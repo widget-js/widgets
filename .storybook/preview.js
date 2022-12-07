@@ -1,11 +1,8 @@
 import {MINIMAL_VIEWPORTS} from '@storybook/addon-viewport';
-import { app } from '@storybook/vue3';
-import ElementPlus from 'element-plus';
-import 'element-plus/dist/index.css';
-import 'animate.css'
-import 'mingcute_icon/font/Mingcute.css';
 
-app.use(ElementPlus);
+import 'animate.css'
+import '@widget-js/vue3/dist/mingcute_icon/font/Mingcute.css';
+
 const customViewports = {
   widget1x1: {
     name: '组件1x1',
@@ -35,13 +32,13 @@ const customViewports = {
       height: '188px',
     },
   },
-  // widget2x4: {
-  //   name: '组件2x4',
-  //   styles: {
-  //     width: '188px',
-  //     height: '412px',
-  //   },
-  // },
+  widget2x4: {
+    name: '组件2x4',
+    styles: {
+      width: '188px',
+      height: '412px',
+    },
+  },
   widget4x1: {
     name: '组件4x1',
     styles: {

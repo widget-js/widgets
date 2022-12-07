@@ -1,4 +1,4 @@
-import {Widget, WidgetKeyword} from "@widget-js/core";
+import {Widget, WidgetKeyword, WidgetParams} from "@widget-js/core";
 
 const name = "com.wisdom.widgets.labor_progress";
 //组件标题
@@ -27,7 +27,9 @@ export const LaborProgressWidgetDefine = new Widget({
     maxHeight: 2,
 })
 
-
+export const     LaborProgressDebugParams = new WidgetParams();
+LaborProgressDebugParams.width = 4;
+LaborProgressDebugParams.height = 1;
 export const LaborProgressWidgetRoutes = [
     {
         path: url,

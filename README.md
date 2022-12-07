@@ -1,4 +1,5 @@
 ## 桌面组件
+项目还在持续完善中
 
 ### 项目目录结构
 
@@ -19,30 +20,21 @@ widgets
 └── tsconfig.json
 ```
 
-### 项目部署
-
-#### 依赖下载
-
-```
-// 下载依赖可能需要翻墙
-yarn install
-```
-
-#### 单独启动Vue
-
+### 运行项目
+#### Vue
 ```
 yarn serve
 ```
 
-#### 启动Electron版
+#### Storybook
 
 ```
-yarn electron:serve
+yarn storybook
 ```
 
-#### 项目主要依赖
+### 组件列表
+#### 打工进度
+![labor_progress.gif](screenshot%2Flabor_progress.gif)
 
-[Element Plus](https://element-plus.gitee.io/zh-CN/component/button.html)
-[MingCute图标库](https://www.mingcute.com/)
-[DayJs时间解析](https://dayjs.fenxianglu.cn)
-[lunar-typescrip日期转换](https://6tail.cn/calendar/api.html)
+- 组件路由：/widget/labor_progress
+- 配置路由：/widget/config/labor_progress

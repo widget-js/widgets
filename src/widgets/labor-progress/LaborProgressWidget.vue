@@ -20,7 +20,7 @@
 
 <script lang="ts">
 
-import {computed, ref} from "vue";
+import {computed, defineComponent, ref} from "vue";
 import {useIntervalFn, useWindowSize} from "@vueuse/core";
 import dayjs from "dayjs";
 import faceWithTears from "./images/face_holding_back_tears_3d.png"
@@ -38,91 +38,91 @@ import "@/common/dayjs-extend"
 import {NotificationApi} from "@widget-js/core";
 import {floor} from "lodash";
 
-export default {
-  name: "LaborProgressWidget",
-  setup: (props,) => {
-    const workStartTime = computed(() => {
-      return dayjs(props.startTime)
-    })
-    const workEndTime = computed(() => {
-      return dayjs(props.endTime)
-    })
+export default defineComponent({
+      name: "LaborProgressWidget",
+      setup: (props) => {
+        const workStartTime = computed(() => {
+          return dayjs(props.startTime)
+        })
+        const workEndTime = computed(() => {
+          return dayjs(props.endTime)
+        })
 
-    console.info("start", workStartTime.value.format())
-    console.info("end", workEndTime.value.format())
+        console.info("start", workStartTime.value.format())
+        console.info("end", workEndTime.value.format())
 
-    const totalSeconds = computed(() => {
-      return dayjs.duration(workEndTime.value.diff(workStartTime.value)).asSeconds();
-    })
-    console.info("Total Second", totalSeconds.value)
-    // 获取一周的第几天，1代表周一，7代表周天
-    const weekday = dayjs().isoWeekday();
-    const weekdayEmojis = [faceSpiralEyes, faceSteam, faceKnockedOut, faceWithTears, faceWithTears, faceWithTears, faceWithTears]
-    const percent = ref(0);
-    const percentPosition = ref();
-    const emojiTimeline = [
-      new EmojiTimeline(weekdayEmojis[weekday - 1], 0, 33.2),
-      new EmojiTimeline(faceYawning, 33.3, 44.4, 1, "困"),
-      new EmojiTimeline(faceSleepy, 44.5, 49, 1, "困"),
-      new EmojiTimeline(faceSleeping, 49.1, 55.6, 1, "困"),
-      new EmojiTimeline(faceSunglasses, 55.7, 94.9, 1, "冲"),
-      new EmojiTimeline(faceStarStruck, 95, 99.9, 0.2, "快"),
-      new EmojiTimeline(facePartying, 100, 100, 3, "❤"),
-    ]
+        const totalSeconds = computed(() => {
+          return dayjs.duration(workEndTime.value.diff(workStartTime.value)).asSeconds();
+        })
+        console.info("Total Second", totalSeconds.value)
+        // 获取一周的第几天，1代表周一，7代表周天
+        const weekday = dayjs().isoWeekday();
+        const weekdayEmojis = [faceSpiralEyes, faceSteam, faceKnockedOut, faceWithTears, faceWithTears, faceWithTears, faceWithTears]
+        const percent = ref(0);
+        const percentPosition = ref();
+        const emojiTimeline = [
+          new EmojiTimeline(weekdayEmojis[weekday - 1], 0, 33.2),
+          new EmojiTimeline(faceYawning, 33.3, 44.4, 1, "困"),
+          new EmojiTimeline(faceSleepy, 44.5, 49, 1, "困"),
+          new EmojiTimeline(faceSleeping, 49.1, 55.6, 1, "困"),
+          new EmojiTimeline(faceSunglasses, 55.7, 94.9, 1, "冲"),
+          new EmojiTimeline(faceStarStruck, 95, 99.9, 0.2, "快"),
+          new EmojiTimeline(facePartying, 100, 100, 3, "❤"),
+        ]
 
-    const {height} = useWindowSize()
-    const time = ref(dayjs())
-    const secondLeft = ref(50)
-    const currentTimeline = ref(emojiTimeline[0])
-    useIntervalFn(() => {
-      time.value = dayjs()
-      const duration = dayjs.duration(time.value.diff(workStartTime.value));
-      const remindDuration = dayjs.duration(workEndTime.value.diff(time.value));
-      const remindSeconds = Math.round(remindDuration.asSeconds());
-      if (remindSeconds == 5 * 60) {
-        NotificationApi.advanceCountdown("收拾好行李，准备下班", workEndTime.value.format(), "下班倒计时")
-      } else if (remindSeconds == 7 && props.enablePhoneReminder) {
-        NotificationApi.call()
-      }
-      percent.value = floor(duration.asSeconds() / totalSeconds.value * 100, 1)
-      if (percent.value > 100) {
-        percent.value = 100;
-      } else if (percent.value < 0) {
-        percent.value = 0;
-      }
-      percentPosition.value = percent.value > 70 ? {left: '4px'} : {right: '4px'}
-      secondLeft.value = percent.value > 95 ? -15 : 50;
-      for (let timeline of emojiTimeline) {
-        if (timeline.isActivated(percent.value)) {
-          currentTimeline.value = timeline;
-          break;
+        const {height} = useWindowSize()
+        const time = ref(dayjs())
+        const secondLeft = ref(50)
+        const currentTimeline = ref(emojiTimeline[0])
+        useIntervalFn(() => {
+          time.value = dayjs()
+          const duration = dayjs.duration(time.value.diff(workStartTime.value));
+          const remindDuration = dayjs.duration(workEndTime.value.diff(time.value));
+          const remindSeconds = Math.round(remindDuration.asSeconds());
+          if (remindSeconds == 5 * 60) {
+            NotificationApi.advanceCountdown("收拾好行李，准备下班", workEndTime.value.format(), "下班倒计时")
+          } else if (remindSeconds == 7 && props.enablePhoneReminder) {
+            NotificationApi.call()
+          }
+          percent.value = floor(duration.asSeconds() / totalSeconds.value * 100, 1)
+          if (percent.value > 100) {
+            percent.value = 100;
+          } else if (percent.value < 0) {
+            percent.value = 0;
+          }
+          percentPosition.value = percent.value > 70 ? {left: '4px'} : {right: '4px'}
+          secondLeft.value = percent.value > 95 ? -15 : 50;
+          for (let timeline of emojiTimeline) {
+            if (timeline.isActivated(percent.value)) {
+              currentTimeline.value = timeline;
+              break;
+            }
+          }
+        }, 1000)
+        return {height, time, currentTimeline, percent, secondLeft, percentPosition}
+      },
+      props: {
+        backgroundColor: {
+          type: String,
+          default: "white"
+        },
+        borderRadius: {
+          type: Number,
+          default: 22
+        },
+        startTime: {
+          type: Date,
+        },
+        endTime: {
+          type: Date,
+        },
+        enablePhoneReminder: {
+          type: Boolean,
+          boolean: false
         }
       }
-    }, 1000)
-    return {height, time, currentTimeline, percent, secondLeft, percentPosition}
-  },
-  props: {
-    backgroundColor: {
-      type: String,
-      default: "white"
-    },
-    borderRadius: {
-      type: Number,
-      default: 22
-    },
-    startTime: {
-      type: Date,
-    },
-    endTime: {
-      type: Date,
-    },
-    enablePhoneReminder: {
-      type: Boolean,
-      boolean: false
     }
-  }
-}
-</script>
+)</script>
 
 <style scoped lang="scss">
 .container {

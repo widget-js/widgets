@@ -8,12 +8,8 @@
 import LaborProgressWidget from "./LaborProgressWidget.vue";
 import LaborProgressData from "@/widgets/labor-progress/model/LaborProgressData";
 import {useWidget} from "@widget-js/vue3";
-import {WidgetParams} from "@widget-js/core";
 import {ref} from "vue";
-
-const debugParams = new WidgetParams();
-debugParams.width = 2;
-debugParams.height = 2;
+import {LaborProgressDebugParams} from "@/widgets/labor-progress/LaborProgressWidgetDefine";
 
 const {widgetData, widgetParams} = useWidget(LaborProgressData, {
   onDataLoaded: <LaborProgressData>(data) => {
@@ -21,7 +17,7 @@ const {widgetData, widgetParams} = useWidget(LaborProgressData, {
     startTime.value = data.getStartTime()
     endTime.value = data.getEndTime()
   },
-  debugParams: debugParams
+  debugParams: LaborProgressDebugParams
 })
 
 const startTime = ref(widgetData.value.getStartTime())

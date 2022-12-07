@@ -31,6 +31,7 @@ import {
   useWidget,
   WidgetConfigOption,
 } from "@widget-js/vue3";
+import {LaborProgressDebugParams} from "@/widgets/labor-progress/LaborProgressWidgetDefine";
 
 export default defineComponent({
       name: "LaborProgressConfigView",
@@ -38,15 +39,12 @@ export default defineComponent({
       setup() {
         const widgetConfigOption = new WidgetConfigOption({backgroundColor: true, borderRadius: true})
 
-        const debugParams = new WidgetParams();
-        debugParams.width = 2;
-        debugParams.height = 2;
         const {widgetData, widgetParams, sizeStyle} = useWidget(LaborProgressData, {
           onDataLoaded: <LaborProgressData>(data) => {
             startTime.value = data.getStartTime()
             endTime.value = data.getEndTime()
           },
-          debugParams: debugParams
+          debugParams: LaborProgressDebugParams
         },);
 
         const startTime = ref(widgetData.value.getStartTime())

@@ -8,8 +8,10 @@ module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave: false,
   filenameHashing: false,
+  chainWebpack(config) {
+    config.resolve.alias.set( 'vue', path.resolve('./node_modules/vue'))
+  },
   configureWebpack: {
-
     plugins: [
       AutoImport({
         resolvers: [ElementPlusResolver()],
