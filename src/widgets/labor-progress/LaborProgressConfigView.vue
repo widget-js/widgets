@@ -13,9 +13,9 @@
     <template v-slot:form>
       <el-form>
         <widget-time-range-field title="工作时间" start-placeholder="开始时间"
-                                 v-model:start-time="startTime"
-                                 v-model:end-time="endTime"
-                                 end-placeholder="结束时间"/>
+                          v-model:start-time="startTime"
+                          v-model:end-time="endTime"
+                          end-placeholder="结束时间"/>
         <widget-checkbox-field title="下班提醒" v-model:checked="widgetData.enablePhoneReminder"/>
       </el-form>
     </template>
@@ -23,54 +23,52 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from "vue";
-import {WidgetDataRepository, WidgetParams} from "@widget-js/core";
+import {ref} from "vue";
+import {WidgetConfigOption, WidgetEditDialog} from "@widget-js/vue3";
+import {WidgetDataRepository} from "@widget-js/core";
 import LaborProgressWidget from "./LaborProgressWidget.vue";
 import LaborProgressData from "@/widgets/labor-progress/model/LaborProgressData";
-import {
-  useWidget,
-  WidgetConfigOption,
-} from "@widget-js/vue3";
+import {useWidget, WidgetCheckboxField} from "@widget-js/vue3";
 import {LaborProgressDebugParams} from "@/widgets/labor-progress/LaborProgressWidgetDefine";
+import {WidgetTimeRangeField} from "@widget-js/vue3";
 
-export default defineComponent({
-      name: "LaborProgressConfigView",
-      components: {LaborProgressWidget},
-      setup() {
-        const widgetConfigOption = new WidgetConfigOption({backgroundColor: true, borderRadius: true})
+export default {
+  name: "LaborProgressConfigView",
+  components: {WidgetTimeRangeField, WidgetCheckboxField, LaborProgressWidget, WidgetEditDialog},
+  setup() {
+    const widgetConfigOption = new WidgetConfigOption({backgroundColor: true, borderRadius: true})
 
-        const {widgetData, widgetParams, sizeStyle} = useWidget(LaborProgressData, {
-          onDataLoaded: <LaborProgressData>(data) => {
-            startTime.value = data.getStartTime()
-            endTime.value = data.getEndTime()
-          },
-          debugParams: LaborProgressDebugParams
-        },);
-
-        const startTime = ref(widgetData.value.getStartTime())
-        const endTime = ref(widgetData.value.getEndTime())
-
-        return {widgetData, widgetParams, startTime, endTime, widgetConfigOption, sizeStyle}
+    const {widgetData, widgetParams,sizeStyle} = useWidget(LaborProgressData, {
+      onDataLoaded: <LaborProgressData>(data) => {
+        startTime.value = data.getStartTime()
+        endTime.value = data.getEndTime()
       },
-      methods: {
-        /**
-         * 点击保存按钮
-         */
-        async onSaveClick() {
-          await WidgetDataRepository.save(this.widgetData);
-          window.close();
-        }
-      },
-      watch: {
-        startTime(newValue) {
-          this.widgetData.setStartTime(newValue)
-        },
-        endTime(newValue) {
-          this.widgetData.setEndTime(newValue)
-        },
-      }
+    },);
+
+    const startTime = ref(widgetData.value.getStartTime())
+    const endTime = ref(widgetData.value.getEndTime())
+
+    return {widgetData, widgetParams, startTime, endTime, widgetConfigOption,sizeStyle}
+  },
+  methods: {
+    /**
+     * 点击保存按钮
+     */
+    async onSaveClick() {
+      await WidgetDataRepository.save(this.widgetData);
+      window.close();
     }
-)
+  },
+  watch: {
+    startTime(newValue) {
+      this.widgetData.setStartTime(newValue)
+    },
+    endTime(newValue) {
+      this.widgetData.setEndTime(newValue)
+    },
+  }
+}
+
 
 </script>
 

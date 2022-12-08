@@ -1,5 +1,6 @@
 <template>
   <labor-progress-widget v-bind="widgetData"
+                         :style="sizeStyle"
                          :start-time="startTime"
                          :end-time="endTime"/>
 </template>
@@ -11,13 +12,12 @@ import {useWidget} from "@widget-js/vue3";
 import {ref} from "vue";
 import {LaborProgressDebugParams} from "@/widgets/labor-progress/LaborProgressWidgetDefine";
 
-const {widgetData, widgetParams} = useWidget(LaborProgressData, {
+const {widgetData, widgetParams,sizeStyle} = useWidget(LaborProgressData, {
   onDataLoaded: <LaborProgressData>(data) => {
     console.log(data)
     startTime.value = data.getStartTime()
     endTime.value = data.getEndTime()
   },
-  debugParams: LaborProgressDebugParams
 })
 
 const startTime = ref(widgetData.value.getStartTime())

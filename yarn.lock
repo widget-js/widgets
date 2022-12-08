@@ -3702,10 +3702,8 @@
   resolved "https://registry.npmmirror.com/@webpack-cli/serve/-/serve-1.7.0.tgz#e1993689ac42d2b16e9194376cfb6753f6254db1"
   integrity sha512-oxnCNGj88fL+xzV+dacXs44HcDwf1ovs3AuEzvP7mqXw7fQntqIhQ1BRmynh4qEKQSSSRSWVyXRjmTbZIX9V2Q==
 
-"@widget-js/core@0.0.14":
-  version "0.0.14"
-  resolved "https://registry.npmmirror.com/@widget-js/core/-/core-0.0.14.tgz#a4e38fcf6cd35fde60b956c48ef0e8f2fb432d62"
-  integrity sha512-cEq8QZ7dUye93JebmzKPyHtXEBF6hdF8jnreuI8q85y7AetiVWgiU+BroFDboezuPQzm0kJS52IKZf3uhxwu3Q==
+"@widget-js/core@file:../core":
+  version "0.1.2"
   dependencies:
     change-case "^4.1.2"
     localforage "^1.10.0"
@@ -13543,7 +13541,7 @@ ws@^7.3.1:
   resolved "https://registry.npmmirror.com/ws/-/ws-7.5.9.tgz#54fa7db29f4c7cec68b1ddd3a89de099942bb591"
   integrity sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==
 
-ws@^8.2.3, ws@^8.4.2:
+ws@^8.11.0, ws@^8.2.3, ws@^8.4.2:
   version "8.11.0"
   resolved "https://registry.npmmirror.com/ws/-/ws-8.11.0.tgz#6a0d36b8edfd9f96d8b25683db2f8d7de6e8e143"
   integrity sha512-HPG3wQd9sNQoT9xHyNCXoDUa+Xw/VevmY9FoHyQ+g+rrMn4j6FB4np7Z0OhdTgjx6MgQLK7jwSy1YecU1+4Asg==

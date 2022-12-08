@@ -1,6 +1,6 @@
 import {Widget, WidgetKeyword, WidgetParams} from "@widget-js/core";
 
-const name = "com.wisdom.widgets.labor_progress";
+const name = "fun.zujian.widgets.labor_progress";
 //组件标题
 const title = {"zh": "打工进度"};
 //组件描述
@@ -27,19 +27,19 @@ export const LaborProgressWidgetDefine = new Widget({
     maxHeight: 2,
 })
 
-export const     LaborProgressDebugParams = new WidgetParams();
+export const LaborProgressDebugParams = new WidgetParams();
 LaborProgressDebugParams.width = 4;
 LaborProgressDebugParams.height = 1;
 export const LaborProgressWidgetRoutes = [
     {
         path: url,
         name: `${name}`,
-        component: () => import(/* webpackChunkName: "com.wisdom.widgets.labor_progress" */ './LaborProgressWidgetView.vue')
+        component: () => import(/* webpackChunkName: "fun.zujian.widgets.labor_progress" */ './LaborProgressWidgetView.vue')
     },
     {
         path: configUrl,
         name: `${name}.config`,
-        component: () => import(/* webpackChunkName: "com.wisdom.widgets.labor_progress.config" */ './LaborProgressConfigView.vue')
+        component: () => import(/* webpackChunkName: "fun.zujian.widgets.labor_progress.config" */ './LaborProgressConfigView.vue')
     }
 ]
 
