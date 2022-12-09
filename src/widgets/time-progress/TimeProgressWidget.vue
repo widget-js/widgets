@@ -8,43 +8,45 @@
       <div class="process-item">
         <div class="desc">今天</div>
         <div class="process">
-          <div class="active today" :style="{ width: today + '%' }"></div>
+          <div class="active today" :style="{ width: todayTransition + '%' }"></div>
         </div>
-        <div class="percentage">{{ today }}%</div>
+        <div class="percentage">{{ formatNumber(todayTransition) }}%</div>
       </div>
 
       <div class="process-item">
         <div class="desc">本周</div>
         <div class="process">
-          <div class="active to-week" :style="{ width: toWeek + '%' }"></div>
+          <div class="active to-week" :style="{ width: weekTransition + '%' }"></div>
         </div>
-        <div class="percentage">{{ toWeek }}%</div>
+        <div class="percentage">{{ formatNumber(weekTransition) }}%</div>
       </div>
 
       <div class="process-item">
         <div class="desc">本月</div>
         <div class="process">
-          <div class="active to-month" :style="{ width: toMonth + '%' }"></div>
+          <div class="active to-month" :style="{ width: monthTransition + '%' }"></div>
         </div>
-        <div class="percentage">{{ toMonth }}%</div>
+        <div class="percentage">{{ formatNumber(monthTransition) }}%</div>
       </div>
 
       <div class="process-item">
         <div class="desc">今年</div>
         <div class="process">
-          <div class="active to-year" :style="{ width: toYear + '%' }"></div>
+          <div class="active to-year" :style="{ width: yearTransition + '%' }"></div>
         </div>
-        <div class="percentage">{{ toYear }}%</div>
+        <div class="percentage">{{ formatNumber(yearTransition) }}%</div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, Ref , nextTick, computed, defineProps} from "vue";
-import dayjs, { Dayjs, OpUnitType } from "dayjs";
-import { useInterval,useWindowSize } from "@vueuse/core";
-import { LunarMonth, Lunar } from "lunar-typescript";
+import {computed, defineProps, onMounted, ref} from "vue";
+import dayjs, {Dayjs, OpUnitType} from "dayjs";
+import {TransitionPresets, useInterval, useTransition, useWindowSize} from "@vueuse/core";
+import {Lunar, LunarMonth} from "lunar-typescript";
+import {floor} from "lodash";
+
 require(`dayjs/locale/zh-cn`);
 dayjs.locale("zh-cn");
 
@@ -54,17 +56,23 @@ const toMonth = ref(100);
 const toYear = ref(100);
 const container = ref<HTMLDivElement>();
 const props = defineProps({
-    locale: {
-      type: String,
-      default: "zh-cn",
-      required: false
-    },
-    isLunar: {
-      type: Boolean,
-      default: false,
-      required: false
-    }
+  locale: {
+    type: String,
+    default: "zh-cn",
+    required: false
+  },
+  isLunar: {
+    type: Boolean,
+    default: false,
+    required: false
+  }
 });
+
+let options = {duration: 1000, transition: TransitionPresets.easeInOutCubic};
+const todayTransition = useTransition(today, options);
+const weekTransition = useTransition(toWeek, options);
+const monthTransition = useTransition(toMonth, options);
+const yearTransition = useTransition(toYear, options);
 
 // 创建时国际化
 (() => {
@@ -126,37 +134,39 @@ function lunarYear(now: Dayjs): number {
 }
 
 // 渲染视图
-function initRenderView(now: Dayjs) {
+const initRenderView = (now: Dayjs) => {
   const day = getRatioValue(now, "day");
   const week = getRatioValue(now, "week");
 
   let month: number;
-  let year:number;
-  if ( props.isLunar ) {
+  let year: number;
+  if (props.isLunar) {
     month = lunarMonth(now);
     year = lunarYear(now);
   } else {
     month = getRatioValue(now, "month");
     year = getRatioValue(now, "year");
   }
-
-  handleChangeValue(today, day);
-  handleChangeValue(toWeek, week);
-  handleChangeValue(toMonth, month);
-  handleChangeValue(toYear, year);
+  today.value = day;
+  toWeek.value = week;
+  toMonth.value = month;
+  toYear.value = year;
 }
 
 // 计算百分比
-function getRatioValue(now: Dayjs, type: OpUnitType): number {
+const getRatioValue = (now: Dayjs, type: OpUnitType): number => {
   const start = now.startOf(type);
   const end = now.endOf(type);
   const ratio = now.diff(start) / end.diff(start);
-  const value = parseInt(Math.round(Number((1 - ratio) * 100)).toFixed(0));
-  return value;
+  return parseInt(Math.round(Number((1 - ratio) * 100)).toFixed(0));
+}
+
+const formatNumber = (num: number) => {
+  return floor(num).toString().padStart(2, "0")
 }
 
 // 定时刷新视图
-function intervalRenderView(interval: number) {
+const intervalRenderView = (interval: number) => {
   if (interval < 1000) {
     interval = 1000;
   }
@@ -166,28 +176,10 @@ function intervalRenderView(interval: number) {
     },
   });
 }
-// 减少值， 主要用于数字倒计时
-function handleChangeValue(start: Ref<number>, end: number) {
-  const interval = 1250 / (100 - end);
-  const { pause } = useInterval(interval, {
-    callback: () => {
-      if (start.value > end) {
-        start.value--;
-      } else if (end > start.value) {
-        start.value++;
-      } else {
-        pause();
-      }
-    },
-    controls: true,
-  });
-}
 
 </script>
 
 <style scoped lang="scss">
-
-
 $font-color: #494644;
 $border-radius: 11px;
 $transition-duration: 125ms;
@@ -234,6 +226,7 @@ body {
 
   .process-group {
     overflow: hidden;
+
     .process-item {
       display: flex;
       height: 0.81em;

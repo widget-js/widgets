@@ -85,7 +85,7 @@ const backgroundColors = computed(() => {
 const currentHeight = ref(0);
 const transitionCurrentHeight = useTransition(currentHeight, {
   duration: 1000,
-  transition: [.29, 1.61, .54, .93]
+  transition: TransitionPresets.easeOutBack
 });
 
 const onInitCanvas = () => {
