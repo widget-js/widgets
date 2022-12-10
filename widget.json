@@ -1,0 +1,10 @@
+{
+  "name": "cn.widgetjs.widgets",
+  "author": "Widget JS",
+  "homepage": "https://widgetjs.cn",
+  "description": {
+    "zh": "内置基础组件"
+  },
+  "entry": "index.html#",
+  "version": "0.0.1"
+}

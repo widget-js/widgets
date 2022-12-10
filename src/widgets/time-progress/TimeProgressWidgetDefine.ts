@@ -1,6 +1,6 @@
 import {Widget, WidgetKeyword} from "@widget-js/core";
 //TODO 修改组件信息，标题，描述，关键词
-const name = "fun.zujian.widgets.time_progress";
+const name = "cn.widgetjs.widgets.time_progress";
 const title = {"zh": "时间进度"};
 //组件标题
 const description = {"zh": "年、月、周、日进度剩余百分比"};
@@ -24,11 +24,11 @@ export const TimeProgressWidgetRoutes = [
     {
         path: url,
         name: `${name}`,
-        component: () => import(/* webpackChunkName: "fun.zujian.widgets.time_progress" */ './TimeProgressWidgetView.vue')
+        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.time_progress" */ './TimeProgressWidgetView.vue')
     },
     {
         path: configUrl,
         name: `${name}.config`,
-        component: () => import(/* webpackChunkName: "fun.zujian.widgets.time_progress.config" */ './TimeProgressConfig.vue')
+        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.time_progress.config" */ './TimeProgressConfig.vue')
     }
 ]

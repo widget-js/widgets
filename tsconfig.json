@@ -36,6 +36,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
+    "src/**/*.widget.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx",
     "auto-imports.d.ts"

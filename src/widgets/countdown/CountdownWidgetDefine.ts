@@ -1,6 +1,6 @@
 import {Widget, WidgetKeyword} from "@widget-js/core";
 
-const name = "com.wisdom.ticker.countdown";
+const name = "cn.widgetjs.ticker.countdown";
 const title = {"zh": "倒计时"};
 const description = {"zh": "一个简单的倒计时插件"};
 const keywords = [WidgetKeyword.COUNTDOWN, WidgetKeyword.TIMER];
@@ -16,11 +16,11 @@ export const CountdownWidgetRoutes = [
     {
         path: url,
         name: `${name}`,
-        component: () => import(/* webpackChunkName: "com.wisdom.ticker.countdown" */ './CountDownWidget.vue')
+        component: () => import(/* webpackChunkName: "cn.widgetjs.ticker.countdown" */ './CountDownWidget.vue')
     },
     {
         path: configUrl,
         name: `${name}.config`,
-        component: () => import(/* webpackChunkName: "com.wisdom.ticker.countdown.config" */ './CountDownConfig.vue')
+        component: () => import(/* webpackChunkName: "cn.widgetjs.ticker.countdown.config" */ './CountDownConfig.vue')
     }
 ]

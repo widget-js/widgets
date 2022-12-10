@@ -1,6 +1,6 @@
 import {Widget, WidgetKeyword} from "@widget-js/core";
 //TODO 修改组件信息，标题，描述，关键词
-const name = "fun.zujian.widgets.birthday_list";
+const name = "cn.widgetjs.widgets.birthday_list";
 //组件标题
 const title = {"zh": "生日列表"};
 //组件描述
@@ -29,12 +29,12 @@ export const BirthdayListWidgetRoutes = [
     {
         path: url,
         name: `${name}`,
-        component: () => import(/* webpackChunkName: "fun.zujian.widgets.birthday_list" */ './BirthdayListWidgetView.vue')
+        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.birthday_list" */ './BirthdayListWidgetView.vue')
     },
     {
         path: configUrl,
         name: `${name}.config`,
-        component: () => import(/* webpackChunkName: "fun.zujian.widgets.birthday_list.config" */ './BirthdayListConfigView.vue')
+        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.birthday_list.config" */ './BirthdayListConfigView.vue')
     }
 ]
 

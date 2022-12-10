@@ -1,5 +1,5 @@
 import {Widget, WidgetKeyword} from "@widget-js/core";
-const name = "fun.zujian.widgets.notepad";
+const name = "cn.widgetjs.widgets.notepad";
 //组件标题
 const title = {"zh": "记事本"};
 //组件描述
@@ -23,12 +23,12 @@ export const NotepadWidgetRoutes = [
     {
         path: url,
         name: `${name}`,
-        component: () => import(/* webpackChunkName: "fun.zujian.widgets.clock" */ './NotepadWidgetView.vue')
+        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.clock" */ './NotepadWidgetView.vue')
     },
     {
         path: configUrl,
         name: `${name}.config`,
-        component: () => import(/* webpackChunkName: "fun.zujian.widgets.clock.config" */ './NotepadWidgetConfigView.vue')
+        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.clock.config" */ './NotepadWidgetConfigView.vue')
     }
 ]
 

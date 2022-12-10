@@ -25,7 +25,7 @@ import {computed, defineProps, nextTick, onMounted, ref} from "vue";
 import dayjs, {Dayjs} from "dayjs";
 import {TransitionPresets, useInterval, useTransition, useWindowSize} from "@vueuse/core";
 import {Lunar, LunarMonth} from "lunar-typescript";
-import {ProgressType, WaveProgressExtraConfig} from "./WaveProgressExtraConfig";
+import {ProgressType, WaveProgressData} from "./model/WaveProgressData";
 import Color from "color";
 import _ from 'lodash'
 
@@ -48,7 +48,7 @@ const props = defineProps({
     required: false,
   },
   extra: {
-    type: WaveProgressExtraConfig,
+    type: WaveProgressData,
     default: {
       progressType: ProgressType.today,
       isLunar: false,

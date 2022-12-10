@@ -1,6 +1,6 @@
 import {Widget, WidgetKeyword} from "@widget-js/core";
 //TODO 修改组件信息，标题，描述，关键词
-const name = "fun.zujian.widgets.action";
+const name = "cn.widgetjs.widgets.action";
 //组件标题
 const title = {"zh": "代办事项"};
 //组件描述
@@ -36,12 +36,12 @@ export const ActionWidgetRoutes = [
     {
         path: url,
         name: `${name}`,
-        component: () => import(/* webpackChunkName: "fun.zujian.widgets.clock" */ './ActionWidgetView.vue')
+        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.clock" */ './ActionWidgetView.vue')
     },
     {
         path: configUrl,
         name: `${name}.config`,
-        component: () => import(/* webpackChunkName: "fun.zujian.widgets.clock.config" */ './ActionWidgetConfigView.vue')
+        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.clock.config" */ './ActionWidgetConfigView.vue')
     }
 ]
 

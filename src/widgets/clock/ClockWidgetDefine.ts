@@ -1,5 +1,5 @@
 import {Widget, WidgetKeyword} from "@widget-js/core";
-const name = "fun.zujian.widgets.clock";
+const name = "cn.widgetjs.widgets.clock";
 //组件标题
 const title = {"zh":"时钟"};
 //组件描述
@@ -28,12 +28,12 @@ export const ClockWidgetRoutes = [
     {
         path: url,
         name: `${name}`,
-        component: () => import(/* webpackChunkName: "fun.zujian.widgets.clock" */ './ClockWidgetView.vue')
+        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.clock" */ './ClockWidgetView.vue')
     },
     {
         path: configUrl,
         name: `${name}.config`,
-        component: () => import(/* webpackChunkName: "fun.zujian.widgets.clock.config" */ './ClockWidgetConfigView.vue')
+        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.clock.config" */ './ClockWidgetConfigView.vue')
     }
 ]
 

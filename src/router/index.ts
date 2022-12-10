@@ -7,7 +7,7 @@ import WidgetRouter from "@/widgets/widget-router";
  * webpackChunkName: 和路由名称保持一致
  */
 const routes: Array<RouteRecordRaw> = [
-    ...WidgetRouter
+    ...WidgetRouter,
 ]
 
 const router = createRouter({

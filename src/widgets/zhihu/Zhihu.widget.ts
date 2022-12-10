@@ -1,6 +1,6 @@
 import {Widget, WidgetKeyword} from "@widget-js/core";
 
-const name = "fun.zujian.widgets.zhihu";
+const name = "cn.widgetjs.widgets.zhihu";
 const title = {"zh": "知乎"};
 //组件标题
 const description = {"zh": "知乎热榜与日报"};
@@ -16,14 +16,9 @@ const minWidth = 4;
 const maxWidth = 4;
 const minHeight = 3;
 const maxHeight = 4;
-export const ZhihuWidgetDefine = new Widget({
+const ZhihuWidgetDefine = new Widget({
     name, title, description, keywords, lang, width, height, maxWidth, maxHeight, minWidth, minHeight, url, configUrl
 })
 
-export const ZhihuWidgetRoutes = [
-    {
-        path: url,
-        name: `${name}`,
-        component: () => import(/* webpackChunkName: "fun.zujian.widgets.zhihu" */ './ZhihuWidgetView.vue')
-    }
-]
+export default ZhihuWidgetDefine;
+

@@ -1,6 +1,6 @@
 import {WidgetData} from "@widget-js/core";
 
-export class WaveProgressExtraConfig extends WidgetData{
+export class WaveProgressData extends WidgetData{
 
     // 类型
     progressType: ProgressType = ProgressType.today;

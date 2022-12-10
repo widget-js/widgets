@@ -34,7 +34,7 @@ import {nextTick, onMounted, Ref, ref} from "vue";
 import {ZhihuModel, ZhihuConvert} from "./ZhihuModel";
 import dayjs from "dayjs";
 import {slice} from "lodash";
-import {WidgetParams} from "@widget-js/core";
+import {BrowserWindowApi, WidgetParams} from "@widget-js/core";
 
 type NavType = 'hot' | 'news';
 const widgetParams = WidgetParams.fromCurrentLocation();
@@ -62,7 +62,7 @@ onMounted(async () => {
 });
 
 function openLink(url: string) {
-  window.open(url.replaceAll("api.", "").replaceAll("questions", "question"));
+  BrowserWindowApi.openUrl(url.replaceAll("api.", "").replaceAll("questions", "question"))
 }
 
 // 知乎热榜
@@ -189,6 +189,7 @@ body {
     background-color: #fff;
     border-radius: 16px;
   }
+
   // 内容
   .zhihu__content {
     display: flex;

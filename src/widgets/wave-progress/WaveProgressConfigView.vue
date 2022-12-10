@@ -38,54 +38,48 @@
   </widget-edit-dialog>
 </template>
 
-<script lang="ts" setup>
-import {ref, watch} from 'vue'
-import {WidgetConfigOption, WidgetEditDialog} from '@widget-js/vue3'
-import {useRoute} from 'vue-router'
-import {WidgetDataRepository, WidgetData, WidgetParams} from '@widget-js/core'
-import WaveProgressWidget from './WaveProgressWidget.vue'
-import {WaveProgressExtraConfig, ProgressType} from './WaveProgressExtraConfig'
-//从url地址获取组件参数
-const route = useRoute()
-const widgetParams = WidgetParams.fromObject(route.query);
-const widgetRef = ref();
-//组件默认数据
-const defaultData = new WaveProgressExtraConfig(widgetParams.name!, widgetParams.id!);
+<script lang="ts">
+import {defineComponent, ref} from 'vue'
+import {useWidget, WidgetConfigOption, WidgetEditDialog} from '@widget-js/vue3'
+import { WidgetDataRepository} from '@widget-js/core'
+import {ProgressType, WaveProgressData} from "@/widgets/wave-progress/model/WaveProgressData";
+import WaveProgressWidget from "@/widgets/wave-progress/WaveProgressWidget.vue";
 
-const widgetData = ref(defaultData)
-const widgetConfigOption = new WidgetConfigOption({backgroundColor: true, custom: true, borderRadius: true});
-WidgetDataRepository.find<WaveProgressExtraConfig>(widgetParams.name!, widgetParams.id!, WaveProgressExtraConfig).then((data) => {
-  if (data) {
-    //有已保存过的数据，覆盖
-    widgetData.value = data
-    console.log(data)
-  }
-})
-
-/**
- * 点击保存按钮
- */
-async function onSaveClick() {
-  await WidgetDataRepository.save(widgetData.value)
-  window.close()
-}
-
-function refresh() {
-  widgetRef.value.refresh();
-}
-
-function handleChangeCustomDate() {
-  const now = new Date();
-  if ((widgetData.value.startDate ?? now) > (widgetData.value.endDate ?? now)) {
-    const start: Date = widgetData.value.startDate ?? now;
-    widgetData.value.startDate = widgetData.value.endDate;
-    widgetData.value.endDate = start;
-  }
-  refresh();
-  console.info("Date Picked",widgetData.value.startDate)
-
-}
-
+export default defineComponent({
+      name: "WaveProgressConfigView",
+      components: {WidgetEditDialog, WaveProgressWidget},
+      computed: {
+        ProgressType() {
+          return ProgressType
+        }
+      },
+      setup() {
+        const {widgetData, widgetParams} = useWidget(WaveProgressData);
+        const widgetConfigOption = new WidgetConfigOption({backgroundColor: true, custom: true, borderRadius: true});
+        const widgetRef = ref();
+        return {widgetData, widgetRef, widgetParams, widgetConfigOption}
+      },
+      methods: {
+        refresh() {
+          this.widgetRef.refresh();
+        },
+        handleChangeCustomDate() {
+          const now = new Date();
+          if ((this.widgetData.startDate ?? now) > (this.widgetData.endDate ?? now)) {
+            const start: Date = this.widgetData.startDate ?? now;
+            this.widgetData.startDate = this.widgetData.endDate;
+            this.widgetData.endDate = start;
+          }
+          this.refresh();
+          console.info("Date Picked", this.widgetData.startDate)
+        },
+        async onSaveClick() {
+          await WidgetDataRepository.save(this.widgetData)
+          window.close()
+        }
+      }
+    }
+)
 </script>
 
 <style scoped></style>
