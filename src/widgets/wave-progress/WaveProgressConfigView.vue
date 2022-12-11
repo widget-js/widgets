@@ -1,12 +1,12 @@
 <template>
-  <widget-edit-dialog :option="widgetConfigOption" :widget-data="widgetData" :title="widgetParams.title"
+  <widget-edit-dialog :option="widgetConfigOption" :widget-data="widgetData" :widget-params="widgetParams"
                       @confirm="onSaveClick()">
     <template v-slot:widget>
       <!-- 组件配置内容   -->
       <wave-progress-widget :style="{
           width: `${widgetParams.widthPx}px`,
           height: `${widgetParams.heightPx}px`,
-        }" :extra="widgetData" ref="widgetRef"></wave-progress-widget>
+        }" :extra="widgetData" ref="widgetRef"/>
     </template>
     <template v-slot:form>
       <el-form :model="widgetData">
@@ -41,13 +41,13 @@
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
 import {useWidget, WidgetConfigOption, WidgetEditDialog} from '@widget-js/vue3'
-import { WidgetDataRepository} from '@widget-js/core'
+import {WidgetDataRepository} from '@widget-js/core'
 import {ProgressType, WaveProgressData} from "@/widgets/wave-progress/model/WaveProgressData";
 import WaveProgressWidget from "@/widgets/wave-progress/WaveProgressWidget.vue";
 
 export default defineComponent({
       name: "WaveProgressConfigView",
-      components: {WidgetEditDialog, WaveProgressWidget},
+      components: { WidgetEditDialog, WaveProgressWidget},
       computed: {
         ProgressType() {
           return ProgressType
@@ -55,7 +55,11 @@ export default defineComponent({
       },
       setup() {
         const {widgetData, widgetParams} = useWidget(WaveProgressData);
-        const widgetConfigOption = new WidgetConfigOption({backgroundColor: true, custom: true, borderRadius: true});
+        const widgetConfigOption = new WidgetConfigOption({
+          backgroundColor: true,
+          custom: true,
+          borderRadius: true
+        });
         const widgetRef = ref();
         return {widgetData, widgetRef, widgetParams, widgetConfigOption}
       },
@@ -82,4 +86,9 @@ export default defineComponent({
 )
 </script>
 
-<style scoped></style>
+<style scoped>
+.widget-scale {
+  max-height: 250px;
+  max-width: 250px;
+}
+</style>

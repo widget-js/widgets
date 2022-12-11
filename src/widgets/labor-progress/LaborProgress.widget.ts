@@ -11,7 +11,7 @@ const url = "/widget/labor_progress";
 const configUrl = "/widget/config/labor_progress";
 
 //组件关键词
-export const LaborProgressWidgetDefine = new Widget({
+const LaborProgressWidgetDefine = new Widget({
     name: name,
     title: title,
     description: description,
@@ -27,20 +27,5 @@ export const LaborProgressWidgetDefine = new Widget({
     maxHeight: 2,
 })
 
-export const LaborProgressDebugParams = new WidgetParams();
-LaborProgressDebugParams.width = 4;
-LaborProgressDebugParams.height = 1;
-export const LaborProgressWidgetRoutes = [
-    {
-        path: url,
-        name: `${name}`,
-        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.labor_progress" */ './LaborProgressWidgetView.vue')
-    },
-    {
-        path: configUrl,
-        name: `${name}.config`,
-        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.labor_progress.config" */ './LaborProgressConfigView.vue')
-    }
-]
 
-
+export default LaborProgressWidgetDefine

@@ -183,14 +183,10 @@ const intervalRenderView = (interval: number) => {
 $font-color: #494644;
 $border-radius: 11px;
 $transition-duration: 125ms;
-body {
-  background: transparent;
-  overflow: hidden;
-}
 
 .time-progress-container {
-  font-size: 21px;
   overflow: hidden;
+  font-size: 21px;
   position: relative;
   width: inherit;
   height: inherit;

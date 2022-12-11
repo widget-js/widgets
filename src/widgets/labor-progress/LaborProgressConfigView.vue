@@ -1,8 +1,7 @@
 <template>
-  <widget-edit-dialog :title="widgetParams.title" :widget-data="widgetData"
+  <widget-edit-dialog :widget-params="widgetParams" :widget-data="widgetData"
                       :option="widgetConfigOption"
-                      @confirm="onSaveClick()"
-                      :enable-background="true">
+                      @confirm="onSaveClick()">
     <template v-slot:widget>
       <!-- 组件配置内容   -->
       <labor-progress-widget :style="sizeStyle"
@@ -13,9 +12,9 @@
     <template v-slot:form>
       <el-form>
         <widget-time-range-field title="工作时间" start-placeholder="开始时间"
-                          v-model:start-time="startTime"
-                          v-model:end-time="endTime"
-                          end-placeholder="结束时间"/>
+                                 v-model:start-time="startTime"
+                                 v-model:end-time="endTime"
+                                 end-placeholder="结束时间"/>
         <widget-checkbox-field title="下班提醒" v-model:checked="widgetData.enablePhoneReminder"/>
       </el-form>
     </template>
@@ -29,16 +28,15 @@ import {WidgetDataRepository} from "@widget-js/core";
 import LaborProgressWidget from "./LaborProgressWidget.vue";
 import LaborProgressData from "@/widgets/labor-progress/model/LaborProgressData";
 import {useWidget, WidgetCheckboxField} from "@widget-js/vue3";
-import {LaborProgressDebugParams} from "@/widgets/labor-progress/LaborProgressWidgetDefine";
 import {WidgetTimeRangeField} from "@widget-js/vue3";
 
 export default {
   name: "LaborProgressConfigView",
   components: {WidgetTimeRangeField, WidgetCheckboxField, LaborProgressWidget, WidgetEditDialog},
   setup() {
-    const widgetConfigOption = new WidgetConfigOption({backgroundColor: true, borderRadius: true})
+    const widgetConfigOption = new WidgetConfigOption({backgroundColor: true, borderRadius: true, previewWidth: 400})
 
-    const {widgetData, widgetParams,sizeStyle} = useWidget(LaborProgressData, {
+    const {widgetData, widgetParams, sizeStyle} = useWidget(LaborProgressData, {
       onDataLoaded: <LaborProgressData>(data) => {
         startTime.value = data.getStartTime()
         endTime.value = data.getEndTime()
@@ -48,7 +46,7 @@ export default {
     const startTime = ref(widgetData.value.getStartTime())
     const endTime = ref(widgetData.value.getEndTime())
 
-    return {widgetData, widgetParams, startTime, endTime, widgetConfigOption,sizeStyle}
+    return {widgetData, widgetParams, startTime, endTime, widgetConfigOption, sizeStyle}
   },
   methods: {
     /**

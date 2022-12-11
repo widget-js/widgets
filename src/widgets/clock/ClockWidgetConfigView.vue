@@ -1,5 +1,5 @@
 <template>
-  <widget-edit-dialog :title="widgetParams.title" :option="widgetConfigOption"
+  <widget-edit-dialog :widget-params="widgetParams" :option="widgetConfigOption"
                       :widget-data="widgetData"
                       @confirm="onSaveClick()">
     <template v-slot:widget>

@@ -31,7 +31,7 @@
 <script lang="ts" setup>
 import axios from "axios";
 import {nextTick, onMounted, Ref, ref} from "vue";
-import {ZhihuModel, ZhihuConvert} from "./ZhihuModel";
+import {ZhihuConvert, ZhihuModel} from "./model/ZhihuModel";
 import dayjs from "dayjs";
 import {slice} from "lodash";
 import {BrowserWindowApi, WidgetParams} from "@widget-js/core";

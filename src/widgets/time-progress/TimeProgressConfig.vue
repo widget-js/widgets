@@ -14,26 +14,11 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from "vue";
-import {WidgetEditDialog} from "@widget-js/vue3";
-import {useRoute} from "vue-router";
-import {WidgetDataRepository, WidgetParams, WidgetData} from "@widget-js/core";
+import {useWidget, WidgetEditDialog} from "@widget-js/vue3";
+import {WidgetData, WidgetDataRepository} from "@widget-js/core";
 import TimeProgressWidget from "./TimeProgressWidget.vue";
 
-//从url地址获取组件参数
-const route = useRoute()
-const widgetParams = WidgetParams.fromObject(route.query);
-//组件默认数据
-const defaultData = new WidgetData(widgetParams.name!, widgetParams.id!);
-
-const widgetData = ref(defaultData);
-
-WidgetDataRepository.find<WidgetData>(widgetParams.name!, widgetParams.id!,WidgetData).then((data) => {
-  if (data) {
-    //有已保存过的数据，覆盖
-    widgetData.value = data;
-  }
-})
+const {widgetData,widgetParams} = useWidget(WidgetData)
 
 /**
  * 点击保存按钮

@@ -3702,18 +3702,16 @@
   resolved "https://registry.npmmirror.com/@webpack-cli/serve/-/serve-1.7.0.tgz#e1993689ac42d2b16e9194376cfb6753f6254db1"
   integrity sha512-oxnCNGj88fL+xzV+dacXs44HcDwf1ovs3AuEzvP7mqXw7fQntqIhQ1BRmynh4qEKQSSSRSWVyXRjmTbZIX9V2Q==
 
-"@widget-js/core@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.npmmirror.com/@widget-js/core/-/core-0.1.4.tgz#4e674100d156dd6e3061d715f5c6ffba3dde9cb8"
-  integrity sha512-qfcoWJ/FlLdaECmxQmmwD+XOQo8DZqw/7SujwH3wd1nEYoH1KPvPXnsAIZRlq1soq+TL4isItiLDGvCXExAZ8A==
+"@widget-js/core@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.npmmirror.com/@widget-js/core/-/core-0.1.5.tgz#36870b2d930ba2c1b0e6f7e7034e726ae0a89a34"
+  integrity sha512-Qpc5RRy+1D+mi71k7tbdcooNX2dL47VpOwqSKihRw+EFF2cvESwRUhjSnt/ReAM0DuTWO2wv+gB4KAMBiWgCWw==
   dependencies:
     change-case "^4.1.2"
     localforage "^1.10.0"
 
-"@widget-js/vue3@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.npmmirror.com/@widget-js/vue3/-/vue3-0.0.4.tgz#8b0f9f3e1f15a5f10b407ad50a6e2b4d17d54260"
-  integrity sha512-ECi4iFUiU2qp4YaN4+0c3ZnWP3I9AJltw2xafrvN31klUwCeLzwzAr9UUhZfb5rAZlDQNBG+PEANj2xU2P6kNA==
+"@widget-js/vue3@file:../vue3":
+  version "0.0.5"
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"

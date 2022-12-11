@@ -9,8 +9,8 @@ const desc = {"zh": "自动倒计时的生日列表"};
 const keywords = [WidgetKeyword.RECOMMEND];
 const lang = "zh"
 const url = "/widget/birthday_list";
-const configUrl = "/widget/config/birthday_list";
-export const BirthdayListWidgetDefine = new Widget({
+const configUrl = "/widget/config/birthday_list?win_width=1100&win_height=900";
+const BirthdayListWidgetDefine = new Widget({
     name: name,
     title: title,
     description: desc,
@@ -24,18 +24,6 @@ export const BirthdayListWidgetDefine = new Widget({
     maxWidth: 4,
     minHeight: 3,
     maxHeight: 6
-})
-export const BirthdayListWidgetRoutes = [
-    {
-        path: url,
-        name: `${name}`,
-        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.birthday_list" */ './BirthdayListWidgetView.vue')
-    },
-    {
-        path: configUrl,
-        name: `${name}.config`,
-        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.birthday_list.config" */ './BirthdayListConfigView.vue')
-    }
-]
+});
 
-
+export default BirthdayListWidgetDefine;
