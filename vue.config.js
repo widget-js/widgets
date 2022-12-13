@@ -14,15 +14,11 @@ module.exports = defineConfig({
   devServer: {
     port: 8088,
     onListening: function (devServer) {
-      if (!devServer) {
-        throw new Error('webpack-dev-server is not defined');
+      if (devServer ) {
+          let address = devServer.server.address();
+          widgetPackage.debugUrl = `http://127.0.0.1:${address.port}/#`;
+          registerWidgetPackage(widgetPackage)
       }
-      let address = devServer.server.address();
-      const port = address.port;
-      console.log(devServer.server.url);
-      console.log('Listening on port:', port);
-      widgetPackage.debugUrl = `http://127.0.0.1:${address.port}/#`;
-      registerWidgetPackage(widgetPackage)
     },
   },
   configureWebpack: {

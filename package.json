@@ -26,11 +26,11 @@
     "lunar-typescript": "^1.2.23",
     "vue": "^3.2.30",
     "vue-i18n": "^9.2.2",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "consola": "^2.15.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
-    "@widget-js/cli": "^1.0.0",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-interactions": "^6.5.13",
@@ -52,6 +52,7 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/cli-shared-utils": "^5.0.8",
     "@vue/eslint-config-typescript": "^9.1.0",
+    "@widget-js/cli": "^1.0.0",
     "archiver": "^5.3.1",
     "babel-loader": "^8.3.0",
     "eslint": "^8.26.0",
