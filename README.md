@@ -25,13 +25,13 @@ widgets
 
 #### Vue
 
-```
+```shell
 pnpm serve
 ```
 
 #### Storybook
 
-```
+```shell
 pnpm storybook
 ```
 

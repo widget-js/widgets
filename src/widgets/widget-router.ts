@@ -13,7 +13,7 @@ const WidgetRouter = [
     ...WaveProgressRoute,
     ...TimeProgressWidgetRoutes,
     ...ClockWidgetRoutes,
-    ...BirthdayListWidgetRoutes
+    ...BirthdayListWidgetRoutes,
     //FBI WANING! ROUTE PLACE, DONT DELETE THIS LINE
 ];
 export default WidgetRouter

@@ -10,7 +10,8 @@
     "lint": "vue-cli-service lint",
     "report": "vue-cli-service build --report",
     "storybook": "vue-cli-service storybook:serve -p 6006",
-    "test:unit": "jest"
+    "test:unit": "jest",
+    "widget:add": "node widget"
   },
   "dependencies": {
     "@vueuse/core": "^9.4.0",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
+    "@widget-js/cli": "^1.0.0",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-interactions": "^6.5.13",
