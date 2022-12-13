@@ -26,13 +26,13 @@ widgets
 #### Vue
 
 ```
-yarn serve
+pnpm serve
 ```
 
 #### Storybook
 
 ```
-yarn storybook
+pnpm storybook
 ```
 
 ### 组件列表

@@ -4,23 +4,25 @@
        }">
     <img class="image" src="./images/balloon.png">
     <div class="title">
-      <span>{{birthdayListData.title}}</span>
+      <span>{{ birthdayListData.title }}</span>
       <!-- <div class="add" @click="add"></div> -->
     </div>
     <div class="people-list" style="flex:1; display:flex; flex-flow:column; overflow: auto;">
-      <template v-for="item in birthdayListData.peopleList">
+      <template v-for="item in peopleList">
         <div class="list" :class="{active: item.qty==0}">
           <div class="left">
             <div class="name">
-              <div class="name-value">{{item.name}}</div>
+              <div class="name-value">{{ item.name }}</div>
+            </div>
+            <div class="dates">
               <div class="date" v-if="item.type=='Y'">
                 <div class="date-type">农</div>
-                <div class="date-value">{{item.month}}月{{item.day}}日</div>
+                <div class="date-value">{{ item.month }}月{{ item.day }}日</div>
               </div>
-            </div>
-            <div class="date">
-              <div class="date-type">公</div>
-              <div class="date-value">{{getShowDate(item)}}</div>
+              <div class="date">
+                <div class="date-type">公</div>
+                <div class="date-value">{{ getShowDate(item) }}</div>
+              </div>
             </div>
           </div>
           <div class="right" :class="{active: item.qty==0}">
@@ -28,7 +30,7 @@
               <span class="icon mgc_cake_line"></span>
             </template>
             <template v-else>
-              <div class="qty">{{item.qty}}</div>
+              <div class="qty">{{ item.qty }}</div>
               <div class="unit">天</div>
             </template>
           </div>
@@ -39,10 +41,11 @@
 </template>
 
 <script lang="ts">
-import {nextTick, onMounted, ref} from "vue";
+import {ref} from "vue";
 // import {useInterval} from '@vueuse/core'
 import dayjs from "dayjs";
 import {Lunar} from 'lunar-typescript';
+import BirthdayListData from "@/widgets/birthday-list/model/BirthdayListData";
 // import {delay} from "lodash";
 //import BirthdayListData from './model/BirthdayListData';
 
@@ -53,43 +56,57 @@ export default {
   name: "BirthdayListWidget",
   //components: {SliderField, DialogTitleBar, ColorPickerField},
   setup: (props, {emit}) => {
-    const curDate = dayjs();
-    const birthdayListData = ref(props.birthdayListData);
-
-    for(var i=0; i<birthdayListData.value.peopleList.length; i++ ){
-      const people = birthdayListData.value.peopleList[i];
-      let newDate;
-      if(people.type == 'Y'){
-        let lunar = Lunar.fromYmd(curDate.year() ,people.month, people.day);
-        newDate = dayjs(lunar.getSolar().toString());
-      }else{
-        newDate = dayjs(''+curDate.year()+'-'+(people.month>9?'':'0')+people.month+'-'+(people.day>9?'':'0')+people.day);
-      }
-      const diff = newDate.diff(curDate,'day');
-      if(diff >= 0){
-        birthdayListData.value.peopleList[i]["qty"] = diff;
-      }else{
-        birthdayListData.value.peopleList[i]["qty"] = newDate.add(1, 'year').diff(curDate,'day');
-      }
-    }
-    birthdayListData.value.peopleList.sort(function(a, b){return a.qty-b.qty;});
-    return {birthdayListData}
+    // const birthdayListData = ref(props.birthdayListData);
+    // return {birthdayListData}
   },
   props: {
     birthdayListData: {
-      type: Object,
-      default: {peopleList:[]}
+      type: BirthdayListData
+    }
+  },
+  watch: {
+    birthdayListData() {
+      // this.update();
+    }
+  },
+  computed: {
+    peopleList() {
+      const peopleList = this.birthdayListData.peopleList;
+      const curDate = dayjs();
+      for (let i = 0; i < peopleList.length; i++) {
+        const people = peopleList[i];
+        let newDate;
+        if (people.type == 'Y') {
+          let lunar = Lunar.fromYmd(curDate.year(), people.month, people.day);
+          newDate = dayjs(lunar.getSolar().toString());
+        } else {
+          newDate = dayjs('' + curDate.year() + '-' + (people.month > 9 ? '' : '0') + people.month + '-' + (people.day > 9 ? '' : '0') + people.day);
+        }
+        const diff = newDate.diff(curDate, 'day');
+        if (diff >= 0) {
+          peopleList[i]["qty"] = diff;
+        } else {
+          peopleList[i]["qty"] = newDate.add(1, 'year').diff(curDate, 'day');
+        }
+      }
+      peopleList.sort(function (a, b) {
+        return a.qty - b.qty;
+      });
+      return peopleList
     }
   },
   //emits: ["confirm", "cancel"],
   methods: {
-    getShowDate(item){
-      if(item.type=='N'){
-        return item.month+'月'+item.day+'日';
+    update() {
+
+    },
+    getShowDate(item) {
+      if (item.type == 'N') {
+        return item.month + '月' + item.day + '日';
       }
-      let newDate = Lunar.fromYmd(dayjs().year() ,item.month, item.day);
+      let newDate = Lunar.fromYmd(dayjs().year(), item.month, item.day);
       let solar = newDate.getSolar();
-      return solar.getMonth()+'月'+solar.getDay()+'日';
+      return solar.getMonth() + '月' + solar.getDay() + '日';
     }
   }
 }
@@ -101,6 +118,7 @@ body * {
   background: transparent;
   overflow: hidden;
 }
+
 .birthday-list-container {
   padding: 24px;
   overflow: hidden;
@@ -113,7 +131,11 @@ body * {
   flex-flow: column;
   aspect-ratio: 1/1;
 
-  ::-webkit-scrollbar {height: 0;width: 0;color: transparent;}
+  ::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+    color: transparent;
+  }
 
   .image {
     position: absolute;
@@ -137,14 +159,17 @@ body * {
       background-size: 100% 100%;
       //background-image: url(../../assets/widget/birthday_list/add.png);
       margin-left: 4px;
+
       &:hover {
-        cursor:pointer
+        cursor: pointer
       }
     }
   }
-  .list+.list {
+
+  .list + .list {
     margin-top: 12px;
   }
+
   .list {
     //margin-top: 12px;
     padding: 12px;
@@ -156,12 +181,14 @@ body * {
 
     &.active {
       background: linear-gradient(90deg, #FC9F12 0%, #FAD960 100%);
-      box-shadow: 1px 1px 4px 0px rgba(221,221,221,0.25);
+      box-shadow: 1px 1px 4px 0px rgba(221, 221, 221, 0.25);
       border: 1px solid;
       border-color: #FAD960;
+
       .left {
         color: white;
       }
+
       .date {
         .date-type {
           background-color: #FFF0C5;
@@ -174,21 +201,30 @@ body * {
       display: flex;
       flex-flow: column;
       justify-content: space-between;
+
       .name {
         display: flex;
         align-items: baseline;
+
         .name-value {
           font-size: 16px;
           font-weight: bold;
           margin-right: 10px;
         }
+
         .date {
           margin-top: 0px;
         }
       }
+
+      .dates {
+        display: flex;
+      }
+
       .date {
         display: flex;
         margin-top: 6px;
+        margin-right: 6px;
         font-weight: 400;
         align-items: center;
 
@@ -202,17 +238,20 @@ body * {
           width: 16px;
           height: 16px;
         }
+
         .date-value {
           margin-left: 5px;
           font-size: 14px;
         }
       }
     }
+
     .right {
       background-color: #FAE4B1;
       border-radius: 5px;
-      width: 44px;
-      height: 44px;
+      width: 50px;
+      height: 50px;
+      text-align: center;
 
       &.active {
         border-radius: 25px;
@@ -221,19 +260,24 @@ body * {
         display: flex;
         justify-content: center;
         align-items: center;
+
         .mgc_cake_line:before {
           color: white;
         }
       }
+
       .qty {
         color: #47310A;
         font-size: 24px;
         font-weight: 400;
-        margin: 4px;
+        margin: 2px;
       }
+
       .unit {
+        display: block;
         background-color: #FADC98;
         font-size: 12px;
+        height: 20px;
       }
     }
   }

@@ -21,8 +21,8 @@
 </template>
 
 <script lang="ts">
-import {nextTick, onMounted, ref} from "vue";
-import {TransitionPresets, useElementBounding, useElementSize, useInterval, useTransition} from '@vueuse/core'
+import {nextTick, ref} from "vue";
+import {TransitionPresets, useInterval, useTransition} from '@vueuse/core'
 import dayjs from "dayjs";
 import {delay} from "lodash";
 
@@ -31,6 +31,7 @@ export default {
   props: {
     backgroundColor: {
       type: String,
+      default: "#333"
     },
     width: {
       type: Number

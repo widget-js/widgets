@@ -9,21 +9,33 @@
   </widget-edit-dialog>
 </template>
 
-<script lang="ts" setup>
-import ClockWidget from './ClockWidget.vue'
-import {WidgetConfigOption, WidgetEditDialog} from "@widget-js/vue3";
+<script lang="ts">
+import {useWidget, WidgetConfigOption} from "@widget-js/vue3";
 import {WidgetData, WidgetDataRepository} from "@widget-js/core";
 import {reactive} from "vue";
-import {useWidget} from "@widget-js/vue3";
+import ClockWidget from "@/widgets/clock/ClockWidget.vue";
 
-const {widgetData, widgetParams} = useWidget(WidgetData)
+export default {
+  name: "",
+  components: {ClockWidget},
+  setup() {
+    const {widgetData, widgetParams} = useWidget(WidgetData)
 
-//修改你的参数
-const widgetConfigOption = reactive(new WidgetConfigOption({custom: false, backgroundColor: true, borderRadius: true}))
+    //修改成需要设置组件参数配置
+    const widgetConfigOption = reactive(new WidgetConfigOption({
+      custom: false,
+      backgroundColor: true,
+      borderRadius: true
+    }));
 
-async function onSaveClick() {
-  await WidgetDataRepository.save(widgetData.value);
-  window.close();
+    return {widgetData, widgetParams, widgetConfigOption}
+  },
+  methods: {
+    async onSaveClick() {
+      await WidgetDataRepository.save(this.widgetData);
+      window.close();
+    }
+  }
 }
 </script>
 
