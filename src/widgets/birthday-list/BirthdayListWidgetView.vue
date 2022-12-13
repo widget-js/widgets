@@ -10,7 +10,7 @@ import {Solar} from 'lunar-typescript';
 import {WidgetDataRepository, WidgetParams} from "@widget-js/core";
 import BirthdayListWidget from "./BirthdayListWidget.vue";
 import BirthdayListData from "@/widgets/birthday-list/model/BirthdayListData";
-import {useWidget} from "../../../../vue3";
+import {useWidget} from "@widget-js/vue3";
 
 //默认数据
 const previewData = new BirthdayListData("");
