@@ -7,7 +7,7 @@ export default {
     },
 };
 
-export const Widget = (args: any) => ({
+export const Widget = (args) => ({
     components: {ClockWidget},
     setup() {
         return {args};
@@ -15,14 +15,5 @@ export const Widget = (args: any) => ({
     template: '<clock-widget v-bind="args"></clock-widget>',
 });
 
-Widget.parameters = {
-    design: [
-        {
-            name: "蓝湖",
-            type: "link",
-            url: "https://share.lanhuapp.com/#/invite?sid=X0xtlll",
-        }
-    ],
-}
 
 
