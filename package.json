@@ -16,6 +16,14 @@
     "vite:build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "react",
+        "react-dom"
+      ]
+    }
+  },
   "dependencies": {
     "@vueuse/core": "^9.4.0",
     "@vueuse/integrations": "^9.6.0",
@@ -59,6 +67,7 @@
     "@widget-js/cli": "^1.0.1",
     "archiver": "^5.3.1",
     "babel-loader": "^8.3.0",
+    "css-loader": "^6.7.2",
     "eslint": "^8.26.0",
     "eslint-plugin-storybook": "^0.6.7",
     "eslint-plugin-vue": "^8.0.3",
@@ -67,6 +76,7 @@
     "sass": "^1.56.0",
     "sass-loader": "^12.0.0",
     "storybook-addon-sass-postcss": "^0.1.3",
+    "style-loader": "^3.3.1",
     "ts-loader": "^8.3.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths-webpack-plugin": "^4.0.0",
