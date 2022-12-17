@@ -8,20 +8,20 @@ const registerWidgetPackage = require("./script/registerWidgetPackage");
 const WidgetWebpackPlugin = require("./script/widgetWebpackPlugin");
 module.exports = defineConfig({
   publicPath: "./",
-  transpileDependencies: true,
   lintOnSave: false,
   filenameHashing: false,
   devServer: {
     port: 8088,
     onListening: function (devServer) {
-      if (devServer ) {
-          let address = devServer.server.address();
-          widgetPackage.url = `http://127.0.0.1:${address.port}/#`;
-          registerWidgetPackage(widgetPackage)
+      if (devServer) {
+        let address = devServer.server.address();
+        widgetPackage.url = `http://127.0.0.1:${address.port}/#`;
+        registerWidgetPackage(widgetPackage)
       }
     },
   },
   configureWebpack: {
+    cache: {type: "filesystem"},
     plugins: [
       AutoImport({
         resolvers: [ElementPlusResolver()],
@@ -31,7 +31,7 @@ module.exports = defineConfig({
       }),
       new WidgetWebpackPlugin()
     ],
-    module:{
+    module: {
       rules: [
         {
           test: /\.txt$/i,

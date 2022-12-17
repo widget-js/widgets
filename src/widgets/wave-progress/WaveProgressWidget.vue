@@ -16,7 +16,7 @@
         :height="cbHeight"
         :style="{ backgroundColor: backgroundColors[0], height: cbHeight + 'px', width: cbWidth + 'px' }"
     ></canvas>
-    <div class="percentage">{{ 100 - _.floor(transitionRation, 0) }}%</div>
+    <div class="percentage">{{ 100 - floor(transitionRation, 0) }}%</div>
   </div>
 </template>
 
@@ -27,7 +27,7 @@ import {TransitionPresets, useInterval, useTransition, useWindowSize} from "@vue
 import {Lunar, LunarMonth} from "lunar-typescript";
 import {ProgressType, WaveProgressData} from "./model/WaveProgressData";
 import Color from "color";
-import _ from 'lodash'
+import {floor} from 'lodash'
 
 require(`dayjs/locale/zh-cn`);
 dayjs.locale("zh-cn");
