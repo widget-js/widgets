@@ -1,4 +1,4 @@
-## 50个桌面组件挑战
+## 桌面组件挑战
 
 项目还在持续完善中
 
@@ -33,6 +33,11 @@ pnpm serve
 
 ```shell
 pnpm storybook
+```
+
+### 创建组件
+```shell
+pnpm widget
 ```
 
 ### 组件列表

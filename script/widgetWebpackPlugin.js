@@ -28,7 +28,7 @@ class WidgetWebpackPlugin {
         if (compiler.options.mode === 'production') {
           let outputPath = compiler.options.output.path;
           let widgetJSONPath = path.resolve(outputPath, "widget.json");
-          widgetPackage["debugUrl"] = null;
+          widgetPackage["url"] = null;
           fs.writeFileSync(widgetJSONPath, JSON.stringify(widgetPackage, null, 2));
           // await zipDirectory(outputPath, path.join(outputPath, widgetPackage.name + ".zip"))
         }

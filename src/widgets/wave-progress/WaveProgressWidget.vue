@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, defineProps, nextTick, onMounted, ref} from "vue";
+import {computed, nextTick, onMounted, ref} from "vue";
 import dayjs, {Dayjs} from "dayjs";
 import {TransitionPresets, useInterval, useTransition, useWindowSize} from "@vueuse/core";
 import {Lunar, LunarMonth} from "lunar-typescript";

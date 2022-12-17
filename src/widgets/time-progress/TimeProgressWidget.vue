@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, defineProps, onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import dayjs, {Dayjs, OpUnitType} from "dayjs";
 import {TransitionPresets, useInterval, useTransition, useWindowSize} from "@vueuse/core";
 import {Lunar, LunarMonth} from "lunar-typescript";
@@ -129,8 +129,7 @@ function lunarYear(now: Dayjs): number {
   const endDate = dayjs(endDay.getCalendar());
   const startDate = dayjs(firstDay.getCalendar());
   const ratio = now.diff(startDate) / endDate.diff(startDate);
-  const value = parseInt(Math.round(Number((1 - ratio) * 100)).toFixed(0));
-  return value;
+  return parseInt(Math.round(Number((1 - ratio) * 100)).toFixed(0));
 }
 
 // 渲染视图

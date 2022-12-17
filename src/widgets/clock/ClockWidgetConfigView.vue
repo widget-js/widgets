@@ -35,6 +35,9 @@ export default {
       await WidgetDataRepository.save(this.widgetData);
       window.close();
     }
+  },
+  mounted() {
+    console.log(window.location)
   }
 }
 </script>

@@ -10,7 +10,6 @@ import LaborProgressWidget from "./LaborProgressWidget.vue";
 import LaborProgressData from "@/widgets/labor-progress/model/LaborProgressData";
 import {useWidget} from "@widget-js/vue3";
 import {ref} from "vue";
-import {LaborProgressDebugParams} from "@/widgets/labor-progress/LaborProgressWidgetDefine";
 
 const {widgetData, widgetParams,sizeStyle} = useWidget(LaborProgressData, {
   onDataLoaded: <LaborProgressData>(data) => {

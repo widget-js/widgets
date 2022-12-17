@@ -16,7 +16,7 @@ module.exports = defineConfig({
     onListening: function (devServer) {
       if (devServer ) {
           let address = devServer.server.address();
-          widgetPackage.debugUrl = `http://127.0.0.1:${address.port}/#`;
+          widgetPackage.url = `http://127.0.0.1:${address.port}/#`;
           registerWidgetPackage(widgetPackage)
       }
     },
@@ -31,6 +31,14 @@ module.exports = defineConfig({
       }),
       new WidgetWebpackPlugin()
     ],
+    module:{
+      rules: [
+        {
+          test: /\.txt$/i,
+          use: 'raw-loader',
+        },
+      ],
+    }
   },
   pluginOptions: {},
 })
