@@ -1,19 +1,10 @@
 <template>
-  <lyric :lyric="lyricArr" :lyric-index="lyricIndex"></lyric>
+  <lyric :lyric="currentLyric" ref="lyric" :top-padding="!hover" :lyric-index="lyricIndex"></lyric>
   <div class="header">
     <div class="icon mgc_minimize_line" @click="hide"></div>
     <div class="icon mgc_close_line" @click="close"></div>
   </div>
-  <div class="footer">
-    <el-progress :percentage="progress" :show-text="false" color="#1ecf9d"/>
-    <div class="buttons">
-      <div class="icon shuffle mgc_shuffle_line"></div>
-      <div class="icon previous mgc_left_line"></div>
-      <div class="icon play mgc_pause_line"></div>
-      <div class="icon next mgc_right_line"></div>
-      <div class="icon volume mgc_volume_line"></div>
-    </div>
-  </div>
+  <lyric-footer :progress="progress" @hover="hover" @leave="leave" @next="next" @previous="previous"></lyric-footer>
   <div class="background"></div>
   <div class="mask"></div>
 </template>
@@ -21,34 +12,63 @@
 <script lang="ts">
 // @ts-ignore
 import noPainNoGain from './lyric/no_pain_no_gain.txt';
-import Lyric from "@/widgets/lyric-book/Lyric.vue";
-import {useIntervalFn} from "@vueuse/core";
-import {computed, ref} from "vue";
-import {BroadcastApi, BroadcastEvent, WidgetApi, WidgetData} from "@widget-js/core";
+import Lyric from "@/widgets/lyric-book/components/Lyric.vue";
+import {useElementSize, useIntervalFn} from "@vueuse/core";
+import {computed, nextTick, ref} from "vue";
+import {BroadcastApi, BroadcastEvent, WidgetApi, WidgetDataRepository} from "@widget-js/core";
+import LyricFooter from "@/widgets/lyric-book/components/LyricFooter.vue";
+import LyricBookData from "@/widgets/lyric-book/model/LyricBookData";
+import PageController from "@/widgets/lyric-book/model/PageController";
+import 'driver.js/dist/driver.min.css';
+import Driver from 'driver.js';
+import {delay} from "lodash";
 
 export default {
   name: "LyricBookWidget",
-  components: {Lyric},
+  components: {LyricFooter, Lyric},
   props: {
     widgetData: {
-      type: WidgetData,
+      type: LyricBookData,
     },
     widgetId: {
       type: String,
-    }
+    },
+    pageController: {
+      type: PageController,
+      required: true
+    },
   },
-  mounted() {
-    const a = this.readFile("file:///C:/Users/neo/Desktop/%E3%80%8A%E6%98%A5%E5%89%8D%E9%9B%AA%E3%80%8B%E4%BD%9C%E8%80%85%EF%BC%9A%E8%8F%9C%E7%B4%AB.txt");
+  async mounted() {
+    await nextTick();
+    delay(() => {
+      if (this.widgetData.showGuide) {
+        const driver = new Driver({
+          allowClose: false, onDeselected: () => {
+            this.widgetData.showGuide = false;
+            WidgetDataRepository.saveByName(this.widgetData);
+          }
+        });
+        driver.highlight({
+          element: '#hotspot',
+          stageBackground: " rgba(255, 255, 255, 0.36)",
+          popover: {
+            title: '小提示',
+            description: '将鼠标移动到该区域，歌词会自动变成小说内容',
+          }
+        });
+      }
+    }, 2000)
   },
   setup() {
-    const lyricArr = noPainNoGain.split("\r\n");
+    const trulyLyric = noPainNoGain.split("\r\n");
     const lyricInterval = 5000;
-    const totalDuration = lyricArr.length * lyricInterval;
+    const totalDuration = trulyLyric.length * lyricInterval;
     const lyricIndex = ref(0);
     const time = ref(0);
     useIntervalFn(() => {
+      if (hover.value) return;
       lyricIndex.value++;
-      if (lyricIndex.value >= lyricArr.length) {
+      if (lyricIndex.value >= trulyLyric.length) {
         lyricIndex.value = 0;
         time.value = 0;
       }
@@ -57,37 +77,73 @@ export default {
       return time.value / totalDuration * 100;
     })
     useIntervalFn(() => {
+      if (hover.value) return;
       time.value = time.value + 100;
     }, 100);
-    return {lyricArr, progress, lyricIndex, totalDuration, time}
+    const lyric = ref();
+    const {height: lyricHeight} = useElementSize(lyric)
+    const hover = ref(false);
+    return {trulyLyric, lyric, lyricHeight, hover, progress, lyricIndex, totalDuration, time}
+  },
+  watch: {
+    hover(newValue) {
+      if (newValue) {
+        this.lyricIndex = 1;
+      } else {
+
+      }
+    },
+    lyricHeight() {
+
+    }
+  },
+  computed: {
+    pageLine() {
+      return Math.floor(this.lyricHeight / LyricBookData.lineHeight)
+    },
+    currentLyric() {
+      return this.hover ? this.pageController.currentContent : this.trulyLyric;
+    }
   },
   methods: {
+    hover() {
+      this.hover = true;
+    },
+    leave() {
+      this.hover = false;
+    },
     hide() {
       BroadcastApi.sendBroadcastEvent(new BroadcastEvent("hide-overlap", "", this.widgetId));
     },
     close() {
       WidgetApi.removeHostedWidget(this.widgetId)
     },
-    readFile(filePath) {
-      // 创建一个新的xhr对象
-      let xhr = new XMLHttpRequest()
-      if (!window.XMLHttpRequest) {
-        xhr = new ActiveXObject('Microsoft.XMLHTTP')
-      }
-      const okStatus = document.location.protocol === 'file' ? 0 : 200
-      xhr!.open('GET', filePath, false)
-      xhr.overrideMimeType('text/html;charset=utf-8')
-      xhr.send(null)
-      return xhr.status === okStatus ? xhr.responseText : null
+    saveData() {
+      this.widgetData.currentPage = this.pageController.getCurrentPage();
+      WidgetDataRepository.saveByName(this.widgetData)
     },
+    next() {
+      this.pageController.nextPage();
+      this.saveData();
+    },
+    previous() {
+      this.pageController.previousPage();
+      this.saveData();
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 
+body:hover {
+  .background {
+    filter: blur(12px);
+  }
+}
+
 .lyric {
-  height: 90%;
+  height: 80%;
 }
 
 .mask,
@@ -104,10 +160,10 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50%;
-  filter: blur(12px);
   background-image: url("./img/img.png");
   transition: all 0.8s;
-  transform: scale(1.1);
+  transform: scale(1);
+  filter: blur(4px);
 }
 
 .icon {
@@ -143,34 +199,6 @@ export default {
   position: absolute;
   right: 8px;
   top: 0;
-}
-
-.footer {
-  position: absolute;
-  width: 80%;
-  height: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  left: 0;
-  right: 0;
-  bottom: 32px;
-  margin: auto;
-
-  .buttons {
-    margin-top: 12px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .play {
-      background-color: #1ecf9d;
-      border-radius: 50%;
-    }
-
-
-  }
 }
 
 

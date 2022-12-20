@@ -59,7 +59,6 @@ const props = defineProps({
 
 const backgroundColors = computed(() => {
   const hex = props.extra.backgroundColor;
-  console.info("backgroundColor", hex);
   let color = hex;
   if (!color) {
     switch (props.extra.progressType) {

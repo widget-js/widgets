@@ -1,24 +1,36 @@
 <template>
   <div class="root">
-    <lyric-book-widget :widget-data="widgetData" :widget-id="widgetParams.id"></lyric-book-widget>
+    <lyric-book-widget :widget-data="widgetData" :widget-id="widgetParams.id"
+                       :page-controller="pageController"/>
   </div>
 </template>
 
 <script lang="ts">
-import {WidgetData, WidgetParams} from "@widget-js/core";
 import LyricBookWidget from "./LyricBookWidget.vue"
 import {useWidget} from "@widget-js/vue3";
+import LyricBookData, {readFile} from "@/widgets/lyric-book/model/LyricBookData";
+import PageController from "@/widgets/lyric-book/model/PageController";
+import {nextTick, reactive} from "vue";
 
 export default {
-  name: "LyricBookWidgetVie w",
+  name: "LyricBookWidgetView",
   components: {LyricBookWidget},
+  async mounted() {
+    await nextTick();
+  },
   setup() {
-    const params = new WidgetParams();
-    const {widgetData, widgetParams} = useWidget(WidgetData, {
-      debugParams: params
+    const pageController = reactive(new PageController());
+
+    const {widgetData, widgetParams} = useWidget(LyricBookData, {
+      loadDataByWidgetName: true, onDataLoaded: (data) => {
+        if (data) {
+          pageController.setCurrentPage(data.currentPage);
+          pageController.updateBookText(readFile(data.file));
+        }
+      }
     });
-    return {widgetData, widgetParams};
-  }
+    return {widgetData, widgetParams, pageController};
+  },
 }
 </script>
 
