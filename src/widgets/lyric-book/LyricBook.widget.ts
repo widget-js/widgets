@@ -22,7 +22,7 @@ const LyricBookWidgetDefine = new Widget({
     configUrl: configUrl,
     width: 10,
     height: 6,
-    minWidth: 6,
+    minWidth: 4,
     maxWidth: 12,
     minHeight: 4,
     maxHeight: 8,

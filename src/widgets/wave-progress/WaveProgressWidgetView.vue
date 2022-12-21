@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO:组件页面，这里编写组件业务逻辑-->
   <wave-progress-widget :style="{
     width:`${widgetParams.widthPx}px`,
     height:`${widgetParams.heightPx}px`

@@ -1,8 +1,5 @@
 import BirthdayListWidget from './BirthdayListWidget.vue';
 
-
-console.log()
-
 export default {
     title: 'Widget/BirthdayList',
     component: BirthdayListWidget,
@@ -10,7 +7,7 @@ export default {
     },
 };
 
-export const Widget = (args: any) => ({
+export const Widget = (args) => ({
     components: {BirthdayListWidget},
     setup() {
         return {args};

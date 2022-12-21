@@ -75,7 +75,6 @@ export default defineComponent({
             this.widgetData.endDate = start;
           }
           this.refresh();
-          console.info("Date Picked", this.widgetData.startDate)
         },
         async onSaveClick() {
           await WidgetDataRepository.save(this.widgetData)

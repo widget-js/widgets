@@ -5,7 +5,7 @@
     <img class="image" src="./images/balloon.png">
     <div class="title">
       <span>{{ birthdayListData.title }}</span>
-      <!-- <div class="add" @click="add"></div> -->
+      <div class="add mgc_add_circle_line" @click="this.$emit('add')"></div>
     </div>
     <div class="people-list" style="flex:1; display:flex; flex-flow:column; overflow: auto;">
       <template v-for="item in peopleList">
@@ -41,11 +41,11 @@
 </template>
 
 <script lang="ts">
-import {ref} from "vue";
 // import {useInterval} from '@vueuse/core'
 import dayjs from "dayjs";
 import {Lunar} from 'lunar-typescript';
-import BirthdayListData from "@/widgets/birthday-list/model/BirthdayListData";
+import BirthdayListData, {BirthdayPeople} from "@/widgets/birthday-list/model/BirthdayListData";
+import {WidgetApi} from "../../../../core";
 // import {delay} from "lodash";
 //import BirthdayListData from './model/BirthdayListData';
 
@@ -59,10 +59,12 @@ export default {
     // const birthdayListData = ref(props.birthdayListData);
     // return {birthdayListData}
   },
+  emits: ["add"],
   props: {
     birthdayListData: {
       type: BirthdayListData
-    }
+    },
+    widgetData: {}
   },
   watch: {
     birthdayListData() {
@@ -71,7 +73,8 @@ export default {
   },
   computed: {
     peopleList() {
-      const peopleList = this.birthdayListData.peopleList;
+      const peopleList: BirthdayPeople[] = [];
+      this.birthdayListData.peopleList.forEach((it) => peopleList.push(it));
       const curDate = dayjs();
       for (let i = 0; i < peopleList.length; i++) {
         const people = peopleList[i];
@@ -148,7 +151,7 @@ body * {
     display: flex;
     justify-content: flex-start;
     color: white;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     align-items: center;
     margin-bottom: 16px;
@@ -156,9 +159,16 @@ body * {
     .add {
       width: 30px;
       height: 30px;
+      display: flex;
+      align-items: center;
       background-size: 100% 100%;
       //background-image: url(../../assets/widget/birthday_list/add.png);
-      margin-left: 4px;
+      margin-left: 6px;
+
+      &:before {
+        font-size: 24px;
+        color: white;
+      }
 
       &:hover {
         cursor: pointer

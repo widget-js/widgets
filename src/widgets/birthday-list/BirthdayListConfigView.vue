@@ -17,7 +17,9 @@
         </el-form-item>
       </el-form>
       <!-- <div style="color: red">注意：目前农历暂不支持，等待后续开放</div> -->
-      <el-table :data="widgetData.peopleList" max-height="250" style="width: 100%;" table-layout="auto">
+      <el-table :data="widgetData.peopleList" max-height="250"
+                row-key="createdAt"
+                style="width: 100%;" table-layout="auto">
         <el-table-column align="center" width="100">
           <template #header>
             <el-button size="small" type="primary" @click="add">新增</el-button>
@@ -26,7 +28,7 @@
             <el-button size="small" type="danger" @click="del(scope)">删除</el-button>
           </template>
         </el-table-column>
-        <el-table-column label="序号" width="60" align="center">
+        <el-table-column label="序号" sortable width="60" align="center">
           <template #default="scope">{{ scope.$index + 1 }}</template>
         </el-table-column>
         <el-table-column label="姓名" prop="name" align="center">
@@ -60,16 +62,21 @@
 <script lang="ts">
 import {NotificationApi, WidgetDataRepository} from "@widget-js/core";
 import BirthdayListWidget from "./BirthdayListWidget.vue";
-import BirthdayListData from "@/widgets/birthday-list/model/BirthdayListData";
+import BirthdayListData, {BirthdayPeople} from "@/widgets/birthday-list/model/BirthdayListData";
 import {useWidget, WidgetConfigOption, WidgetEditDialog} from "@widget-js/vue3";
+import {reactive} from "vue";
 
 export default {
   name: "BirthdayListConfigView",
-  components: { BirthdayListWidget, WidgetEditDialog},
+  components: {BirthdayListWidget, WidgetEditDialog},
   setup() {
     const widgetConfigOption = new WidgetConfigOption({backgroundColor: true, borderRadius: false})
-    const {widgetData, widgetParams} = useWidget(BirthdayListData, {loadDataByWidgetName: true});
+    const {widgetData, widgetParams} = useWidget(BirthdayListData, {
+      loadDataByWidgetName: true    });
     return {widgetData, widgetParams, widgetConfigOption}
+  },
+  mounted() {
+    document.title = "组件设置"
   },
   methods: {
     /**
@@ -103,13 +110,21 @@ export default {
       window.close();
     },
     add() {
-      this.widgetData.peopleList.splice(0, 0, {name: '', type: 'N', month: 1, day: 1, qty: 0});
+      const newPeople: BirthdayPeople = {name: '', type: 'N', month: 1, day: 1, qty: 0, createdAt: new Date().getTime()}
+      this.widgetData.peopleList.splice(0, 0, newPeople);
     },
     del(scope) {
       this.widgetData.peopleList.splice(scope.$index, 1);
     }
   },
-  watch: {}
+  watch: {
+    widgetData: {
+      handler(val) {
+        console.log(val)
+      },
+      deep: true
+    }
+  }
 }
 
 

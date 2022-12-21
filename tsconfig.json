@@ -5,12 +5,10 @@
     "strict": true,
     "jsx": "preserve",
     "noImplicitAny": false,
-    "composite": true,
     "noImplicitThis": false,
     "moduleResolution": "node",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "noEmit": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
@@ -42,8 +40,7 @@
     "src/**/*.widget.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx",
-    "auto-imports.d.ts",
-    "vite.config.ts"
+    "auto-imports.d.ts"
   ],
   "exclude": [
     "node_modules"

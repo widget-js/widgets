@@ -3,15 +3,16 @@
     <!--封面-->
     <dl class="music-info">
       <dt>
-        <img src="./img/player_cover.png"/>
+        <img src="../img/player_cover.png"/>
       </dt>
       <dd>爱拼才会赢</dd>
       <dd class="author">歌手：叶启田</dd>
       <dd class="album">专辑：《闽南情歌大对唱》</dd>
     </dl>
     <!--歌词-->
-    <div ref="musicLyric" class="music-lyric">
-      <div class="music-lyric-items" :style="lyricTop">
+    <div ref="musicLyric" class="music-lyric"
+         :style="{paddingTop:`${LyricBookData.lineHeight}px`,paddingBottom:`${verticalPadding}px`}">
+      <div class="music-lyric-items" :style="{lineHeight:`${LyricBookData.lineHeight}px`}">
         <template v-if="lyric.length > 0">
           <p
               v-for="(item, index) in lyric"
@@ -28,6 +29,10 @@
 </template>
 
 <script lang="js">
+import {useScroll} from "@vueuse/core";
+import {ref} from "vue";
+import LyricBookData, {PageController} from "@/widgets/lyric-book/model/LyricBookData";
+
 export default {
   name: 'Lyric',
   props: {
@@ -41,6 +46,10 @@ export default {
       type: Boolean,
       default: false
     },
+    topPadding: {
+      type: Boolean,
+      default: true
+    },
     // 当前歌词下标
     lyricIndex: {
       type: Number,
@@ -53,29 +62,43 @@ export default {
     }
   },
   computed: {
-    lyricTop() {
-      return `transform :translate3d(0, ${
-          -34 * (this.lyricIndex - this.top)
-      }px, 0)`
+    LyricBookData() {
+      return LyricBookData
     },
+    verticalPadding() {
+      return this.top * LyricBookData.lineHeight;
+    },
+    currentScrollY() {
+      return LyricBookData.lineHeight * this.lyricIndex;
+    }
+  },
+  setup() {
+    const musicLyric = ref();
+    const {y: scrollY} = useScroll(musicLyric, {behavior: "smooth"});
+    return {musicLyric, scrollY}
+  },
+  watch: {
+    lyricIndex() {
+      this.scrollY = this.currentScrollY;
+    }
   },
   mounted() {
     window.addEventListener('resize', () => {
       clearTimeout(this.resizeTimer)
-      this.resizeTimer = setTimeout(() => this.clacTop(), 60)
+      this.resizeTimer = setTimeout(() => this.calcTop(), 60)
     })
-    this.$nextTick(() => this.clacTop())
+    this.$nextTick(() => this.calcTop())
   },
   methods: {
     // 计算歌词居中的 top值
-    clacTop() {
+    calcTop() {
       const dom = this.$refs.musicLyric
       const {display = ''} = window.getComputedStyle(dom)
       if (display === 'none') {
         return
       }
       const height = dom.offsetHeight
-      this.top = Math.floor(height / 34/2)
+      this.top = Math.floor((height - 56) / LyricBookData.lineHeight / 2);
     }
   }
 }
@@ -87,14 +110,20 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+  padding: 0 100px;
+}
+
+p {
+  margin: 0;
 }
 
 .music-info {
   padding-bottom: 20px;
   text-align: center;
   font-size: 18px;
+  flex: 1;
 
-  .author,.album{
+  .author, .album {
     color: rgba(255, 255, 255, 0.6);
     font-size: 16px;
   }
@@ -112,7 +141,7 @@ export default {
       top: 0;
       width: 201px;
       height: 180px;
-      background: url('./img/album_cover_player.png') 0 0 no-repeat;
+      background: url('../img/album_cover_player.png') 0 0 no-repeat;
     }
 
     img {
@@ -132,24 +161,23 @@ export default {
 
 /*歌词部分*/
 .music-lyric {
-  height: 80%;
+  height: 90%;
   left: 0;
-  max-height: 800px;
+  flex: 1;
   overflow: hidden;
   text-align: center;
   mask-image: linear-gradient(
           to bottom,
           rgba(255, 255, 255, 0) 0,
-          rgba(255, 255, 255, 0.6) 15%,
+          rgba(255, 255, 255, 0.6) 5%,
           rgba(255, 255, 255, 1) 25%,
           rgba(255, 255, 255, 1) 75%,
-          rgba(255, 255, 255, 0.6) 85%,
+          rgba(255, 255, 255, 0.2) 95%,
           rgba(255, 255, 255, 0) 100%
   );
 
   .music-lyric-items {
     text-align: center;
-    line-height: 34px;
     font-size: 16px;
     transform: translate3d(0, 0, 0);
     transition: transform 0.6s ease-out;
@@ -161,8 +189,7 @@ export default {
   }
 }
 
-// 当屏幕小于 960 时
-@media (max-width: 960px) {
+@media (max-width: 800px) {
   .music-info {
     display: none;
   }
