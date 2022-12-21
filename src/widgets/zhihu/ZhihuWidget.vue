@@ -111,11 +111,6 @@ const newsService = axios.create({
 </script>
 
 <style scoped lang="scss">
-body {
-  overflow: hidden;
-  height: 100%;
-}
-
 .zhihu-box {
   width: 100%;
   height: 100%;

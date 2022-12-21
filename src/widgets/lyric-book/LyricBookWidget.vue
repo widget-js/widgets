@@ -120,7 +120,7 @@ export default {
     },
     saveData() {
       this.widgetData.currentPage = this.pageController.getCurrentPage();
-      WidgetDataRepository.saveByName(this.widgetData)
+      WidgetApi.saveDataByName(this.widgetData, {sendBroadcast: false})
     },
     next() {
       this.pageController.nextPage();

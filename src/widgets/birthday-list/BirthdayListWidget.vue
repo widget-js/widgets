@@ -42,8 +42,8 @@
 
 <script lang="ts">
 // import {useInterval} from '@vueuse/core'
-import dayjs from "dayjs";
-import {Lunar} from 'lunar-typescript';
+import dayjs, {Dayjs} from "dayjs";
+import {Lunar, LunarMonth, Solar, SolarMonth} from 'lunar-typescript';
 import BirthdayListData, {BirthdayPeople} from "@/widgets/birthday-list/model/BirthdayListData";
 import {WidgetApi} from "../../../../core";
 // import {delay} from "lodash";
@@ -80,8 +80,8 @@ export default {
         const people = peopleList[i];
         let newDate;
         if (people.type == 'Y') {
-          let lunar = Lunar.fromYmd(curDate.year(), people.month, people.day);
-          newDate = dayjs(lunar.getSolar().toString());
+          const solarDate = this.getSolarDate(curDate.year(), people.month, people.day);
+          newDate = dayjs(solarDate.toString());
         } else {
           newDate = dayjs('' + curDate.year() + '-' + (people.month > 9 ? '' : '0') + people.month + '-' + (people.day > 9 ? '' : '0') + people.day);
         }
@@ -100,6 +100,11 @@ export default {
   },
   //emits: ["confirm", "cancel"],
   methods: {
+    getSolarDate(year: number, month: number, day: number): Solar {
+      const lunarMonth = LunarMonth.fromYm(year, month);
+      const lastDay = lunarMonth!.getDayCount();
+      return Lunar.fromYmd(year, month, day > lastDay ? lastDay : day).getSolar();
+    },
     update() {
 
     },
@@ -107,9 +112,8 @@ export default {
       if (item.type == 'N') {
         return item.month + '月' + item.day + '日';
       }
-      let newDate = Lunar.fromYmd(dayjs().year(), item.month, item.day);
-      let solar = newDate.getSolar();
-      return solar.getMonth() + '月' + solar.getDay() + '日';
+      let lunar = this.getSolarDate(dayjs().year(), item.month, item.day);
+      return lunar.getMonth() + '月' + lunar.getDay() + '日';
     }
   }
 }

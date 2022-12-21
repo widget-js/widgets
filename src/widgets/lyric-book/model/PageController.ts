@@ -130,7 +130,6 @@ export default class PageController {
             for (let line of page) {
 
             }
-
         }
         return undefined;
     }

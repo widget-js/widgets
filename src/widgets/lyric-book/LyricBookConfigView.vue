@@ -24,7 +24,7 @@
           <span>{{ filename }}</span>
         </el-form-item>
         <el-form-item label="当前页数">
-          <el-input :style="{width:'100px',marginRight:`200px`}" @change="pageChange" v-model="currentPage"
+          <el-input :style="{width:'100px',marginRight:`200px`}" v-model="currentPage"
                     type="number" min="1"
                     max="10000000">
             <template #prepend>第</template>
@@ -51,7 +51,7 @@
 
 import LyricBookWidget from "./LyricBookWidget.vue";
 import {useWidget, WidgetConfigOption, WidgetEditDialog} from "@widget-js/vue3";
-import {DialogApi, NotificationApi, WidgetDataRepository} from "@widget-js/core";
+import {DialogApi, NotificationApi, WidgetApi, WidgetDataRepository} from "@widget-js/core";
 import {reactive, ref} from "vue";
 import LyricBookData, {readFile} from "@/widgets/lyric-book/model/LyricBookData";
 import PageController from "@/widgets/lyric-book/model/PageController";
@@ -68,13 +68,11 @@ export default {
       loadDataByWidgetName: true,
       onDataLoaded: (data) => {
         if (data) {
-          pageController.setCurrentPage(data.currentPage);
           filePath.value = data.file ?? "";
-          currentPage.value = data.currentPage;
+          currentPage.value = data.currentPage + 1;
         }
       }
     });
-
 
     //修改成需要设置组件参数配置
     const widgetConfigOption = reactive(new WidgetConfigOption({
@@ -120,34 +118,28 @@ export default {
       }
     },
     currentPage() {
-      // this.pageContent = this.pageController.setCurrentLine(this.currentPage);
-    }
-  },
-  methods: {
-    pageChange() {
       this.pageContent = this.pageController.setCurrentPage(this.currentPage - 1);
     },
+  },
+  methods: {
     previousPage() {
-      this.pageContent = this.pageController.previousPage();
-      this.currentPage = this.pageController.getCurrentPage() + 1;
+      this.currentPage--;
     },
     nextPage() {
-      this.pageContent = this.pageController.nextPage();
-      this.currentPage = this.pageController.getCurrentPage() + 1;
+      this.currentPage++;
     },
     search() {
       const result = this.pageController.search(this.keyword);
       if (result && result[0] > -1) {
-        this.pageContent = this.pageController.setCurrentPage(result[0]);
-        this.currentPage = this.pageController.getCurrentPage() + 1;
+        this.currentPage = result[0] + 1;
       } else {
         NotificationApi.error("没有找到关键词")
       }
     },
     async onSaveClick() {
-      this.widgetData.currentPage = parseInt(this.currentPage.toString());
+      this.widgetData.currentPage = parseInt(this.currentPage.toString()) - 1;
       this.widgetData.file = this.filePath;
-      await WidgetDataRepository.saveByName(this.widgetData);
+      await WidgetApi.saveDataByName(this.widgetData);
       window.close();
     },
     async pickFile() {
