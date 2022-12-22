@@ -1,6 +1,20 @@
-## 桌面组件挑战
+<p align="center">
+<a href="https://github.com/widget-js/widgets">
+  <img src="https://raw.githubusercontent.com/widget-js/widgets/master/screenshot/logo.png" alt="Widgets - Capable and ergonomic widgets." width="300">
+</a>
+<br>
+桌面组件
+</p>
 
-项目还在持续完善中
+<p align="center">
+  <img src="https://img.shields.io/github/license/widget-js/widgets" alt="">
+  <a href="https://discord.gg/vwSAaRR8cT"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true" alt="Chat"></a>
+</p>
+
+
+
+### 说明
+这是桌面组件前端开源组件，项目还在持续完善中
 
 ### 项目目录结构
 
@@ -35,7 +49,7 @@ pnpm serve
 pnpm storybook
 ```
 
-### 创建组件
+### 创建自己的组件
 ```shell
 pnpm widget
 ```
@@ -67,4 +81,11 @@ pnpm widget
 - vueuse: useTransition
 - string.padStart(2,"0"): 字符串不足2位，用0补足。 "7" -> "07"
 - 动画曲线：TransitionPresets.easeInOutCubic
+
+
+#### 歌词小说
+- 代码路径：/widgets/lyric_book
+- 组件路由：/widget/lyric_book
+![歌词小说](./screenshot/lyric_book.png)
+
 
