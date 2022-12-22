@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://github.com/widget-js/widgets">
-  <img src="https://raw.githubusercontent.com/widget-js/widgets/master/screenshot/logo.png" alt="Widgets - Capable and ergonomic widgets." width="300">
+  <img width="150" src="https://raw.githubusercontent.com/widget-js/widgets/master/screenshot/logo.png" alt="Widgets - Capable and ergonomic widgets." width="300">
 </a>
 <br>
 桌面组件
@@ -15,6 +15,9 @@
 
 ### 说明
 这是桌面组件前端开源组件，项目还在持续完善中
+
+### Windows 10/11 客户端下载
+https://www.microsoft.com/store/productId/9NPR50GQ7T53
 
 ### 项目目录结构
 
