@@ -3,7 +3,7 @@ import GlitchWidgetDefine from "./Glitch.widget";
 const url = GlitchWidgetDefine.url;
 const name = GlitchWidgetDefine.name;
 
-const configUrl = GlitchWidgetDefine.configUrl;
+const configUrl = GlitchWidgetDefine.configUrl!;
 
 const GlitchWidgetRoutes = [
     {
