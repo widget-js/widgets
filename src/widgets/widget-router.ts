@@ -6,6 +6,7 @@ import {ClockWidgetRoutes} from "@/widgets/clock/ClockWidgetRoutes";
 import BirthdayListWidgetRoutes from "@/widgets/birthday-list/BirthdayListWidgetRoutes";
 import LyricBookWidgetRoutes from "./lyric-book/LyricBookWidgetRoutes";
 import MickeyClockWidgetRoutes from "./mickey-clock/MickeyClockWidgetRoutes";
+import GlitchWidgetRoutes from "./glitch/GlitchWidgetRoutes";
 //FBI WANING! IMPORT PLACE, DONT DELETE THIS LINE
 
 
@@ -16,8 +17,7 @@ const WidgetRouter = [
     ...TimeProgressWidgetRoutes,
     ...ClockWidgetRoutes,
     ...BirthdayListWidgetRoutes,
-    ...LyricBookWidgetRoutes,
-    ...MickeyClockWidgetRoutes,
+    ...GlitchWidgetRoutes,
     //FBI WANING! ROUTE PLACE, DONT DELETE THIS LINE
 ];
 export default WidgetRouter
