@@ -5,7 +5,6 @@ import LaborProgressWidgetRoutes from "@/widgets/labor-progress/LaborProgressRou
 import {ClockWidgetRoutes} from "@/widgets/clock/ClockWidgetRoutes";
 import BirthdayListWidgetRoutes from "@/widgets/birthday-list/BirthdayListWidgetRoutes";
 import GlitchWidgetRoutes from "./glitch/GlitchWidgetRoutes";
-import DynamicIslandWidgetRoutes from "./dynamic-island/DynamicIslandWidgetRoutes";
 //FBI WANING! IMPORT PLACE, DONT DELETE THIS LINE
 
 
