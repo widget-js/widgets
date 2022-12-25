@@ -25,9 +25,9 @@ import {computed, nextTick, onMounted, ref} from "vue";
 import dayjs, {Dayjs} from "dayjs";
 import {TransitionPresets, useInterval, useTransition, useWindowSize} from "@vueuse/core";
 import {Lunar, LunarMonth} from "lunar-typescript";
-import {ProgressType, WaveProgressData} from "./model/WaveProgressData";
+import {ProgressType} from "./model/WaveProgressData";
 import Color from "color";
-import {floor} from 'lodash'
+import {delay, floor} from 'lodash'
 
 require(`dayjs/locale/zh-cn`);
 dayjs.locale("zh-cn");
@@ -47,21 +47,34 @@ const props = defineProps({
     default: "zh-cn",
     required: false,
   },
-  extra: {
-    type: WaveProgressData,
-    default: {
-      progressType: ProgressType.today,
-      isLunar: false,
-    },
-    required: false,
+  progressType: {
+    type: Number,
+    default: 0
   },
+  eventName: {
+    type: String,
+    default: "今天"
+  },
+  startDate: {
+    type: Date
+  },
+  endDate: {
+    type: Date
+  },
+  isLunar: {
+    type: Boolean,
+    default: false
+  },
+  backgroundColor: {
+    type: String
+  }
 });
 
 const backgroundColors = computed(() => {
-  const hex = props.extra.backgroundColor;
+  const hex = props.backgroundColor;
   let color = hex;
   if (!color) {
-    switch (props.extra.progressType) {
+    switch (props.progressType) {
       case ProgressType.today:
         color = "#ff5594ff";
         break;
@@ -144,7 +157,7 @@ const refresh = async () => {
   initRenderView(now);
 
   const dayEnd = now.endOf("day");
-  const day = getRatioValue(now, ProgressType.today);
+  const day = getRatioValue(now, props.progressType);
   // 每个百分比刷新一次就好
   const daySurplus = 100 - day;
   const interval = dayEnd.diff(now) / daySurplus;
@@ -152,7 +165,9 @@ const refresh = async () => {
 }
 
 onMounted(async () => {
-  await refresh();
+  delay(async () => {
+    await refresh();
+  }, 500)
   onInitCanvas();
 });
 
@@ -162,7 +177,7 @@ const fontSize = computed(() => {
 
 // 渲染视图
 function initRenderView(now: Dayjs) {
-  ratio.value = getRatioValue(now, props.extra.progressType);
+  ratio.value = getRatioValue(now, props.progressType);
 }
 
 const transitionRation = useTransition(ratio, {
@@ -171,7 +186,7 @@ const transitionRation = useTransition(ratio, {
 });
 
 const title = computed(() => {
-  switch (props.extra.progressType) {
+  switch (props.progressType) {
     case ProgressType.today:
       return "今天";
     case ProgressType.toWeek:
@@ -181,7 +196,7 @@ const title = computed(() => {
     case ProgressType.toYear:
       return "今年";
     default:
-      return props.extra.eventName;
+      return props.eventName;
   }
 })
 
@@ -199,7 +214,7 @@ const getRatioValue = (now: Dayjs, progressType: ProgressType): number => {
       end = now.endOf("week");
       break;
     case ProgressType.toMonth:
-      if (props.extra.isLunar) {
+      if (props.isLunar) {
         const nowLunar = Lunar.fromDate(now.toDate());
         const monthDay = LunarMonth.fromYm(nowLunar.getYear(), nowLunar.getMonth());
         const firstDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), 1).getSolar();
@@ -213,7 +228,7 @@ const getRatioValue = (now: Dayjs, progressType: ProgressType): number => {
 
       break;
     case ProgressType.toYear:
-      if (props.extra.isLunar) {
+      if (props.isLunar) {
         const nowLunar = Lunar.fromDate(now.toDate());
         const firstDay = Lunar.fromYmd(nowLunar.getYear(), 1, 1).getSolar();
         const endDay = Lunar.fromYmd(nowLunar.getYear() + 1, 1, 1).getSolar();
@@ -241,11 +256,11 @@ const getRatioValue = (now: Dayjs, progressType: ProgressType): number => {
 }
 
 const startDate = computed(() => {
-  return dayjs(props.extra.startDate)
+  return dayjs(props.startDate)
 });
 
 const endDate = computed(() => {
-  return dayjs(props.extra.endDate)
+  return dayjs(props.endDate)
 });
 // 定时刷新视图
 const intervalRenderView = (interval: number) => {

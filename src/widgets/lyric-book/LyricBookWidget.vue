@@ -136,6 +136,7 @@ export default {
 
 <style lang="scss" scoped>
 
+
 body:hover {
   .background {
     filter: blur(12px);

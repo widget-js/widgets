@@ -6,7 +6,7 @@
       <wave-progress-widget :style="{
           width: `${widgetParams.widthPx}px`,
           height: `${widgetParams.heightPx}px`,
-        }" :extra="widgetData" ref="widgetRef"/>
+        }" v-bind="widgetData" ref="widgetRef"/>
     </template>
     <template v-slot:form>
       <el-form :model="widgetData">
@@ -47,7 +47,7 @@ import WaveProgressWidget from "@/widgets/wave-progress/WaveProgressWidget.vue";
 
 export default defineComponent({
       name: "WaveProgressConfigView",
-      components: { WidgetEditDialog, WaveProgressWidget},
+      components: {WidgetEditDialog, WaveProgressWidget},
       computed: {
         ProgressType() {
           return ProgressType

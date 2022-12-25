@@ -1,17 +1,18 @@
 <template>
   <div class="glitch_container">
     <a class="switcher" href="#" @click="toggleScreen"></a>
-      <div class="screen" :class="{glitch: showGlitch}">
-      <div class="clock" :class="{ 'is-off': isOff, }"><span class="time" :data-time="refContent">{{refContent}}</span></div>
+    <div class="screen" :class="{glitch: showGlitch}">
+      <div class="clock" :class="{ 'is-off': isOff, }"><span class="time"
+                                                             :data-time="refContent">{{ refContent }}</span></div>
       <div class="figure"></div>
       <div class="figure-mask"></div>
     </div>
   </div>
-    <!-- TODO 这里只写组件内容，不做自定义数据、业务处理   -->
 </template>
 
 <script lang="ts" setup>
-import {ref,onMounted} from 'vue';
+import {ref, onMounted} from 'vue';
+
 let isOff = ref(true);
 let refContent = ref('');
 let showGlitch = ref(true)
@@ -24,7 +25,7 @@ onMounted(() => {
   setTimeout(() => {
     isOff.value = false;
     console.log(isOff.value)
-  },2000)
+  }, 2000)
 
   setInterval(() => {
 
@@ -46,7 +47,7 @@ onMounted(() => {
 
     console.log(refContent.value)
 
-  },1000)
+  }, 1000)
 
 })
 
@@ -89,9 +90,11 @@ a.switcher {
   opacity: 0.15;
   transition: opacity 0.15s;
 }
+
 a.switcher:hover {
   opacity: 1;
 }
+
 a.switcher:before {
   display: block;
   content: '';
@@ -103,6 +106,7 @@ a.switcher:before {
   top: 0;
   left: 5px;
 }
+
 .screen {
   position: relative;
   z-index: 1;
@@ -112,8 +116,10 @@ a.switcher:before {
   aspect-ratio: 1/0.5;
   text-align: center;
   vertical-align: middle;
+  border-radius: 22px;
   background-color: #111111;
 }
+
 .figure {
   display: block;
   position: absolute;
@@ -130,6 +136,7 @@ a.switcher:before {
   border-left: 50px solid transparent;
   border-bottom: 0 solid transparent;
 }
+
 .figure:before {
   display: block;
   content: '';
@@ -145,6 +152,7 @@ a.switcher:before {
   border-left: 45px solid transparent;
   border-bottom: 0 solid transparent;
 }
+
 .figure-mask {
   display: block;
   position: absolute;
@@ -161,6 +169,7 @@ a.switcher:before {
   border-left: 100px solid #111;
   border-bottom: 0 solid transparent;
 }
+
 .clock {
   display: block;
   position: absolute;
@@ -174,6 +183,7 @@ a.switcher:before {
   margin: auto;
   cursor: default;
 }
+
 .clock span {
   display: block;
   position: relative;
@@ -181,10 +191,12 @@ a.switcher:before {
   /*line-height: 1;*/
   vertical-align: middle;
 }
+
 .clock.is-off {
   -webkit-animation: is-off 2s linear infinite !important;
   animation: is-off 2s linear infinite !important;
 }
+
 .glitch:before {
   position: absolute;
   z-index: 999999;
@@ -196,19 +208,22 @@ a.switcher:before {
   -webkit-animation: bg-move 2s linear infinite;
   animation: bg-move 2s linear infinite;
   background-size: 100% 8px;
-  background-image: linear-gradient(0, rgba(255,255,255,0.05) 10%, transparent 10%, transparent 50%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.05) 60%, transparent 60%, transparent);
+  background-image: linear-gradient(0, rgba(255, 255, 255, 0.05) 10%, transparent 10%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 60%, transparent 60%, transparent);
 }
+
 .glitch .figure,
 .glitch .figure-mask {
   transform: skewX(0deg) scaleY(1);
   -webkit-animation: tr-bag 4s linear infinite;
   animation: tr-bag 4s linear infinite;
 }
+
 .glitch .clock {
   transform: skewX(0deg) scaleY(1);
   -webkit-animation: clock-bag 4s linear infinite;
   animation: clock-bag 4s linear infinite;
 }
+
 .glitch .clock span:before,
 .glitch .clock span:after {
   display: block;
@@ -224,16 +239,19 @@ a.switcher:before {
   /*height: 128px;*/
   clip: rect(0, 300px, 0, 0);
 }
+
 .glitch .clock span:before {
   left: -2px;
   text-shadow: 2px 0 #00f;
   animation: c2 1s infinite linear alternate-reverse;
 }
+
 .glitch .clock span:after {
   left: 3px;
   text-shadow: -2px 0 #f00;
   animation: c1 2s infinite linear alternate-reverse;
 }
+
 @-webkit-keyframes is-off {
   0% {
     opacity: 1;
@@ -284,6 +302,7 @@ a.switcher:before {
     color: #fff;
   }
 }
+
 @keyframes is-off {
   0% {
     opacity: 1;
@@ -334,6 +353,7 @@ a.switcher:before {
     color: #fff;
   }
 }
+
 @-webkit-keyframes c1 {
   0% {
     clip: rect(2px, 9999px, 36px, 0);
@@ -399,6 +419,7 @@ a.switcher:before {
     clip: rect(64px, 9999px, 59px, 0);
   }
 }
+
 @keyframes c1 {
   0% {
     clip: rect(2px, 9999px, 35.5px, 0);
@@ -464,6 +485,7 @@ a.switcher:before {
     clip: rect(64px, 9999px, 59px, 0);
   }
 }
+
 @-webkit-keyframes c2 {
   0% {
     clip: rect(11px, 9999px, 28px, 0);
@@ -532,6 +554,7 @@ a.switcher:before {
     transform: scaleX(0.8);
   }
 }
+
 @keyframes c2 {
   0% {
     clip: rect(11px, 9999px, 28px, 0);
@@ -600,6 +623,7 @@ a.switcher:before {
     transform: scaleX(0.8);
   }
 }
+
 @-webkit-keyframes clock-bag {
   0% {
     transform: translate(1px, 4px);
@@ -773,6 +797,7 @@ a.switcher:before {
     transform: scaleX(1) scaleY(1) skewX(0deg);
   }
 }
+
 @keyframes clock-bag {
   0% {
     transform: translate(1px, 4px);
@@ -946,6 +971,7 @@ a.switcher:before {
     transform: scaleX(1) scaleY(1) skewX(0deg);
   }
 }
+
 @-webkit-keyframes tr-bag {
   0% {
     transform: translate(2px, 3px);
@@ -1119,6 +1145,7 @@ a.switcher:before {
     transform: scaleX(1) scaleY(1) skewX(0deg);
   }
 }
+
 @keyframes tr-bag {
   0% {
     transform: translate(2px, 3px);
@@ -1292,6 +1319,7 @@ a.switcher:before {
     transform: scaleX(1) scaleY(1) skewX(0deg);
   }
 }
+
 @-webkit-keyframes bg-move {
   0% {
     background-position: 0 0;
@@ -1300,6 +1328,7 @@ a.switcher:before {
     background-position: 0 -32px;
   }
 }
+
 @keyframes bg-move {
   0% {
     background-position: 0 0;

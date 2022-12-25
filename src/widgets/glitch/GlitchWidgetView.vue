@@ -1,6 +1,5 @@
 <template>
-    <!-- TODO:组件页面，这里编写组件业务逻辑-->
-    <glitch-widget :background-color="widgetData.backgroundColor"></glitch-widget>
+    <glitch-widget :style="sizeStyle"  :background-color="widgetData.backgroundColor"></glitch-widget>
 </template>
 
 <script lang="ts">
@@ -12,8 +11,8 @@ export default {
     name:"GlitchWidgetView",
     components: {GlitchWidget},
     setup(){
-        const {widgetData, widgetParams} = useWidget(WidgetData);
-        return {widgetData, widgetParams};
+        const {widgetData, widgetParams,sizeStyle} = useWidget(WidgetData);
+        return {widgetData, widgetParams,sizeStyle};
     }
 }
 </script>

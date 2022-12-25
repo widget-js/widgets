@@ -18,6 +18,10 @@ module.exports = {
       use: ['style-loader', 'css-loader', 'sass-loader'],
       include: path.resolve(__dirname, '../'),
     });
+    config.module.rules.push( {
+      test: /\.txt$/i,
+      use: 'raw-loader',
+    });
     config.resolve.plugins = [
       ...(config.resolve.plugins || []),
       new TsconfigPathsPlugin({

@@ -5,10 +5,13 @@
   "description": {
     "zh": "内置基础组件"
   },
-  "entry": "index.html#",
+  "entry": "index.html",
   "version": "0.0.1",
+  "hash": "true",
   "devOptions": {
     "folder": "./src/widgets/",
-    "useStorybook": true
+    "storybook": true,
+    "route": true,
+    "devUrl": "http://127.0.0.1:8088"
   }
 }

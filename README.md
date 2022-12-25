@@ -54,7 +54,7 @@ pnpm storybook
 
 ### 创建自己的组件
 ```shell
-pnpm widget
+pnpm widget create
 ```
 
 ### 组件列表

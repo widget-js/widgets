@@ -4,9 +4,8 @@ import WaveProgressRoute from "@/widgets/wave-progress/WaveProgressRoute";
 import LaborProgressWidgetRoutes from "@/widgets/labor-progress/LaborProgressRoutes";
 import {ClockWidgetRoutes} from "@/widgets/clock/ClockWidgetRoutes";
 import BirthdayListWidgetRoutes from "@/widgets/birthday-list/BirthdayListWidgetRoutes";
-import LyricBookWidgetRoutes from "./lyric-book/LyricBookWidgetRoutes";
-import MickeyClockWidgetRoutes from "./mickey-clock/MickeyClockWidgetRoutes";
 import GlitchWidgetRoutes from "./glitch/GlitchWidgetRoutes";
+import DynamicIslandWidgetRoutes from "./dynamic-island/DynamicIslandWidgetRoutes";
 //FBI WANING! IMPORT PLACE, DONT DELETE THIS LINE
 
 

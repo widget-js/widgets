@@ -1,18 +1,18 @@
 import {Widget, WidgetKeyword} from "@widget-js/core";
 //TODO 修改组件信息，标题，描述，关键词
-const name = "cn.widgetjs.widgets.glitch";
+const name = "cn.widgetjs.widgets.dynamic_island";
 //组件标题
-const title = {"zh": "故障时钟"};
+const title = {"zh": "灵动岛"};
 //组件描述
-const description = {"zh": "Glitch"};
+const description = {"zh": ""};
 //组件关键词
 const keywords = [WidgetKeyword.RECOMMEND];
 //组件路由地址
-const url = "/widget/glitch";
+const url = "/widget/dynamic_island";
 //配置页路由地址
-const configUrl = undefined;
+const configUrl = "/widget/config/dynamic_island";
 //组件关键词
-const GlitchWidgetDefine = new Widget({
+const DynamicIslandWidgetDefine = new Widget({
     name: name,
     title: title,
     description: description,
@@ -21,11 +21,11 @@ const GlitchWidgetDefine = new Widget({
     url: url,
     configUrl: configUrl,
     width: 4,
-    height: 2,
+    height: 4,
     minWidth: 4,
     maxWidth: 4,
-    minHeight: 2,
-    maxHeight: 2
+    minHeight: 4,
+    maxHeight: 4
 })
 
-export default GlitchWidgetDefine;
+export default DynamicIslandWidgetDefine;

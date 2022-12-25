@@ -2,9 +2,9 @@ import {Widget, WidgetKeyword} from "@widget-js/core";
 //TODO 修改组件信息，标题，描述，关键词
 const name = "cn.widgetjs.widgets.mickey_clock";
 //组件标题
-const title = {"zh": ""};
+const title = {"zh": "米奇表盘"};
 //组件描述
-const description = {"zh": ""};
+const description = {"zh": "源自Apple Watch米奇表盘"};
 //组件关键词
 const keywords = [WidgetKeyword.RECOMMEND];
 //组件路由地址

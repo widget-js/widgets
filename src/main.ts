@@ -5,6 +5,7 @@ import 'animate.css';
 import {WidgetJsPlugin} from "@widget-js/vue3";
 import '@widget-js/vue3/dist/style.css'
 import '@widget-js/vue3/dist/mingcute_icon/font/Mingcute.css'
+import {createPinia} from "pinia";
 
-createApp(App).use(WidgetJsPlugin).use(router).mount('#app')
+createApp(App).use(WidgetJsPlugin).use(router).use(createPinia()).mount('#app')
 

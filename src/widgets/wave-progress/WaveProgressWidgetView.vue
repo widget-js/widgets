@@ -2,7 +2,7 @@
   <wave-progress-widget :style="{
     width:`${widgetParams.widthPx}px`,
     height:`${widgetParams.heightPx}px`
-    }" :extra="widgetData"></wave-progress-widget>
+    }" v-bind="widgetData"></wave-progress-widget>
 </template>
 
 <script lang="ts" setup>
