@@ -28,7 +28,7 @@ const props = defineProps({
   }
 })
 const onNotificationClick = () => {
-  NotificationApi.countdown("下班倒计时", props.targetTime)
+
 }
 
 

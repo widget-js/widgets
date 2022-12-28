@@ -3,7 +3,7 @@
     <audio ref="audio"></audio>
     <audio ref="ringtone"></audio>
     <audio ref="hangup"></audio>
-    <img class="avatar" src="../images/zhangyuge.jpg" alt="">
+    <img class="avatar" :src="avatar" alt="">
     <div class="content">
       <div class="title">{{ title }}</div>
       <div class="description">{{ desc }}</div>
@@ -20,17 +20,17 @@
     </div>
 
     <div class="voice" v-if="voicePlaying">
-      <voice-bar></voice-bar>
-      <voice-bar></voice-bar>
-      <voice-bar></voice-bar>
-      <voice-bar></voice-bar>
-      <voice-bar></voice-bar>
-      <voice-bar></voice-bar>
-      <voice-bar></voice-bar>
-      <voice-bar></voice-bar>
-      <voice-bar background-color="#E39444"></voice-bar>
-      <voice-bar background-color="#E39444"></voice-bar>
-      <voice-bar background-color="#E39444"></voice-bar>
+      <voice-bar/>
+      <voice-bar/>
+      <voice-bar/>
+      <voice-bar/>
+      <voice-bar/>
+      <voice-bar/>
+      <voice-bar/>
+      <voice-bar/>
+      <voice-bar background-color="#E39444"/>
+      <voice-bar background-color="#E39444"/>
+      <voice-bar background-color="#E39444"/>
     </div>
   </div>
 </template>
@@ -40,16 +40,36 @@ import {nextTick, onMounted, onUnmounted, ref, watch} from "vue";
 import {useIntervalFn, useMediaControls} from "@vueuse/core";
 
 import Lyric, {HandlerParams, Lines} from 'lyric-resolver'
-import {useNotificationStore} from "../store/notification-store";
-import {storeToRefs} from "pinia";
 import VoiceBar from "./VoiceBar.vue";
+import {NotificationApi} from "@widget-js/core";
 
-const notificationStore = useNotificationStore();
-const {show, notification} = storeToRefs(notificationStore)
 const audio = ref()
 const ringtone = ref()
 const hangup = ref()
-const {playing, waiting, duration, ended} = useMediaControls(ringtone, {
+
+const props = defineProps({
+  title: {
+    type: String,
+    default: "章鱼哥",
+  },
+  avatar: {
+    type: String,
+  },
+  lyric: {
+    type: String,
+    default: ""
+  },
+  audio: {
+    type: String,
+    required: true
+  },
+  message: {
+    type: String,
+    default: "下班提醒",
+  }
+})
+
+const {playing: ringtonePlaying, duration, ended} = useMediaControls(ringtone, {
   src: "./audio/ringtone.m4a",
 })
 
@@ -58,17 +78,9 @@ const {playing: hangupPlaying, ended: hangupEnded} = useMediaControls(hangup, {
 })
 
 const {playing: voicePlaying, duration: voiceDuration, ended: voiceEnded} = useMediaControls(audio, {
-  src: "./audio/voice_squidward.m4a",
+  src: props.audio,
 })
 
-const props = defineProps({
-  title: {
-    type: String
-  },
-  message: {
-    type: String
-  }
-})
 
 watch(ended, () => {
   voicePlaying.value = true
@@ -80,38 +92,32 @@ watch(voiceEnded, () => {
 
 watch(voicePlaying, (newValue, oldValue) => {
   if (newValue) {
-    playing.value = false;
+    ringtonePlaying.value = false;
     useInterval.resume();
   }
 })
 
-watch(show, (newValue, oldValue) => {
-  if (!newValue) {
-    playing.value = false
-    hangupPlaying.value = false
-    voicePlaying.value = false
+// watch(show, (newValue, oldValue) => {
+//   if (!newValue) {
+//     playing.value = false
+//     hangupPlaying.value = false
+//     voicePlaying.value = false
+//   }
+// })
+
+watch(hangupEnded, () => {
+  NotificationApi.hide();
+})
+
+defineExpose({
+  stop() {
+    voicePlaying.value = false;
+    ringtonePlaying.value = false;
   }
 })
 
-watch(hangupEnded, () => {
-  notificationStore.hideNotification();
-})
-
 const desc = ref(props.message)
-const lyric = new Lyric(
-    "[00:00.00]5\n" +
-    "[00:00.90]4\n" +
-    "[00:01.80]3\n" +
-    "[00:02.80]2\n" +
-    "[00:03.50]1\n" +
-    "[00:04.50]我下班了，蟹老板\n" +
-    "[00:06.20]我要说的是\n" +
-    "[00:07.30]如果有一天\n" +
-    "[00:08.30]我真的实现了\n" +
-    "[00:09.70]我生命中的梦想\n" +
-    "[00:11.20]我永远也不会让\n" +
-    "[00:13.50]我的双脚\n" +
-    "[00:14.50]站在这油污的地板上", handleLyric);
+const lyric = new Lyric(props.lyric, handleLyric);
 let index = 0;
 
 function handleLyric(payload: HandlerParams): void {
@@ -140,19 +146,21 @@ const useInterval = useIntervalFn(() => {
 let lines: Lines[]
 onMounted(async () => {
   await nextTick();
-  playing.value = true
+  ringtonePlaying.value = true
   lines = lyric.lines
 });
 
 function hangupClick() {
-  notificationStore.hideNotification()
+  ringtonePlaying.value = false;
+  voicePlaying.value = false;
+  NotificationApi.hide();
 }
 
-watch(show, () => {
-  if (!show.value) {
-    playing.value = false
-  }
-})
+// watch(show, () => {
+//   if (!show.value) {
+//     playing.value = false
+//   }
+// })
 
 onUnmounted(() => {
 
@@ -161,21 +169,25 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
-
+$containerHeight: 75px;
+$childHeight: calc($containerHeight - 1.6rem);
 .phone-call {
   display: flex;
   padding: 0.8rem;
   width: 100%;
+  border-radius: 12px;
+  max-height: $containerHeight;
+  align-items: center;
 
   .avatar {
-    height: 100%;
+    height: $childHeight;
+    aspect-ratio: 1;
     border-radius: 50%;
   }
 
   .content {
     flex: 1;
     display: flex;
-
     align-items: flex-start;
     margin-left: 1rem;
     margin-right: 1rem;
@@ -215,7 +227,7 @@ onUnmounted(() => {
 
     .btn-hangup, .btn-answer {
       background-color: red;
-      height: 100%;
+      height: $childHeight;
       border-radius: 50%;
       cursor: pointer;
       display: flex;

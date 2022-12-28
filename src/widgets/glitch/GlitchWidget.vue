@@ -69,7 +69,7 @@ function toggleScreen(e) {
 // }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 .glitch_container {
   color: #FFFFFF;
@@ -152,23 +152,23 @@ a.switcher:before {
   border-left: 45px solid transparent;
   border-bottom: 0 solid transparent;
 }
-
-.figure-mask {
-  display: block;
-  position: absolute;
-  z-index: 99;
-  width: 0;
-  height: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  border-top: 200px solid transparent;
-  border-right: 100px solid #111;
-  border-left: 100px solid #111;
-  border-bottom: 0 solid transparent;
-}
+//
+//.figure-mask {
+//  display: block;
+//  position: absolute;
+//  z-index: 99;
+//  width: 0;
+//  height: 0;
+//  top: 0;
+//  right: 0;
+//  bottom: 0;
+//  left: 0;
+//  margin: auto;
+//  border-top: 200px solid transparent;
+//  border-right: 100px solid #111;
+//  border-left: 100px solid #111;
+//  border-bottom: 0 solid transparent;
+//}
 
 .clock {
   display: block;
@@ -250,6 +250,12 @@ a.switcher:before {
   left: 3px;
   text-shadow: -2px 0 #f00;
   animation: c1 2s infinite linear alternate-reverse;
+}
+
+@media (max-width: 300px) {
+  .clock span {
+    font-size: 50px;
+  }
 }
 
 @-webkit-keyframes is-off {

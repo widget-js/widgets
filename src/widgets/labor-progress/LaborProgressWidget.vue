@@ -1,5 +1,5 @@
 <template>
-  <div class="container" ref="container"
+  <div class="container" ref="container" @mouseenter="mouseEnter"
        :style="{height:`${height}px`, backgroundColor:backgroundColor,borderRadius: `${borderRadius}px`}">
     <div class="progress-bar">
       <div class="outline">
@@ -36,7 +36,7 @@ import faceSleepy from "./images/sleepy_face_3d.png"
 import facePartying from "./images/partying_face_3d.png"
 import EmojiTimeline from "@/widgets/labor-progress/model/EmojiTimeline";
 import "@/common/dayjs-extend"
-import {NotificationApi} from "@widget-js/core";
+import {NotificationApi, WidgetApi} from "@widget-js/core";
 import {floor} from "lodash";
 
 export default {
@@ -48,6 +48,26 @@ export default {
     const workEndTime = computed(() => {
       return dayjs(props.endTime)
     })
+
+    const startCall = async () => {
+      const url = await WidgetApi.getWidgetPackageUrl("cn.widgetjs.widgets", false);
+      const avatar = url + "/images/zhangyuge.jpg";
+      const audio = url + "/audio/voice_squidward.m4a";
+      const lyric = "[00:00.00]5\n" +
+          "[00:00.90]4\n" +
+          "[00:01.80]3\n" +
+          "[00:02.80]2\n" +
+          "[00:03.50]1\n" +
+          "[00:04.50]我下班了，蟹老板\n" +
+          "[00:06.20]我要说的是\n" +
+          "[00:07.30]如果有一天\n" +
+          "[00:08.30]我真的实现了\n" +
+          "[00:09.70]我生命中的梦想\n" +
+          "[00:11.20]我永远也不会让\n" +
+          "[00:13.50]我的双脚\n" +
+          "[00:14.50]站在这油污的地板上";
+      await NotificationApi.call(avatar, audio, "章鱼哥", "下班提醒", lyric)
+    }
 
     console.info("start", workStartTime.value.format())
     console.info("end", workEndTime.value.format())
@@ -83,7 +103,7 @@ export default {
       if (remindSeconds == 5 * 60) {
         NotificationApi.advanceCountdown("收拾好行李，准备下班", workEndTime.value.format(), "下班倒计时")
       } else if (remindSeconds == 7 && props.enablePhoneReminder) {
-        NotificationApi.call()
+        startCall();
       }
       percent.value = floor(duration.asSeconds() / totalSeconds.value * 100, 1)
       if (percent.value > 100) {
@@ -100,7 +120,13 @@ export default {
         }
       }
     }, 1000)
-    return {height, time, currentTimeline, percent, secondLeft, percentPosition}
+    return {height, time, currentTimeline, startCall,percent, workEndTime, secondLeft, percentPosition}
+  },
+  methods: {
+    async mouseEnter() {
+      // this.startCall();
+      // NotificationApi.advanceCountdown("收拾好行李，准备下班", this.workEndTime.format(), "下班倒计时")
+    },
   },
   props: {
     backgroundColor: {

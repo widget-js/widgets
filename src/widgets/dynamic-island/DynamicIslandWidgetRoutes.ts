@@ -15,6 +15,11 @@ const DynamicIslandWidgetRoutes = [
         path: configUrl,
         name: `${name}.config`,
         component: () => import(/* webpackChunkName: "com.wisdom.widgets.dynamic_island.config" */ './DynamicIslandConfigView.vue')
+    },
+    {
+        path: '/widget/dynamic_island/call',
+        name: `${name}.call`,
+        component: () => import(/* webpackChunkName: "com.wisdom.widgets.dynamic_island.call" */ './components/PhoneCallNotification.vue')
     }
 ]
 

@@ -1,16 +1,17 @@
 import DynamicIslandWidget from './DynamicIslandWidget.vue';
 import dayjs from "dayjs";
+import {NotificationState} from "@/widgets/dynamic-island/model/NotificationState";
+import {NotificationType} from "@widget-js/core";
 
 export default {
     title: 'Widget/DynamicIsland',
     component: DynamicIslandWidget,
     argTypes: {
-        size: {control: 'select', options: ['small', 'default', 'large']},
-        targetTime: {control: 'date'},
-        type: {
+        // size: {control: 'select', options: ['small', 'default', 'large']},
+        state: {
             control: 'select',
-            options: ['call', 'countdown', 'advance-countdown', 'error', 'success', 'warning', 'info'],
-        }
+            options: [NotificationState.HIDE, NotificationState.SMALL, NotificationState.NORMAL, NotificationState.LARGE]
+        },
     },
 };
 
@@ -25,35 +26,39 @@ const Template = (args: any) => ({
 export const MessageError = Template.bind({})
 // @ts-ignore
 MessageError.args = {
-    show: true,
-    type: 'error',
-    size: 'small',
-    message: "错误信息"
+    notification: {
+        type: 'error',
+        message: "错误信息",
+    },
+    state: NotificationState.SMALL
 }
 export const MessageInfo = Template.bind({})
 // @ts-ignore
 MessageInfo.args = {
-    show: true,
-    type: 'info',
-    size: 'small',
-    message: "Hello World"
+    notification: {
+        type: 'info',
+        message: "Hello World",
+    },
+    state: NotificationState.SMALL
 }
 export const MessageSuccess = Template.bind({})
 // @ts-ignore
 MessageSuccess.args = {
-    show: true,
-    type: 'success',
-    size: 'small',
-    message: "Hello World"
+    notification: {
+        type: 'success',
+        message: "Hello World",
+    },
+    state: NotificationState.SMALL,
 }
 
 export const MessageWarning = Template.bind({})
 // @ts-ignore
 MessageWarning.args = {
-    show: true,
-    type: 'warning',
-    size: 'small',
-    message: "警告信息"
+    notification: {
+        type: 'warning',
+        message: "警告信息",
+    },
+    state: NotificationState.SMALL,
 }
 
 export const Countdown = Template.bind({})
@@ -61,41 +66,41 @@ const date = dayjs('2023-01-01');
 
 // @ts-ignore
 Countdown.args = {
-    show: true,
-    type: 'countdown',
-    size: 'small',
-    message: '新年倒计时',
-    targetTime: date.toISOString(),
+    notification: {
+        type: 'countdown',
+        message: "新年倒计时",
+        backgroundColor: "rgba(0,0,0,0.5)",
+        targetTime: date.toISOString(),
+    },
+    state: NotificationState.SMALL,
 }
 
 export const CountdownAdvance = Template.bind({})
 // @ts-ignore
 CountdownAdvance.args = {
-    show: true,
-    type: 'advance-countdown',
-    size: 'default',
-    message: '恭喜发财',
-    title: '新年倒计时',
-    targetTime: date.toISOString(),
-}
-
-export const Call = Template.bind({})
-// @ts-ignore
-Call.args = {
-    show: true,
-    type: 'call',
-    size: 'default',
-    message: '下班提醒',
-    title: '章鱼哥',
+    notification: {
+        type: 'advance-countdown',
+        title: "新年倒计时",
+        message: '恭喜发财',
+        backgroundColor: "rgba(0,0,0,0.5)",
+        targetTime: date.toISOString(),
+    },
+    state: NotificationState.NORMAL,
 }
 
 
-export const Alert = Template.bind({})
+export const Reminder = Template.bind({})
 // @ts-ignore
-Alert.args = {
-    show: true,
-    type: 'alert',
-    size: 'large',
-    message: '您已经连续使用电脑45分钟',
-    title: '久坐提醒',
+Reminder.args = {
+    state: NotificationState.LARGE,
+    notification: {
+        type: "reminder",
+        message: '您已经连续使用电脑45分钟',
+        state: NotificationState.LARGE,
+        title: '久坐提醒',
+        icon: 'computer_line',
+        color: '#5D8AC8',
+        cancelButtonText:"知道了",
+        confirmButtonText:"休息一下",
+    }
 }

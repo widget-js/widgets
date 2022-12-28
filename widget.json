@@ -7,12 +7,15 @@
   },
   "entry": "index.html",
   "version": "0.0.1",
-  "hash": "true",
+  "hash": true,
   "devOptions": {
     "folder": "./src/widgets/",
     "storybook": true,
     "route": true,
     "devUrl": "http://127.0.0.1:8088"
   },
-  "widgets": []
+  "widgets": [],
+  "permissions": [
+    "ACCESS_MOUSE_EVENT"
+  ]
 }

@@ -45,7 +45,7 @@
 import dayjs, {Dayjs} from "dayjs";
 import {Lunar, LunarMonth, Solar, SolarMonth} from 'lunar-typescript';
 import BirthdayListData, {BirthdayPeople} from "@/widgets/birthday-list/model/BirthdayListData";
-import {WidgetApi} from "../../../../core";
+import {WidgetApi} from "@widget-js/core";
 // import {delay} from "lodash";
 //import BirthdayListData from './model/BirthdayListData';
 

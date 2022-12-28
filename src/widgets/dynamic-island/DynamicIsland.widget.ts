@@ -4,7 +4,7 @@ const name = "cn.widgetjs.widgets.dynamic_island";
 //组件标题
 const title = {"zh": "灵动岛"};
 //组件描述
-const description = {"zh": ""};
+const description = {"zh": "丝般顺滑的灵动通知组件"};
 //组件关键词
 const keywords = [WidgetKeyword.RECOMMEND];
 //组件路由地址
@@ -20,12 +20,12 @@ const DynamicIslandWidgetDefine = new Widget({
     lang: "zh",
     url: url,
     configUrl: configUrl,
-    width: 4,
+    width: 6,
     height: 4,
-    minWidth: 4,
-    maxWidth: 4,
+    minWidth: 6,
+    maxWidth: 6,
     minHeight: 4,
-    maxHeight: 4
+    maxHeight: 4,
 })
 
 export default DynamicIslandWidgetDefine;
