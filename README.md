@@ -41,13 +41,13 @@ widgets
 ### 运行项目
 
 #### Vue
-
+#
 ```shell
 pnpm serve
 ```
 
 #### Storybook
-
+用StoryBook运行只能查看组件
 ```shell
 pnpm storybook
 ```

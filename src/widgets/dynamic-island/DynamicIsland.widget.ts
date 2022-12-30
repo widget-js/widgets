@@ -2,7 +2,7 @@ import {Widget, WidgetKeyword} from "@widget-js/core";
 //TODO 修改组件信息，标题，描述，关键词
 const name = "cn.widgetjs.widgets.dynamic_island";
 //组件标题
-const title = {"zh": "灵动岛"};
+const title = {"zh": "灵动通知"};
 //组件描述
 const description = {"zh": "丝般顺滑的灵动通知组件"};
 //组件关键词

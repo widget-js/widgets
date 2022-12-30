@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import {nextTick, onMounted, onUnmounted, ref, watch} from "vue";
+import {computed, nextTick, onMounted, onUnmounted, ref, watch} from "vue";
 import {useIntervalFn, useMediaControls} from "@vueuse/core";
 
 import Lyric, {HandlerParams, Lines} from 'lyric-resolver'
@@ -65,11 +65,11 @@ const props = defineProps({
   },
   message: {
     type: String,
-    default: "下班提醒",
+    default: "",
   }
 })
 
-const {playing: ringtonePlaying, duration, ended} = useMediaControls(ringtone, {
+const {playing: ringtonePlaying, duration, ended: ringtoneEnd} = useMediaControls(ringtone, {
   src: "./audio/ringtone.m4a",
 })
 
@@ -82,7 +82,7 @@ const {playing: voicePlaying, duration: voiceDuration, ended: voiceEnded} = useM
 })
 
 
-watch(ended, () => {
+watch(ringtoneEnd, () => {
   voicePlaying.value = true
 })
 
@@ -97,31 +97,42 @@ watch(voicePlaying, (newValue, oldValue) => {
   }
 })
 
-// watch(show, (newValue, oldValue) => {
-//   if (!newValue) {
-//     playing.value = false
-//     hangupPlaying.value = false
-//     voicePlaying.value = false
-//   }
-// })
-
 watch(hangupEnded, () => {
   NotificationApi.hide();
 })
 
+const stop = () => {
+  ringtonePlaying.value = false;
+  voicePlaying.value = false;
+  NotificationApi.hide();
+}
+
+const start = () => {
+  time = 0;
+  ringtonePlaying.value = true;
+  voicePlaying.value = false;
+  hangup.value = false;
+  lines = lyric.value.lines;
+}
+
 defineExpose({
-  stop() {
-    voicePlaying.value = false;
-    ringtonePlaying.value = false;
-  }
+  stop,
 })
 
-const desc = ref(props.message)
-const lyric = new Lyric(props.lyric, handleLyric);
-let index = 0;
+const desc = ref(props.message);
+watch(() => props.message, (newValue) => {
+  console.log(newValue);
+  desc.value = newValue;
+})
 
 function handleLyric(payload: HandlerParams): void {
 }
+
+const lyric = computed(() => {
+  return new Lyric(props.lyric, handleLyric)
+});
+let index = 0;
+
 
 function answerClick() {
   voicePlaying.value = true
@@ -129,6 +140,7 @@ function answerClick() {
 
 
 let time = 0;
+let lines: Lines[];
 const useInterval = useIntervalFn(() => {
       time += 10
       if (lines.length > 1) {
@@ -143,28 +155,15 @@ const useInterval = useIntervalFn(() => {
     },
     10, {immediate: false}
 )
-let lines: Lines[]
+
 onMounted(async () => {
   await nextTick();
-  ringtonePlaying.value = true
-  lines = lyric.lines
+  start();
 });
 
 function hangupClick() {
-  ringtonePlaying.value = false;
-  voicePlaying.value = false;
-  NotificationApi.hide();
+  stop();
 }
-
-// watch(show, () => {
-//   if (!show.value) {
-//     playing.value = false
-//   }
-// })
-
-onUnmounted(() => {
-
-})
 
 </script>
 

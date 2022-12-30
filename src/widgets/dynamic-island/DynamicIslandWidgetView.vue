@@ -3,7 +3,6 @@
                          v-model:state="state"
                          @mouseenter="onMouseEnter"
                          @mouseleave="onMouseLeave"
-                         @hidden="hidden"
                          :notification="notification"/>
 </template>
 
@@ -11,9 +10,12 @@
 import {AppNotification, BrowserWindowApi, ElectronUtils, WidgetApi, WidgetData} from "@widget-js/core";
 import DynamicIslandWidget from "./DynamicIslandWidget.vue"
 import {useNotification, useWidget} from "@widget-js/vue3";
-import {computed, ref} from "vue";
+import {computed, reactive, ref, watch} from "vue";
 import {useIntervalFn, useTimeoutFn} from "@vueuse/core";
 import {NotificationState} from "@/widgets/dynamic-island/model/NotificationState";
+import {CountdownDemo, SitReminderDemo} from "@/widgets/dynamic-island/model/Demo";
+import "@/common/dayjs-extend";
+import useSitReminder from "./composition/use-sit-reminder";
 
 export default {
   name: "DynamicIslandWidgetView",
@@ -21,6 +23,7 @@ export default {
   setup() {
     const {widgetParams} = useWidget(WidgetData);
     const dynamicIslandWidget = ref();
+    const state = ref(NotificationState.HIDE);
     const defaultNotification = new AppNotification({
       duration: 0,
       message: "欢迎",
@@ -28,15 +31,17 @@ export default {
       type: "info"
     });
 
-    const notification = ref(defaultNotification);
+    const notification = reactive(defaultNotification);
     const hide = () => {
       state.value = NotificationState.HIDE
     }
+
     useNotification((newNotification) => {
       if (newNotification) {
         BrowserWindowApi.show();
-        notification.value = new AppNotification({...newNotification! });
-        // Object.assign(notification, newNotification);
+        BrowserWindowApi.moveTop();
+        // notification.value = new AppNotification({...newNotification! });
+        Object.assign(notification, newNotification);
         setState();
         stopHideTimeout();
         startHideTimeout();
@@ -45,18 +50,36 @@ export default {
       }
     })
 
+    if (!widgetParams.preview) {
+      useSitReminder()
+    }
+
+    watch(state, (newValue) => {
+      if (newValue == NotificationState.HIDE) {
+        startHideWindow();
+      } else {
+        stopHideWindow();
+      }
+      console.log(state.value);
+    })
+    const {start: startHideWindow, stop: stopHideWindow} = useTimeoutFn(() => {
+      console.log("hide window");
+      BrowserWindowApi.hide();
+    }, 1000)
+
+    stopHideWindow();
+
     const hideTimeout = computed(() => {
-      return notification.value.duration
+      return notification.duration
     })
 
-    const state = ref(NotificationState.HIDE);
     const inElectron = ElectronUtils.hasElectronApi();
 
     let previousStateIndex = 0;
     const setState = () => {
-      switch (notification.value.type) {
-        case "advance-countdown":
+      switch (notification.type) {
         case "call":
+        case "advance-countdown":
         case "url":
           state.value = NotificationState.NORMAL;
           break;
@@ -69,32 +92,6 @@ export default {
       }
     }
 
-    const showInfoDemo = () => {
-      notification.value.type = "info"
-      notification.value.message = "您好"
-      setState();
-    }
-
-    const showUrlDemo = async () => {
-      const packageUrl = await WidgetApi.getWidgetPackageUrl("cn.widgetjs.widgets",false);
-      notification.value.avatar = packageUrl + "/images/zhangyuge.jpg"
-      notification.value.title = "章鱼哥"
-      notification.value.message = "下班提醒"
-      notification.value.type = "call"
-      setState();
-    };
-    //预览动画
-
-    const showReminderDemo = () => {
-      notification.value.type = "reminder"
-      notification.value.message = "您已经连续使用电脑45分钟"
-      notification.value.title = "久坐提醒"
-      notification.value.icon = "computer_line"
-      notification.value.cancelButtonText = "知道了"
-      notification.value.confirmButtonText = "休息一下"
-      setState();
-    };
-
     const {start, stop: stopHideTimeout} = useTimeoutFn(() => {
       hide();
     }, hideTimeout)
@@ -105,21 +102,32 @@ export default {
       }
     }
 
-    const {pause, resume} = useIntervalFn(() => {
+    const {pause, resume} = useIntervalFn(async () => {
       state.value = NotificationState.NORMAL;
       previousStateIndex++;
-      switch (previousStateIndex % 3) {
+      switch (previousStateIndex % 4) {
         case 0:
-          showReminderDemo();
+          Object.assign(notification, CountdownDemo)
           break;
         case 1:
-          showUrlDemo();
+          const packageUrl = await WidgetApi.getWidgetPackageUrl("cn.widgetjs.widgets");
+          notification.avatar = packageUrl + "/images/zhangyuge.jpg"
+          notification.title = "章鱼哥"
+          notification.message = "下班提醒"
+          notification.type = "call"
+          notification.backgroundColor = "black"
           break;
         case 2:
-          showInfoDemo();
+          notification.type = "info"
+          notification.backgroundColor = "black"
+          notification.message = "您好"
+          break;
+        case 3:
+          Object.assign(notification, SitReminderDemo)
           break;
       }
-    }, 2000);
+      setState();
+    }, 2000, {immediate: true});
 
     if (widgetParams.preview) {
       resume();
@@ -131,9 +139,6 @@ export default {
       dynamicIslandWidget,
       inElectron,
       state,
-      showUrlDemo,
-      showInfoDemo,
-      showReminderDemo,
       notification,
       widgetParams,
       startHideTimeout,

@@ -1,8 +1,7 @@
 <template>
-  <!-- TODO:组件页面，这里编写组件业务逻辑-->
-  <mickey-clock-widget :background-color="widgetData.backgroundColor"
-                       :style="{width:`${widgetParams.widthPx}px`,height:`${widgetParams.heightPx}px`}">
-
+  <mickey-clock-widget :background-color="widgetData.backgroundColor" :width="widgetParams.widthPx"
+                       :borderRadius="widgetData.borderRadius??22"
+                       :height="widgetParams.heightPx">
   </mickey-clock-widget>
 </template>
 
@@ -22,8 +21,8 @@ export default {
     debugParams.id = "123";
     debugParams.name = MickeyClockWidgetDefine.name;
 
-    const {widgetData, widgetParams} = useWidget(WidgetData, {debugParams});
-    return {widgetData, widgetParams};
+    const {widgetData, widgetParams, sizeStyle} = useWidget(WidgetData, {debugParams});
+    return {widgetData, widgetParams, sizeStyle};
   }
 }
 </script>

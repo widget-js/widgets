@@ -8,6 +8,11 @@ const MickeyClockWidgetRoutes = [
         path: url,
         name: `${name}`,
         component: () => import(/* webpackChunkName: "com.wisdom.widgets.mickey_clock" */ './MickeyClockWidgetView.vue')
+    },
+    {
+        path: MickeyClockWidgetDefine.configUrl!,
+        name: `${name}.config`,
+        component: () => import(/* webpackChunkName: "com.wisdom.widgets.mickey_clock.config" */ './MickeyClockWidgetConfigView.vue')
     }
 ]
 

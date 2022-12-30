@@ -21,18 +21,26 @@
 
 <script lang="ts" setup>
 
+import {AppNotification, BroadcastApi, BroadcastEvent, NotificationApi} from "@widget-js/core";
+
 const props = defineProps({
   notification: {
-    type: Notification,
+    type: AppNotification,
+    required: true
   }
 })
+const broadcastEvent = new BroadcastEvent("", "cn.widgetjs.notification", props.notification);
 
 const cancel = () => {
-
+  broadcastEvent.type = props.notification.cancelBroadcast ?? "cn.widgetjs.notification.cancel";
+  BroadcastApi.sendBroadcastEvent(broadcastEvent)
+  NotificationApi.hide();
 }
 
 const confirm = () => {
-
+  broadcastEvent.type = props.notification.confirmBroadcast ?? "cn.widgetjs.notification.confirm";
+  BroadcastApi.sendBroadcastEvent(broadcastEvent)
+  NotificationApi.hide();
 }
 </script>
 
@@ -42,7 +50,7 @@ const confirm = () => {
 .message-notification {
   display: flex;
   flex-direction: column;
-  width: $notification-width;
+  width: 100%;
   height: 100%;
   align-items: center;
   justify-items: center;
@@ -86,6 +94,8 @@ const confirm = () => {
     display: flex;
     width: 100%;
     align-items: center;
+    padding-left: 16px;
+    padding-right: 16px;
 
     .text {
       .title {
@@ -110,8 +120,8 @@ const confirm = () => {
   }
 
   .icon {
-    font-size: 48px;
-    margin-right: 0.5rem;
+    font-size: 36px;
+    margin-right: 16px;
 
     &:before {
       color: #5D8AC8

@@ -1,7 +1,7 @@
 import DynamicIslandWidget from './DynamicIslandWidget.vue';
 import dayjs from "dayjs";
 import {NotificationState} from "@/widgets/dynamic-island/model/NotificationState";
-import {NotificationType} from "@widget-js/core";
+import {AdvanceCountdownDemo, SitReminderDemo} from "@/widgets/dynamic-island/model/Demo";
 
 export default {
     title: 'Widget/DynamicIsland',
@@ -78,13 +78,7 @@ Countdown.args = {
 export const CountdownAdvance = Template.bind({})
 // @ts-ignore
 CountdownAdvance.args = {
-    notification: {
-        type: 'advance-countdown',
-        title: "新年倒计时",
-        message: '恭喜发财',
-        backgroundColor: "rgba(0,0,0,0.5)",
-        targetTime: date.toISOString(),
-    },
+    notification: AdvanceCountdownDemo,
     state: NotificationState.NORMAL,
 }
 
@@ -93,14 +87,5 @@ export const Reminder = Template.bind({})
 // @ts-ignore
 Reminder.args = {
     state: NotificationState.LARGE,
-    notification: {
-        type: "reminder",
-        message: '您已经连续使用电脑45分钟',
-        state: NotificationState.LARGE,
-        title: '久坐提醒',
-        icon: 'computer_line',
-        color: '#5D8AC8',
-        cancelButtonText:"知道了",
-        confirmButtonText:"休息一下",
-    }
+    notification: SitReminderDemo
 }

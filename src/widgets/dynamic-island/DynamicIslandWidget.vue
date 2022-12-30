@@ -5,7 +5,8 @@
     <advance-countdown-notification v-else-if="notification.type === 'advance-countdown'" v-bind="notification"/>
     <custom-url-notification v-else-if="notification.type === 'url'" v-bind="notification"/>
     <reminder-notification v-else-if="notification.type === 'reminder'" :notification="notification"/>
-    <phone-call-notification ref="phoneCall" v-else-if="notification.type === 'call'" v-bind="notification"/>
+    <phone-call-notification :key="notification.createdAt" ref="phoneCall" v-else-if="notification.type === 'call'"
+                             v-bind="notification"/>
     <message-notification v-else v-bind="notification"/>
   </div>
 </template>
@@ -20,7 +21,7 @@ import CustomUrlNotification from "@/widgets/dynamic-island/components/CustomUrl
 import ReminderNotification from "@/widgets/dynamic-island/components/ReminderNotification.vue";
 import {NotificationState} from "@/widgets/dynamic-island/model/NotificationState";
 import {useMotion} from "@vueuse/motion";
-import {SwipeDirection, usePointerSwipe} from "@vueuse/core";
+import {SwipeDirection, useDraggable, useIntervalFn, usePointerSwipe} from "@vueuse/core";
 import {AppNotification} from "@widget-js/core";
 
 export default {
@@ -31,7 +32,7 @@ export default {
     MessageNotification,
     AdvanceCountdownNotification, CountingNotification, PhoneCallNotification
   },
-  emits: ["mouseEnter", "mouseLeave", "hidden", "update:state"],
+  emits: ["mouseEnter", "mouseLeave", "update:state"],
   setup(props, context) {
     const container = ref();
     const backgroundColor = ref("black");
@@ -52,15 +53,23 @@ export default {
       height: 48,
       scale: 1,
       backgroundColor: backgroundColor,
-      transition
+      transition: {
+        duration: 500,
+        type: 'keyframe',
+        onComplete: () => {
+        },
+      }
     }
-    const {apply, motionProperties} = useMotion(island, {
-      initial: {...hide},
+    const {apply, motionProperties, variant} = useMotion(island, {
+      initial: {...hide,},
       hide,
       tapped: {
         scale: 0.95,
         backgroundColor: backgroundColor,
-        transition
+        transition: {
+          ...transition,
+          onComplete: () => (variant.value = 'hovered'),
+        }
       },
       hovered: {
         scale: 1,
@@ -92,26 +101,24 @@ export default {
         transition
       },
     });
-    watch(motionProperties, () => {
-      if (motionProperties['y'] < minY) {
-        context.emit('hidden');
-        if (phoneCall) {
-          phoneCall.value?.stop();
-        }
-      }
-    })
     const stateModel = computed({
       get: () => {
         return props.state
       },
       set: (value) => {
         apply(value);
+        if (value == NotificationState.HIDE) {
+          if (phoneCall) {
+            phoneCall.value?.stop();
+          }
+        }
         context.emit('update:state', value);
       }
     })
     let startTranslateY = -100;
-    const {distanceY} = usePointerSwipe(island, {
-      onSwipeStart() {
+    const {distanceY, isSwiping, stop: stopSwipe} = usePointerSwipe(island, {
+      threshold: 10,
+      onSwipeStart(e) {
         startTranslateY = motionProperties['y'];
       },
       async onSwipe(e: PointerEvent) {
@@ -126,7 +133,6 @@ export default {
         })
       },
       async onSwipeEnd(e: PointerEvent, direction: SwipeDirection) {
-        console.log(motionProperties['y'])
         if (motionProperties['y'] < 0) {
           stateModel.value = NotificationState.HIDE;
         } else {
@@ -134,12 +140,12 @@ export default {
         }
       },
     });
-    return {container, phoneCall, backgroundColor, island, stateModel, apply}
+    return {container, phoneCall, isSwiping, variant, backgroundColor, island, stateModel, apply}
   },
   methods: {},
   async mounted() {
     await nextTick();
-    this.apply(this.state);
+    await this.apply(this.state);
   },
   watch: {
     state(newState) {
@@ -168,6 +174,8 @@ export default {
 <style scoped lang="scss">
 $cubic-bezier: cubic-bezier(0, 1, .68, 1.05);
 .island {
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
   cursor: pointer;
   border-radius: 42px;
   display: flex;
@@ -176,40 +184,20 @@ $cubic-bezier: cubic-bezier(0, 1, .68, 1.05);
   right: 0;
   margin: auto;
   background-color: black;
-  transition-property: width, height;
-  transition-duration: 0.8s;
-  transition-timing-function: $cubic-bezier;
   will-change: width, height;
   clip: auto;
   overflow: hidden;
   justify-content: flex-start;
   box-shadow: (0px 12px 32px 4px rgba(0, 0, 0, 0.04), 0px 8px 20px rgba(0, 0, 0, 0.08));
 
-  .content {
-    flex: 1;
-    display: flex;
-
-    align-items: flex-start;
-    margin-left: 1rem;
-    margin-right: 1rem;
+  .mask {
+    position: absolute;
+    width: 100%;
     height: 100%;
-    justify-content: space-around;
-    flex-direction: column;
-
-    .title {
-      font-size: 0.8em;
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    .description {
-      color: white;
-      font-size: 1em;
-    }
-  }
-
-  .actions {
-    display: flex;
-    justify-content: flex-start;
+    z-index: 5;
+    left: 0;
+    top: 0;
+    background-color: black;
   }
 }
 </style>

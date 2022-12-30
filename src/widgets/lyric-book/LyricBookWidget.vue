@@ -37,11 +37,15 @@ export default {
       type: PageController,
       required: true
     },
+    preview: {
+      type: Boolean,
+      default: false
+    }
   },
   async mounted() {
     await nextTick();
     delay(() => {
-      if (this.widgetData.showGuide) {
+      if (this.widgetData.showGuide && !this.preview) {
         const driver = new Driver({
           allowClose: false, onDeselected: () => {
             this.widgetData.showGuide = false;

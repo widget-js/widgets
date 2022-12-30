@@ -1,6 +1,6 @@
 <template>
   <div class="root">
-    <lyric-book-widget :widget-data="widgetData" :widget-id="widgetParams.id"
+    <lyric-book-widget :widget-data="widgetData" :widget-id="widgetParams.id" :preview="widgetParams.preview"
                        :page-controller="pageController"/>
   </div>
 </template>

@@ -45,12 +45,13 @@ export default {
     const workStartTime = computed(() => {
       return dayjs(props.startTime)
     })
+
     const workEndTime = computed(() => {
       return dayjs(props.endTime)
     })
 
     const startCall = async () => {
-      const url = await WidgetApi.getWidgetPackageUrl("cn.widgetjs.widgets", false);
+      const url = await WidgetApi.getWidgetPackageUrl("cn.widgetjs.widgets");
       const avatar = url + "/images/zhangyuge.jpg";
       const audio = url + "/audio/voice_squidward.m4a";
       const lyric = "[00:00.00]5\n" +
@@ -101,7 +102,7 @@ export default {
       const remindDuration = dayjs.duration(workEndTime.value.diff(time.value));
       const remindSeconds = Math.round(remindDuration.asSeconds());
       if (remindSeconds == 5 * 60) {
-        NotificationApi.advanceCountdown("收拾好行李，准备下班", workEndTime.value.format(), "下班倒计时")
+        NotificationApi.countdown("下班倒计时", workEndTime.value.format())
       } else if (remindSeconds == 7 && props.enablePhoneReminder) {
         startCall();
       }
@@ -125,7 +126,7 @@ export default {
   methods: {
     async mouseEnter() {
       // this.startCall();
-      // NotificationApi.advanceCountdown("收拾好行李，准备下班", this.workEndTime.format(), "下班倒计时")
+      // NotificationApi.countdown("下班倒计时", this.workEndTime.format())
     },
   },
   props: {

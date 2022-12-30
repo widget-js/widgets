@@ -4,13 +4,13 @@ const name = "cn.widgetjs.widgets.mickey_clock";
 //组件标题
 const title = {"zh": "米奇表盘"};
 //组件描述
-const description = {"zh": "源自Apple Watch米奇表盘"};
+const description = {"zh": "Apple Watch米奇表盘"};
 //组件关键词
 const keywords = [WidgetKeyword.RECOMMEND];
 //组件路由地址
 const url = "/widget/mickey_clock";
 //配置页路由地址
-const configUrl = undefined;
+const configUrl = "/widget/config/mickey_clock";
 //组件关键词
 const MickeyClockWidgetDefine = new Widget({
     name: name,
@@ -23,9 +23,9 @@ const MickeyClockWidgetDefine = new Widget({
     width: 2,
     height: 2,
     minWidth: 2,
-    maxWidth: 2,
+    maxWidth: 3,
     minHeight: 2,
-    maxHeight: 2
+    maxHeight: 3
 })
 
 export default MickeyClockWidgetDefine;

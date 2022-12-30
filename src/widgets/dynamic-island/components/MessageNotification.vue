@@ -37,7 +37,7 @@ const icon = computed(() => {
 
 .message-notification {
   display: flex;
-  width: $notification-width;
+  width: 100%;
   height: 100%;
   align-items: center;
   padding-left: 16px;

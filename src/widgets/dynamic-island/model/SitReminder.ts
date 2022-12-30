@@ -4,5 +4,5 @@ export class SitReminder extends WidgetData {
     enable = true;
     breakInterval = 5;
     sitInterval = 30;
-    usageInterval = 5;
+    mouseCheckInterval = 5;
 }
