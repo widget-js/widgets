@@ -1,6 +1,5 @@
 <template>
-  <zhihu-widget :background-color="widgetData.backgroundColor"
-                :style="{width:`${widgetParams.widthPx}px`,height:`${widgetParams.heightPx}px`}"/>
+  <zhihu-widget :style="{width:`${widgetParams.widthPx}px`,height:`${widgetParams.heightPx}px`}"/>
 </template>
 
 <script lang="ts" setup>

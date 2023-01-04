@@ -41,7 +41,7 @@ widgets
 ### 运行项目
 
 #### Vue
-#
+下载并打开桌面组件客户端后再运行
 ```shell
 pnpm serve
 ```
@@ -58,6 +58,22 @@ pnpm widget create
 ```
 
 ### 组件列表
+#### 生日列表
+![gif](screenshot/birthday_list.png)
+
+- 代码路径：/widgets/birthday_list
+- 组件路由：/widget/birthday_list
+- 配置路由：/widget/config/birthday_list
+
+
+#### 灵动通知
+
+![gif](screenshot/dynamic_island.gif)
+
+- 代码路径：/widgets/dynamic_island
+- 组件路由：/widget/dynamic_island
+- 配置路由：/widget/config/dynamic_island
+
 
 #### 打工进度
 
@@ -67,24 +83,11 @@ pnpm widget create
 - 组件路由：/widget/labor_progress
 - 配置路由：/widget/config/labor_progress
 
-学到了什么：
-
-- dayjs：duration，diff
-- animate.css: animate__animated animate__fadeOutUp animate__infinite
-- vueuse: useIntervalFn
-
 #### 时间进度
 
 ![time_progress.png](screenshot%2Ftime_progress.png)
 - 代码路径：/widgets/time_progress
 - 组件路由：/widget/time_progress
-
-学到了什么：
-
-- vueuse: useTransition
-- string.padStart(2,"0"): 字符串不足2位，用0补足。 "7" -> "07"
-- 动画曲线：TransitionPresets.easeInOutCubic
-
 
 #### 歌词小说
 - 代码路径：/widgets/lyric_book

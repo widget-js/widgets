@@ -37,7 +37,8 @@ import facePartying from "./images/partying_face_3d.png"
 import EmojiTimeline from "@/widgets/labor-progress/model/EmojiTimeline";
 import "@/common/dayjs-extend"
 import {NotificationApi, WidgetApi} from "@widget-js/core";
-import {floor} from "lodash";
+import {delay, floor} from "lodash";
+import {SitReminderDemo} from "@/widgets/dynamic-island/model/Demo";
 
 export default {
   name: "LaborProgressWidget",
@@ -121,12 +122,12 @@ export default {
         }
       }
     }, 1000)
-    return {height, time, currentTimeline, startCall,percent, workEndTime, secondLeft, percentPosition}
+    return {height, time, currentTimeline, startCall, percent, workEndTime, secondLeft, percentPosition}
   },
   methods: {
     async mouseEnter() {
-      // this.startCall();
-      // NotificationApi.countdown("下班倒计时", this.workEndTime.format())
+      // await NotificationApi.countdown("下班倒计时", dayjs().add(5, 'minute').toISOString())
+      // await NotificationApi.send(SitReminderDemo);
     },
   },
   props: {

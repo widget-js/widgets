@@ -31,7 +31,7 @@
 <script lang="js">
 import {useScroll} from "@vueuse/core";
 import {ref} from "vue";
-import LyricBookData, {PageController} from "@/widgets/lyric-book/model/LyricBookData";
+import LyricBookData from "@/widgets/lyric-book/model/LyricBookData";
 
 export default {
   name: 'Lyric',

@@ -16,7 +16,7 @@ export const AdvanceCountdownDemo = new AppNotification({
     title: "新年倒计时",
     message: '恭喜发财',
     backgroundColor: "black",
-    targetTime: dayjs('2023-01-01').toISOString(),
+    targetTime: dayjs().add(1,'hour').toISOString(),
 });
 
 
@@ -24,5 +24,11 @@ export const CountdownDemo = new AppNotification({
     type: 'countdown',
     message: "倒计时",
     backgroundColor: "rgba(0,0,0,0.5)",
-    targetTime: dayjs('2023-01-01').toISOString(),
+    targetTime: dayjs().add(1,'hour').toISOString(),
 });
+
+export const ErrorDemo = new AppNotification({
+    type: 'error',
+    message: "错误信息",
+});
+

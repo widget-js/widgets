@@ -7,7 +7,9 @@ import '@widget-js/vue3/dist/style.css'
 import '@widget-js/vue3/dist/mingcute_icon/font/Mingcute.css'
 import {createPinia} from "pinia";
 import {MotionPlugin} from '@vueuse/motion'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 
-createApp(App).use(WidgetJsPlugin).use(MotionPlugin)
+createApp(App).use(ElementPlus).use(WidgetJsPlugin).use(MotionPlugin)
     .use(router).use(createPinia()).mount('#app')
 

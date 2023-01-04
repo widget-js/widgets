@@ -33,6 +33,7 @@ import axios from "axios";
 import {nextTick, onMounted, Ref, ref} from "vue";
 import {ZhihuConvert, ZhihuModel} from "./model/ZhihuModel";
 import dayjs from "dayjs";
+import {ElScrollbar} from "element-plus";
 import {slice} from "lodash";
 import {BrowserWindowApi, WidgetParams} from "@widget-js/core";
 
@@ -138,7 +139,6 @@ const newsService = axios.create({
       background-size: cover;
       position: relative;
       margin-right: 8px;
-
       &::after {
         position: absolute;
         content: "";

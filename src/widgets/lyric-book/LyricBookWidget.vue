@@ -11,7 +11,7 @@
 
 <script lang="ts">
 // @ts-ignore
-import noPainNoGain from './lyric/no_pain_no_gain.txt';
+import noPainNoGain from './lyric/no_pain_no_gain.txt?raw';
 import Lyric from "@/widgets/lyric-book/components/Lyric.vue";
 import {useElementSize, useIntervalFn} from "@vueuse/core";
 import {computed, nextTick, ref} from "vue";

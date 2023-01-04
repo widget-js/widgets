@@ -30,7 +30,7 @@ export default {
     const text2 = ref();
 
     const transition = {
-      duration: 333,
+      duration: 300,
       type: 'keyframes',
       ease: 'easeOut',
     }

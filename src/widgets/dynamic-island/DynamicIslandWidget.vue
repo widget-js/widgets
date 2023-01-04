@@ -3,7 +3,6 @@
        ref="island">
     <counting-notification v-if="notification.type === 'countdown'" v-bind="notification"/>
     <advance-countdown-notification v-else-if="notification.type === 'advance-countdown'" v-bind="notification"/>
-    <custom-url-notification v-else-if="notification.type === 'url'" v-bind="notification"/>
     <reminder-notification v-else-if="notification.type === 'reminder'" :notification="notification"/>
     <phone-call-notification :key="notification.createdAt" ref="phoneCall" v-else-if="notification.type === 'call'"
                              v-bind="notification"/>
@@ -41,26 +40,24 @@ export default {
     const maxY = 100;
     const minY = -100;
     const maxWidth = 350;
+
     const transition = {
-      type: 'spring',
-      stiffness: 300,
-      damping: 20,
-      mass: 1
+      type: 'spring', // 弹簧动画
+      stiffness: 300, // 刚度值
+      damping: 20,    // 阻尼值
+      mass: 1         // 质量
     }
+
     const hide = {
       y: minY,
       width: 48,
       height: 48,
       scale: 1,
       backgroundColor: backgroundColor,
-      transition: {
-        duration: 500,
-        type: 'keyframe',
-        onComplete: () => {
-        },
-      }
+      transition
     }
-    const {apply, motionProperties, variant} = useMotion(island, {
+
+    const {apply, motionProperties} = useMotion(island, {
       initial: {...hide,},
       hide,
       tapped: {
@@ -68,7 +65,7 @@ export default {
         backgroundColor: backgroundColor,
         transition: {
           ...transition,
-          onComplete: () => (variant.value = 'hovered'),
+          onComplete: () => apply('hovered'),
         }
       },
       hovered: {
@@ -78,29 +75,30 @@ export default {
       },
       small: {
         y: maxY - 10,
+        width: maxWidth - 32,
         height: 48,
         scale: 1,
         backgroundColor: backgroundColor,
-        width: maxWidth - 32,
         transition
       },
       normal: {
         y: maxY - 20,
+        width: maxWidth,
         height: 72,
         scale: 1,
         backgroundColor: backgroundColor,
-        width: maxWidth,
         transition
       },
       large: {
         y: maxY,
-        scale: 1,
-        height: 144,
-        backgroundColor: backgroundColor,
         width: maxWidth,
+        height: 144,
+        scale: 1,
+        backgroundColor: backgroundColor,
         transition
       },
     });
+
     const stateModel = computed({
       get: () => {
         return props.state
@@ -116,7 +114,7 @@ export default {
       }
     })
     let startTranslateY = -100;
-    const {distanceY, isSwiping, stop: stopSwipe} = usePointerSwipe(island, {
+    const {distanceY, isSwiping} = usePointerSwipe(island, {
       threshold: 10,
       onSwipeStart(e) {
         startTranslateY = motionProperties['y'];
@@ -140,7 +138,7 @@ export default {
         }
       },
     });
-    return {container, phoneCall, isSwiping, variant, backgroundColor, island, stateModel, apply}
+    return {container, phoneCall, isSwiping, backgroundColor, island, stateModel, apply}
   },
   methods: {},
   async mounted() {

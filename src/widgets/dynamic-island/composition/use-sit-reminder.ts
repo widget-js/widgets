@@ -74,7 +74,6 @@ const useSitReminder = () => {
                 "知道了", "休息一下", cancelBroadcast, confirmBroadcast);
             usageCount.value = 0;
         }
-        console.log(usageCount.value);
     }, 1000)
 }
 
