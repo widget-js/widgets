@@ -39,7 +39,10 @@ widgets
 ```
 
 ### 运行项目
-
+#### 先下载依赖
+```shell
+pnpm install
+```
 #### Vue
 下载并打开桌面组件客户端后再运行
 ```shell
