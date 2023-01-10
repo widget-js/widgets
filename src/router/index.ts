@@ -8,6 +8,10 @@ import WidgetRouter from "@/widgets/widget-router";
  */
 const routes: Array<RouteRecordRaw> = [
     ...WidgetRouter,
+    {
+        path: '/countdown/list',
+        component: () => import(/* webpackChunkName: "com.wisdom.widgets.quick_search" */ '../countdown/CountdownList.vue')
+    }
 ]
 
 const router = createRouter({

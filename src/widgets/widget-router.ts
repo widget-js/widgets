@@ -8,6 +8,8 @@ import GlitchWidgetRoutes from "./glitch/GlitchWidgetRoutes";
 import DynamicIslandWidgetRoutes from "@/widgets/dynamic-island/DynamicIslandWidgetRoutes";
 import MickeyClockWidgetRoutes from "@/widgets/mickey-clock/MickeyClockWidgetRoutes";
 import LyricBookWidgetRoutes from "@/widgets/lyric-book/LyricBookWidgetRoutes";
+import TodoListWidgetRoutes from "./todo-list/TodoListWidgetRoutes";
+import CountdownWidgetRoutes from "./countdown/CountdownWidgetRoutes";
 //FBI WANING! IMPORT PLACE, DONT DELETE THIS LINE
 
 
@@ -21,7 +23,9 @@ const WidgetRouter = [
     ...GlitchWidgetRoutes,
     ...DynamicIslandWidgetRoutes,
     ...MickeyClockWidgetRoutes,
-    ...LyricBookWidgetRoutes
+    ...LyricBookWidgetRoutes,
+    ...TodoListWidgetRoutes,
+    ...CountdownWidgetRoutes,
     //FBI WANING! ROUTE PLACE, DONT DELETE THIS LINE
 ];
 export default WidgetRouter

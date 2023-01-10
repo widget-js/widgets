@@ -43,7 +43,7 @@ export default {
 
     const transition = {
       type: 'spring', // 弹簧动画
-      stiffness: 300, // 刚度值
+      stiffness: 300, // 刚度值/弹性系数
       damping: 20,    // 阻尼值
       mass: 1         // 质量
     }
@@ -121,7 +121,7 @@ export default {
       },
       async onSwipe(e: PointerEvent) {
         const value = startTranslateY - distanceY.value;
-        const y = Math.min(200, value);
+        const y = Math.min(500, value);
         //最小缩放为 maxY的一半，最大缩放为1
         const scale = Math.min(1, Math.max(y, maxY * 0.75) / maxY);
         await apply({

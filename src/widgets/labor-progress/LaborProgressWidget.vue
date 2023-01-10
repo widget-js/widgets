@@ -127,6 +127,7 @@ export default {
   methods: {
     async mouseEnter() {
       // await NotificationApi.countdown("下班倒计时", dayjs().add(5, 'minute').toISOString())
+      // SitReminderDemo.duration = -1;
       // await NotificationApi.send(SitReminderDemo);
     },
   },

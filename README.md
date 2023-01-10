@@ -68,6 +68,19 @@ pnpm widget create
 - 组件路由：/widget/birthday_list
 - 配置路由：/widget/config/birthday_list
 
+#### 代办事项
+![gif](screenshot/todo.png)
+
+- 代码路径：/widgets/todo-list
+- 组件路由：/widget/todo-list
+- 配置路由：/widget/config/todo-list
+
+#### 倒计时
+![gif](screenshot/countdown.png)
+
+- 代码路径：/widgets/countdown
+- 组件路由：/widget/countdown
+- 配置路由：/widget/config/countdown
 
 #### 灵动通知
 

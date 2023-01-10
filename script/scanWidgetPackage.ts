@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import scanWidgets from "./scanWidgets";
+// import scanWidgets from "./scanWidgets";
 
 
 const scanWidgetPackage = () => {
@@ -9,9 +9,9 @@ const scanWidgetPackage = () => {
     if (!widgetPackage["widgets"]) {
         widgetPackage["widgets"] = [];
     }
-    scanWidgets().forEach((it) => {
-        widgetPackage["widgets"].push(it);
-    })
+    // scanWidgets().forEach((it) => {
+    //     widgetPackage["widgets"].push(it);
+    // })
     return widgetPackage;
 }
 
