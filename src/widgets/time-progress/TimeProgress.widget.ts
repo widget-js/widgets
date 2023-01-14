@@ -7,7 +7,6 @@ const description = {"zh": "年、月、周、日进度剩余百分比"};
 const keywords = [WidgetKeyword.RECOMMEND];
 const lang = "zh"
 const url = "/widget/time_progress";
-// const configUrl = "/widget/config/time_progress";
 const width = 4;
 const height = 2;
 const minWidth = 4;
@@ -15,6 +14,7 @@ const maxWidth = 4;
 const minHeight = 2;
 const maxHeight = 2;
 const TimeProgressWidgetDefine = new Widget({
-    name, title, description, keywords, lang, width, height, maxWidth, maxHeight, minWidth, minHeight, url
+    name, title, description, keywords, lang, width, height, maxWidth, maxHeight, minWidth, minHeight, url,
+    previewImage:"/images/preview_time_progress.png"
 })
 export default TimeProgressWidgetDefine

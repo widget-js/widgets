@@ -2,7 +2,6 @@ import {WidgetData} from "@widget-js/core";
 import dayjs from "dayjs";
 
 export default class LaborProgressData extends WidgetData {
-    enablePhoneReminder = false;
     startHour: number = 9;
     startMinute: number = 0;
     endHour: number = 18;

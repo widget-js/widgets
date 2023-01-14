@@ -10,6 +10,8 @@ import MickeyClockWidgetRoutes from "@/widgets/mickey-clock/MickeyClockWidgetRou
 import LyricBookWidgetRoutes from "@/widgets/lyric-book/LyricBookWidgetRoutes";
 import TodoListWidgetRoutes from "./todo-list/TodoListWidgetRoutes";
 import CountdownWidgetRoutes from "./countdown/CountdownWidgetRoutes";
+import Countdown2WidgetRoutes from "./countdown2/Countdown2WidgetRoutes";
+import PhoneReminderWidgetRoutes from "./phone-reminder/PhoneReminderWidgetRoutes";
 //FBI WANING! IMPORT PLACE, DONT DELETE THIS LINE
 
 
@@ -26,6 +28,8 @@ const WidgetRouter = [
     ...LyricBookWidgetRoutes,
     ...TodoListWidgetRoutes,
     ...CountdownWidgetRoutes,
+    ...Countdown2WidgetRoutes,
+    ...PhoneReminderWidgetRoutes,
     //FBI WANING! ROUTE PLACE, DONT DELETE THIS LINE
 ];
 export default WidgetRouter

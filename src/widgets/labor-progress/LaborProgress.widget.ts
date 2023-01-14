@@ -1,4 +1,4 @@
-import {Widget, WidgetKeyword, WidgetParams} from "@widget-js/core";
+import {Widget, WidgetKeyword} from "@widget-js/core";
 
 const name = "cn.widgetjs.widgets.labor_progress";
 //组件标题

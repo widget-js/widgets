@@ -70,6 +70,13 @@ const {widgetData, widgetParams} = useWidget(TodoListData, {
   }
 });
 
+if (widgetParams.preview) {
+  const todo1 = new Todo("背单词");
+  const todo2 = new Todo("游戏策划");
+  const todo4 = new Todo("KOL合作方案评审");
+  widgetData.value.todoList = [todo1, todo2, todo4]
+}
+
 const root = ref();
 const {height} = useElementSize(root)
 const {height: windowHeight} = useWindowSize()
@@ -102,7 +109,7 @@ const {playing: ringtonePlaying, duration} = useMediaControls(ding, {
   src: "./audio/ding.mp3",
 })
 
-const borderColor = computed(()=>{
+const borderColor = computed(() => {
   return new Color(props.color).alpha(0.3).toString();
 })
 

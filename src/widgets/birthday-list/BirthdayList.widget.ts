@@ -7,7 +7,6 @@ const title = {"zh": "生日列表"};
 const desc = {"zh": "自动倒计时的生日列表"};
 //组件关键词
 const keywords = [WidgetKeyword.RECOMMEND];
-const lang = "zh"
 const url = "/widget/birthday_list";
 const configUrl = "/widget/config/birthday_list?win_width=1100&win_height=900";
 const BirthdayListWidgetDefine = new Widget({
@@ -19,6 +18,7 @@ const BirthdayListWidgetDefine = new Widget({
     url: url,
     configUrl: configUrl,
     width: 4,
+    previewImage:"/images/preview_birthday_list.png",
     height: 4,
     minWidth: 3,
     maxWidth: 4,

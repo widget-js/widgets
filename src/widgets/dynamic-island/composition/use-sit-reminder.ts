@@ -71,7 +71,7 @@ const useSitReminder = () => {
         //sitReminderData.value.sitInterval * 60
         if (usageCount.value > sitReminderData.value.sitInterval * 60) {
             await NotificationApi.reminder("久坐提醒", `您已经连续使用电脑${sitReminderData.value.sitInterval}分钟`, "computer_line",
-                "知道了", "休息一下", cancelBroadcast, confirmBroadcast);
+                "知道了", "休息一下", cancelBroadcast, confirmBroadcast, 10000);
             usageCount.value = 0;
         }
     }, 1000)

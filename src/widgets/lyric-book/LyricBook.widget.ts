@@ -17,6 +17,7 @@ const LyricBookWidgetDefine = new Widget({
     title: title,
     description: description,
     keywords: keywords,
+    previewImage:"/images/preview_lyric_book.png",
     lang: "zh",
     url: url,
     configUrl: configUrl,

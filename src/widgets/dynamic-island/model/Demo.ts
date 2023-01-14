@@ -1,4 +1,4 @@
-import {AppNotification} from "@widget-js/core";
+import {AppNotification, WidgetApi} from "@widget-js/core";
 import dayjs from "dayjs";
 
 export const SitReminderDemo = new AppNotification({
@@ -16,16 +16,38 @@ export const AdvanceCountdownDemo = new AppNotification({
     title: "新年倒计时",
     message: '恭喜发财',
     backgroundColor: "black",
-    targetTime: dayjs().add(1,'hour').toISOString(),
+    targetTime: dayjs().add(1, 'hour').toISOString(),
 });
 
 
-export const CountdownDemo = new AppNotification({
-    type: 'countdown',
-    message: "倒计时",
-    backgroundColor: "rgba(0,0,0,0.5)",
-    targetTime: dayjs().add(1,'hour').toISOString(),
-});
+export const getZhangYuGe = async () => {
+    const notification = new AppNotification({message: "下班提醒"});
+    const packageUrl = await WidgetApi.getWidgetPackageUrl("cn.widgetjs.widgets");
+    notification.avatar = packageUrl + "/images/zhangyuge.jpg"
+    notification.title = "章鱼哥"
+    notification.type = "call"
+    notification.backgroundColor = "black";
+    return notification;
+}
+
+export const getTeaCall = async () => {
+    const notification = new AppNotification({message: "饮茶提醒"});
+    const packageUrl = await WidgetApi.getWidgetPackageUrl("cn.widgetjs.widgets");
+    notification.avatar = packageUrl + "/images/avatar/elvis.png"
+    notification.title = "饮茶哥"
+    notification.type = "call"
+    notification.backgroundColor = "black";
+    return notification;
+}
+
+export const getCountdownDemo = ()=>{
+    return new AppNotification({
+        type: 'countdown',
+        message: "倒计时",
+        backgroundColor: "rgba(0,0,0,0.5)",
+        targetTime: dayjs().add(1, 'hour').toISOString(),
+    });
+};
 
 export const ErrorDemo = new AppNotification({
     type: 'error',

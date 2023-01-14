@@ -20,6 +20,7 @@ const TodoListWidgetDefine = new Widget({
     lang: "zh",
     url: url,
     configUrl: configUrl,
+    previewImage:"/images/preview_todo_list.png",
     width: 3,
     height: 3,
     minWidth: 3,

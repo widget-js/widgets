@@ -1,26 +1,20 @@
 <template>
   <dynamic-island-widget ref="dynamicIslandWidget"
                          v-model:state="state"
+                         :mute="widgetParams.preview"
                          @mouseenter="onMouseEnter"
                          @mouseleave="onMouseLeave"
                          :notification="notification"/>
 </template>
 
 <script lang="ts">
-import {
-  AppNotification,
-  BrowserWindowApi,
-  ElectronUtils,
-  NotificationApi,
-  WidgetApi,
-  WidgetData
-} from "@widget-js/core";
+import {AppNotification, BrowserWindowApi, ElectronUtils, WidgetApi, WidgetData} from "@widget-js/core";
 import DynamicIslandWidget from "./DynamicIslandWidget.vue"
 import {useNotification, useWidget} from "@widget-js/vue3";
 import {computed, reactive, ref, watch} from "vue";
 import {useIntervalFn, useTimeoutFn} from "@vueuse/core";
 import {NotificationState} from "@/widgets/dynamic-island/model/NotificationState";
-import {CountdownDemo, SitReminderDemo} from "@/widgets/dynamic-island/model/Demo";
+import {getCountdownDemo, SitReminderDemo} from "@/widgets/dynamic-island/model/Demo";
 import "@/common/dayjs-extend";
 import useSitReminder from "./composition/use-sit-reminder";
 
@@ -47,7 +41,6 @@ export default {
       if (newNotification) {
         BrowserWindowApi.show();
         BrowserWindowApi.moveTop();
-        // notification.value = new AppNotification({...newNotification! });
         Object.assign(notification, newNotification);
         setState();
         stopHideTimeout();
@@ -114,20 +107,20 @@ export default {
       previousStateIndex++;
       switch (previousStateIndex % 4) {
         case 0:
-          Object.assign(notification, CountdownDemo)
+          Object.assign(notification, getCountdownDemo())
           break;
         case 1:
           const packageUrl = await WidgetApi.getWidgetPackageUrl("cn.widgetjs.widgets");
-          notification.avatar = packageUrl + "/images/zhangyuge.jpg"
-          notification.title = "章鱼哥"
-          notification.message = "下班提醒"
-          notification.type = "call"
-          notification.backgroundColor = "black"
+          notification.avatar = packageUrl + "/images/zhangyuge.jpg";
+          notification.title = "章鱼哥";
+          notification.message = "下班提醒";
+          notification.type = "call";
+          notification.backgroundColor = "black";
           break;
         case 2:
-          notification.type = "info"
-          notification.backgroundColor = "black"
-          notification.message = "您好"
+          notification.type = "info";
+          notification.backgroundColor = "black";
+          notification.message = "您好";
           break;
         case 3:
           Object.assign(notification, SitReminderDemo)

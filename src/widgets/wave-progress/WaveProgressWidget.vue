@@ -29,7 +29,6 @@ import {ProgressType} from "./model/WaveProgressData";
 import Color from "color";
 import {delay, floor} from 'lodash'
 
-require(`dayjs/locale/zh-cn`);
 dayjs.locale("zh-cn");
 
 const ratio = ref(1);

@@ -15,7 +15,6 @@
                                  v-model:start-time="startTime"
                                  v-model:end-time="endTime"
                                  end-placeholder="结束时间"/>
-        <widget-checkbox-field title="章鱼哥下班提醒" v-model:checked="widgetData.enablePhoneReminder"/>
       </el-form>
     </template>
   </widget-edit-dialog>

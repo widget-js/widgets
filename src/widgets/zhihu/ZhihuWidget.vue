@@ -135,7 +135,7 @@ const newsService = axios.create({
     .zhihu__logo {
       width: 35px;
       height: 16px;
-      background-image: url("~@/widgets/zhihu/images/logo.svg");
+      background-image: url("@/widgets/zhihu/images/logo.svg");
       background-size: cover;
       position: relative;
       margin-right: 8px;
@@ -175,7 +175,7 @@ const newsService = axios.create({
       right: 20px;
       width: 36px;
       height: 36px;
-      background-image: url("~@/widgets/zhihu/images/liukanshan.png");
+      background-image: url("@/widgets/zhihu/images/liukanshan.png");
       background-size: cover;
     }
   }

@@ -63,9 +63,6 @@ watch(selectedDate, () => {
   emitDateUpdate();
 })
 
-watch(selectedYear, () => {
-  console.log(selectedYear.value);
-})
 onMounted(async () => {
   await nextTick();
 });

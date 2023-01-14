@@ -1,8 +1,8 @@
 <template>
   <div class="phone-call">
-    <audio ref="audio"></audio>
-    <audio ref="ringtone"></audio>
-    <audio ref="hangup"></audio>
+    <audio v-if="!mute" ref="audio"></audio>
+    <audio v-if="!mute" ref="ringtone"></audio>
+    <audio v-if="!mute" ref="hangup"></audio>
     <img class="avatar" :src="avatar" alt="">
     <div class="content">
       <div class="title">{{ title }}</div>
@@ -63,28 +63,43 @@ const props = defineProps({
     type: String,
     required: true
   },
+  mute: {
+    type: Boolean,
+    default: false
+  },
   message: {
     type: String,
     default: "",
   }
 })
 
-const {playing: ringtonePlaying, duration, ended: ringtoneEnd} = useMediaControls(ringtone, {
+const {
+  playing: ringtonePlaying,
+  duration,
+  ended: ringtoneEnd,
+  volume: ringtoneVolume,
+  muted: ringtoneMuted
+} = useMediaControls(ringtone, {
   src: "./audio/ringtone.m4a",
 })
 
-const {playing: hangupPlaying, ended: hangupEnded} = useMediaControls(hangup, {
+const {playing: hangupPlaying, ended: hangupEnded, volume: hangupVolume} = useMediaControls(hangup, {
   src: "./audio/hangup.m4a",
 })
 
-const {playing: voicePlaying, duration: voiceDuration, ended: voiceEnded} = useMediaControls(audio, {
+const {
+  playing: voicePlaying,
+  duration: voiceDuration,
+  ended: voiceEnded,
+  volume: voiceVolume
+} = useMediaControls(audio, {
   src: props.audio,
 })
 
 
 watch(ringtoneEnd, () => {
   voicePlaying.value = true
-})
+});
 
 watch(voiceEnded, () => {
   hangupPlaying.value = true
@@ -92,18 +107,23 @@ watch(voiceEnded, () => {
 
 watch(voicePlaying, (newValue, oldValue) => {
   if (newValue) {
+    console.log("voice playing");
     ringtonePlaying.value = false;
-    useInterval.resume();
+    console.log(lyric.value.lines);
+    lines = [...lyric.value.lines];
+    resume();
   }
 })
 
 watch(hangupEnded, () => {
-  NotificationApi.hide();
+  stop();
 })
 
 const stop = () => {
+  console.log("stop playing");
   ringtonePlaying.value = false;
   voicePlaying.value = false;
+  pause();
   NotificationApi.hide();
 }
 
@@ -112,7 +132,6 @@ const start = () => {
   ringtonePlaying.value = true;
   voicePlaying.value = false;
   hangup.value = false;
-  lines = lyric.value.lines;
 }
 
 defineExpose({
@@ -133,7 +152,6 @@ const lyric = computed(() => {
 });
 let index = 0;
 
-
 function answerClick() {
   voicePlaying.value = true
 }
@@ -141,17 +159,20 @@ function answerClick() {
 
 let time = 0;
 let lines: Lines[];
-const useInterval = useIntervalFn(() => {
+const {pause, resume} = useIntervalFn(() => {
       time += 10
-      if (lines.length > 1) {
-        if (lines[1].lineTime > time) {
-          desc.value = lines[0].txt
+      if (lines.length > 0) {
+        if (lines.length > 1) {
+          if (lines[1].lineTime > time) {
+            desc.value = lines[0].txt
+          } else {
+            lines.splice(0, 1)
+          }
         } else {
-          lines.splice(0, 1)
+          desc.value = lines[0].txt;
         }
-      } else {
-        desc.value = lines[0].txt
       }
+      console.log("run")
     },
     10, {immediate: false}
 )
@@ -203,7 +224,9 @@ $childHeight: calc($containerHeight - 1.6rem);
       color: white;
       font-size: 1rem;
       text-overflow: ellipsis;
-      max-width: 144px;
+      max-width: 170px;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
 

@@ -12,7 +12,7 @@
     "folder": "./src/widgets/",
     "storybook": true,
     "route": true,
-    "devUrl": "http://127.0.0.1:8088"
+    "devUrl": "http://localhost:5173"
   },
   "widgets": [],
   "permissions": [

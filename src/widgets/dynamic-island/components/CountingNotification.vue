@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 import {useIntervalFn} from "@vueuse/core";
 
 import dayjs from "dayjs";
@@ -43,16 +43,23 @@ useIntervalFn(() => {
   timeStr2.value = count < 10 ? `0${count}` : `${count}`
 }, 10)
 
-const targetTime = dayjs(props.targetTime)
-const startAt = dayjs()
-const totalSeconds = dayjs.duration(targetTime.diff(startAt)).asSeconds()
+const targetTime = computed(() => dayjs(props.targetTime))
+let startAt = dayjs()
 let remindSeconds = 0;
+watch(targetTime, () => {
+  startAt = dayjs();
+  remindSeconds = 0;
+})
+const totalSeconds = computed(() => dayjs.duration(targetTime.value.diff(startAt)).asSeconds())
 const progress = ref(1)
 useIntervalFn(() => {
-  const duration = dayjs.duration(targetTime.diff(dayjs()));
+  const duration = dayjs.duration(targetTime.value.diff(dayjs()));
   timeStr1.value = duration.format('mm:ss')
   remindSeconds = duration.asSeconds();
-  progress.value = remindSeconds / totalSeconds * 100
+  progress.value = remindSeconds / totalSeconds.value * 100
+  if (remindSeconds < 0) {
+    NotificationApi.hide();
+  }
 }, 1000)
 
 const timeString = computed(() => {
@@ -97,6 +104,7 @@ $easing: cubic-bezier(1, 0, 1, 0);
     justify-content: space-around;
     flex-direction: column;
     z-index: 2;
+
     .title {
       font-size: 1rem;
       color: white;

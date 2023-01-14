@@ -17,6 +17,7 @@ const maxWidth = 4;
 const minHeight = 3;
 const maxHeight = 4;
 const ZhihuWidgetDefine = new Widget({
+    previewImage: "/images/preview_zhihu.png",
     name, title, description, keywords, lang, width, height, maxWidth, maxHeight, minWidth, minHeight, url, configUrl
 })
 

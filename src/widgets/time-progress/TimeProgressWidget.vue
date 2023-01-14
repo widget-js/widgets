@@ -47,7 +47,6 @@ import {TransitionPresets, useInterval, useTransition, useWindowSize} from "@vue
 import {Lunar, LunarMonth} from "lunar-typescript";
 import {floor} from "lodash";
 
-require(`dayjs/locale/zh-cn`);
 dayjs.locale("zh-cn");
 
 const today = ref(100);

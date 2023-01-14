@@ -51,26 +51,6 @@ export default {
       return dayjs(props.endTime)
     })
 
-    const startCall = async () => {
-      const url = await WidgetApi.getWidgetPackageUrl("cn.widgetjs.widgets");
-      const avatar = url + "/images/zhangyuge.jpg";
-      const audio = url + "/audio/voice_squidward.m4a";
-      const lyric = "[00:00.00]5\n" +
-          "[00:00.90]4\n" +
-          "[00:01.80]3\n" +
-          "[00:02.80]2\n" +
-          "[00:03.50]1\n" +
-          "[00:04.50]我下班了，蟹老板\n" +
-          "[00:06.20]我要说的是\n" +
-          "[00:07.30]如果有一天\n" +
-          "[00:08.30]我真的实现了\n" +
-          "[00:09.70]我生命中的梦想\n" +
-          "[00:11.20]我永远也不会让\n" +
-          "[00:13.50]我的双脚\n" +
-          "[00:14.50]站在这油污的地板上";
-      await NotificationApi.call(avatar, audio, "章鱼哥", "下班提醒", lyric)
-    }
-
     console.info("start", workStartTime.value.format())
     console.info("end", workEndTime.value.format())
 
@@ -104,8 +84,6 @@ export default {
       const remindSeconds = Math.round(remindDuration.asSeconds());
       if (remindSeconds == 5 * 60) {
         NotificationApi.countdown("下班倒计时", workEndTime.value.format())
-      } else if (remindSeconds == 7 && props.enablePhoneReminder) {
-        startCall();
       }
       percent.value = floor(duration.asSeconds() / totalSeconds.value * 100, 1)
       if (percent.value > 100) {
@@ -122,11 +100,11 @@ export default {
         }
       }
     }, 1000)
-    return {height, time, currentTimeline, startCall, percent, workEndTime, secondLeft, percentPosition}
+    return {height, time, currentTimeline, percent, workEndTime, secondLeft, percentPosition}
   },
   methods: {
     async mouseEnter() {
-      // await NotificationApi.countdown("下班倒计时", dayjs().add(5, 'minute').toISOString())
+      // await NotificationApi.countdown("下班倒计时", dayjs().add(5, 'second').toISOString())
       // SitReminderDemo.duration = -1;
       // await NotificationApi.send(SitReminderDemo);
     },

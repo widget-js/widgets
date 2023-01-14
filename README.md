@@ -11,12 +11,12 @@
   <a href="https://discord.gg/vwSAaRR8cT"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true" alt="Chat"></a>
 </p>
 
-
-
 ### 说明
+
 这是桌面组件前端开源组件，项目还在持续完善中
 
 ### Windows 10/11 客户端下载
+
 https://www.microsoft.com/store/productId/9NPR50GQ7T53
 
 ### 项目目录结构
@@ -39,48 +39,68 @@ widgets
 ```
 
 ### 运行项目
+
 #### 先下载依赖
+
 ```shell
 pnpm install
 ```
+
 #### Vue
+
 下载并打开桌面组件客户端后再运行
+
 ```shell
 pnpm serve
 ```
 
 #### Storybook
+
 用StoryBook运行只能查看组件
+
 ```shell
 pnpm storybook
 ```
 
 ### 创建自己的组件
+
 ```shell
 pnpm widget create
 ```
 
 ### 组件列表
+
 #### 生日列表
-![gif](screenshot/birthday_list.png)
+
+![gif](public/images/preview_birthday_list.png)
 
 - 代码路径：/widgets/birthday_list
 - 组件路由：/widget/birthday_list
 - 配置路由：/widget/config/birthday_list
 
 #### 代办事项
-![gif](screenshot/todo.png)
+
+![image](public/images/preview_todo_list.png)
 
 - 代码路径：/widgets/todo-list
 - 组件路由：/widget/todo-list
 - 配置路由：/widget/config/todo-list
 
 #### 倒计时
-![gif](screenshot/countdown.png)
+
+![gif](public/images/preview_countdown.png)
 
 - 代码路径：/widgets/countdown
 - 组件路由：/widget/countdown
 - 配置路由：/widget/config/countdown
+
+#### 倒计时2
+
+![gif](public/images/preview_countdown2.png)
+
+- 代码路径：/widgets/countdown2
+- 组件路由：/widget/countdown2
+- 配置路由：/widget/config/countdown2
 
 #### 灵动通知
 
@@ -89,7 +109,6 @@ pnpm widget create
 - 代码路径：/widgets/dynamic_island
 - 组件路由：/widget/dynamic_island
 - 配置路由：/widget/config/dynamic_island
-
 
 #### 打工进度
 
@@ -101,13 +120,14 @@ pnpm widget create
 
 #### 时间进度
 
-![time_progress.png](screenshot%2Ftime_progress.png)
+![time_progress.png](public/images/preview_time_progress.png)
+
 - 代码路径：/widgets/time_progress
 - 组件路由：/widget/time_progress
 
 #### 歌词小说
+![歌词小说](public/images/preview_lyric_book.png)
 - 代码路径：/widgets/lyric_book
 - 组件路由：/widget/lyric_book
-![歌词小说](./screenshot/lyric_book.png)
 
 

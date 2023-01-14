@@ -4,7 +4,9 @@
     <counting-notification v-if="notification.type === 'countdown'" v-bind="notification"/>
     <advance-countdown-notification v-else-if="notification.type === 'advance-countdown'" v-bind="notification"/>
     <reminder-notification v-else-if="notification.type === 'reminder'" :notification="notification"/>
-    <phone-call-notification :key="notification.createdAt" ref="phoneCall" v-else-if="notification.type === 'call'"
+    <phone-call-notification :key="notification.createdAt" ref="phoneCall"
+                             v-else-if="notification.type === 'call'"
+                             :mute="mute"
                              v-bind="notification"/>
     <message-notification v-else v-bind="notification"/>
   </div>
@@ -156,8 +158,16 @@ export default {
       deep: true
     },
   },
-  computed: {},
+  computed: {
+    NotificationState() {
+      return NotificationState
+    }
+  },
   props: {
+    mute: {
+      type: Boolean,
+      default: false
+    },
     notification: {
       type: AppNotification
     },
