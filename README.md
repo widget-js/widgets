@@ -70,6 +70,14 @@ pnpm widget create
 
 ### 组件列表
 
+#### 喝水提醒
+
+![gif](public/images/preview_water_reminder.png)
+
+- 代码路径：/widgets/water-reminder
+- 组件路由：/widget/water_reminder
+- 配置路由：/widget/config/water_reminder
+
 #### 生日列表
 
 ![gif](public/images/preview_birthday_list.png)

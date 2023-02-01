@@ -108,10 +108,8 @@ const onInitCanvas = () => {
     // 动起来
     const loop = function () {
       step++;
-
       const lines: string[] = [backgroundColors.value[1] + backgroundColors.value[2], backgroundColors.value[3]];
-
-      const offset = parseInt(fontSize.value) / 2;
+      // const offset = parseInt(fontSize.value) / 2;
 
       const boxHeight = (cbHeight.value = containerRef.value?.offsetHeight ?? 158);
       const boxWidth = (cbWidth.value = containerRef.value?.offsetWidth ?? 58);
@@ -121,8 +119,8 @@ const onInitCanvas = () => {
       // 画三个不同颜色的矩阵
       for (let j = lines.length - 1; j >= 0; j--) {
         // 每个矩阵的角度都不同，每个之间相差100度
-        const angle: number = ((step + j * 100) * Math.PI) / 180,
-            deltaHeight: number = Math.sin(angle) * offset;
+        const angle: number = ((step + j * 100) * Math.PI) / 180;
+        const deltaHeight: number = Math.sin(angle) * 20;
         ctx.fillStyle = backgroundColors.value[j];
         ctx.beginPath(); // 开始绘制
         ctx.moveTo(0, transitionCurrentHeight.value);
@@ -132,7 +130,7 @@ const onInitCanvas = () => {
         ctx.bezierCurveTo(
             relativeX,
             transitionCurrentHeight.value - deltaHeight,
-            relativeX * 3,
+            boxWidth - relativeX,
             transitionCurrentHeight.value + deltaHeight,
             boxWidth,
             transitionCurrentHeight.value

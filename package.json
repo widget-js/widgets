@@ -26,12 +26,13 @@
     }
   },
   "dependencies": {
+    "@icon-park/vue-next": "^1.4.2",
     "@vueuse/core": "^9.4.0",
     "@vueuse/integrations": "^9.6.0",
     "@vueuse/motion": "2.0.0-beta.12",
     "@vueuse/router": "^9.9.0",
-    "@widget-js/core": "^0.1.22",
-    "@widget-js/vue3": "^0.1.21",
+    "@widget-js/core": "^0.1.24",
+    "@widget-js/vue3": "^0.1.23",
     "animate.css": "^4.1.1",
     "axios": "^1.1.3",
     "color": "^4.2.3",

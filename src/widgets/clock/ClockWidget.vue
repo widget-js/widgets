@@ -13,8 +13,8 @@
       <img ref="minute" class="center minute tick" :style="{
       transform:  'rotate('+ minuteDeg +'deg)',
     }" src="./images/clock_hand_minute.png" alt="">
-      <img ref="startSecondDeg" class="center second tick" :style="{
-      transform: 'rotate('+ newSecond +'deg)',
+      <img ref="startSecondDeg" class="center second" :style="{
+      transform: 'rotate('+ secondDeg +'deg)',
     }" src="./images/clock_hand_second.png" alt="">
     </div>
   </div>
@@ -42,24 +42,13 @@ export default {
   },
   async mounted() {
     await nextTick()
-    delay(() => {
-      this.updateTime();
-    }, 500);
-    delay(() => {
-      this.firstShot = false;
-    }, 1000);
   },
   setup() {
-    const container = ref(null);
     const secondDeg = ref(0);
     const hourDeg = ref(0);
     const minuteDeg = ref(0);
     const firstShot = ref(true);
 
-    const newSecond = useTransition(secondDeg, {
-      duration: 1000,
-      transition: firstShot ? TransitionPresets.easeOutQuad : TransitionPresets.linear,
-    })
     const calAddDeg = (current: number, max: number, previousDeg: number, deg: number) => {
       if (current == 0) current = max;
       const previous = previousDeg / deg;
@@ -74,8 +63,9 @@ export default {
     }
 
     const updateTime = () => {
-      const second = dayjs().second();
-      const minute = dayjs().minute();
+      const now = dayjs();
+      const second = now.second();
+      const minute = now.minute();
       secondDeg.value = secondDeg.value + calAddDeg(second, 60, secondDeg.value, 6);
       minuteDeg.value = (minute / 60 * 360);
       hourDeg.value = (getHour() / 12 * 360);
@@ -87,12 +77,11 @@ export default {
           }
         }
     )
-    return {firstShot, minuteDeg, hourDeg, newSecond, updateTime, getHour}
+    return {firstShot, minuteDeg, hourDeg, secondDeg, updateTime, getHour}
   },
   computed: {
     fillClass() {
       if (this.width > this.height) {
-        console.info("fill-height")
         return {"fill-height": true, "fill-width": false}
       }
       return {"fill-height": false, "fill-width": true}
@@ -150,6 +139,7 @@ body * {
   }
 
   .second {
+    transition-duration: 0s;
     transition-timing-function: linear;
   }
 

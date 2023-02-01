@@ -1,7 +1,7 @@
 import {MINIMAL_VIEWPORTS} from '@storybook/addon-viewport';
 import {app} from '@storybook/vue3';
 import 'animate.css'
-import '@widget-js/vue3/dist/mingcute_icon/font/Mingcute.css';
+import '@widget-js/vue3/dist/mingcute_icon/MingCute.css';
 import 'element-plus/dist/index.css'
 
 import ElementPlus from 'element-plus'

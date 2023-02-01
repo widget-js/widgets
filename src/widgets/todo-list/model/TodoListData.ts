@@ -3,18 +3,17 @@ import dayjs from "dayjs";
 import {remove} from "lodash";
 
 export class TodoListData extends WidgetData {
-    todoList: Todo[] = [];
+    todoList: Todo[] = [new Todo("欢迎使用桌面组件"), new Todo("鼠标右击组件弹出菜单")];
     finishedList: Todo[] = [];
 
     finishTodo(todo: Todo) {
-        console.log(JSON.stringify(todo))
         remove(this.todoList, function (item) {
             return item.id === todo.id;
         })
         todo.finishedAt = new Date().toISOString();
         //防止快速点击重复添加
         if (!this.finishedList.find(item => item.id == todo.id)) {
-            this.finishedList.splice(0,0,todo);
+            this.finishedList.splice(0, 0, todo);
         }
     }
 
@@ -25,7 +24,7 @@ export class TodoListData extends WidgetData {
         })
         todo.finishedAt = undefined;
         if (!this.todoList.find(item => item.id == todo.id)) {
-            this.todoList.splice(0,0,todo);
+            this.todoList.splice(0, 0, todo);
         }
     }
 

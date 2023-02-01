@@ -50,9 +50,10 @@ const useSitReminder = () => {
             }
         } else if (event.type == cancelBroadcast) {
         } else if (event.type == confirmBroadcast) {
-            BrowserWindowApi.openUrl(breakUrl);
+            await BrowserWindowApi.openUrl(breakUrl);
         }
     });
+    const interval = 10;
     useIntervalFn(async () => {
         if (!sitReminderData.value.enable) {
             return;
@@ -62,19 +63,19 @@ const useSitReminder = () => {
         if (duration.asMinutes() > sitReminderData.value.mouseCheckInterval) {
             usageCount.value = 0;
         } else {
-            usageCount.value = usageCount.value + 1;
-            if (usageCount.value < 10 && await BrowserWindowApi.existsByUrl(breakUrl)) {
+            usageCount.value = usageCount.value + interval;
+            if (usageCount.value < 20 && await BrowserWindowApi.existsByUrl(breakUrl)) {
                 usageCount.value = 0;
             }
         }
-        // console.log(usageCount)
+        console.log(usageCount.value)
         //sitReminderData.value.sitInterval * 60
         if (usageCount.value > sitReminderData.value.sitInterval * 60) {
             await NotificationApi.reminder("久坐提醒", `您已经连续使用电脑${sitReminderData.value.sitInterval}分钟`, "computer_line",
                 "知道了", "休息一下", cancelBroadcast, confirmBroadcast, 10000);
             usageCount.value = 0;
         }
-    }, 1000)
+    }, interval * 1000)
 }
 
 export default useSitReminder;

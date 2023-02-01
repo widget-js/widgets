@@ -24,7 +24,6 @@ onMounted(() => {
 
   setTimeout(() => {
     isOff.value = false;
-    console.log(isOff.value)
   }, 2000)
 
   setInterval(() => {
@@ -44,8 +43,6 @@ onMounted(() => {
         seconds;
 
     refContent.value = realTime;
-
-    console.log(refContent.value)
 
   }, 1000)
 
@@ -152,6 +149,7 @@ a.switcher:before {
   border-left: 45px solid transparent;
   border-bottom: 0 solid transparent;
 }
+
 //
 //.figure-mask {
 //  display: block;
