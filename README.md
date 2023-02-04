@@ -11,7 +11,7 @@
   <a href="https://discord.gg/vwSAaRR8cT"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true" alt="Chat"></a>
 </p>
 
-![png](screenshot.jpg)
+![png](public/screenshot.jpg)
 
 ### 说明
 
@@ -61,12 +61,6 @@ pnpm install
 #### 4.运行
 ```shell
 pnpm serve
-```
-
-### 创建自己的组件
-
-```shell
-pnpm widget create
 ```
 
 ### 创建自己的组件
@@ -145,26 +139,21 @@ pnpm widget create
 
 #### 知乎热榜
 
-![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/zhihu.png)
+![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_zhihu.png)
 
-- 代码路径：/widgets/zhihu
-- 组件路由：/widget/zhihu
+见热点组件包：https://github.com/widget-js/hotspot
 
 #### bilibili热榜
 
 ![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/bilibili_hot_search.png)
 
-- 代码路径：/widgets/bilibili
-- 组件路由：/widget/bilibili
-
-
+见热点组件包：https://github.com/widget-js/hotspot
 
 #### 微博热榜
 
 ![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/weibo_hot_search.png)
 
-- 代码路径：/widgets/weibo
-- 组件路由：/widget/weibo
+见热点组件包：https://github.com/widget-js/hotspot
 
 
 #### 歌词小说
