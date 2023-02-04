@@ -11,13 +11,16 @@
   <a href="https://discord.gg/vwSAaRR8cT"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true" alt="Chat"></a>
 </p>
 
+![png](screenshot.jpg)
+
 ### 说明
 
 这是桌面组件前端开源组件，项目还在持续完善中
 
 ### Windows 10/11 客户端下载
 
-https://www.microsoft.com/store/productId/9NPR50GQ7T53
+1. https://www.microsoft.com/store/productId/9NPR50GQ7T53
+2. https://haihaihai.vip
 
 ### 项目目录结构
 
@@ -40,26 +43,30 @@ widgets
 
 ### 运行项目
 
-#### 先下载依赖
+#### 1.下载并运行桌面组件客户端
+1. https://www.microsoft.com/store/productId/9NPR50GQ7T53
+2. https://haihaihai.vip
 
+#### 2.克隆代码
+
+```shell
+#克隆代码
+git clone https://github.com/widget-js/hotspot.git
+
+```
+#### 3.到项目目录下载依赖
 ```shell
 pnpm install
 ```
-
-#### Vue
-
-下载并打开桌面组件客户端后再运行
-
+#### 4.运行
 ```shell
 pnpm serve
 ```
 
-#### Storybook
-
-用StoryBook运行只能查看组件
+### 创建自己的组件
 
 ```shell
-pnpm storybook
+pnpm widget create
 ```
 
 ### 创建自己的组件
@@ -132,6 +139,33 @@ pnpm widget create
 
 - 代码路径：/widgets/time_progress
 - 组件路由：/widget/time_progress
+
+#### 歌词小说
+
+
+#### 知乎热榜
+
+![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/zhihu.png)
+
+- 代码路径：/widgets/zhihu
+- 组件路由：/widget/zhihu
+
+#### bilibili热榜
+
+![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/bilibili_hot_search.png)
+
+- 代码路径：/widgets/bilibili
+- 组件路由：/widget/bilibili
+
+
+
+#### 微博热榜
+
+![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/weibo_hot_search.png)
+
+- 代码路径：/widgets/weibo
+- 组件路由：/widget/weibo
+
 
 #### 歌词小说
 ![歌词小说](public/images/preview_lyric_book.png)
