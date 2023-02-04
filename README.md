@@ -134,8 +134,6 @@ pnpm widget create
 - 代码路径：/widgets/time_progress
 - 组件路由：/widget/time_progress
 
-#### 歌词小说
-
 
 #### 知乎热榜
 
