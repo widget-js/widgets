@@ -1,7 +1,14 @@
 import {SitReminder} from "@/widgets/dynamic-island/model/SitReminder";
 import {useAppBroadcast, useMouseEventHook, useWidget} from "@widget-js/vue3";
 import dayjs from "dayjs";
-import {BroadcastEvent, BrowserWindowApi, NotificationApi, WidgetApi, WidgetDataRepository} from "@widget-js/core";
+import {
+    BroadcastEvent,
+    BrowserWindowApi,
+    DeviceApi,
+    NotificationApi,
+    WidgetApi,
+    WidgetDataRepository
+} from "@widget-js/core";
 import {useIntervalFn, useStorage} from "@vueuse/core";
 
 /**
@@ -26,11 +33,6 @@ const useSitReminder = () => {
     console.log(lastUsedAtData.value);
     console.log(usageCount.value);
     let lastUsedAt = dayjs(lastUsedAtData.value)
-    useMouseEventHook((event) => {
-        lastUsedAt = dayjs()
-        lastUsedAtData.value = lastUsedAt.toISOString();
-    })
-
     let breakUrl = "";
     let loadBreakUrl = async (minute: number) => {
         const url = await WidgetApi.getWidgetPackageIndexUrl("cn.widgetjs.widgets");
@@ -54,13 +56,15 @@ const useSitReminder = () => {
         }
     });
     const interval = 10;
+    let lastPoint = {x: 0, y: 0};
     useIntervalFn(async () => {
         if (!sitReminderData.value.enable) {
             return;
         }
         const now = dayjs();
-        const duration = dayjs.duration(now.diff(lastUsedAt))
-        if (duration.asMinutes() > sitReminderData.value.mouseCheckInterval) {
+
+        const duration = dayjs.duration(now.diff(lastUsedAt));
+        if (duration.asSeconds() > sitReminderData.value.mouseCheckInterval * 60 + interval) {
             usageCount.value = 0;
         } else {
             usageCount.value = usageCount.value + interval;
@@ -68,7 +72,13 @@ const useSitReminder = () => {
                 usageCount.value = 0;
             }
         }
-        console.log(usageCount.value)
+        console.log(usageCount.value, lastUsedAt.toISOString());
+        const point = await DeviceApi.getCursorScreenPoint();
+        if (point.x != lastPoint.x || point.y != lastPoint.y) {
+            console.log("mouse moved", point)
+            lastPoint = point;
+            lastUsedAt = now;
+        }
         //sitReminderData.value.sitInterval * 60
         if (usageCount.value > sitReminderData.value.sitInterval * 60) {
             await NotificationApi.reminder("久坐提醒", `您已经连续使用电脑${sitReminderData.value.sitInterval}分钟`, "computer_line",

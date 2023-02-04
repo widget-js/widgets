@@ -165,7 +165,7 @@ const textColor = computed(() => {
       font-family: 'OPPOSans', serif;
       font-style: normal;
       font-weight: 500;
-      font-size: 24px;
+      font-size: 32px;
       line-height: 32px;
       color: v-bind(textColor);
       position: absolute;
@@ -205,7 +205,7 @@ const textColor = computed(() => {
     font-size: 16px;
     line-height: 21px;
     position: absolute;
-    bottom: 12px;
+    bottom: 8px;
     width: 100%;
     text-align: center;
     color: v-bind(textColor);

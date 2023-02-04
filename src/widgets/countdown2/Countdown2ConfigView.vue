@@ -56,7 +56,7 @@ export default {
       custom: true,
       backgroundColor: true,
       borderRadius: true,
-      fontSize: true
+      fontSize: false
     }));
 
     return {widgetData, widgetParams, isLunar, widgetConfigOption, showDatePicker, date}

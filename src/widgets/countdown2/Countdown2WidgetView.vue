@@ -17,8 +17,8 @@ const {widgetData, widgetParams, sizeStyle} = useWidget(CountdownModel, {
   defaultData: defaultData
 });
 const fontSize = ref(72);
-if (widgetParams.preview) {
-  fontSize.value = 48
+if(widgetParams.widthPx && widgetParams.widthPx <= 150){
+  fontSize.value = 54
 }
 </script>
 

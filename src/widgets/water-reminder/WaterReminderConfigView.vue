@@ -9,7 +9,7 @@
       <water-reminder-widget :style="{
         width:`${widgetParams.widthPx}px`,
         height:`${widgetParams.heightPx}px`
-      }" v-bind="widgetData" ></water-reminder-widget>
+      }" v-bind="widgetData" :cup="cup"></water-reminder-widget>
     </template>
     <template v-slot:form>
       <el-form>
@@ -38,10 +38,15 @@
 import WaterReminderWidget from "./WaterReminderWidget.vue";
 import {useWidget, WidgetConfigOption, WidgetEditDialog} from "@widget-js/vue3";
 import {WidgetApi} from "@widget-js/core";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import {WaterReminderModel} from "@/widgets/water-reminder/model/WaterReminderModel";
 
-const {widgetData, widgetParams} = useWidget(WaterReminderModel, {loadDataByWidgetName: true})
+const {widgetData, widgetParams} = useWidget(WaterReminderModel, {
+  loadDataByWidgetName: true, onDataLoaded: (data) => {
+    cup.value = data?.getTodayHistory() ?? 0
+  }
+})
+const cup = ref(0)
 
 //修改成需要设置组件参数配置
 const widgetConfigOption = reactive(new WidgetConfigOption({
@@ -50,6 +55,7 @@ const widgetConfigOption = reactive(new WidgetConfigOption({
   borderRadius: false,
   color: true
 }));
+
 
 async function onSaveClick() {
   await WidgetApi.saveDataByName(this.widgetData,);

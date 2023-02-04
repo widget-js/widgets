@@ -18,8 +18,8 @@ export default {
       defaultData: defaultData
     });
     const fontSize = ref(54);
-    if(widgetParams.preview){
-      fontSize.value = 36
+    if(widgetParams.widthPx && widgetParams.widthPx <= 150){
+      fontSize.value = 40
     }
     return {widgetData, widgetParams,sizeStyle,fontSize};
   }
