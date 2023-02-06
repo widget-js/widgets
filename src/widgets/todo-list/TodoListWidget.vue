@@ -20,14 +20,16 @@
           </transition-group>
         </div>
         <div class="list" v-show="viewType === 'history'">
-          <template v-for="(item,index) in finishList">
+          <template v-for="(item,index) in finishList" :key="item.id">
             <todo-item @click="finishTodoItemClick(item)" :todo="item"></todo-item>
           </template>
         </div>
         <add-body @cancel="viewType = 'default'" @confirm="addTodo($event)" v-show="viewType === 'add'"></add-body>
       </div>
     </el-scrollbar>
-    <audio ref="ding"></audio>
+    <audio ref="ding1"></audio>
+    <audio ref="ding2"></audio>
+    <audio ref="ding3"></audio>
   </div>
 </template>
 
@@ -79,7 +81,6 @@ if (widgetParams.preview) {
 
 const root = ref();
 const {height} = useElementSize(root)
-const {height: windowHeight} = useWindowSize()
 const addTodo = (content: string) => {
   const todo = new Todo(content);
   widgetData.value.todoList.splice(0, 0, todo);
@@ -94,7 +95,12 @@ const todoItemClick = (todo: Todo) => {
   list.value = widgetData.value.todoList;
   finishList.value = widgetData.value.finishedList;
   WidgetApi.saveDataByName(widgetData.value, {sendBroadcast: false});
-  ringtonePlaying.value = true;
+  for (let ringtone of ringtoneArr) {
+    if (!ringtone.value) {
+      ringtone.value = true
+      break;
+    }
+  }
 }
 
 const finishTodoItemClick = (todo: Todo) => {
@@ -104,10 +110,22 @@ const finishTodoItemClick = (todo: Todo) => {
   WidgetApi.saveDataByName(widgetData.value, {sendBroadcast: false});
 }
 
-const ding = ref()
-const {playing: ringtonePlaying, duration} = useMediaControls(ding, {
+const ding1 = ref()
+const ding2 = ref()
+const ding3 = ref()
+const {playing: ringtonePlaying1} = useMediaControls(ding1, {
   src: "./audio/ding.mp3",
 })
+
+const {playing: ringtonePlaying2} = useMediaControls(ding2, {
+  src: "./audio/ding.mp3",
+})
+
+const {playing: ringtonePlaying3} = useMediaControls(ding3, {
+  src: "./audio/ding.mp3",
+})
+
+const ringtoneArr = [ringtonePlaying1, ringtonePlaying2, ringtonePlaying3]
 
 const borderColor = computed(() => {
   return new Color(props.color).alpha(0.3).toString();

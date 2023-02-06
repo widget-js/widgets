@@ -1,5 +1,5 @@
 <template>
-    <glitch-widget :style="sizeStyle"  :background-color="widgetData.backgroundColor"></glitch-widget>
+    <glitch-widget :style="sizeStyle"></glitch-widget>
 </template>
 
 <script lang="ts">

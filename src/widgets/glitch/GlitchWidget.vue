@@ -250,9 +250,9 @@ a.switcher:before {
   animation: c1 2s infinite linear alternate-reverse;
 }
 
-@media (max-width: 300px) {
+@media (max-width: 330px) {
   .clock span {
-    font-size: 50px;
+    font-size: 55px;
   }
 }
 

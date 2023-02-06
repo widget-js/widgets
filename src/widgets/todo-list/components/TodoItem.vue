@@ -28,7 +28,7 @@ const props = defineProps({
   padding: 4px 8px;
   border-radius: 8px;
   background-color: white;
-
+  cursor: pointer;
   .action-three-two-one {
     width: 80%;
     margin-left: 10%;
