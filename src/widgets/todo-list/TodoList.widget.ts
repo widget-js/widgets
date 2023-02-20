@@ -18,15 +18,23 @@ const TodoListWidgetDefine = new Widget({
     description: description,
     keywords: keywords,
     lang: "zh",
-    url: url,
-    configUrl: configUrl,
     previewImage:"/images/preview_todo_list.png",
     width: 3,
     height: 3,
     minWidth: 3,
     maxWidth: 6,
     minHeight: 3,
-    maxHeight: 6
+    maxHeight: 6,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+        {
+            url: configUrl,
+            name: 'config'
+        },
+    ]
 })
 
 export default TodoListWidgetDefine;

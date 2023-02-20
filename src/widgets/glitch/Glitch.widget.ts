@@ -18,14 +18,18 @@ const GlitchWidgetDefine = new Widget({
     description: description,
     keywords: keywords,
     lang: "zh",
-    url: url,
-    configUrl: configUrl,
     width: 4,
     height: 2,
     minWidth: 4,
     maxWidth: 4,
     minHeight: 2,
-    maxHeight: 2
+    maxHeight: 2,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+    ]
 })
 
 export default GlitchWidgetDefine;

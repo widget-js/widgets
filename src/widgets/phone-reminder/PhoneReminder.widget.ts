@@ -18,15 +18,23 @@ const PhoneReminderWidgetDefine = new Widget({
     description: description,
     keywords: keywords,
     lang: "zh",
-    url,
-    configUrl,
     width: 6,
     height: 4,
     minWidth: 1,
     supportHostedMode: HostedMode.BACKGROUND,
     maxWidth: 2,
     minHeight: 2,
-    maxHeight: 2
+    maxHeight: 2,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+        {
+            url: configUrl,
+            name: 'config'
+        },
+    ]
 })
 
 export default PhoneReminderWidgetDefine;

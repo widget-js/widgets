@@ -2,12 +2,12 @@ import WaveProgressWidgetDefine from "@/widgets/wave-progress/WaveProgress.widge
 
 const WaveProgressRoute = [
     {
-        path: WaveProgressWidgetDefine.url,
+        path: WaveProgressWidgetDefine.getIndexRoute().url,
         name: `${WaveProgressWidgetDefine.name}`,
         component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.wave_progress" */ './WaveProgressWidgetView.vue')
     },
     {
-        path: WaveProgressWidgetDefine.configUrl!,
+        path: WaveProgressWidgetDefine.getConfigRoute()!.url,
         name: `${WaveProgressWidgetDefine.name}.config`,
         component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.wave_progress.config" */ './WaveProgressConfigView.vue')
     },

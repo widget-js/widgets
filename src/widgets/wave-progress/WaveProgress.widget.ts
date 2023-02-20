@@ -17,7 +17,17 @@ const maxWidth = 3;
 const minHeight = 2;
 const maxHeight = 7;
 const WaveProgressWidgetDefine = new Widget({
-    name, title, description, keywords, lang, width, height, maxWidth, maxHeight, minWidth, minHeight, url, configUrl
+    name, title, description, keywords, lang, width, height, maxWidth, maxHeight, minWidth, minHeight,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+        {
+            url: configUrl,
+            name: 'config'
+        },
+    ]
 })
 
 export default WaveProgressWidgetDefine;

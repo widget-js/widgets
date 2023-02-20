@@ -19,14 +19,22 @@ const Countdown2WidgetDefine = new Widget({
     keywords: keywords,
     previewImage: "/images/preview_countdown2.png",
     lang: "zh",
-    url: url,
-    configUrl: configUrl,
     width: 2,
     height: 2,
     minWidth: 2,
     maxWidth: 4,
     minHeight: 2,
-    maxHeight: 4
+    maxHeight: 4,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+        {
+            url: configUrl,
+            name: 'config'
+        },
+    ]
 })
 
 export default Countdown2WidgetDefine;

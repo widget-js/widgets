@@ -17,14 +17,22 @@ const LaborProgressWidgetDefine = new Widget({
     description: description,
     keywords: keywords,
     lang: "zh",
-    url: url,
-    configUrl: configUrl,
     width: 4,
     height: 1,
     minWidth: 3,
     maxWidth: 6,
     minHeight: 1,
     maxHeight: 2,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+        {
+            url: configUrl,
+            name: 'config'
+        },
+    ]
 })
 
 

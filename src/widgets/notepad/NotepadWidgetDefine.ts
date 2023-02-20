@@ -1,4 +1,5 @@
 import {Widget, WidgetKeyword} from "@widget-js/core";
+
 const name = "cn.widgetjs.widgets.notepad";
 //组件标题
 const title = {"zh": "记事本"};
@@ -16,7 +17,17 @@ const maxWidth = 4;
 const minHeight = 2;
 const maxHeight = 4;
 export const NotepadWidgetDefine = new Widget({
-    name, title, description, keywords, lang, width, height, maxWidth, maxHeight, minWidth, minHeight, url, configUrl
+    name, title, description, keywords, lang, width, height, maxWidth, maxHeight, minWidth, minHeight,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+        {
+            url: configUrl,
+            name: 'config'
+        },
+    ]
 })
 
 export const NotepadWidgetRoutes = [

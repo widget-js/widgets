@@ -19,15 +19,23 @@ const LyricBookWidgetDefine = new Widget({
     keywords: keywords,
     previewImage:"/images/preview_lyric_book.png",
     lang: "zh",
-    url: url,
-    configUrl: configUrl,
     width: 10,
     height: 6,
     minWidth: 4,
     maxWidth: 12,
     minHeight: 4,
     maxHeight: 8,
-    supportHostedMode: HostedMode.OVERLAP
+    supportHostedMode: HostedMode.OVERLAP,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+        {
+            url: configUrl,
+            name: 'config'
+        },
+    ]
 });
 
 export default LyricBookWidgetDefine;

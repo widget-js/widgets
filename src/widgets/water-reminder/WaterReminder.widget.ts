@@ -18,8 +18,6 @@ const WaterReminderWidgetDefine = new Widget({
     description: description,
     keywords: keywords,
     lang: "zh",
-    url: url,
-    configUrl: configUrl,
     previewImage: "/images/preview_water_reminder.png",
     width: 2,
     height: 2,
@@ -27,7 +25,17 @@ const WaterReminderWidgetDefine = new Widget({
     minWidth: 2,
     maxWidth: 2,
     minHeight: 2,
-    maxHeight: 2
+    maxHeight: 2,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+        {
+            url: configUrl,
+            name: 'config'
+        },
+    ]
 })
 
 export default WaterReminderWidgetDefine;

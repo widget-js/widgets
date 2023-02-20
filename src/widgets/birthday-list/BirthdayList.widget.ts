@@ -15,15 +15,23 @@ const BirthdayListWidgetDefine = new Widget({
     description: desc,
     keywords: keywords,
     lang: "zh",
-    url: url,
-    configUrl: configUrl,
     width: 4,
-    previewImage:"/images/preview_birthday_list.png",
+    previewImage: "/images/preview_birthday_list.png",
     height: 4,
     minWidth: 3,
     maxWidth: 4,
     minHeight: 3,
-    maxHeight: 6
+    maxHeight: 6,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+        {
+            url: configUrl,
+            name: 'config'
+        },
+    ]
 });
 
 export default BirthdayListWidgetDefine;

@@ -18,14 +18,22 @@ const DynamicIslandWidgetDefine = new Widget({
     description: description,
     keywords: keywords,
     lang: "zh",
-    url: url,
-    configUrl: configUrl,
     width: 6,
     height: 4,
     minWidth: 6,
     maxWidth: 6,
     minHeight: 4,
     maxHeight: 4,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+        {
+            url: configUrl,
+            name: 'config'
+        },
+    ]
 })
 
 export default DynamicIslandWidgetDefine;

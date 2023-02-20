@@ -18,14 +18,13 @@ const QuickSearchWidgetDefine = new Widget({
     description: description,
     keywords: keywords,
     lang: "zh",
-    url: url,
-    configUrl: configUrl,
     width: 2,
     height: 2,
     minWidth: 2,
     maxWidth: 2,
     minHeight: 2,
-    maxHeight: 2
+    maxHeight: 2,
+    routes: []
 })
 
 export default QuickSearchWidgetDefine;

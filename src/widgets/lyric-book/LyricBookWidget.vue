@@ -15,7 +15,7 @@ import noPainNoGain from './lyric/no_pain_no_gain.txt?raw';
 import Lyric from "@/widgets/lyric-book/components/Lyric.vue";
 import {useElementSize, useIntervalFn} from "@vueuse/core";
 import {computed, nextTick, ref} from "vue";
-import {BroadcastApi, BroadcastEvent, WidgetApi, WidgetDataRepository} from "@widget-js/core";
+import {BroadcastApi, BroadcastEvent, HostedWidgetApi, WidgetApi, WidgetDataRepository} from "@widget-js/core";
 import LyricFooter from "@/widgets/lyric-book/components/LyricFooter.vue";
 import LyricBookData from "@/widgets/lyric-book/model/LyricBookData";
 import PageController from "@/widgets/lyric-book/model/PageController";
@@ -120,7 +120,7 @@ export default {
       BroadcastApi.sendBroadcastEvent(new BroadcastEvent("hide-overlap", "", this.widgetId));
     },
     close() {
-      WidgetApi.removeHostedWidget(this.widgetId)
+      HostedWidgetApi.removeHostedWidget(this.widgetId)
     },
     saveData() {
       this.widgetData.currentPage = this.pageController.getCurrentPage();

@@ -1,9 +1,9 @@
 import LyricBookWidgetDefine from "./LyricBook.widget";
 
-const url = LyricBookWidgetDefine.url;
+const url = LyricBookWidgetDefine.getIndexRoute().url;
 const name = LyricBookWidgetDefine.name;
 
-const configUrl = LyricBookWidgetDefine.configUrl!;
+const configUrl = LyricBookWidgetDefine.getConfigRoute()!.url;
 
 const LyricBookWidgetRoutes = [
     {

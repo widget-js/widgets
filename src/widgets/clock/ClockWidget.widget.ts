@@ -15,14 +15,22 @@ const ClockWidgetDefine = new Widget({
     description: description,
     keywords: keywords,
     lang: "zh",
-    url: url,
-    configUrl: configUrl,
     width: 2,
     height: 2,
     minWidth: 2,
     maxWidth: 4,
     minHeight: 2,
-    maxHeight: 4
+    maxHeight: 4,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+        {
+            url: configUrl,
+            name: 'config'
+        },
+    ]
 })
 
 

@@ -18,14 +18,22 @@ const MickeyClockWidgetDefine = new Widget({
     description: description,
     keywords: keywords,
     lang: "zh",
-    url: url,
-    configUrl: configUrl,
     width: 2,
     height: 2,
     minWidth: 2,
     maxWidth: 3,
     minHeight: 2,
-    maxHeight: 3
+    maxHeight: 3,
+    routes: [
+        {
+            url: url,
+            name: 'index'
+        },
+        {
+            url: configUrl,
+            name: 'config'
+        },
+    ]
 })
 
 export default MickeyClockWidgetDefine;
