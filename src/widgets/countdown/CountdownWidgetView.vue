@@ -18,7 +18,9 @@ export default {
       defaultData: defaultData
     });
     const fontSize = ref(54);
-    if(widgetParams.widthPx && widgetParams.widthPx <= 150){
+    const widthPx = widgetParams.widthPx ?? 0;
+    const heightPx = widgetParams.heightPx ?? 0;
+    if(widthPx <= 220 || heightPx <= 220 ){
       fontSize.value = 40
     }
     return {widgetData, widgetParams,sizeStyle,fontSize};

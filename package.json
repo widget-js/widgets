@@ -71,6 +71,7 @@
     "eslint-plugin-storybook": "^0.6.7",
     "eslint-plugin-vue": "^8.0.3",
     "lint-staged": "^13.0.3",
+    "prettier": "^2.8.4",
     "raw-loader": "^4.0.2",
     "sass": "^1.56.0",
     "sass-loader": "^12.0.0",

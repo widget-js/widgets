@@ -71,6 +71,13 @@ pnpm widget create
 
 ### 组件列表
 
+#### 抖音热榜
+
+![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_douyin.png)
+
+见热点组件包：https://github.com/widget-js/hotspot
+
+
 #### 喝水提醒
 
 ![gif](public/images/preview_water_reminder.png)
@@ -152,6 +159,7 @@ pnpm widget create
 ![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/weibo_hot_search.png)
 
 见热点组件包：https://github.com/widget-js/hotspot
+
 
 
 #### 歌词小说

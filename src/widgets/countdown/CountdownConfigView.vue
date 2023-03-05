@@ -8,15 +8,15 @@
       <countdown-widget :style="{
         width:`${widgetParams.widthPx}px`,
         height:`${widgetParams.heightPx}px`
-      }" v-bind="widgetData" v-bind:is-lunar="isLunar" :date="date.toISOString()"></countdown-widget>
+      }" v-bind="widgetData" v-bind:is-lunar="isLunar" :font-size="fontSize" :date="date.toISOString()"></countdown-widget>
     </template>
     <template v-slot:form>
       <el-form-item label="事项名称">
-        <el-input v-model="widgetData.title"></el-input>
+        <el-input v-model="widgetData.title"/>
       </el-form-item>
       <el-form-item label="事项日期">
         <date-picker-dialog v-model:visible="showDatePicker" v-model:date="date"
-                            v-model:is-lunar="isLunar"></date-picker-dialog>
+                            v-model:is-lunar="isLunar"/>
         <el-button @click="showDatePicker = !showDatePicker">{{ dateStr }}</el-button>
       </el-form-item>
     </template>
@@ -41,7 +41,7 @@ export default {
   components: {SolarDatePicker, DatePickerDialog, CountdownWidget, WidgetEditDialog},
   setup() {
     const showDatePicker = ref(false)
-    const date = ref(new Date())
+    const date = ref(CountdownModel.DEFAULT_DATE)
     const isLunar = ref(false)
     const {widgetData, widgetParams} = useWidget(CountdownModel, {
       onDataLoaded: (data) => {
@@ -52,6 +52,13 @@ export default {
       }
     })
 
+    const fontSize = ref(54);
+    const widthPx = widgetParams.widthPx ?? 0;
+    const heightPx = widgetParams.heightPx ?? 0;
+    if(widthPx <= 220 || heightPx <= 220 ){
+      fontSize.value = 40
+    }
+
     //修改成需要设置组件参数配置
     const widgetConfigOption = reactive(new WidgetConfigOption({
       custom: true,
@@ -59,7 +66,7 @@ export default {
       borderRadius: true
     }));
 
-    return {widgetData, widgetParams, isLunar, widgetConfigOption, showDatePicker, date}
+    return {widgetData, widgetParams, isLunar, widgetConfigOption, showDatePicker, date,fontSize}
   },
   computed: {
     dateStr() {

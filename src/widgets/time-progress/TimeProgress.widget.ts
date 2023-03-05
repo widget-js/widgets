@@ -15,6 +15,7 @@ const minHeight = 2;
 const maxHeight = 2;
 const TimeProgressWidgetDefine = new Widget({
     name, title, description, keywords, lang, width, height, maxWidth, maxHeight, minWidth, minHeight,
+    refreshWhenResided:false,
     previewImage:"/images/preview_time_progress.png",
     routes: [
         {
