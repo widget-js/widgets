@@ -67,6 +67,7 @@ let frameId = -1;
 watch(width, (newValue) => {
   if (newValue > 0) {
     init();
+    cancelAnimationFrame(frameId)
     step();
   }
 })

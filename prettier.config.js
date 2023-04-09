@@ -1,5 +1,5 @@
 module.exports = {
-  printWidth: 100,
+  printWidth: 120,
   tabWidth: 2,
   useTabs: false,
   semi: false,
@@ -15,6 +15,7 @@ module.exports = {
   proseWrap: 'never',
   htmlWhitespaceSensitivity: 'strict',
   endOfLine: 'auto',
+  bracketSameLine: true,
   rangeStart: 0,
   plugins: [require('prettier-plugin-tailwindcss')]
 }

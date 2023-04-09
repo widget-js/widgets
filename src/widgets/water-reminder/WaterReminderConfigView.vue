@@ -74,22 +74,4 @@ async function onSaveClick() {
 </script>
 
 <style scoped lang="scss">
-@use 'sass:map';
-@import 'element-plus/theme-chalk/src/common/var.scss';
-
-.colors {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-
-  .color {
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    margin-left: 12px;
-    border-radius: 12px;
-    border: 1px solid map.get($border-color, '');
-  }
-}
 </style>

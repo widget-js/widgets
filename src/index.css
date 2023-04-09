@@ -1,0 +1,46 @@
+body *,
+page view {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    user-select: none;
+    font-family: Roboto-Medium, 'Microsoft YaHei', serif;
+}
+
+body {
+    font-family: OPPOSans, Roboto, Helvetica Neue, Helvetica, Tahoma, Arial, PingFang SC-Light, Microsoft YaHei, serif;
+    margin: 0;
+    overflow: hidden;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    border: 1px solid transparent;
+    outline: none;
+    background-color: transparent;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1 1 0%;
+}
+
+.gap-1 {
+    gap: 0.25rem;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.items-center {
+    align-items: center;
+}
+

@@ -1,5 +1,5 @@
 <template>
-  <div class="time-progress-container" ref="container" :style="{fontSize: fontSize}">
+  <div class="time-progress-container" ref="container" :style="{ fontSize: fontSize }">
     <div class="header">
       <div class="title">时间进度 <span v-if="props.isLunar">(农历)</span></div>
       <div class="decorate"></div>
@@ -41,23 +41,23 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, onMounted, ref} from "vue";
-import dayjs, {Dayjs, OpUnitType} from "dayjs";
-import {TransitionPresets, useInterval, useTransition, useWindowSize} from "@vueuse/core";
-import {Lunar, LunarMonth} from "lunar-typescript";
-import {floor} from "lodash";
+import { computed, onMounted, ref } from 'vue'
+import dayjs, { Dayjs, OpUnitType } from 'dayjs'
+import { TransitionPresets, useInterval, useTransition, useWindowSize } from '@vueuse/core'
+import { Lunar, LunarMonth } from 'lunar-typescript'
+import { floor } from 'lodash'
 
-dayjs.locale("zh-cn");
+dayjs.locale('zh-cn')
 
-const today = ref(100);
-const toWeek = ref(100);
-const toMonth = ref(100);
-const toYear = ref(100);
-const container = ref<HTMLDivElement>();
+const today = ref(100)
+const toWeek = ref(100)
+const toMonth = ref(100)
+const toYear = ref(100)
+const container = ref<HTMLDivElement>()
 const props = defineProps({
   locale: {
     type: String,
-    default: "zh-cn",
+    default: 'zh-cn',
     required: false
   },
   isLunar: {
@@ -65,116 +65,112 @@ const props = defineProps({
     default: false,
     required: false
   }
-});
+})
 
-let options = {duration: 1000, transition: TransitionPresets.easeInOutCubic};
-const todayTransition = useTransition(today, options);
-const weekTransition = useTransition(toWeek, options);
-const monthTransition = useTransition(toMonth, options);
-const yearTransition = useTransition(toYear, options);
+let options = { duration: 1000, transition: TransitionPresets.easeInOutCubic }
+const todayTransition = useTransition(today, options)
+const weekTransition = useTransition(toWeek, options)
+const monthTransition = useTransition(toMonth, options)
+const yearTransition = useTransition(toYear, options)
 
 // 创建时国际化
-(() => {
-  dayjs.locale(props.locale);
-})();
-
+;(() => {
+  dayjs.locale(props.locale)
+})()
 
 onMounted(() => {
-  const now = dayjs();
-  initRenderView(now);
+  const now = dayjs()
+  initRenderView(now)
 
-  const dayEnd = now.endOf("day");
-  const day = getRatioValue(now, "day");
+  const dayEnd = now.endOf('day')
+  const day = getRatioValue(now, 'day')
   // 每个百分比刷新一次就好
-  const daySurplus = 100 - day;
-  const interval = dayEnd.diff(now) / daySurplus;
-  intervalRenderView(interval);
-});
+  const daySurplus = 100 - day
+  const interval = dayEnd.diff(now) / daySurplus
+  intervalRenderView(interval)
+})
 
-
-const {width, height} = useWindowSize();
-
+const { width, height } = useWindowSize()
 
 let fontSize = computed(() => {
-  return (height.value / 134) * 21 + "px";
+  return (height.value / 134) * 21 + 'px'
 })
 
 // 农历 月
 function lunarMonth(now: Dayjs): number {
-  const nowLunar = Lunar.fromDate(now.toDate());
+  const nowLunar = Lunar.fromDate(now.toDate())
   // 获取当月天数
-  const monthDay = LunarMonth.fromYm(nowLunar.getYear(), nowLunar.getMonth());
+  const monthDay = LunarMonth.fromYm(nowLunar.getYear(), nowLunar.getMonth())
 
   // 获取当月第一天 转solar
-  const firstDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), 1).getSolar();
+  const firstDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), 1).getSolar()
   // 获取当月最后一天
-  const endDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), monthDay!.getDayCount()).getSolar();
+  const endDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), monthDay!.getDayCount()).getSolar()
 
-  const endDate = dayjs(endDay.getCalendar()).endOf("day");
-  const startDate = dayjs(firstDay.getCalendar());
-  const ratio = now.diff(startDate) / endDate.diff(startDate);
-  const value = parseInt(Math.round(Number((1 - ratio) * 100)).toFixed(0));
-  return value;
+  const endDate = dayjs(endDay.getCalendar()).endOf('day')
+  const startDate = dayjs(firstDay.getCalendar())
+  const ratio = now.diff(startDate) / endDate.diff(startDate)
+  const value = parseInt(Math.round(Number((1 - ratio) * 100)).toFixed(0))
+  return value
 }
 
 // 农历 月
 function lunarYear(now: Dayjs): number {
-  const nowLunar = Lunar.fromDate(now.toDate());
+  const nowLunar = Lunar.fromDate(now.toDate())
   // 获取今年的一月一日即春节
-  const firstDay = Lunar.fromYmd(nowLunar.getYear(), 1, 1).getSolar();
+  const firstDay = Lunar.fromYmd(nowLunar.getYear(), 1, 1).getSolar()
   // 获取当月第一天 转solar
   // 获取第二年第一天
-  const endDay = Lunar.fromYmd(nowLunar.getYear() + 1, 1, 1).getSolar();
-  const endDate = dayjs(endDay.getCalendar());
-  const startDate = dayjs(firstDay.getCalendar());
-  const ratio = now.diff(startDate) / endDate.diff(startDate);
-  return parseInt(Math.round(Number((1 - ratio) * 100)).toFixed(0));
+  const endDay = Lunar.fromYmd(nowLunar.getYear() + 1, 1, 1).getSolar()
+  const endDate = dayjs(endDay.getCalendar())
+  const startDate = dayjs(firstDay.getCalendar())
+  const ratio = now.diff(startDate) / endDate.diff(startDate)
+  return parseInt(Math.round(Number((1 - ratio) * 100)).toFixed(0))
 }
 
 // 渲染视图
 const initRenderView = (now: Dayjs) => {
-  const day = getRatioValue(now, "day");
-  const week = getRatioValue(now, "week");
+  const day = getRatioValue(now, 'day')
+  const week = getRatioValue(now, 'week')
 
-  let month: number;
-  let year: number;
+  let month: number
+  let year: number
   if (props.isLunar) {
-    month = lunarMonth(now);
-    year = lunarYear(now);
+    month = lunarMonth(now)
+    year = lunarYear(now)
   } else {
-    month = getRatioValue(now, "month");
-    year = getRatioValue(now, "year");
+    month = getRatioValue(now, 'month')
+    year = getRatioValue(now, 'year')
   }
-  today.value = day;
-  toWeek.value = week;
-  toMonth.value = month;
-  toYear.value = year;
+  today.value = day
+  toWeek.value = week
+  toMonth.value = month
+  toYear.value = year
 }
 
 // 计算百分比
 const getRatioValue = (now: Dayjs, type: OpUnitType): number => {
-  const start = now.startOf(type);
-  const end = now.endOf(type);
-  const ratio = now.diff(start) / end.diff(start);
-  return parseInt(Math.round(Number((1 - ratio) * 100)).toFixed(0));
+  const start = now.startOf(type)
+  const end = now.endOf(type)
+  const ratio = now.diff(start) / end.diff(start)
+  return parseInt(Math.round(Number((1 - ratio) * 100)).toFixed(0))
 }
 
 const formatNumber = (num: number) => {
-  return floor(num).toString().padStart(2, "0")
+  return floor(num).toString().padStart(2, '0')
 }
 
 // 定时刷新视图
 const intervalRenderView = (interval: number) => {
   if (interval < 1000) {
-    interval = 1000;
+    interval = 1000
   }
   useInterval(interval, {
     callback: () => {
-      initRenderView(dayjs());
-    },
-  });
+      initRenderView(dayjs())
+    }
+  })
 }
-
 </script>
 
 <style scoped lang="scss">
@@ -213,7 +209,7 @@ $transition-duration: 125ms;
       height: 1.71em;
       width: 3.52em;
       right: 8px;
-      background-image: url("~@/widgets/time-progress/images/time_progress_decorate.svg");
+      background-image: url('@/widgets/time-progress/images/time_progress_decorate.svg');
       background-size: cover;
     }
   }
@@ -225,6 +221,7 @@ $transition-duration: 125ms;
       display: flex;
       height: 0.81em;
       margin: 0.19em 0;
+      overflow: hidden;
       flex-direction: row;
       align-items: center;
 
@@ -241,6 +238,7 @@ $transition-duration: 125ms;
         background-color: #e2e2e2ff;
         margin: 0 7px;
         border-radius: $border-radius;
+        overflow: hidden;
 
         .active {
           width: 100%;

@@ -71,6 +71,13 @@ pnpm widget create
 
 ### 组件列表
 
+#### 键盘演示
+
+![png](./public/images/preview_keystroke.png)
+
+https://github.com/widget-js/hotspot
+
+
 #### 抖音热榜
 
 ![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_douyin.png)

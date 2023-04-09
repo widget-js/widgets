@@ -44,12 +44,12 @@ const { widgetData, widgetParams, sizeStyle, dataLoaded } = useWidget(WaterRemin
 const name = WaterReminderWidgetDefine.name
 const cancelBroadcast = name + '.cancel'
 const okBroadcast = name + '.ok'
-console.log(okBroadcast)
 const { isActive, pause, resume } = useIntervalFn(() => {
   const now = dayjs()
   const second = now.diff(lastReminderAt, 'second')
   widgetData.value.lastReminderAt = lastReminderAt.toISOString()
   WidgetApi.saveDataByName(widgetData.value, { sendBroadcast: false })
+
   if (second >= widgetData.value.interval * 60) {
     lastReminderAt = dayjs()
     NotificationApi.reminder(
@@ -60,7 +60,7 @@ const { isActive, pause, resume } = useIntervalFn(() => {
       '喝一杯',
       cancelBroadcast,
       okBroadcast,
-      1000
+      5000
     )
   }
 }, 10000)
