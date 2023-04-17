@@ -75,8 +75,6 @@ pnpm widget create
 
 ![png](./public/images/preview_keystroke.png)
 
-https://github.com/widget-js/hotspot
-
 
 #### 抖音热榜
 
