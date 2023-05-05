@@ -44,7 +44,6 @@ export default {
         BrowserWindowApi.moveTop()
         Object.assign(notification, newNotification)
         setState()
-        stopHideTimeout()
         startHideTimeout()
       } else {
         hide()
@@ -98,6 +97,7 @@ export default {
     }, hideTimeout)
 
     const startHideTimeout = () => {
+      stopHideTimeout()
       if (hideTimeout.value > 0) {
         start()
       }
