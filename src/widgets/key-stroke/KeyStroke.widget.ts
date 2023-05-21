@@ -1,4 +1,5 @@
-import { Widget, WidgetKeyword } from '@widget-js/core'
+import { HostedMode, Widget, WidgetKeyword } from '@widget-js/core'
+
 const name = 'cn.widgetjs.widgets.key_stroke'
 //组件标题
 const title = { zh: '键盘演示' }
@@ -23,6 +24,7 @@ const KeyStrokeWidgetDefine = new Widget({
   maxWidth: 4,
   minHeight: 3,
   maxHeight: 3,
+  supportHostedMode: HostedMode.OVERLAP,
   backgroundThrottling: false,
   permissions: ['keyboard'],
   movable: false,

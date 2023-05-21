@@ -27,13 +27,13 @@
 
 import Countdown2Widget from "./Countdown2Widget.vue";
 import {useWidget, WidgetConfigOption, WidgetEditDialog} from "@widget-js/vue3";
-import {WidgetData, WidgetDataRepository} from "@widget-js/core";
 import {reactive, ref} from "vue";
 import {CountdownModel} from "@/widgets/countdown/model/CountdownModel";
 import dayjs from "dayjs";
 import {DateType} from "@/countdown/Event";
 import {Lunar} from "lunar-typescript";
 import DatePickerDialog from "@/components/DatePickerDialog.vue";
+import {WidgetDataApi} from "../../../../core";
 
 export default {
   name: "",
@@ -74,7 +74,7 @@ export default {
     async onSaveClick() {
       this.widgetData.date = this.date;
       this.widgetData.dateType = this.isLunar ? DateType.LUNAR : DateType.SOLAR;
-      await WidgetDataRepository.save(this.widgetData);
+      await WidgetDataApi.save(this.widgetData);
       window.close();
     }
   }

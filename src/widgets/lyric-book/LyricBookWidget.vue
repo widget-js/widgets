@@ -11,27 +11,34 @@
 
 <script lang="ts">
 // @ts-ignore
-import noPainNoGain from './lyric/no_pain_no_gain.txt?raw';
-import Lyric from "@/widgets/lyric-book/components/Lyric.vue";
-import {useElementSize, useIntervalFn} from "@vueuse/core";
-import {computed, nextTick, ref} from "vue";
-import {BroadcastApi, BroadcastEvent, HostedWidgetApi, WidgetApi, WidgetDataRepository} from "@widget-js/core";
-import LyricFooter from "@/widgets/lyric-book/components/LyricFooter.vue";
-import LyricBookData from "@/widgets/lyric-book/model/LyricBookData";
-import PageController from "@/widgets/lyric-book/model/PageController";
-import 'driver.js/dist/driver.min.css';
-import Driver from 'driver.js';
-import {delay} from "lodash";
+import noPainNoGain from './lyric/no_pain_no_gain.txt?raw'
+import Lyric from '@/widgets/lyric-book/components/Lyric.vue'
+import { useElementSize, useIntervalFn } from '@vueuse/core'
+import { computed, nextTick, ref } from 'vue'
+import {
+  BroadcastApi,
+  BroadcastEvent,
+  BrowserWindowApi,
+  HostedWidgetApi,
+  WidgetApi,
+  WidgetDataApi
+} from '@widget-js/core'
+import LyricFooter from '@/widgets/lyric-book/components/LyricFooter.vue'
+import LyricBookData from '@/widgets/lyric-book/model/LyricBookData'
+import PageController from '@/widgets/lyric-book/model/PageController'
+import 'driver.js/dist/driver.min.css'
+import Driver from 'driver.js'
+import { delay } from 'lodash'
 
 export default {
-  name: "LyricBookWidget",
-  components: {LyricFooter, Lyric},
+  name: 'LyricBookWidget',
+  components: { LyricFooter, Lyric },
   props: {
     widgetData: {
-      type: LyricBookData,
+      type: LyricBookData
     },
     widgetId: {
-      type: String,
+      type: String
     },
     pageController: {
       type: PageController,
@@ -43,104 +50,100 @@ export default {
     }
   },
   async mounted() {
-    await nextTick();
+    await nextTick()
     delay(() => {
       if (this.widgetData.showGuide && !this.preview) {
         const driver = new Driver({
-          allowClose: false, onDeselected: () => {
-            this.widgetData.showGuide = false;
-            WidgetDataRepository.saveByName(this.widgetData);
+          allowClose: false,
+          onDeselected: () => {
+            this.widgetData.showGuide = false
+            WidgetDataApi.saveByName(this.widgetData)
           }
-        });
+        })
         driver.highlight({
           element: '#hotspot',
-          stageBackground: " rgba(255, 255, 255, 0.36)",
+          stageBackground: ' rgba(255, 255, 255, 0.36)',
           popover: {
             title: '小提示',
-            description: '将鼠标移动到该区域，歌词会自动变成小说内容',
+            description: '将鼠标移动到该区域，歌词会自动变成小说内容'
           }
-        });
+        })
       }
     }, 2000)
   },
   setup() {
-    const trulyLyric = noPainNoGain.split("\r\n");
-    const lyricInterval = 5000;
-    const totalDuration = trulyLyric.length * lyricInterval;
-    const lyricIndex = ref(0);
-    const time = ref(0);
+    const trulyLyric = noPainNoGain.split('\r\n')
+    const lyricInterval = 5000
+    const totalDuration = trulyLyric.length * lyricInterval
+    const lyricIndex = ref(0)
+    const time = ref(0)
     useIntervalFn(() => {
-      if (hover.value) return;
-      lyricIndex.value++;
+      if (hover.value) return
+      lyricIndex.value++
       if (lyricIndex.value >= trulyLyric.length) {
-        lyricIndex.value = 0;
-        time.value = 0;
+        lyricIndex.value = 0
+        time.value = 0
       }
-    }, lyricInterval);
+    }, lyricInterval)
     const progress = computed(() => {
-      return time.value / totalDuration * 100;
+      return (time.value / totalDuration) * 100
     })
     useIntervalFn(() => {
-      if (hover.value) return;
-      time.value = time.value + 100;
-    }, 100);
-    const lyric = ref();
-    const {height: lyricHeight} = useElementSize(lyric)
-    const hover = ref(false);
-    return {trulyLyric, lyric, lyricHeight, hover, progress, lyricIndex, totalDuration, time}
+      if (hover.value) return
+      time.value = time.value + 100
+    }, 100)
+    const lyric = ref()
+    const { height: lyricHeight } = useElementSize(lyric)
+    const hover = ref(false)
+    return { trulyLyric, lyric, lyricHeight, hover, progress, lyricIndex, totalDuration, time }
   },
   watch: {
     hover(newValue) {
       if (newValue) {
-        this.lyricIndex = 1;
+        this.lyricIndex = 1
       } else {
-
       }
     },
-    lyricHeight() {
-
-    }
+    lyricHeight() {}
   },
   computed: {
     pageLine() {
       return Math.floor(this.lyricHeight / LyricBookData.lineHeight)
     },
     currentLyric() {
-      return this.hover ? this.pageController.currentContent : this.trulyLyric;
+      return this.hover ? this.pageController.currentContent : this.trulyLyric
     }
   },
   methods: {
     hover() {
-      this.hover = true;
+      this.hover = true
     },
     leave() {
-      this.hover = false;
+      this.hover = false
     },
     hide() {
-      BroadcastApi.sendBroadcastEvent(new BroadcastEvent("hide-overlap", "", this.widgetId));
+      BrowserWindowApi.hide()
     },
     close() {
       HostedWidgetApi.removeHostedWidget(this.widgetId)
     },
     saveData() {
-      this.widgetData.currentPage = this.pageController.getCurrentPage();
-      WidgetApi.saveDataByName(this.widgetData, {sendBroadcast: false})
+      this.widgetData.currentPage = this.pageController.getCurrentPage()
+      WidgetDataApi.saveByName(this.widgetData, { sendBroadcast: false })
     },
     next() {
-      this.pageController.nextPage();
-      this.saveData();
+      this.pageController.nextPage()
+      this.saveData()
     },
     previous() {
-      this.pageController.previousPage();
-      this.saveData();
+      this.pageController.previousPage()
+      this.saveData()
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
-
 body:hover {
   .background {
     filter: blur(12px);
@@ -165,7 +168,7 @@ body:hover {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50%;
-  background-image: url("./img/img.png");
+  background-image: url('./img/img.png');
   transition: all 0.8s;
   transform: scale(1);
   filter: blur(4px);
@@ -205,6 +208,4 @@ body:hover {
   right: 8px;
   top: 0;
 }
-
-
 </style>

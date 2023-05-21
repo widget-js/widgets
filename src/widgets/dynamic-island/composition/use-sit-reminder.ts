@@ -7,7 +7,8 @@ import {
   DeviceApi,
   NotificationApi,
   WidgetApi,
-  WidgetDataRepository
+  WidgetApiEvent,
+  WidgetDataApi
 } from '@widget-js/core'
 import { useIntervalFn, useStorage } from '@vueuse/core'
 import { delay } from 'lodash'
@@ -31,33 +32,29 @@ const useSitReminder = () => {
 
   const lastUsedAtData = useStorage(sitReminder.name + '.last_used_at', dayjs().toISOString())
   const usageCount = useStorage(sitReminder.name + '.usage_count', 0)
-  console.log(lastUsedAtData.value)
-  console.log(usageCount.value)
   let lastUsedAt = dayjs(lastUsedAtData.value)
   let breakUrl = ''
   let loadBreakUrl = async (minute: number) => {
     const url = await WidgetApi.getWidgetPackageIndexUrl('cn.widgetjs.widgets')
     breakUrl = url + '/widget/dynamic_island/break?win_fullscreen=true&win_always_on_top=true&duration=' + minute * 60
   }
-  useAppBroadcast(
-    [BroadcastEvent.TYPE_WIDGET_UPDATED, cancelBroadcast, confirmBroadcast],
-    async (event: BroadcastEvent) => {
-      if (event.type == BroadcastEvent.TYPE_WIDGET_UPDATED) {
-        if (event.payload.name == sitReminder.name) {
-          WidgetDataRepository.findByName(sitReminder.name, SitReminder).then((data) => {
-            if (data) {
-              console.log(data)
-              sitReminderData.value = data
-              loadBreakUrl(sitReminderData.value.breakInterval)
-            }
-          })
-        }
-      } else if (event.type == cancelBroadcast) {
-      } else if (event.type == confirmBroadcast) {
-        await BrowserWindowApi.openUrl(breakUrl)
+  useAppBroadcast([WidgetApiEvent.DATA_CHANGED, cancelBroadcast, confirmBroadcast], async (event: BroadcastEvent) => {
+    console.log(event)
+    if (event.event == WidgetApiEvent.DATA_CHANGED) {
+      if (event.payload.name == sitReminder.name) {
+        WidgetDataApi.findByName(sitReminder.name, SitReminder).then((data) => {
+          if (data) {
+            console.log(data)
+            sitReminderData.value = data
+            loadBreakUrl(sitReminderData.value.breakInterval)
+          }
+        })
       }
+    } else if (event.event == cancelBroadcast) {
+    } else if (event.event == confirmBroadcast) {
+      await BrowserWindowApi.openUrl(breakUrl)
     }
-  )
+  })
   const interval = 10
   let lastPoint = { x: 0, y: 0 }
   useIntervalFn(async () => {

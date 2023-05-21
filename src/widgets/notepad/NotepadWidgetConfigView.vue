@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 import {WidgetEditDialog} from "@widget-js/vue3";
 import {useRoute} from "vue-router";
-import {WidgetParams,WidgetData,WidgetDataRepository} from "@widget-js/core";
+import {WidgetParams, WidgetData, WidgetDataApi} from "@widget-js/core";
 import {ref} from "vue";
 import ClockWidget from "@/widgets/clock/ClockWidget.vue";
 import WidgetColorField from "@widget-js/vue3";
@@ -30,7 +30,7 @@ defaultData.backgroundColor = "#333";
 
 const widgetData = ref(defaultData);
 
-WidgetDataRepository.find<WidgetData>(widgetParams.name!, widgetParams.id!,WidgetData).then((data) => {
+WidgetDataApi.find<WidgetData>(widgetParams.name!, widgetParams.id!,WidgetData).then((data) => {
   if (data) {
     widgetData.value = data;
   }
@@ -41,7 +41,7 @@ function onTimezoneChanged() {
 }
 
 async function onSaveClick() {
-  await WidgetDataRepository.save(widgetData.value);
+  await WidgetDataApi.save(widgetData.value);
   window.close();
 }
 </script>

@@ -1,0 +1,88 @@
+<template>
+  <div class="photo" :style="{ borderRadius: `${widgetData.borderRadius ?? 0}px` }">
+    <el-carousel :height="`${widgetParams.heightPx}px`" indicator-position="none" :interval="5000">
+      <template v-if="widgetParams.preview">
+        <el-carousel-item v-for="item in defaultPhotos" :key="item">
+          <img class="photo-item" :src="item" alt=""/>
+        </el-carousel-item>
+      </template>
+      <template v-else>
+        <el-carousel-item v-for="item in photos" :key="item">
+          <img class="photo-item" :src="item" alt=""/>
+        </el-carousel-item>
+        <el-carousel-item v-if="showGuide" @click="showConfig">
+          <h4 class="justify-center">点击设置图片文件</h4>
+        </el-carousel-item>
+        <el-carousel-item v-else-if="photos.length == 0">
+          <h4 class="justify-center">文件夹内没有找到图片</h4>
+        </el-carousel-item>
+      </template>
+    </el-carousel>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import {useWidget} from '@widget-js/vue3'
+import {PhotoData} from '@/widgets/photo/PhotoData'
+import {ref} from 'vue'
+import {BrowserWindowApi, FileApi, HostedWidgetApi, WidgetApi} from '@widget-js/core'
+
+const defaultPhotos = ['/images/photo1.jpg', '/images/photo2.jpg', '/images/photo3.jpg']
+const photos = ref<string[]>([])
+const showGuide = ref(false)
+const {widgetData, widgetParams, sizeStyle} = useWidget(PhotoData, {
+  defaultData: {
+    borderRadius: 22
+  },
+  onDataLoaded: (data) => {
+    if (data && data.directory) {
+      // photos.value
+      console.log(photos.value)
+      FileApi.readDirectory(data.directory).then((files) => {
+        photos.value = files.filter((file) => {
+          const ignoreCase = file.toLowerCase()
+          return (
+            ignoreCase.endsWith('.jpg') ||
+            ignoreCase.endsWith('.jpeg') ||
+            ignoreCase.endsWith('.gif') ||
+            ignoreCase.endsWith('.png')
+          )
+        })
+      })
+      showGuide.value = false
+    } else {
+      showGuide.value = true
+    }
+  }
+})
+
+const showConfig = async () => {
+  // const widgetConfigUrl = await WidgetApi.getWidgetConfigUrl(widgetParams.name, widgetParams);
+  // await BrowserWindowApi.openUrl(widgetConfigUrl!);
+  HostedWidgetApi.openConfigRoute(widgetParams.id, widgetParams)
+}
+</script>
+
+<style scoped lang="scss">
+.photo {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  .photo-item {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+}
+
+.el-carousel__item h4 {
+  display: flex;
+  color: #fff;
+  opacity: 0.75;
+  height: 100vh;
+  place-items: center;
+  margin: 0;
+}
+</style>

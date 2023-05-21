@@ -1,5 +1,6 @@
 import { WidgetData } from '@widget-js/core'
 import { remove } from 'lodash'
+import { nanoid } from 'nanoid'
 
 export class TodoListData extends WidgetData {
   todoList: Todo[] = [new Todo('欢迎使用桌面组件'), new Todo('鼠标右击组件弹出菜单')]
@@ -16,7 +17,7 @@ export class TodoListData extends WidgetData {
     }
   }
 
-  deleteTodo (todo: Todo) {
+  deleteTodo(todo: Todo) {
     remove(this.todoList, function (item) {
       return item.id === todo.id
     })
@@ -50,12 +51,14 @@ export class TodoListData extends WidgetData {
     }
   }
 }
+
 export interface TodoUpdate {
   content: string
   todo?: Todo
 }
+
 export class Todo {
-  id: number
+  id: string
   createdAt: string
   content: string
   finishedAt?: string
@@ -64,7 +67,7 @@ export class Todo {
     this.createdAt = new Date().toISOString()
     this.content = content
     this.finishedAt = undefined
-    this.id = new Date().getTime()
+    this.id = nanoid()
   }
 
   isFinished = (): boolean => {

@@ -8,9 +8,8 @@
       </div>
     </div>
     <div class="action">
-      <div class="button cancel" @click="cancel" v-if="notification.cancelButtonText">{{
-          notification.cancelButtonText
-        }}
+      <div class="button cancel" @click="cancel" v-if="notification.cancelButtonText"
+        >{{ notification.cancelButtonText }}
       </div>
       <div class="button confirm" @click="confirm" v-if="notification.confirmButtonText">
         {{ notification.confirmButtonText }}
@@ -20,8 +19,8 @@
 </template>
 
 <script lang="ts" setup>
-
-import {AppNotification, BroadcastApi, BroadcastEvent, NotificationApi} from "@widget-js/core";
+import { AppNotification, BroadcastApi, BroadcastEvent, NotificationApi, NotificationApiEvent } from '@widget-js/core'
+import {unref} from "vue";
 
 const props = defineProps({
   notification: {
@@ -29,23 +28,30 @@ const props = defineProps({
     required: true
   }
 })
-const broadcastEvent = new BroadcastEvent("", "cn.widgetjs.notification", props.notification);
 
 const cancel = () => {
-  broadcastEvent.type = props.notification.cancelBroadcast ?? "cn.widgetjs.notification.cancel";
-  BroadcastApi.sendBroadcastEvent(broadcastEvent)
-  NotificationApi.hide();
+  const broadcastCancelEvent = new BroadcastEvent({
+    event: props.notification.cancelBroadcast ?? NotificationApiEvent.CANCEL,
+    payload: JSON.stringify(props.notification)
+  })
+
+  BroadcastApi.send(broadcastCancelEvent)
+  NotificationApi.hide()
 }
 
 const confirm = () => {
-  broadcastEvent.type = props.notification.confirmBroadcast ?? "cn.widgetjs.notification.confirm";
-  BroadcastApi.sendBroadcastEvent(broadcastEvent)
-  NotificationApi.hide();
+  const broadcastConfirmEvent = new BroadcastEvent({
+    event: props.notification.confirmBroadcast ?? NotificationApiEvent.CONFIRM,
+    payload: JSON.stringify(props.notification)
+  })
+
+  BroadcastApi.send(broadcastConfirmEvent)
+  NotificationApi.hide()
 }
 </script>
 
 <style scoped lang="scss">
-@import "../scss/notification.scss";
+@import '../scss/notification.scss';
 
 .message-notification {
   display: flex;
@@ -76,12 +82,12 @@ const confirm = () => {
       color: white;
 
       &.cancel {
-        background-color: #2C2C2D
+        background-color: #2c2c2d;
       }
 
       &.confirm {
-        color: #5D91D9;
-        background-color: #1A1C2D;
+        color: #5d91d9;
+        background-color: #1a1c2d;
       }
 
       &:not(:last-child) {
@@ -115,7 +121,6 @@ const confirm = () => {
         overflow: hidden;
         text-overflow: ellipsis;
       }
-
     }
   }
 
@@ -124,9 +129,8 @@ const confirm = () => {
     margin-right: 16px;
 
     &:before {
-      color: #5D8AC8
+      color: #5d8ac8;
     }
   }
 }
-
 </style>

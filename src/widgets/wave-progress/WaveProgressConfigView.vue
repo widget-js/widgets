@@ -41,9 +41,9 @@
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
 import {useWidget, WidgetConfigOption, WidgetEditDialog} from '@widget-js/vue3'
-import {WidgetDataRepository} from '@widget-js/core'
 import {ProgressType, WaveProgressData} from "@/widgets/wave-progress/model/WaveProgressData";
 import WaveProgressWidget from "@/widgets/wave-progress/WaveProgressWidget.vue";
+import {WidgetDataApi} from "../../../../core";
 
 export default defineComponent({
       name: "WaveProgressConfigView",
@@ -77,7 +77,7 @@ export default defineComponent({
           this.refresh();
         },
         async onSaveClick() {
-          await WidgetDataRepository.save(this.widgetData)
+          await WidgetDataApi.save(this.widgetData)
           window.close()
         }
       }

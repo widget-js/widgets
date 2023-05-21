@@ -1,39 +1,45 @@
 <template>
-  <widget-edit-dialog :widget-params="widgetParams" :option="widgetConfigOption"
-                      :widget-data="widgetData"
-                      @confirm="onSaveClick()">
+  <widget-edit-dialog
+    :widget-params="widgetParams"
+    :option="widgetConfigOption"
+    :widget-data="widgetData"
+    @confirm="onSaveClick()">
     <template v-slot:widget>
-      <clock-widget :width="widgetParams.widthPx" :height="widgetParams.heightPx"
-                    :background-color="widgetData.backgroundColor"></clock-widget>
+      <clock-widget
+        :width="widgetParams.widthPx"
+        :height="widgetParams.heightPx"
+        :background-color="widgetData.backgroundColor"></clock-widget>
     </template>
   </widget-edit-dialog>
 </template>
 
 <script lang="ts">
-import {useWidget, WidgetConfigOption} from "@widget-js/vue3";
-import {WidgetData, WidgetDataRepository} from "@widget-js/core";
-import {reactive} from "vue";
-import ClockWidget from "@/widgets/clock/ClockWidget.vue";
+import { useWidget, WidgetConfigOption } from '@widget-js/vue3'
+import { WidgetData, WidgetDataApi } from '@widget-js/core'
+import { reactive } from 'vue'
+import ClockWidget from '@/widgets/clock/ClockWidget.vue'
 
 export default {
-  name: "",
-  components: {ClockWidget},
+  name: '',
+  components: { ClockWidget },
   setup() {
-    const {widgetData, widgetParams} = useWidget(WidgetData)
+    const { widgetData, widgetParams } = useWidget(WidgetData)
 
     //修改成需要设置组件参数配置
-    const widgetConfigOption = reactive(new WidgetConfigOption({
-      custom: false,
-      backgroundColor: true,
-      borderRadius: true
-    }));
+    const widgetConfigOption = reactive(
+      new WidgetConfigOption({
+        custom: false,
+        backgroundColor: true,
+        borderRadius: true
+      })
+    )
 
-    return {widgetData, widgetParams, widgetConfigOption}
+    return { widgetData, widgetParams, widgetConfigOption }
   },
   methods: {
     async onSaveClick() {
-      await WidgetDataRepository.save(this.widgetData);
-      window.close();
+      await WidgetDataApi.save(this.widgetData)
+      window.close()
     }
   },
   mounted() {
@@ -42,6 +48,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

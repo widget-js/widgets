@@ -142,7 +142,6 @@ function startHideTimer() {
   }, hideTimeout)
 }
 
-
 useKeyboardEventHook((event: NativeKeyboardEvent) => {
   if (event.isKeyUp) {
     if (isModifierKey(event.keyCode)) {
@@ -150,13 +149,12 @@ useKeyboardEventHook((event: NativeKeyboardEvent) => {
       if (modifierKey) {
         modifierKey.isKeyUp = true
       }
+      startHideTimer()
     } else {
       if (normalKey.value) {
         normalKey.value.isKeyUp = true
       }
     }
-
-    startHideTimer()
   } else {
     if (isModifierKey(event.keyCode)) {
       if (isModifierKeysReleased()) {
@@ -196,7 +194,7 @@ onMounted(async () => {
       scanCode: 17,
       isKeyUp: true
     }
-    await BrowserWindowApi.alignToScreen('bottom')
+    await BrowserWindowApi.alignToScreen('bottom-center')
     await BrowserWindowApi.setIgnoreMouseEvent(true)
     show()
     startHideTimer()

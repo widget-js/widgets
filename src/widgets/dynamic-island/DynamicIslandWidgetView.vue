@@ -2,14 +2,13 @@
   <dynamic-island-widget
     ref="dynamicIslandWidget"
     v-model:state="state"
-    :mute="widgetParams.preview"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
     :notification="notification" />
 </template>
 
 <script lang="ts">
-import { AppNotification, BrowserWindowApi, ElectronUtils, WidgetApi, WidgetData } from '@widget-js/core'
+import {AppNotification, BrowserWindowApi, ElectronUtils, NotificationApi, WidgetApi, WidgetData} from '@widget-js/core'
 import DynamicIslandWidget from './DynamicIslandWidget.vue'
 import { useNotification, useWidget } from '@widget-js/vue3'
 import { computed, reactive, ref, watch } from 'vue'
@@ -60,10 +59,8 @@ export default {
       } else {
         stopHideWindow()
       }
-      console.log(state.value)
     })
     const { start: startHideWindow, stop: stopHideWindow } = useTimeoutFn(() => {
-      console.log('hide window')
       BrowserWindowApi.hide()
     }, 1000)
 
@@ -133,7 +130,6 @@ export default {
       2000,
       { immediate: true }
     )
-
     if (widgetParams.preview) {
       resume()
     } else {
@@ -151,14 +147,6 @@ export default {
       hide
     }
   },
-  watch: {
-    notification: {
-      handler(newValue, oldValue) {
-        console.log(JSON.stringify(newValue))
-      },
-      deep: true
-    }
-  },
   methods: {
     async onMouseEnter() {
       await BrowserWindowApi.setIgnoreMouseEvent(false)
@@ -168,9 +156,10 @@ export default {
       await BrowserWindowApi.setIgnoreMouseEvent(true)
       this.startHideTimeout()
     },
-    hidden() {
-      console.log('hidden')
-      BrowserWindowApi.hide()
+    async hidden() {
+      await BrowserWindowApi.setIgnoreMouseEvent(false)
+      await BrowserWindowApi.setPosition({ y: -10000 })
+      // await BrowserWindowApi.hide()
     }
   }
 }

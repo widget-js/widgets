@@ -6,12 +6,12 @@
     @confirm="onSaveClick()">
     <template v-slot:widget>
       <!-- 组件配置内容   -->
-      <quick-search-widget
+      <collection-widget
         :style="{
           width: `${widgetParams.widthPx}px`,
           height: `${widgetParams.heightPx}px`
         }"
-        :background-color="widgetData.backgroundColor"></quick-search-widget>
+        :background-color="widgetData.backgroundColor"></collection-widget>
     </template>
     <template v-slot:form>
       <!--  TODO 这里写自定义表单内容          -->
@@ -20,14 +20,14 @@
 </template>
 
 <script lang="ts">
-import QuickSearchWidget from './QuickSearchWidget.vue'
+import CollectionWidget from './CollectionWidget.vue'
 import { useWidget, WidgetConfigOption, WidgetEditDialog } from '@widget-js/vue3'
 import { WidgetData, WidgetDataApi } from '@widget-js/core'
 import { reactive } from 'vue'
 
 export default {
   name: '',
-  components: { QuickSearchWidget, WidgetEditDialog },
+  components: { CollectionWidget, WidgetEditDialog },
   setup() {
     const { widgetData, widgetParams } = useWidget(WidgetData)
 

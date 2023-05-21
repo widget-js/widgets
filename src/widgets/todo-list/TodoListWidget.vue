@@ -15,12 +15,7 @@
         <div class="list" v-show="viewType === 'default'">
           <transition-group name="list">
             <template v-for="(item, index) in list" :key="item.id">
-              <TodoItem
-                @finish="todoItemClick(item)"
-                @delete="deleteTodo"
-                editable
-                @edit="edit"
-                :todo="item"/>
+              <TodoItem @finish="todoItemClick(item)" @delete="deleteTodo" editable @edit="edit" :todo="item" />
             </template>
           </transition-group>
         </div>
@@ -43,7 +38,7 @@ import TodoItem from './components/TodoItem.vue'
 import { computed, ref } from 'vue'
 import { useWidget } from '@widget-js/vue3'
 import { Todo, TodoListData, TodoUpdate } from '@/widgets/todo-list/model/TodoListData'
-import { WidgetApi } from '@widget-js/core'
+import { WidgetApi, WidgetDataApi } from '@widget-js/core'
 import { useElementSize, useMediaControls } from '@vueuse/core'
 import Color from 'color'
 import EditBox from '@/widgets/todo-list/components/EditBox.vue'
@@ -96,7 +91,7 @@ const saveTodo = (data: TodoUpdate) => {
   } else {
     widgetData.value.todoList.splice(0, 0, new Todo(data.content))
   }
-  WidgetApi.saveDataByName(widgetData.value, { sendBroadcast: false })
+  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
   viewType.value = 'default'
   list.value = widgetData.value.todoList
 }
@@ -104,7 +99,7 @@ const deleteTodo = (todo: Todo) => {
   widgetData.value.deleteTodo(todo)
   list.value = widgetData.value.todoList
   finishList.value = widgetData.value.finishedList
-  WidgetApi.saveDataByName(widgetData.value, { sendBroadcast: false })
+  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
 }
 const edit = (todo: Todo) => {
   editBox.value!.setTodo(todo)
@@ -116,7 +111,7 @@ const todoItemClick = (todo: Todo) => {
   widgetData.value.finishTodo(todo)
   list.value = widgetData.value.todoList
   finishList.value = widgetData.value.finishedList
-  WidgetApi.saveDataByName(widgetData.value, { sendBroadcast: false })
+  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
   for (let ringtone of ringtoneArr) {
     if (!ringtone.value) {
       ringtone.value = true
@@ -129,7 +124,7 @@ const finishTodoItemClick = (todo: Todo) => {
   widgetData.value.undoTodo(todo)
   list.value = widgetData.value.todoList
   finishList.value = widgetData.value.finishedList
-  WidgetApi.saveDataByName(widgetData.value, { sendBroadcast: false })
+  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
 }
 
 const ding1 = ref()

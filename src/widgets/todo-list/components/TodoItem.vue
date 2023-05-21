@@ -4,10 +4,10 @@
       <ElCheckbox :checked="todo.isFinished()">
         <span></span>
       </ElCheckbox>
-      <span class="todo flex-1" style="line-height: 1.2">
-        <pre>{{ todo.content }}</pre>
-      </span>
-      <div class="actions flex gap-2 items-center">
+      <div class="todo" style="line-height: 1.2">
+        <p>{{ todo.content }}</p>
+      </div>
+      <div class="actions flex items-center gap-2">
         <div
           v-if="editable"
           @click.stop="edit"
@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import { Todo } from '@/widgets/todo-list/model/TodoListData'
-import { Edit, Delete } from '@icon-park/vue-next'
+import { Delete, Edit } from '@icon-park/vue-next'
 
 const props = defineProps({
   todo: {
@@ -60,9 +60,15 @@ const deleteTodo = () => {
   }
 }
 
-pre {
+p {
   font-weight: normal;
   margin: 0;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.todo {
+  width: 75%;
 }
 
 .todo-item {
@@ -78,6 +84,7 @@ pre {
   }
 
   .actions {
+    margin-left: auto;
     opacity: 0;
   }
 }

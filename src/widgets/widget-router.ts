@@ -13,6 +13,8 @@ import Countdown2WidgetRoutes from "./countdown2/Countdown2WidgetRoutes";
 import PhoneReminderWidgetRoutes from "./phone-reminder/PhoneReminderWidgetRoutes";
 import WaterReminderWidgetRoutes from "./water-reminder/WaterReminderWidgetRoutes";
 import KeyStrokeWidgetRoutes from "./key-stroke/KeyStrokeWidgetRoutes";
+// import CollectionWidgetRoutes from "./collection/CollectionWidgetRoutes";
+import PhotoWidgetRoutes from "./photo/PhotoWidgetRoutes";
 //FBI WANING! IMPORT PLACE, DONT DELETE THIS LINE
 
 
@@ -32,6 +34,8 @@ const WidgetRouter = [
     ...PhoneReminderWidgetRoutes,
     ...WaterReminderWidgetRoutes,
     ...KeyStrokeWidgetRoutes,
+    // ...CollectionWidgetRoutes,
+    ...PhotoWidgetRoutes,
     //FBI WANING! ROUTE PLACE, DONT DELETE THIS LINE
 ];
 export default WidgetRouter

@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import {useWidget, WidgetConfigOption} from "@widget-js/vue3";
-import {WidgetData, WidgetDataRepository} from "@widget-js/core";
+import {WidgetData, WidgetDataApi} from "@widget-js/core";
 import {reactive} from "vue";
 import MickeyClockWidget from "@/widgets/mickey-clock/MickeyClockWidget.vue";
 
@@ -31,12 +31,11 @@ export default {
       previewWidth: 200,
       previewHeight: 200,
     }));
-
     return {widgetData, widgetParams, widgetConfigOption}
   },
   methods: {
     async onSaveClick() {
-      await WidgetDataRepository.save(this.widgetData);
+      await WidgetDataApi.save(this.widgetData);
       window.close();
     }
   },

@@ -1,17 +1,13 @@
 <template>
-  <water-reminder-widget
-    v-bind="widgetData"
-    v-model:cup="cup"
-    :style="sizeStyle"
-  ></water-reminder-widget>
+  <water-reminder-widget v-bind="widgetData" v-model:cup="cup" :style="sizeStyle"></water-reminder-widget>
 </template>
 
 <script lang="ts" setup>
 import WaterReminderWidget from './WaterReminderWidget.vue'
-import { useAppBroadcast, useNotification, useWidget } from '@widget-js/vue3'
+import { useAppBroadcast, useWidget } from '@widget-js/vue3'
 import { WaterReminderModel } from '@/widgets/water-reminder/model/WaterReminderModel'
 import { ref, watch } from 'vue'
-import { WidgetApi, NotificationApi, BroadcastEvent } from '@widget-js/core'
+import { NotificationApi, BroadcastEvent, WidgetDataApi, LogApi, WidgetApiEvent } from '@widget-js/core'
 import dayjs from 'dayjs'
 import { useIntervalFn } from '@vueuse/core'
 import WaterReminderWidgetDefine from '@/widgets/water-reminder/WaterReminder.widget'
@@ -19,7 +15,7 @@ import WaterReminderWidgetDefine from '@/widgets/water-reminder/WaterReminder.wi
 let lastReminderAt = dayjs()
 const cup = ref(0)
 
-const { widgetData, widgetParams, sizeStyle, dataLoaded } = useWidget(WaterReminderModel, {
+const { widgetData, widgetParams, sizeStyle } = useWidget(WaterReminderModel, {
   onDataLoaded: (data) => {
     cup.value = data?.getTodayHistory() ?? 0
     if (data?.lastReminderAt) {
@@ -32,9 +28,9 @@ const { widgetData, widgetParams, sizeStyle, dataLoaded } = useWidget(WaterRemin
     }
     console.log(data?.lastReminderAt)
     watch(cup, (newValue) => {
-      console.log('cup changed!')
+      LogApi.log('cup changed!')
       widgetData.value.history[widgetData.value.getTodayKey()] = newValue
-      WidgetApi.saveDataByName(widgetData.value, { sendBroadcast: false })
+      WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
       lastReminderAt = dayjs()
     })
   },
@@ -44,11 +40,11 @@ const { widgetData, widgetParams, sizeStyle, dataLoaded } = useWidget(WaterRemin
 const name = WaterReminderWidgetDefine.name
 const cancelBroadcast = name + '.cancel'
 const okBroadcast = name + '.ok'
-const { isActive, pause, resume } = useIntervalFn(() => {
+const { pause, resume } = useIntervalFn(() => {
   const now = dayjs()
   const second = now.diff(lastReminderAt, 'second')
   widgetData.value.lastReminderAt = lastReminderAt.toISOString()
-  WidgetApi.saveDataByName(widgetData.value, { sendBroadcast: false })
+  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
 
   if (second >= widgetData.value.interval * 60) {
     lastReminderAt = dayjs()
@@ -65,8 +61,8 @@ const { isActive, pause, resume } = useIntervalFn(() => {
   }
 }, 10000)
 
-useAppBroadcast([cancelBroadcast, okBroadcast], (event: BroadcastEvent) => {
-  if (event.type == okBroadcast) {
+useAppBroadcast([cancelBroadcast, okBroadcast], (broadcastEvent: BroadcastEvent) => {
+  if (broadcastEvent.event == okBroadcast) {
     cup.value++
   }
 })
