@@ -21,11 +21,11 @@ import { useWidget, WidgetConfigOption, WidgetEditDialog } from '@widget-js/vue3
 import { DialogApi, WidgetDataApi } from '@widget-js/core'
 import { reactive, ref } from 'vue'
 import { PhotoData } from '@/widgets/photo/PhotoData'
-
+import PhotoWidget from "@/widgets/photo/Photo.widget";
+const defaultData = new PhotoData(PhotoWidget.name)
+defaultData.borderRadius = 22
 const { widgetData, widgetParams } = useWidget(PhotoData, {
-  defaultData: {
-    borderRadius: 22
-  },
+  defaultData,
   onDataLoaded: () => {
     directory.value = widgetData.value.directory
   }

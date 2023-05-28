@@ -8,7 +8,14 @@
 </template>
 
 <script lang="ts">
-import {AppNotification, BrowserWindowApi, ElectronUtils, NotificationApi, WidgetApi, WidgetData} from '@widget-js/core'
+import {
+  AppNotification,
+  BrowserWindowApi,
+  ElectronUtils,
+  NotificationApi,
+  WidgetApi,
+  WidgetData
+} from '@widget-js/core'
 import DynamicIslandWidget from './DynamicIslandWidget.vue'
 import { useNotification, useWidget } from '@widget-js/vue3'
 import { computed, reactive, ref, watch } from 'vue'
@@ -40,7 +47,7 @@ export default {
     useNotification((newNotification) => {
       if (newNotification) {
         BrowserWindowApi.showInactive()
-        BrowserWindowApi.moveTop()
+        BrowserWindowApi.setAlwaysOnTop(true)
         Object.assign(notification, newNotification)
         setState()
         startHideTimeout()

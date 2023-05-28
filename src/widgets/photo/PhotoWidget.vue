@@ -3,12 +3,12 @@
     <el-carousel :height="`${widgetParams.heightPx}px`" indicator-position="none" :interval="5000">
       <template v-if="widgetParams.preview">
         <el-carousel-item v-for="item in defaultPhotos" :key="item">
-          <img class="photo-item" :src="item" alt=""/>
+          <img class="photo-item" :src="item" alt="" />
         </el-carousel-item>
       </template>
       <template v-else>
         <el-carousel-item v-for="item in photos" :key="item">
-          <img class="photo-item" :src="item" alt=""/>
+          <img class="photo-item" :src="item" alt="" />
         </el-carousel-item>
         <el-carousel-item v-if="showGuide" @click="showConfig">
           <h4 class="justify-center">点击设置图片文件</h4>
@@ -22,18 +22,22 @@
 </template>
 
 <script lang="ts" setup>
-import {useWidget} from '@widget-js/vue3'
-import {PhotoData} from '@/widgets/photo/PhotoData'
-import {ref} from 'vue'
-import {BrowserWindowApi, FileApi, HostedWidgetApi, WidgetApi} from '@widget-js/core'
+import { useWidget } from '@widget-js/vue3'
+import { PhotoData } from '@/widgets/photo/PhotoData'
+import { ref } from 'vue'
+import { FileApi, HostedWidgetApi } from '@widget-js/core'
+import photo1 from './assets/photo1.jpg'
+import photo2 from './assets/photo2.jpg'
+import photo3 from './assets/photo3.jpg'
+import PhotoWidget from "@/widgets/photo/Photo.widget";
 
-const defaultPhotos = ['/images/photo1.jpg', '/images/photo2.jpg', '/images/photo3.jpg']
+const defaultPhotos = [photo1, photo2, photo3]
 const photos = ref<string[]>([])
 const showGuide = ref(false)
-const {widgetData, widgetParams, sizeStyle} = useWidget(PhotoData, {
-  defaultData: {
-    borderRadius: 22
-  },
+const defaultData = new PhotoData(PhotoWidget.name)
+defaultData.borderRadius = 22
+const { widgetData, widgetParams, sizeStyle } = useWidget(PhotoData, {
+  defaultData,
   onDataLoaded: (data) => {
     if (data && data.directory) {
       // photos.value
@@ -59,7 +63,7 @@ const {widgetData, widgetParams, sizeStyle} = useWidget(PhotoData, {
 const showConfig = async () => {
   // const widgetConfigUrl = await WidgetApi.getWidgetConfigUrl(widgetParams.name, widgetParams);
   // await BrowserWindowApi.openUrl(widgetConfigUrl!);
-  HostedWidgetApi.openConfigRoute(widgetParams.id, widgetParams)
+  HostedWidgetApi.openConfigRoute(widgetParams.id!, widgetParams)
 }
 </script>
 
