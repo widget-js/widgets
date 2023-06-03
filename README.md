@@ -30,10 +30,11 @@ widgets
 │   ├── components                // 常用Vue组件
 │   ├── views                     //
 │   ├── widgets                   // 桌面组件文件
-│   │   └── countdown             // 每个桌面组件一个文件夹
-│   │       ├── XXWidget.vue      // 桌面小组件
-│   │       └── XXConfig.vue      // 小组件配置页面
-│   │       └── XXView.vue        // 小组件页面
+│   │   ├── countdown             // 每个桌面组件一个文件夹
+│   │   │   ├── XXWidget.vue      // 桌面小组件
+│   │   │   ├── XXConfig.vue      // 小组件配置页面
+│   │   │   └── XXView.vue        // 小组件页面
+│   │   └── ...
 │   └── index.ts
 ├── .gitignore
 ├── package.json
@@ -44,6 +45,7 @@ widgets
 ### 运行项目
 
 #### 1.下载并运行桌面组件客户端
+
 1. https://www.microsoft.com/store/productId/9NPR50GQ7T53
 2. https://haihaihai.vip
 
@@ -54,11 +56,15 @@ widgets
 git clone https://github.com/widget-js/hotspot.git
 
 ```
+
 #### 3.到项目目录下载依赖
+
 ```shell
 pnpm install
 ```
+
 #### 4.运行
+
 ```shell
 pnpm serve
 ```
@@ -66,22 +72,23 @@ pnpm serve
 ### 创建自己的组件
 
 ```shell
-pnpm widget create
+// 安装组件脚手架
+npm install -g @widget-js/cli
+// 在项目根目录运行 创建组件命令
+widget create
 ```
 
 ### 组件列表
 
-#### 键盘演示
+#### 键盘演示(src/widgets/keystroke)
 
 ![png](./public/images/preview_keystroke.png)
-
 
 #### 抖音热榜
 
 ![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_douyin.png)
 
 见热点组件包：https://github.com/widget-js/hotspot
-
 
 #### 喝水提醒
 
@@ -91,14 +98,6 @@ pnpm widget create
 - 组件路由：/widget/water_reminder
 - 配置路由：/widget/config/water_reminder
 
-#### 生日列表
-
-![gif](public/images/preview_birthday_list.png)
-
-- 代码路径：/widgets/birthday_list
-- 组件路由：/widget/birthday_list
-- 配置路由：/widget/config/birthday_list
-
 #### 代办事项
 
 ![image](public/images/preview_todo_list.png)
@@ -106,6 +105,18 @@ pnpm widget create
 - 代码路径：/widgets/todo-list
 - 组件路由：/widget/todo-list
 - 配置路由：/widget/config/todo-list
+
+#### 轮播相册(src/widgets/photo)
+
+![image](screenshot/photo.png)
+
+#### 生日列表
+
+![gif](public/images/preview_birthday_list.png)
+
+- 代码路径：/widgets/birthday_list
+- 组件路由：/widget/birthday_list
+- 配置路由：/widget/config/birthday_list
 
 #### 倒计时
 
@@ -146,7 +157,6 @@ pnpm widget create
 - 代码路径：/widgets/time_progress
 - 组件路由：/widget/time_progress
 
-
 #### 知乎热榜
 
 ![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_zhihu.png)
@@ -165,10 +175,10 @@ pnpm widget create
 
 见热点组件包：https://github.com/widget-js/hotspot
 
-
-
 #### 歌词小说
+
 ![歌词小说](public/images/preview_lyric_book.png)
+
 - 代码路径：/widgets/lyric_book
 - 组件路由：/widget/lyric_book
 
