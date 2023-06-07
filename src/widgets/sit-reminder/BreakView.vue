@@ -12,10 +12,10 @@
 <script lang="ts">
 import {onKeyStroke, useIntervalFn} from "@vueuse/core";
 import {ref} from "vue";
-import TextSwitcher from "@/widgets/dynamic-island/components/TextSwitcher.vue";
+import TextSwitcher from "@/widgets/sit-reminder/TextSwitcher.vue";
 import '@/common/dayjs-extend'
 import dayjs from "dayjs";
-import {useRouteHash, useRouteQuery} from "@vueuse/router";
+import { useRouteQuery} from "@vueuse/router";
 
 export default {
   name: "BreakView",

@@ -17,22 +17,20 @@
 </template>
 
 <script lang="ts">
-import DynamicIslandWidget from './DynamicIslandWidget.vue'
 import { useWidget, WidgetConfigOption, WidgetEditDialog } from '@widget-js/vue3'
 import { WidgetDataApi } from '@widget-js/core'
 import { reactive } from 'vue'
-import { SitReminder } from '@/widgets/dynamic-island/model/SitReminder'
+import {SitReminder} from "@/widgets/sit-reminder/model/SitReminder";
+import SitReminderWidgetDefine from "@/widgets/sit-reminder/SitReminder.widget";
 
 export default {
   name: '',
-  components: { DynamicIslandWidget, WidgetEditDialog },
+  components: {  WidgetEditDialog },
   setup() {
-    const name = 'cn.widgetjs.widget.sit_reminder'
-    const sitReminder = new SitReminder(name)
+    const sitReminder = new SitReminder(SitReminderWidgetDefine.name)
     const { widgetData, widgetParams } = useWidget(SitReminder, {
       defaultData: sitReminder,
       loadDataByWidgetName: true,
-      widgetName: name
     })
     //修改成需要设置组件参数配置
     const widgetConfigOption = reactive(

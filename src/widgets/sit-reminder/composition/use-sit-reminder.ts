@@ -1,6 +1,7 @@
-import { SitReminder } from '@/widgets/dynamic-island/model/SitReminder'
-import { useAppBroadcast, useMouseEventHook, useWidget } from '@widget-js/vue3'
+import {useAppBroadcast, useWidget} from '@widget-js/vue3'
 import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
+dayjs.extend(duration)
 import {
   BroadcastEvent,
   BrowserWindowApi,
@@ -10,18 +11,17 @@ import {
   WidgetApiEvent,
   WidgetDataApi
 } from '@widget-js/core'
-import { useIntervalFn, useStorage } from '@vueuse/core'
-import { delay } from 'lodash'
+import {useIntervalFn, useStorage} from '@vueuse/core'
+import {SitReminder} from "@/widgets/sit-reminder/model/SitReminder";
 
 /**
- * TODO 把久坐提醒拆分成一个独立的组件
  * 久坐提醒
  */
-const useSitReminder = () => {
+const  useSitReminder = () => {
   const sitReminder = new SitReminder('cn.widgetjs.widget.sit_reminder')
   const cancelBroadcast = sitReminder.name + '.cancel'
   const confirmBroadcast = sitReminder.name + '.confirm'
-  const { widgetData: sitReminderData } = useWidget(SitReminder, {
+  const {widgetData: sitReminderData} = useWidget(SitReminder, {
     defaultData: sitReminder,
     loadDataByWidgetName: true,
     widgetName: sitReminder.name,
@@ -36,7 +36,7 @@ const useSitReminder = () => {
   let breakUrl = ''
   let loadBreakUrl = async (minute: number) => {
     const url = await WidgetApi.getWidgetPackageIndexUrl('cn.widgetjs.widgets')
-    breakUrl = url + '/widget/dynamic_island/break?win_fullscreen=true&win_always_on_top=true&duration=' + minute * 60
+    breakUrl = url + '/widget/sit_reminder/break?win_fullscreen=true&win_always_on_top=true&duration=' + minute * 60
   }
   useAppBroadcast([WidgetApiEvent.DATA_CHANGED, cancelBroadcast, confirmBroadcast], async (event: BroadcastEvent) => {
     console.log(event)
@@ -56,7 +56,7 @@ const useSitReminder = () => {
     }
   })
   const interval = 10
-  let lastPoint = { x: 0, y: 0 }
+  let lastPoint = {x: 0, y: 0}
   useIntervalFn(async () => {
     if (!sitReminderData.value.enable) {
       return

@@ -2,9 +2,9 @@ import {HostedMode, Widget, WidgetKeyword} from "@widget-js/core";
 //TODO 修改组件信息，标题，描述，关键词
 const name = "cn.widgetjs.widgets.lyric_book";
 //组件标题
-const title = {"zh": "歌词小说"};
+const title = {"zh-CN": "歌词小说"};
 //组件描述
-const description = {"zh": "资本家看了都会流泪的摸鱼工具"};
+const description = {"zh-CN": "资本家看了都会流泪的摸鱼工具"};
 //组件关键词
 const keywords = [WidgetKeyword.RECOMMEND];
 //组件路由地址
@@ -18,7 +18,7 @@ const LyricBookWidgetDefine = new Widget({
     description: description,
     keywords: keywords,
     previewImage:"/images/preview_lyric_book.png",
-    lang: "zh",
+    lang: "zh-CN",
     width: 10,
     height: 6,
     minWidth: 4,

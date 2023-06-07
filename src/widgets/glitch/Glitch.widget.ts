@@ -2,9 +2,9 @@ import {Widget, WidgetKeyword} from "@widget-js/core";
 //TODO 修改组件信息，标题，描述，关键词
 const name = "cn.widgetjs.widgets.glitch";
 //组件标题
-const title = {"zh": "故障时钟"};
+const title = {"zh-CN": "故障时钟"};
 //组件描述
-const description = {"zh": "Glitch"};
+const description = {"zh-CN": "Glitch"};
 //组件关键词
 const keywords = [WidgetKeyword.RECOMMEND];
 //组件路由地址
@@ -17,7 +17,7 @@ const GlitchWidgetDefine = new Widget({
     title: title,
     description: description,
     keywords: keywords,
-    lang: "zh",
+    lang: "zh-CN",
     width: 4,
     height: 2,
     minWidth: 4,

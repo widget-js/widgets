@@ -8,22 +8,14 @@
 </template>
 
 <script lang="ts">
-import {
-  AppNotification,
-  BrowserWindowApi,
-  ElectronUtils,
-  NotificationApi,
-  WidgetApi,
-  WidgetData
-} from '@widget-js/core'
+import {AppNotification, BrowserWindowApi, ElectronUtils, WidgetApi, WidgetData} from '@widget-js/core'
 import DynamicIslandWidget from './DynamicIslandWidget.vue'
-import { useNotification, useWidget } from '@widget-js/vue3'
-import { computed, reactive, ref, watch } from 'vue'
-import { useIntervalFn, useTimeoutFn } from '@vueuse/core'
-import { NotificationState } from '@/widgets/dynamic-island/model/NotificationState'
-import { getCountdownDemo, SitReminderDemo } from '@/widgets/dynamic-island/model/Demo'
+import {useNotification, useWidget} from '@widget-js/vue3'
+import {computed, reactive, ref, watch} from 'vue'
+import {useIntervalFn, useTimeoutFn} from '@vueuse/core'
+import {NotificationState} from '@/widgets/dynamic-island/model/NotificationState'
+import {getCountdownDemo, SitReminderDemo} from '@/widgets/dynamic-island/model/Demo'
 import '@/common/dayjs-extend'
-import useSitReminder from './composition/use-sit-reminder'
 
 export default {
   name: 'DynamicIslandWidgetView',
@@ -55,10 +47,6 @@ export default {
         hide()
       }
     })
-
-    if (!widgetParams.preview) {
-      useSitReminder()
-    }
 
     watch(state, (newValue) => {
       if (newValue == NotificationState.HIDE) {

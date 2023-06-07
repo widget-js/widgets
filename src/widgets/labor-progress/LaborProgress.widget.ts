@@ -2,9 +2,9 @@ import {Widget, WidgetKeyword} from "@widget-js/core";
 
 const name = "cn.widgetjs.widgets.labor_progress";
 //组件标题
-const title = {"zh": "打工进度"};
+const title = {"zh-CN": "打工进度"};
 //组件描述
-const description = {"zh": "打工人，打工魂"};
+const description = {"zh-CN": "打工人，打工魂"};
 //组件关键词
 const keywords = [WidgetKeyword.RECOMMEND];
 const url = "/widget/labor_progress";
@@ -16,7 +16,7 @@ const LaborProgressWidgetDefine = new Widget({
     title: title,
     description: description,
     keywords: keywords,
-    lang: "zh",
+    lang: "zh-CN",
     width: 4,
     height: 1,
     minWidth: 3,
