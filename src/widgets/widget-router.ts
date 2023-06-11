@@ -16,6 +16,7 @@ import KeyStrokeWidgetRoutes from "./key-stroke/KeyStrokeWidgetRoutes";
 // import CollectionWidgetRoutes from "./collection/CollectionWidgetRoutes";
 import PhotoWidgetRoutes from "./photo/PhotoWidgetRoutes";
 import SitReminderWidgetRoutes from "./sit-reminder/SitReminderWidgetRoutes";
+import ClipboardWidgetRoutes from "./clipboard/ClipboardWidgetRoutes";
 //FBI WANING! IMPORT PLACE, DONT DELETE THIS LINE
 
 
@@ -38,6 +39,7 @@ const WidgetRouter = [
     // ...CollectionWidgetRoutes,
     ...PhotoWidgetRoutes,
     ...SitReminderWidgetRoutes,
+    ...ClipboardWidgetRoutes,
     //FBI WANING! ROUTE PLACE, DONT DELETE THIS LINE
 ];
 export default WidgetRouter

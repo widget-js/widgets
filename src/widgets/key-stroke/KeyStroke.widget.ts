@@ -1,10 +1,10 @@
-import { HostedMode, Widget, WidgetKeyword } from '@widget-js/core'
+import {HostedMode, Widget, WidgetKeyword} from '@widget-js/core'
 
 const name = 'cn.widgetjs.widgets.key_stroke'
 //组件标题
-const title = { zh: '键盘演示' }
+const title = {'zh-CN': '键盘演示'}
 //组件描述
-const description = { zh: '在屏幕显示每一次快捷键敲击' }
+const description = {'zh-CN': '在屏幕显示每一次快捷键敲击'}
 //组件关键词
 const keywords = [WidgetKeyword.RECOMMEND]
 //组件路由地址
@@ -17,7 +17,7 @@ const KeyStrokeWidgetDefine = new Widget({
   title: title,
   description: description,
   keywords: keywords,
-  lang: 'zh',
+  lang: 'zh-CN',
   width: 4,
   height: 3,
   minWidth: 4,

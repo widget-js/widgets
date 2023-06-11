@@ -2,9 +2,9 @@ import { HostedMode, Widget, WidgetKeyword } from '@widget-js/core'
 
 const name = 'cn.widgetjs.widgets.phone_reminder'
 //组件标题
-const title = { zh: '来电提醒' }
+const title = { 'zh-CN': '来电提醒' }
 //组件描述
-const description = { zh: '用灵动通知加语音，提醒重要事项' }
+const description = { 'zh-CN': '用灵动通知加语音，提醒重要事项' }
 //组件关键词
 const keywords = [WidgetKeyword.RECOMMEND]
 //组件路由地址
@@ -17,7 +17,7 @@ const PhoneReminderWidgetDefine = new Widget({
   title: title,
   description: description,
   keywords: keywords,
-  lang: 'zh',
+  lang: 'zh-CN',
   width: 6,
   height: 4,
   minWidth: 1,

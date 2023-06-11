@@ -8,28 +8,27 @@ import ViteWidget from '@widget-js/vite-plugin-widget'
 // https://vitejs.dev/config/
 
 export default defineConfig({
-    base: './',
-    server:{
-        port: 5174
-    },
-    build: {
-        target: "es6",
-        rollupOptions: {
-            output: {
-                entryFileNames: `assets/[name].js`,
-                chunkFileNames: `assets/[name].js`,
-                assetFileNames: `assets/[name].[ext]`
-            }
-        }
-    },
-    plugins: [vue(), ViteWidget(),
-        AutoImport({
-            resolvers: [ElementPlusResolver()],
-        }),
-        Components({
-            resolvers: [ElementPlusResolver()],
-        })],
-    resolve: {
-        alias: [{find: '@', replacement: path.resolve(__dirname, 'src')}]
+  base: './',
+  server: {
+    port: 5174
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: `assets/[name].js`,
+        chunkFileNames: `assets/[name].js`,
+        assetFileNames: `assets/[name].[ext]`
+      }
     }
+  },
+  plugins: [vue(), ViteWidget(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    })],
+  resolve: {
+    alias: [{find: '@', replacement: path.resolve(__dirname, 'src')}]
+  }
 })

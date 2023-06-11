@@ -10,27 +10,28 @@ const keywords = [WidgetKeyword.RECOMMEND];
 const url = "/widget/clock";
 const configUrl = "/widget/config/clock";
 const ClockWidgetDefine = new Widget({
-    name: name,
-    title: title,
-    description: description,
-    keywords: keywords,
-    lang: "zh-CN",
-    width: 2,
-    height: 2,
-    minWidth: 2,
-    maxWidth: 4,
-    minHeight: 2,
-    maxHeight: 4,
-    routes: [
-        {
-            url: url,
-            name: 'index'
-        },
-        {
-            url: configUrl,
-            name: 'config'
-        },
-    ]
+  name: name,
+  title: title,
+  description: description,
+  keywords: keywords,
+  lang: "zh-CN",
+  width: 2,
+  height: 2,
+  minWidth: 2,
+  maxWidth: 4,
+  minHeight: 2,
+  maxHeight: 4,
+  previewImage: '/images/preview_clock.png',
+  routes: [
+    {
+      url: url,
+      name: 'index'
+    },
+    {
+      url: configUrl,
+      name: 'config'
+    },
+  ]
 })
 
 

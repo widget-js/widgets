@@ -2,10 +2,10 @@
   <div class="water-reminder" @mouseenter="showControl = true" @mouseleave="showControl = false">
     <div class="circle">
       <canvas id="canvas" :width="width" :height="height" ref="canvas"></canvas>
-      <span class="text">{{cupModel}}/{{targetCup}}</span>
+      <span class="text">{{ cupModel }}/{{ targetCup }}</span>
       <div class="border"></div>
     </div>
-    <span class="title">每天{{targetCup}}杯水</span>
+    <span class="title">每天{{ targetCup }}杯水</span>
     <div class="btn reset" @click="reset" v-show="showControl">
       <refresh theme="outline" size="20" :fill="color"/>
     </div>
@@ -44,10 +44,10 @@ const props = defineProps({
 })
 const emits = defineEmits(['update:cup']);
 const cupModel = computed({
-  get:()=>{
+  get: () => {
     return props.cup;
   },
-  set:(value)=>{
+  set: (value) => {
     emits('update:cup', value)
   }
 });
@@ -77,7 +77,7 @@ const progress = computed(() => {
   return currentCupTransition.value / props.targetCup * 100
 })
 
-const currentCupTransition = useTransition(cupModel,{transition:TransitionPresets.easeOutCubic})
+const currentCupTransition = useTransition(cupModel, {transition: TransitionPresets.easeOutCubic})
 const init = () => {
   const canvas = document.getElementById("canvas");
   // @ts-ignore
@@ -142,7 +142,7 @@ const textColor = computed(() => {
     left: 15%;
     top: 10%;
 
-    .border{
+    .border {
       border-radius: 50%;
       width: 100%;
       aspect-ratio: 1;
@@ -153,6 +153,7 @@ const textColor = computed(() => {
       position: absolute;
 
     }
+
     #canvas {
       position: absolute;
       width: 100%;
@@ -163,7 +164,7 @@ const textColor = computed(() => {
     }
 
     .text {
-      font-family: 'OPPOSans', serif;
+      font-family: 'OPPOSans', "Microsoft YaHei", Monospace, serif;
       font-style: normal;
       font-weight: 500;
       font-size: 32px;

@@ -2,12 +2,12 @@ import {Widget, WidgetKeyword} from "@widget-js/core";
 
 const name = "cn.widgetjs.widgets.notepad";
 //组件标题
-const title = {"zh": "记事本"};
+const title = {"zh-CN": "记事本"};
 //组件描述
-const description = {"zh": ""};
+const description = {"zh-CN": ""};
 //组件关键词
 const keywords = [WidgetKeyword.RECOMMEND];
-const lang = "zh"
+const lang = "zh-CN"
 const url = "/widget/notepad";
 const configUrl = "/widget/config/notepad";
 const width = 2;

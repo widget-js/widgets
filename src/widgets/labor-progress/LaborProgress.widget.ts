@@ -12,27 +12,28 @@ const configUrl = "/widget/config/labor_progress";
 
 //组件关键词
 const LaborProgressWidgetDefine = new Widget({
-    name: name,
-    title: title,
-    description: description,
-    keywords: keywords,
-    lang: "zh-CN",
-    width: 4,
-    height: 1,
-    minWidth: 3,
-    maxWidth: 6,
-    minHeight: 1,
-    maxHeight: 2,
-    routes: [
-        {
-            url: url,
-            name: 'index'
-        },
-        {
-            url: configUrl,
-            name: 'config'
-        },
-    ]
+  name: name,
+  title: title,
+  description: description,
+  keywords: keywords,
+  lang: "zh-CN",
+  width: 4,
+  height: 1,
+  previewImage: "/images/preview_labor_progress.png",
+  minWidth: 3,
+  maxWidth: 6,
+  minHeight: 1,
+  maxHeight: 2,
+  routes: [
+    {
+      url: url,
+      name: 'index'
+    },
+    {
+      url: configUrl,
+      name: 'config'
+    },
+  ]
 })
 
 

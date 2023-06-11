@@ -53,7 +53,7 @@ widgets
 
 ```shell
 #克隆代码
-git clone https://github.com/widget-js/hotspot.git
+git clone https://github.com/widget-js/widget.git
 
 ```
 
@@ -84,11 +84,13 @@ widget create
 
 ![png](./public/images/preview_keystroke.png)
 
-#### 抖音热榜
+#### 抖音热榜（热点组件包：https://github.com/widget-js/hotspot）
 
 ![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_douyin.png)
 
-见热点组件包：https://github.com/widget-js/hotspot
+#### 剪切板搜索(src/widgets/clipboard)
+
+<img style="border: 3px solid #c3c3c3;border-radius: 12px" src="public/images/preview_clipboard.png"/>
 
 #### 喝水提醒
 
