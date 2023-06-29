@@ -1,13 +1,13 @@
 <template>
-  <div class="glitch_container">
-    <a class="switcher" href="#" @click="toggleScreen"></a>
-    <div class="screen" :class="{glitch: showGlitch}">
-      <div class="clock" :class="{ 'is-off': isOff, }"><span class="time"
-                                                             :data-time="refContent">{{ refContent }}</span></div>
-      <div class="figure"></div>
-      <div class="figure-mask"></div>
+    <div class="glitch_container">
+      <a class="switcher" href="#" @click="toggleScreen"></a>
+      <div class="screen" :class="{glitch: showGlitch}">
+        <div class="clock" :class="{ 'is-off': isOff, }"><span class="time"
+                                                               :data-time="refContent">{{ refContent }}</span></div>
+        <div class="figure"></div>
+        <div class="figure-mask"></div>
+      </div>
     </div>
-  </div>
 </template>
 
 <script lang="ts" setup>
@@ -33,14 +33,14 @@ onMounted(() => {
     let minutes = new Date().getMinutes();
 
     const realTime =
-        (hours < 10 ? "0" : "") +
-        hours +
-        " : " +
-        (minutes < 10 ? "0" : "") +
-        minutes +
-        " : " +
-        (seconds < 10 ? "0" : "") +
-        seconds;
+      (hours < 10 ? "0" : "") +
+      hours +
+      " : " +
+      (minutes < 10 ? "0" : "") +
+      minutes +
+      " : " +
+      (seconds < 10 ? "0" : "") +
+      seconds;
 
     refContent.value = realTime;
 
@@ -74,11 +74,11 @@ function toggleScreen(e) {
 
 a.switcher {
   display: block;
-  position: fixed;
+  position: absolute;
   text-decoration: none;
   z-index: 999999999999;
-  right: 10px;
-  bottom: 10px;
+  right: 24px;
+  bottom: 24px;
   width: 16px;
   height: 16px;
   background: transparent;

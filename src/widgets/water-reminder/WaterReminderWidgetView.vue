@@ -1,15 +1,17 @@
 <template>
-  <water-reminder-widget v-bind="widgetData" v-model:cup="cup" :style="sizeStyle"></water-reminder-widget>
+  <widget-wrapper>
+    <water-reminder-widget v-bind="widgetData" v-model:cup="cup"></water-reminder-widget>
+  </widget-wrapper>
 </template>
 
 <script lang="ts" setup>
 import WaterReminderWidget from './WaterReminderWidget.vue'
-import { useAppBroadcast, useWidget } from '@widget-js/vue3'
-import { WaterReminderModel } from '@/widgets/water-reminder/model/WaterReminderModel'
-import { ref, watch } from 'vue'
-import { NotificationApi, BroadcastEvent, WidgetDataApi, LogApi, WidgetApiEvent } from '@widget-js/core'
+import {useAppBroadcast, useWidget,WidgetWrapper} from '@widget-js/vue3'
+import {WaterReminderModel} from '@/widgets/water-reminder/model/WaterReminderModel'
+import {ref, watch} from 'vue'
+import {BroadcastEvent, LogApi, NotificationApi, WidgetDataApi} from '@widget-js/core'
 import dayjs from 'dayjs'
-import { useIntervalFn } from '@vueuse/core'
+import {useIntervalFn} from '@vueuse/core'
 import WaterReminderWidgetDefine from '@/widgets/water-reminder/WaterReminder.widget'
 
 let lastReminderAt = dayjs()

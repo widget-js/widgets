@@ -1,13 +1,13 @@
 <template>
-  <clock-widget :background-color="widgetData.backgroundColor" :width="widgetParams.widthPx"
-                :height="widgetParams.heightPx"></clock-widget>
+  <widget-wrapper>
+    <clock-widget :background-color="widgetData.backgroundColor"></clock-widget>
+  </widget-wrapper>
 </template>
 
 <script lang="ts" setup>
 import {WidgetData} from "@widget-js/core";
 import ClockWidget from "./ClockWidget.vue"
-import {useWidget} from "@widget-js/vue3";
-
+import {useWidget,WidgetWrapper} from "@widget-js/vue3";
 const {widgetData, widgetParams} = useWidget(WidgetData);
 </script>
 

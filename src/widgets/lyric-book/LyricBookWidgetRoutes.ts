@@ -1,4 +1,4 @@
-import LyricBookWidgetDefine from "./LyricBook.widget";
+import LyricBookWidgetDefine from "./LyricBook";
 
 const url = LyricBookWidgetDefine.getIndexRoute().url;
 const name = LyricBookWidgetDefine.name;

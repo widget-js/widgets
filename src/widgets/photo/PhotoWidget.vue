@@ -1,31 +1,35 @@
 <template>
-  <div class="photo" :style="{ borderRadius: `${widgetData.borderRadius ?? 0}px` }">
-    <el-carousel :height="`${widgetParams.heightPx}px`" indicator-position="none" :interval="5000">
-      <template v-if="widgetParams.preview">
-        <el-carousel-item v-for="item in defaultPhotos" :key="item">
-          <img class="photo-item" :src="item" alt="" />
-        </el-carousel-item>
-      </template>
-      <template v-else>
-        <el-carousel-item v-for="item in photos" :key="item">
-          <img class="photo-item" :src="item" alt="" />
-        </el-carousel-item>
-        <el-carousel-item v-if="showGuide" @click="showConfig">
-          <h4 class="justify-center">点击设置图片文件</h4>
-        </el-carousel-item>
-        <el-carousel-item v-else-if="photos.length == 0">
-          <h4 class="justify-center">文件夹内没有找到图片</h4>
-        </el-carousel-item>
-      </template>
-    </el-carousel>
-  </div>
+  <widget-wrapper>
+    <div class="">
+      <div class="photo" :style="{ borderRadius: `${widgetData.borderRadius ?? 0}px` }">
+        <el-carousel :height="`${widgetParams.heightPx - 12}px`" indicator-position="none" :interval="5000">
+          <template v-if="widgetParams.preview">
+            <el-carousel-item v-for="item in defaultPhotos" :key="item">
+              <img class="photo-item" :src="item" alt=""/>
+            </el-carousel-item>
+          </template>
+          <template v-else>
+            <el-carousel-item v-for="item in photos" :key="item">
+              <img class="photo-item" :src="item" alt=""/>
+            </el-carousel-item>
+            <el-carousel-item v-if="showGuide" @click="showConfig">
+              <h4 class="justify-center">点击设置图片文件</h4>
+            </el-carousel-item>
+            <el-carousel-item v-else-if="photos.length == 0">
+              <h4 class="justify-center">文件夹内没有找到图片</h4>
+            </el-carousel-item>
+          </template>
+        </el-carousel>
+      </div>
+    </div>
+  </widget-wrapper>
 </template>
 
 <script lang="ts" setup>
-import { useWidget } from '@widget-js/vue3'
-import { PhotoData } from '@/widgets/photo/PhotoData'
-import { ref } from 'vue'
-import { FileApi, HostedWidgetApi } from '@widget-js/core'
+import {useWidget, WidgetWrapper} from '@widget-js/vue3'
+import {PhotoData} from '@/widgets/photo/PhotoData'
+import {ref} from 'vue'
+import {FileApi, HostedWidgetApi} from '@widget-js/core'
 import photo1 from './assets/photo1.jpg'
 import photo2 from './assets/photo2.jpg'
 import photo3 from './assets/photo3.jpg'
@@ -36,7 +40,7 @@ const photos = ref<string[]>([])
 const showGuide = ref(false)
 const defaultData = new PhotoData(PhotoWidget.name)
 defaultData.borderRadius = 22
-const { widgetData, widgetParams, sizeStyle } = useWidget(PhotoData, {
+const {widgetData, widgetParams} = useWidget(PhotoData, {
   defaultData,
   onDataLoaded: (data) => {
     if (data && data.directory) {
@@ -69,14 +73,15 @@ const showConfig = async () => {
 
 <style scoped lang="scss">
 .photo {
-  width: 100vw;
-  height: 100vh;
+  position: relative;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.2);
 
   .photo-item {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 }
@@ -85,7 +90,7 @@ const showConfig = async () => {
   display: flex;
   color: #fff;
   opacity: 0.75;
-  height: 100vh;
+  height: 100%;
   place-items: center;
   margin: 0;
 }

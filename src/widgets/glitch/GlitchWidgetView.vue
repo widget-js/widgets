@@ -1,20 +1,12 @@
 <template>
-    <glitch-widget :style="sizeStyle"></glitch-widget>
+  <widget-wrapper>
+    <glitch-widget ></glitch-widget>
+  </widget-wrapper>
 </template>
 
-<script lang="ts">
-import {WidgetData} from "@widget-js/core";
+<script lang="ts" setup>
 import GlitchWidget from "./GlitchWidget.vue"
-import {useWidget} from "@widget-js/vue3";
-
-export default {
-    name:"GlitchWidgetView",
-    components: {GlitchWidget},
-    setup(){
-        const {widgetData, widgetParams,sizeStyle} = useWidget(WidgetData);
-        return {widgetData, widgetParams,sizeStyle};
-    }
-}
+import {WidgetWrapper} from "@widget-js/vue3"
 </script>
 
 <style scoped>

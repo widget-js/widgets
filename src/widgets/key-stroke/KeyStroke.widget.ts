@@ -24,7 +24,7 @@ const KeyStrokeWidgetDefine = new Widget({
   maxWidth: 4,
   minHeight: 3,
   maxHeight: 3,
-  supportHostedMode: HostedMode.OVERLAP,
+  supportHostedMode: HostedMode.BACKGROUND,
   backgroundThrottling: false,
   permissions: ['keyboard'],
   movable: false,

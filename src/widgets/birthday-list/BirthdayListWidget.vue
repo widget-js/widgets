@@ -1,6 +1,6 @@
 <template>
   <div ref="container" class="birthday-list-container" :style="{
-          backgroundColor:birthdayListData.backgroundColor
+          backgroundColor:birthdayListData?.backgroundColor
        }">
     <img class="image" src="./images/balloon.png">
     <div class="title">
@@ -46,6 +46,7 @@ import dayjs, {Dayjs} from "dayjs";
 import {Lunar, LunarMonth, Solar, SolarMonth} from 'lunar-typescript';
 import BirthdayListData, {BirthdayPeople} from "@/widgets/birthday-list/model/BirthdayListData";
 import {WidgetApi} from "@widget-js/core";
+import {PropType} from "vue";
 // import {delay} from "lodash";
 //import BirthdayListData from './model/BirthdayListData';
 
@@ -62,9 +63,8 @@ export default {
   emits: ["add"],
   props: {
     birthdayListData: {
-      type: BirthdayListData
-    },
-    widgetData: {}
+      type: Object as PropType<BirthdayListData>
+    }
   },
   watch: {
     birthdayListData() {

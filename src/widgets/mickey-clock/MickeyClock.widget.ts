@@ -13,27 +13,24 @@ const url = "/widget/mickey_clock";
 const configUrl = "/widget/config/mickey_clock";
 //组件关键词
 const MickeyClockWidgetDefine = new Widget({
-    name: name,
-    title: title,
-    description: description,
-    keywords: keywords,
-    lang: "zh-CN",
-    width: 2,
-    height: 2,
-    minWidth: 2,
-    maxWidth: 3,
-    minHeight: 2,
-    maxHeight: 3,
-    routes: [
-        {
-            url: url,
-            name: 'index'
-        },
-        {
-            url: configUrl,
-            name: 'config'
-        },
-    ]
+  name: name,
+  title: title,
+  description: description,
+  keywords: keywords,
+  lang: "zh-CN",
+  width: 2,
+  height: 2,
+  minWidth: 2,
+  maxWidth: 3,
+  minHeight: 2,
+  maxHeight: 3,
+  previewImage: "/public/images/preview_micky_clock.png",
+  routes: [
+    {
+      url: url,
+      name: 'index'
+    }
+  ]
 })
 
 export default MickeyClockWidgetDefine;

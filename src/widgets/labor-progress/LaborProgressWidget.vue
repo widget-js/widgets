@@ -3,7 +3,7 @@
     class="container"
     ref="container"
     @mouseenter="mouseEnter"
-    :style="{ height: `${height}px`, backgroundColor: backgroundColor, borderRadius: `${borderRadius}px` }">
+    :style="{ backgroundColor: backgroundColor, borderRadius: `${borderRadius}px` }">
     <div class="progress-bar">
       <div class="outline">
         <div class="progress" :style="{ width: `${percent}%` }"></div>
@@ -84,7 +84,6 @@ export default {
       new EmojiTimeline(facePartying, 100, 100, 3, '❤')
     ]
 
-    const { height } = useWindowSize()
     const time = ref(dayjs())
     const secondLeft = ref(50)
     const currentTimeline = ref(emojiTimeline[0])
@@ -111,7 +110,7 @@ export default {
         }
       }
     }, 1000)
-    return { height, time, currentTimeline, percent, workEndTime, secondLeft, percentPosition }
+    return { time, currentTimeline, percent, workEndTime, secondLeft, percentPosition }
   },
   methods: {
     async mouseEnter() {

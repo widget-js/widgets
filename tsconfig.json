@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "isolatedModules": true,
     "resolveJsonModule": true,
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
@@ -20,9 +21,9 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env",
-      "jest",
-      "element-plus/global"
+      "element-plus/global",
+      "@widget-js/core",
+      "vue"
     ],
     "paths": {
       "@/*": [

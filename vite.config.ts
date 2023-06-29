@@ -5,7 +5,7 @@ import Components from 'unplugin-vue-components/vite'
 import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
 import path from 'path'
 import ViteWidget from '@widget-js/vite-plugin-widget'
-// https://vitejs.dev/config/
+import checker from 'vite-plugin-checker'
 
 export default defineConfig({
   base: './',
@@ -22,6 +22,9 @@ export default defineConfig({
     }
   },
   plugins: [vue(), ViteWidget(),
+    checker({
+      typescript: true
+    }),
     AutoImport({
       resolvers: [ElementPlusResolver()],
     }),

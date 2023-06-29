@@ -1,22 +1,24 @@
 <template>
-  <div class="bg" :style="{borderRadius: `${borderRadius??22}px`}"></div>
-  <div id="watch" :style="{transform:`translate(-50%, -50%) scale(${scale}) `}">
-    <div class="digit"><span>1</span></div>
-    <div class="digit"><span>2</span></div>
-    <div class="digit"><span>3</span></div>
-    <div class="digit"><span>4</span></div>
-    <div class="digit"><span>5</span></div>
-    <div class="digit"><span>6</span></div>
-    <div class="digit"><span>7</span></div>
-    <div class="digit"><span>8</span></div>
-    <div class="digit"><span>9</span></div>
-    <div class="digit"><span>10</span></div>
-    <div class="digit"><span>11</span></div>
-    <div class="digit"><span>12</span></div>
-    <div id="mickey"></div>
-    <div id="hours" class="right" :style="{'transform': hoursRotate}">
+  <div class="mickey-clock">
+    <div class="bg" :style="{borderRadius: `${borderRadius??22}px`}"></div>
+    <div id="watch" :style="{transform:`translate(-50%, -50%) scale(${scale}) `}">
+      <div class="digit"><span>1</span></div>
+      <div class="digit"><span>2</span></div>
+      <div class="digit"><span>3</span></div>
+      <div class="digit"><span>4</span></div>
+      <div class="digit"><span>5</span></div>
+      <div class="digit"><span>6</span></div>
+      <div class="digit"><span>7</span></div>
+      <div class="digit"><span>8</span></div>
+      <div class="digit"><span>9</span></div>
+      <div class="digit"><span>10</span></div>
+      <div class="digit"><span>11</span></div>
+      <div class="digit"><span>12</span></div>
+      <div id="mickey"></div>
+      <div id="hours" class="right" :style="{'transform': hoursRotate}">
+      </div>
+      <div id="minutes" class="back left" :style="{'transform': minutesRotate}"></div>
     </div>
-    <div id="minutes" class="back left" :style="{'transform': minutesRotate}"></div>
   </div>
 </template>
 
@@ -72,6 +74,8 @@ export default {
         if (this.hours > 12) {
           this.hours = this.hours - 12;
         }
+        this.hours = 3
+        this.minutes = 40
         this.hoursRotate = 'rotate(' + (this.hours * 30) + 'deg)';
         this.minutesRotate = 'rotate(' + (this.minutes * 6) + 'deg)';
       }, 1000)
@@ -82,7 +86,6 @@ export default {
 
 <style scoped lang="scss">
 .bg {
-  position: absolute;
   width: 100%;
   left: 0;
   top: 0;
@@ -94,7 +97,7 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.4);
+  transform: translate(-50%, -50%) scale(0.28);
   border-radius: 50%;
   width: 450px;
   height: 450px;

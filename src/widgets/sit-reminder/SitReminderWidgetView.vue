@@ -1,5 +1,4 @@
 <template>
-    <!-- TODO:组件页面，这里编写组件业务逻辑-->
     <sit-reminder-widget ></sit-reminder-widget>
 </template>
 

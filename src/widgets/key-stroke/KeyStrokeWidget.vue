@@ -23,12 +23,12 @@
 </template>
 
 <script lang="ts" setup>
-import { MotionVariants, useMotion } from '@vueuse/motion'
-import { nextTick, onMounted, reactive, ref } from 'vue'
-import { useKeyboardEventHook } from '@widget-js/vue3'
-import { BrowserWindowApi, DeviceApi, NativeKeyboardEvent } from '@widget-js/core'
-import { debounce, delay } from 'lodash'
-import { useIntervalFn } from '@vueuse/core'
+import {MotionVariants, useMotion} from '@vueuse/motion'
+import {nextTick, onMounted, reactive, ref} from 'vue'
+import {useKeyboardEventHook} from '@widget-js/vue3'
+import {BrowserWindowApi, DeviceApi, NativeKeyboardEvent} from '@widget-js/core'
+import {debounce, delay} from 'lodash'
+import {useIntervalFn} from '@vueuse/core'
 
 const keyboard = ref<HTMLElement>()
 const transition = {
@@ -68,30 +68,30 @@ const clearAllKeys = () => {
 const normalKeyContent = ref<HTMLElement>()
 const modifierKeys = reactive<NativeKeyboardEvent[]>([])
 const normalKey = ref<NativeKeyboardEvent | null>(null)
-const { apply, state } = useMotion(keyboard, variants)
+const {apply, state} = useMotion(keyboard, variants)
 onMounted(async () => {
   await nextTick()
 })
 let hideTimeoutId = 0
-const winKey = { name: 'Win', keyCode: 91 }
-const ctlKey = { name: 'Ctrl', keyCode: 162 }
-const shiftKey = { name: 'Shift', keyCode: 160 }
-const altKey = { name: 'Alt', keyCode: 164 }
+const winKey = {name: 'Win', keyCode: 91}
+const ctlKey = {name: 'Ctrl', keyCode: 162}
+const shiftKey = {name: 'Shift', keyCode: 160}
+const altKey = {name: 'Alt', keyCode: 164}
 const hideTimeout = 4000
 const keyNameMap = [
-  { name: '⌫', keyCode: 8 },
-  { name: 'Caps', keyCode: 20 },
-  { name: 'Home', keyCode: 36 },
-  { name: '←', keyCode: 37 },
-  { name: '↑', keyCode: 38 },
-  { name: '→', keyCode: 39 },
-  { name: 'Esc', keyCode: 27 },
-  { name: '↓', keyCode: 40 },
-  { name: 'Space', keyCode: 32 },
-  { name: '⇧', keyCode: 33 },
-  { name: '⇩', keyCode: 34 },
-  { name: '📸', keyCode: 44 },
-  { name: '☰', keyCode: 93 }
+  {name: '⌫', keyCode: 8},
+  {name: 'Caps', keyCode: 20},
+  {name: 'Home', keyCode: 36},
+  {name: '←', keyCode: 37},
+  {name: '↑', keyCode: 38},
+  {name: '→', keyCode: 39},
+  {name: 'Esc', keyCode: 27},
+  {name: '↓', keyCode: 40},
+  {name: 'Space', keyCode: 32},
+  {name: '⇧', keyCode: 33},
+  {name: '⇩', keyCode: 34},
+  {name: '📸', keyCode: 44},
+  {name: '☰', keyCode: 93}
 ]
 
 function isModifierKey(keycode) {
@@ -194,6 +194,7 @@ onMounted(async () => {
       scanCode: 17,
       isKeyUp: true
     }
+    await BrowserWindowApi.setBounds({height: 220})
     await BrowserWindowApi.alignToScreen('bottom-center')
     await BrowserWindowApi.setIgnoreMouseEvent(true)
     show()

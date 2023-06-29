@@ -28,11 +28,12 @@ import {Lunar, LunarMonth} from "lunar-typescript";
 import {ProgressType} from "./model/WaveProgressData";
 import Color from "color";
 import {delay, floor} from 'lodash'
+import {useWidgetSize} from "@widget-js/vue3";
 
 dayjs.locale("zh-cn");
 
 const ratio = ref(1);
-const {width, height} = useWindowSize();
+const {width, height} = useWidgetSize();
 
 const canvasRef = ref<HTMLCanvasElement>();
 const containerRef = ref<HTMLDivElement>();

@@ -51,6 +51,7 @@ export default {
       }
     })
 
+
     //修改成需要设置组件参数配置
     const widgetConfigOption = reactive(new WidgetConfigOption({
       custom: true,

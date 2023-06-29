@@ -2,7 +2,6 @@
   <dynamic-island-widget
     ref="dynamicIslandWidget"
     v-model:state="state"
-    :preview="widgetParams.preview"
     :notification="notification" />
 </template>
 

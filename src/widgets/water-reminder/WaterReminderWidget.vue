@@ -138,7 +138,7 @@ const textColor = computed(() => {
   .circle {
     height: 70%;
     width: 70%;
-    position: absolute;
+    position: relative;
     left: 15%;
     top: 10%;
 
@@ -155,7 +155,7 @@ const textColor = computed(() => {
     }
 
     #canvas {
-      position: absolute;
+      position: relative;
       width: 100%;
       aspect-ratio: 1;
       top: 50%;
@@ -190,14 +190,14 @@ const textColor = computed(() => {
 
     &.reset {
       position: absolute;
-      left: 12px;
-      bottom: 12px;
+      left: 24px;
+      bottom: 24px;
     }
 
     &.add {
       position: absolute;
-      right: 12px;
-      bottom: 12px;
+      right: 24px;
+      bottom:24px;
     }
   }
 
@@ -207,7 +207,8 @@ const textColor = computed(() => {
     font-size: 16px;
     line-height: 21px;
     position: absolute;
-    bottom: 8px;
+    bottom: 20px;
+    left: 0;
     width: 100%;
     text-align: center;
     color: v-bind(textColor);

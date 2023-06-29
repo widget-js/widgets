@@ -46,6 +46,7 @@ import dayjs, { Dayjs, OpUnitType } from 'dayjs'
 import { TransitionPresets, useInterval, useTransition, useWindowSize } from '@vueuse/core'
 import { Lunar, LunarMonth } from 'lunar-typescript'
 import { floor } from 'lodash'
+import {useWidgetSize} from "../../../../vue3";
 
 dayjs.locale('zh-cn')
 
@@ -90,7 +91,7 @@ onMounted(() => {
   intervalRenderView(interval)
 })
 
-const { width, height } = useWindowSize()
+const { width, height } = useWidgetSize()
 
 let fontSize = computed(() => {
   return (height.value / 134) * 21 + 'px'

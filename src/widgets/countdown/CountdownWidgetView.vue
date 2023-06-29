@@ -1,30 +1,25 @@
 <template>
-  <countdown-widget v-bind="widgetData" :style="{...sizeStyle}" :font-size="fontSize"></countdown-widget>
+  <widget-wrapper>
+    <countdown-widget v-bind="widgetData" :font-size="fontSize"></countdown-widget>
+  </widget-wrapper>
 </template>
 
-<script lang="ts">
-import CountdownWidget from "./CountdownWidget.vue"
-import {useWidget} from "@widget-js/vue3";
+<script lang="ts" setup>
+import {useWidget, WidgetWrapper} from "@widget-js/vue3";
 import {CountdownModel} from "@/widgets/countdown/model/CountdownModel";
 import CountdownWidgetDefine from "./Countdown.widget";
 import {ref} from "vue";
+import CountdownWidget from "@/widgets/countdown/CountdownWidget.vue";
 
-export default {
-  name: "CountdownWidgetView",
-  components: {CountdownWidget},
-  setup() {
-    const defaultData = new CountdownModel(CountdownWidgetDefine.name);
-    const {widgetData, widgetParams,sizeStyle} = useWidget(CountdownModel, {
-      defaultData: defaultData
-    });
-    const fontSize = ref(54);
-    const widthPx = widgetParams.widthPx ?? 0;
-    const heightPx = widgetParams.heightPx ?? 0;
-    if(widthPx <= 220 || heightPx <= 220 ){
-      fontSize.value = 40
-    }
-    return {widgetData, widgetParams,sizeStyle,fontSize};
-  }
+const defaultData = new CountdownModel(CountdownWidgetDefine.name);
+const {widgetData, widgetParams, sizeStyle} = useWidget(CountdownModel, {
+  defaultData: defaultData
+});
+const fontSize = ref(54);
+const widthPx = widgetParams.widthPx ?? 0;
+const heightPx = widgetParams.heightPx ?? 0;
+if (widthPx <= 220 || heightPx <= 220) {
+  fontSize.value = 40
 }
 </script>
 

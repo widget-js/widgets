@@ -1,21 +1,23 @@
 <template>
-  <div ref="container" class="clock-container" :style="{
+  <div class="root">
+    <div ref="container" class="clock-container" :style="{
           backgroundColor:backgroundColor,
        width:`${width}px`,
        height:`${height}px`
        }">
-    <div :class="{circles:true,...fillClass}">
-      <div :class="{center:true,'white-bg':true,}"/>
-      <img class="center" src="./images/clock_bg.png" alt="">
-      <img ref="hour" class="center hour tick" :style="{
+      <div :class="{circles:true,...fillClass}">
+        <div :class="{center:true,'white-bg':true,}"/>
+        <img class="center" src="./images/clock_bg.png" alt="">
+        <img ref="hour" class="center hour tick" :style="{
       transform:  'rotate('+ hourDeg +'deg)',
     }" src="./images/clock_hand_hour.png" alt="">
-      <img ref="minute" class="center minute tick" :style="{
+        <img ref="minute" class="center minute tick" :style="{
       transform:  'rotate('+ minuteDeg +'deg)',
     }" src="./images/clock_hand_minute.png" alt="">
-      <img ref="startSecondDeg" class="center second" :style="{
+        <img ref="startSecondDeg" class="center second" :style="{
       transform: 'rotate('+ secondDeg +'deg)',
     }" src="./images/clock_hand_second.png" alt="">
+      </div>
     </div>
   </div>
 </template>

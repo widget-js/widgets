@@ -13,23 +13,24 @@ const url = "/widget/glitch";
 const configUrl = undefined;
 //组件关键词
 const GlitchWidgetDefine = new Widget({
-    name: name,
-    title: title,
-    description: description,
-    keywords: keywords,
-    lang: "zh-CN",
-    width: 4,
-    height: 2,
-    minWidth: 4,
-    maxWidth: 4,
-    minHeight: 2,
-    maxHeight: 2,
-    routes: [
-        {
-            url: url,
-            name: 'index'
-        },
-    ]
+  name: name,
+  title: title,
+  description: description,
+  keywords: keywords,
+  lang: "zh-CN",
+  width: 4,
+  height: 2,
+  minWidth: 4,
+  maxWidth: 4,
+  minHeight: 2,
+  maxHeight: 2,
+  previewImage: '/public/images/preview_glitch_clock.png',
+  routes: [
+    {
+      url: url,
+      name: 'index'
+    },
+  ]
 })
 
 export default GlitchWidgetDefine;

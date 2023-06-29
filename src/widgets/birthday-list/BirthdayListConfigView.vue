@@ -5,14 +5,6 @@
     :option="widgetConfigOption"
     @confirm="onSaveClick()"
     :enable-background="true">
-    <template v-slot:widget>
-      <!-- 组件配置内容   -->
-      <birthday-list-widget
-        :style="{ width: `${widgetParams.widthPx}px`, height: `${widgetParams.heightPx}px` }"
-        :border-radius="widgetData.borderRadius"
-        :birthday-list-data="widgetData"
-        :background-color="widgetData.backgroundColor" />
-    </template>
     <template v-slot:form>
       <el-form label-width="120px">
         <el-form-item label="左上角标题">
@@ -26,17 +18,7 @@
         row-key="createdAt"
         style="width: 100%"
         table-layout="auto">
-        <el-table-column align="center" width="100">
-          <template #header>
-            <el-button size="small" type="primary" @click="add">新增</el-button>
-          </template>
-          <template #default="scope">
-            <el-button size="small" type="danger" @click="del(scope)">删除</el-button>
-          </template>
-        </el-table-column>
-        <el-table-column label="序号" sortable width="60" align="center">
-          <template #default="scope">{{ scope.$index + 1 }}</template>
-        </el-table-column>
+        <el-table-column type="index" width="60" align="center"/>
         <el-table-column label="姓名" prop="name" align="center">
           <template #default="{ row }">
             <el-input v-model="row.name" maxlength="10" />
@@ -58,6 +40,14 @@
         <el-table-column label="日" prop="day" align="center">
           <template #default="{ row }">
             <el-input-number v-model="row.day" :min="1" :max="31" />
+          </template>
+        </el-table-column>
+        <el-table-column align="center" width="100">
+          <template #header>
+            <el-button size="small" type="primary" @click="add">新增</el-button>
+          </template>
+          <template #default="scope">
+            <el-button size="small" type="danger" @click="del(scope)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

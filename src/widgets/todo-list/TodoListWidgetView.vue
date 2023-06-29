@@ -1,21 +1,16 @@
 <template>
-  <todo-list-widget v-bind="widgetData"
-                    :style="{...sizeStyle}"></todo-list-widget>
+  <widget-wrapper>
+    <todo-list-widget v-bind="widgetData"></todo-list-widget>
+  </widget-wrapper>
+
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {WidgetData} from "@widget-js/core";
 import TodoListWidget from "./TodoListWidget.vue"
-import {useWidget} from "@widget-js/vue3";
+import {useWidget, WidgetWrapper} from "@widget-js/vue3";
 
-export default {
-  name: "TodoListWidgetView",
-  components: {TodoListWidget},
-  setup() {
-    const {widgetData, widgetParams, sizeStyle} = useWidget(WidgetData);
-    return {widgetData, widgetParams, sizeStyle};
-  }
-}
+const {widgetData, widgetParams} = useWidget(WidgetData);
 </script>
 
 <style scoped>
