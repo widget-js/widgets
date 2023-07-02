@@ -1,8 +1,9 @@
 <template>
-    <widget-edit-dialog :widget-params="widgetParams" :option="widgetConfigOption"
-                        :widget-data="widgetData"
-                        @confirm="onSaveClick()">
-    </widget-edit-dialog>
+  <widget-edit-dialog :widget-params="widgetParams" :option="widgetConfigOption"
+                      :widget-data="widgetData"
+                      @apply="onApplyClick()"
+                      @confirm="onSaveClick()">
+  </widget-edit-dialog>
 </template>
 
 <script lang="ts">
@@ -16,17 +17,17 @@ export default {
   name: "",
   components: {TodoListWidget, WidgetEditDialog},
   setup() {
-    const {widgetData, widgetParams} = useWidget(WidgetData)
+    const {widgetData, widgetParams} = useWidget(WidgetData, {loadDataByWidgetName: true})
 
     //修改成需要设置组件参数配置
     const widgetConfigOption = reactive(new WidgetConfigOption({
       custom: false,
-      preview:false,
+      preview: false,
       backgroundColor: true,
       borderRadius: true,
-      previewWidth:200,
-      previewHeight:200,
-      color:true,
+      previewWidth: 200,
+      previewHeight: 200,
+      color: true,
     }));
 
     return {widgetData, widgetParams, widgetConfigOption}
@@ -35,6 +36,9 @@ export default {
     async onSaveClick() {
       await WidgetDataApi.save(this.widgetData);
       window.close();
+    },
+    async onApplyClick() {
+      await WidgetDataApi.saveByName(this.widgetData)
     }
   }
 }

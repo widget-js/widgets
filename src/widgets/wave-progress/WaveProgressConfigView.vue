@@ -1,13 +1,7 @@
 <template>
   <widget-edit-dialog :option="widgetConfigOption" :widget-data="widgetData" :widget-params="widgetParams"
+                      @apply="onApplyClick()"
                       @confirm="onSaveClick()">
-    <template v-slot:widget>
-      <!-- 组件配置内容   -->
-      <wave-progress-widget :style="{
-          width: `${widgetParams.widthPx}px`,
-          height: `${widgetParams.heightPx}px`,
-        }" v-bind="widgetData" ref="widgetRef"/>
-    </template>
     <template v-slot:form>
       <el-form :model="widgetData">
         <el-form-item label="进度类型">
@@ -43,45 +37,49 @@ import {defineComponent, ref} from 'vue'
 import {useWidget, WidgetConfigOption, WidgetEditDialog} from '@widget-js/vue3'
 import {ProgressType, WaveProgressData} from "@/widgets/wave-progress/model/WaveProgressData";
 import WaveProgressWidget from "@/widgets/wave-progress/WaveProgressWidget.vue";
-import {WidgetDataApi} from "../../../../core";
+import {WidgetDataApi} from "@widget-js/core";
 
 export default defineComponent({
-      name: "WaveProgressConfigView",
-      components: {WidgetEditDialog, WaveProgressWidget},
-      computed: {
-        ProgressType() {
-          return ProgressType
-        }
+    name: "WaveProgressConfigView",
+    components: {WidgetEditDialog, WaveProgressWidget},
+    computed: {
+      ProgressType() {
+        return ProgressType
+      }
+    },
+    setup() {
+      const {widgetData, widgetParams} = useWidget(WaveProgressData);
+      const widgetConfigOption = new WidgetConfigOption({
+        backgroundColor: true,
+        custom: true,
+        borderRadius: true,
+        preview: false
+      });
+      const widgetRef = ref();
+      return {widgetData, widgetRef, widgetParams, widgetConfigOption}
+    },
+    methods: {
+      refresh() {
+        this.widgetRef.refresh();
       },
-      setup() {
-        const {widgetData, widgetParams} = useWidget(WaveProgressData);
-        const widgetConfigOption = new WidgetConfigOption({
-          backgroundColor: true,
-          custom: true,
-          borderRadius: true
-        });
-        const widgetRef = ref();
-        return {widgetData, widgetRef, widgetParams, widgetConfigOption}
-      },
-      methods: {
-        refresh() {
-          this.widgetRef.refresh();
-        },
-        handleChangeCustomDate() {
-          const now = new Date();
-          if ((this.widgetData.startDate ?? now) > (this.widgetData.endDate ?? now)) {
-            const start: Date = this.widgetData.startDate ?? now;
-            this.widgetData.startDate = this.widgetData.endDate;
-            this.widgetData.endDate = start;
-          }
-          this.refresh();
-        },
-        async onSaveClick() {
-          await WidgetDataApi.save(this.widgetData)
-          window.close()
+      handleChangeCustomDate() {
+        const now = new Date();
+        if ((this.widgetData.startDate ?? now) > (this.widgetData.endDate ?? now)) {
+          const start: Date = this.widgetData.startDate ?? now;
+          this.widgetData.startDate = this.widgetData.endDate;
+          this.widgetData.endDate = start;
         }
+        this.refresh();
+      },
+      async onApplyClick() {
+        await WidgetDataApi.save(this.widgetData)
+      },
+      async onSaveClick() {
+        await WidgetDataApi.save(this.widgetData)
+        window.close();
       }
     }
+  }
 )
 </script>
 

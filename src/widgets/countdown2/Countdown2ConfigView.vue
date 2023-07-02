@@ -2,14 +2,8 @@
 
   <widget-edit-dialog :widget-params="widgetParams" :option="widgetConfigOption"
                       :widget-data="widgetData"
-                      @confirm="onSaveClick()">
-    <template v-slot:widget>
-      <!-- 组件配置内容   -->
-      <countdown2-widget :style="{
-        width:`${widgetParams.widthPx}px`,
-        height:`${widgetParams.heightPx}px`
-      }" v-bind="widgetData" v-bind:is-lunar="isLunar" :date="date.toISOString()" :font-size="72"></countdown2-widget>
-    </template>
+                      @apply="onApplyClick"
+                      @confirm="onSaveClick">
     <template v-slot:form>
       <el-form-item label="事项名称">
         <el-input v-model="widgetData.title"></el-input>
@@ -33,7 +27,7 @@ import dayjs from "dayjs";
 import {DateType} from "@/countdown/Event";
 import {Lunar} from "lunar-typescript";
 import DatePickerDialog from "@/components/DatePickerDialog.vue";
-import {WidgetDataApi} from "../../../../core";
+import {WidgetDataApi} from "@widget-js/core";
 
 export default {
   name: "",
@@ -57,6 +51,7 @@ export default {
       custom: true,
       backgroundColor: true,
       borderRadius: true,
+      preview: false,
       fontSize: false
     }));
 
@@ -72,10 +67,13 @@ export default {
     },
   },
   methods: {
-    async onSaveClick() {
+    async onApplyClick() {
       this.widgetData.date = this.date;
       this.widgetData.dateType = this.isLunar ? DateType.LUNAR : DateType.SOLAR;
       await WidgetDataApi.save(this.widgetData);
+    },
+    async onSaveClick() {
+      await this.onApplyClick();
       window.close();
     }
   }

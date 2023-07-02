@@ -24,7 +24,7 @@ const GlitchWidgetDefine = new Widget({
   maxWidth: 4,
   minHeight: 2,
   maxHeight: 2,
-  previewImage: '/public/images/preview_glitch_clock.png',
+  previewImage: '/images/preview_glitch_clock.png',
   routes: [
     {
       url: url,

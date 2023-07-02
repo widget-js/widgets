@@ -3,6 +3,7 @@
     :widget-params="widgetParams"
     :option="widgetConfigOption"
     :widget-data="widgetData"
+    @apply="onApplyClick()"
     @confirm="onSaveClick()">
     <template v-slot:form>
       <widget-checkbox-field v-model:checked="widgetData.enable" label="启用久坐提醒" />
@@ -45,6 +46,9 @@ export default {
     return { widgetData, widgetParams, widgetConfigOption }
   },
   methods: {
+    async onApplyClick() {
+      await WidgetDataApi.saveByName(this.widgetData)
+    },
     async onSaveClick() {
       await WidgetDataApi.saveByName(this.widgetData)
       window.close()

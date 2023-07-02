@@ -21,6 +21,7 @@ import {BrowserWindowApi, BrowserWindowApiEvent, ClipboardApiEvent} from "@widge
 import {ClipboardData, ClipboardListData} from "@/widgets/clipboard/model/ClipboardData";
 import {ref, watch} from "vue";
 import {Transition, useMotion} from "@vueuse/motion";
+import {delay} from "lodash";
 
 type SearchEngine = 'bing' | 'google' | 'baidu'
 const {widgetData} = useWidget(ClipboardListData, {
@@ -62,7 +63,19 @@ const {apply, motionProperties} = useMotion(null, {
   show: {
     y: 0,
     scale: 1,
-    transition,
+    transition: {
+      ...transition,
+      onComplete: () => {
+        // electron bug，设置位置，会导致窗口大小变化，动画结束后恢复大小
+        delay(() => {
+          console.log("onComplete")
+          BrowserWindowApi.setSize(600, 56)
+          BrowserWindowApi.setMaximumSize(600, 56)
+          BrowserWindowApi.setMinimumSize(600, 56)
+        }, 500)
+        // BrowserWindowApi.setSize(600, 36)
+      }
+    }
   }
 })
 
@@ -71,16 +84,15 @@ const hideWindow = () => {
   apply('hide')
 }
 const search = (se: SearchEngine) => {
-  hideWindow()
   switch (se) {
     case "bing":
-      BrowserWindowApi.openUrl(`https://cn.bing.com/search?q=${data.value?.content}`)
+      BrowserWindowApi.openUrl(`https://cn.bing.com/search?q=${data.value?.content}`, {external: true})
       break
     case "google":
-      BrowserWindowApi.openUrl(`https://www.google.com/search?q=${data.value?.content}`)
+      BrowserWindowApi.openUrl(`https://www.google.com/search?q=${data.value?.content}`, {external: true})
       break
     case "baidu":
-      BrowserWindowApi.openUrl(`https://www.baidu.com/s?wd=${data.value?.content}`)
+      BrowserWindowApi.openUrl(`https://www.baidu.com/s?wd=${data.value?.content}`, {external: true})
       break
   }
 }
@@ -94,11 +106,11 @@ watch(
   }
 )
 
-BrowserWindowApi.setSize(600, 36)
-BrowserWindowApi.setMovable(false)
+BrowserWindowApi.setSize(600, 56)
+
+BrowserWindowApi.setMovable(true)
 BrowserWindowApi.alignToScreen('top-center')
 useAppBroadcast([ClipboardApiEvent.CHANGED, BrowserWindowApiEvent.FOCUS], async (broadcast) => {
-  console.log('as')
   if (broadcast.event == ClipboardApiEvent.CHANGED) {
     const text = broadcast.payload['content'] as string
     data.value = new ClipboardData(text);

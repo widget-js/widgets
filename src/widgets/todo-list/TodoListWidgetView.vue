@@ -10,7 +10,7 @@ import {WidgetData} from "@widget-js/core";
 import TodoListWidget from "./TodoListWidget.vue"
 import {useWidget, WidgetWrapper} from "@widget-js/vue3";
 
-const {widgetData, widgetParams} = useWidget(WidgetData);
+const {widgetData, widgetParams} = useWidget(WidgetData, {loadDataByWidgetName: true});
 </script>
 
 <style scoped>

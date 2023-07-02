@@ -24,7 +24,7 @@ const MickeyClockWidgetDefine = new Widget({
   maxWidth: 3,
   minHeight: 2,
   maxHeight: 3,
-  previewImage: "/public/images/preview_micky_clock.png",
+  previewImage: "/images/preview_micky_clock.png",
   routes: [
     {
       url: url,

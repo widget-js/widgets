@@ -1,8 +1,8 @@
 <template>
   <div
-      class="wave-progress-container"
-      ref="containerRef"
-      :style="{ fontSize: fontSize, backgroundColor: backgroundColors[0], height: height + 'px', width: width + 'px', borderRadius: $props.extra?.borderRadius + 'px' }"
+    class="wave-progress-container"
+    ref="containerRef"
+    :style="{ fontSize: fontSize, backgroundColor: backgroundColors[0], height: height + 'px', width: width + 'px', borderRadius: $props.extra?.borderRadius + 'px' }"
   >
     <div class="tips">
       <div class="title">{{ title }}</div>
@@ -10,20 +10,20 @@
     </div>
 
     <canvas
-        ref="canvasRef"
-        class="wave-canvas"
-        :width="cbWidth"
-        :height="cbHeight"
-        :style="{ backgroundColor: backgroundColors[0], height: cbHeight + 'px', width: cbWidth + 'px' }"
+      ref="canvasRef"
+      class="wave-canvas"
+      :width="cbWidth"
+      :height="cbHeight"
+      :style="{ backgroundColor: backgroundColors[0], height: cbHeight + 'px', width: cbWidth + 'px' }"
     ></canvas>
     <div class="percentage">{{ 100 - floor(transitionRation, 0) }}%</div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {computed, nextTick, onMounted, ref} from "vue";
+import {computed, nextTick, onMounted, ref, watch} from "vue";
 import dayjs, {Dayjs} from "dayjs";
-import {TransitionPresets, useInterval, useTransition, useWindowSize} from "@vueuse/core";
+import {TransitionPresets, useInterval, useTransition} from "@vueuse/core";
 import {Lunar, LunarMonth} from "lunar-typescript";
 import {ProgressType} from "./model/WaveProgressData";
 import Color from "color";
@@ -69,7 +69,9 @@ const props = defineProps({
     type: String
   }
 });
-
+watch(() => props.progressType, () => {
+  refresh()
+})
 const backgroundColors = computed(() => {
   const hex = props.backgroundColor;
   let color = hex;
@@ -129,12 +131,12 @@ const onInitCanvas = () => {
 
         // const sinX = Math.sin(relativeX);
         ctx.bezierCurveTo(
-            relativeX,
-            transitionCurrentHeight.value - deltaHeight,
-            boxWidth - relativeX,
-            transitionCurrentHeight.value + deltaHeight,
-            boxWidth,
-            transitionCurrentHeight.value
+          relativeX,
+          transitionCurrentHeight.value - deltaHeight,
+          boxWidth - relativeX,
+          transitionCurrentHeight.value + deltaHeight,
+          boxWidth,
+          transitionCurrentHeight.value
         );
         ctx.lineTo(boxWidth, boxHeight);
         ctx.lineTo(0, boxHeight);

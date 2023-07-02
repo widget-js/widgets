@@ -41,12 +41,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
-import dayjs, { Dayjs, OpUnitType } from 'dayjs'
-import { TransitionPresets, useInterval, useTransition, useWindowSize } from '@vueuse/core'
-import { Lunar, LunarMonth } from 'lunar-typescript'
-import { floor } from 'lodash'
-import {useWidgetSize} from "../../../../vue3";
+import {computed, onMounted, ref} from 'vue'
+import dayjs, {Dayjs, OpUnitType} from 'dayjs'
+import {TransitionPresets, useInterval, useTransition, useWindowSize} from '@vueuse/core'
+import {Lunar, LunarMonth} from 'lunar-typescript'
+import {floor} from 'lodash'
+import {useWidgetSize} from "@widget-js/vue3";
 
 dayjs.locale('zh-cn')
 
@@ -68,7 +68,7 @@ const props = defineProps({
   }
 })
 
-let options = { duration: 1000, transition: TransitionPresets.easeInOutCubic }
+let options = {duration: 1000, transition: TransitionPresets.easeInOutCubic}
 const todayTransition = useTransition(today, options)
 const weekTransition = useTransition(toWeek, options)
 const monthTransition = useTransition(toMonth, options)
@@ -91,7 +91,7 @@ onMounted(() => {
   intervalRenderView(interval)
 })
 
-const { width, height } = useWidgetSize()
+const {width, height} = useWidgetSize()
 
 let fontSize = computed(() => {
   return (height.value / 134) * 21 + 'px'

@@ -41,13 +41,17 @@ export class TodoListData extends WidgetData {
     this.todoList = []
     this.finishedList = []
     const todoList = json['todoList']
-    for (let todoJson of todoList) {
-      this.todoList.push(Object.assign(new Todo(''), todoJson))
+    if (todoList) {
+      for (let todoJson of todoList) {
+        this.todoList.push(Object.assign(new Todo(''), todoJson));
+      }
     }
 
     const finishedList = json['finishedList']
-    for (let todoJson of finishedList) {
-      this.finishedList.push(Object.assign(new Todo(''), todoJson))
+    if (finishedList) {
+      for (let todoJson of finishedList) {
+        this.finishedList.push(Object.assign(new Todo(''), todoJson));
+      }
     }
   }
 }

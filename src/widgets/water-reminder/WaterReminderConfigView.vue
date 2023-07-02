@@ -4,6 +4,7 @@
     :option="widgetConfigOption"
     :widget-data="widgetData"
     label-width="150px"
+    @apply="onApplyClick()"
     @confirm="onSaveClick()"
   >
     <template v-slot:form>
@@ -32,9 +33,8 @@
 </template>
 
 <script lang="ts" setup>
-import WaterReminderWidget from './WaterReminderWidget.vue'
 import {useWidget, WidgetConfigOption, WidgetEditDialog} from '@widget-js/vue3'
-import {WidgetApi, WidgetDataApi} from '@widget-js/core'
+import {WidgetDataApi} from '@widget-js/core'
 import {reactive, ref} from 'vue'
 import {WaterReminderModel} from '@/widgets/water-reminder/model/WaterReminderModel'
 
@@ -56,6 +56,10 @@ const widgetConfigOption = reactive(
     color: true
   })
 )
+
+async function onApplyClick() {
+  await WidgetDataApi.saveByName(widgetData.value)
+}
 
 async function onSaveClick() {
   await WidgetDataApi.saveByName(widgetData.value)

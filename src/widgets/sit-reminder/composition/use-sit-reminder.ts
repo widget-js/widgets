@@ -1,6 +1,7 @@
 import {useAppBroadcast, useWidget} from '@widget-js/vue3'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
+
 dayjs.extend(duration)
 import {
   BroadcastEvent,
@@ -13,19 +14,20 @@ import {
 } from '@widget-js/core'
 import {useIntervalFn, useStorage} from '@vueuse/core'
 import {SitReminder} from "@/widgets/sit-reminder/model/SitReminder";
+import SitReminderWidgetDefine from "@/widgets/sit-reminder/SitReminder.widget";
 
 /**
  * 久坐提醒
  */
-const  useSitReminder = () => {
-  const sitReminder = new SitReminder('cn.widgetjs.widget.sit_reminder')
+const useSitReminder = () => {
+  const sitReminder = new SitReminder(SitReminderWidgetDefine.name)
   const cancelBroadcast = sitReminder.name + '.cancel'
   const confirmBroadcast = sitReminder.name + '.confirm'
   const {widgetData: sitReminderData} = useWidget(SitReminder, {
     defaultData: sitReminder,
     loadDataByWidgetName: true,
     widgetName: sitReminder.name,
-    onDataLoaded() {
+    onDataLoaded(data) {
       loadBreakUrl(sitReminderData.value.breakInterval)
     }
   })
@@ -72,7 +74,7 @@ const  useSitReminder = () => {
         usageCount.value = 0
       }
     }
-    console.log(usageCount.value, lastUsedAt.toISOString())
+    console.log(usageCount.value, lastUsedAt.toISOString(), sitReminderData.value.sitInterval)
     const point = await DeviceApi.getCursorScreenPoint()
     if (point.x != lastPoint.x || point.y != lastPoint.y) {
       console.log('mouse moved', point)
@@ -80,7 +82,7 @@ const  useSitReminder = () => {
       lastUsedAt = now
     }
     //sitReminderData.value.sitInterval * 60
-    if (usageCount.value > sitReminderData.value.sitInterval * 60) {
+    if (usageCount.value >= sitReminderData.value.sitInterval * 60) {
       await NotificationApi.reminder(
         '久坐提醒',
         `您已经连续使用电脑${sitReminderData.value.sitInterval}分钟`,
