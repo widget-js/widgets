@@ -20,7 +20,7 @@
 ### Windows 10/11 客户端下载
 
 1. https://www.microsoft.com/store/productId/9NPR50GQ7T53
-2. https://haihaihai.vip
+2. https://widgetjs.cn
 
 ### 项目目录结构
 
@@ -47,7 +47,7 @@ widgets
 #### 1.下载并运行桌面组件客户端
 
 1. https://www.microsoft.com/store/productId/9NPR50GQ7T53
-2. https://haihaihai.vip
+2. https://widgetjs.cn
 
 #### 2.克隆代码
 
