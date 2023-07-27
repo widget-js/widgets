@@ -100,7 +100,7 @@ widget create
 - 组件路由：/widget/water_reminder
 - 配置路由：/widget/config/water_reminder
 
-#### 代办事项
+#### 待办事项
 
 ![image](public/images/preview_todo_list.png)
 

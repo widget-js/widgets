@@ -7,7 +7,7 @@
       maxlength="120"
       @keydown.shift.enter="confirm"
       :autosize="{ minRows: 2, maxRows: 6 }"
-      placeholder="请输入代办内容,按 Shift+Enter 直接保存"></ElInput>
+      placeholder="请输入待办内容,按 Shift+Enter 直接保存"></ElInput>
     <div class="buttons">
       <ElButton @click="cancel">取消</ElButton>
       <ElButton type="primary" @click="confirm">保存</ElButton>
