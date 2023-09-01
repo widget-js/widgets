@@ -1,6 +1,6 @@
 import MickeyClockWidgetDefine from "./MickeyClock.widget";
 
-const url = MickeyClockWidgetDefine.getIndexRoute().url;
+const url = MickeyClockWidgetDefine.path;
 const name = MickeyClockWidgetDefine.name;
 
 const MickeyClockWidgetRoutes = [

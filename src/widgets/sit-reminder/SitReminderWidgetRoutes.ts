@@ -1,9 +1,9 @@
 import SitReminderWidgetDefine from "./SitReminder.widget";
 
-const url = SitReminderWidgetDefine.getIndexRoute().url;
+const url = SitReminderWidgetDefine.path;
 const name = SitReminderWidgetDefine.name;
 
-const configUrl = SitReminderWidgetDefine.getConfigRoute()!.url;
+const configUrl = SitReminderWidgetDefine.configPagePath;
 
 const SitReminderWidgetRoutes = [
   {

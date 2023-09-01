@@ -1,6 +1,6 @@
 import KeyStrokeWidgetDefine from "./KeyStroke.widget";
 
-const url = KeyStrokeWidgetDefine.getIndexRoute().url;
+const url = KeyStrokeWidgetDefine.path;
 const name = KeyStrokeWidgetDefine.name;
 
 const KeyStrokeWidgetRoutes = [

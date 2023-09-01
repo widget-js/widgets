@@ -1,4 +1,4 @@
-import {HostedMode, Widget, WidgetKeyword} from "@widget-js/core";
+import { DeployMode, Widget, WidgetKeyword} from "@widget-js/core";
 //TODO 修改组件信息，标题，描述，关键词
 const name = "cn.widgetjs.widgets.lyric_book";
 //组件标题
@@ -25,17 +25,9 @@ const LyricBookWidgetDefine = new Widget({
     maxWidth: 12,
     minHeight: 4,
     maxHeight: 8,
-    supportHostedMode: HostedMode.OVERLAP,
-    routes: [
-        {
-            url: url,
-            name: 'index'
-        },
-        {
-            url: configUrl,
-            name: 'config'
-        },
-    ]
+    supportDeployMode: DeployMode.OVERLAP,
+    path: url,
+    configPagePath:configUrl,
 });
 
 export default LyricBookWidgetDefine;

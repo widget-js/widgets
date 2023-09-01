@@ -2,12 +2,12 @@ import LaborProgressWidgetDefine from "@/widgets/labor-progress/LaborProgress.wi
 
 const LaborProgressWidgetRoutes = [
     {
-        path: LaborProgressWidgetDefine.getIndexRoute().url,
+        path: LaborProgressWidgetDefine.path,
         name: `${LaborProgressWidgetDefine.name}`,
         component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.labor_progress" */ './LaborProgressWidgetView.vue')
     },
     {
-        path: LaborProgressWidgetDefine.getConfigRoute()!.url,
+        path: LaborProgressWidgetDefine.configPagePath,
         name: `${LaborProgressWidgetDefine.name}.config`,
         component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.labor_progress.config" */ './LaborProgressConfigView.vue')
     }

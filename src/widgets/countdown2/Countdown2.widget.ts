@@ -13,6 +13,8 @@ const url = "/widget/countdown2";
 const configUrl = "/widget/config/countdown2";
 //组件关键词
 const Countdown2WidgetDefine = new Widget({
+    path: url,
+    configPagePath:configUrl,
     name: name,
     title: title,
     description: description,
@@ -25,16 +27,6 @@ const Countdown2WidgetDefine = new Widget({
     maxWidth: 4,
     minHeight: 2,
     maxHeight: 4,
-    routes: [
-        {
-            url: url,
-            name: 'index'
-        },
-        {
-            url: configUrl,
-            name: 'config'
-        },
-    ]
 })
 
 export default Countdown2WidgetDefine;

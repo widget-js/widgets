@@ -1,13 +1,13 @@
 import ClipboardWidgetDefine from "./Clipboard.widget";
 
-const url = ClipboardWidgetDefine.getIndexRoute().url;
+const path = ClipboardWidgetDefine.path;
 const name = ClipboardWidgetDefine.name;
 
-// const configUrl = ClipboardWidgetDefine.getConfigRoute()!.url;
+// const configUrl = ClipboardWidgetDefine.getConfigRoute()!.path;
 
 const ClipboardWidgetRoutes = [
     {
-        path: url,
+        path: path,
         name: `${name}`,
         component: () => import(/* webpackChunkName: "com.wisdom.widgets.clipboard" */ './ClipboardWidget.vue')
     },

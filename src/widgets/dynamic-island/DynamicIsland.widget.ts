@@ -1,4 +1,4 @@
-import {HostedMode, Widget, WidgetKeyword} from '@widget-js/core'
+import {DeployMode, Widget, WidgetKeyword} from '@widget-js/core'
 
 const name = 'cn.widgetjs.widgets.dynamic_island'
 //组件标题
@@ -13,6 +13,8 @@ const url = '/widget/dynamic_island'
 const configUrl = '/widget/config/dynamic_island'
 //组件关键词
 const DynamicIslandWidgetDefine = new Widget({
+  path: url,
+  configPagePath:configUrl,
   name: name,
   title: title,
   description: description,
@@ -25,13 +27,7 @@ const DynamicIslandWidgetDefine = new Widget({
   minHeight: 4,
   maxHeight: 4,
   previewImage: '/images/preview_sit_reminder.png',
-  supportHostedMode: HostedMode.BACKGROUND,
-  routes: [
-    {
-      url: url,
-      name: 'index'
-    }
-  ]
+  supportDeployMode: DeployMode.BACKGROUND,
 })
 
 export default DynamicIslandWidgetDefine

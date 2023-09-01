@@ -1,9 +1,9 @@
 import PhotoWidgetDefine from './Photo.widget'
 
-const url = PhotoWidgetDefine.getIndexRoute().url
+const url = PhotoWidgetDefine.path
 const name = PhotoWidgetDefine.name
 
-const configUrl = PhotoWidgetDefine.getConfigRoute()!.url
+const configUrl = PhotoWidgetDefine.configPagePath
 
 const PhotoWidgetRoutes = [
   {

@@ -1,9 +1,9 @@
 import QuickSearchWidgetDefine from "./QuickSearch";
 
-const url = QuickSearchWidgetDefine.getIndexRoute().url;
+const url = QuickSearchWidgetDefine.path;
 const name = QuickSearchWidgetDefine.name;
 
-const configUrl = QuickSearchWidgetDefine.getConfigRoute()!.url;
+const configUrl = QuickSearchWidgetDefine.configPagePath;
 
 const QuickSearchWidgetRoutes = [
     {

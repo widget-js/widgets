@@ -24,16 +24,8 @@ const LaborProgressWidgetDefine = new Widget({
   maxWidth: 6,
   minHeight: 1,
   maxHeight: 2,
-  routes: [
-    {
-      url: url,
-      name: 'index'
-    },
-    {
-      url: configUrl,
-      name: 'config'
-    },
-  ]
+  path: url,
+  configPagePath:configUrl,
 })
 
 

@@ -1,41 +1,32 @@
-import {Widget, WidgetKeyword} from "@widget-js/core";
-//TODO 修改组件信息，标题，描述，关键词
-const name = "cn.widgetjs.widgets.photo";
+import { Widget, WidgetKeyword } from '@widget-js/core'
+
+const name = 'cn.widgetjs.widgets.photo'
 //组件标题
-const title = {"zh-CN": "轮播相册"};
+const title = { 'zh-CN': '轮播相册' }
 //组件描述
-const description = {"zh-CN": "轮播文件夹内的图片"};
+const description = { 'zh-CN': '轮播文件夹内的图片' }
 //组件关键词
-const keywords = [WidgetKeyword.RECOMMEND];
+const keywords = [WidgetKeyword.RECOMMEND]
 //组件路由地址
-const url = "/widget/photo";
+const path = '/widget/photo'
 //配置页路由地址
-const configUrl = "/widget/config/photo";
+const configUrl = '/widget/config/photo'
 //组件关键词
 const PhotoWidgetDefine = new Widget({
-    name: name,
-    title: title,
-    description: description,
-    keywords: keywords,
-    lang: "zh-CN",
-    width: 2,
-    height: 2,
-    minWidth: 1,
-    maxWidth: 6,
-    minHeight: 1,
-    maxHeight: 6,
-    routes: [
-        {
-            url: url,
-            name: 'index'
-        },
-
-        {
-            url: configUrl,
-            name: 'config'
-        },
-
-    ]
+  previewImage: '',
+  path: path,
+  name: name,
+  title: title,
+  description: description,
+  keywords: keywords,
+  lang: 'zh-CN',
+  width: 2,
+  height: 2,
+  minWidth: 1,
+  maxWidth: 6,
+  minHeight: 1,
+  maxHeight: 6,
+  configPagePath:configUrl,
 })
 
-export default PhotoWidgetDefine;
+export default PhotoWidgetDefine

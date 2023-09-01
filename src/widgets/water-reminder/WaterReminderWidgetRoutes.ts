@@ -1,9 +1,9 @@
 import WaterReminderWidgetDefine from "./WaterReminder.widget";
 
-const url = WaterReminderWidgetDefine.getIndexRoute().url;
+const url = WaterReminderWidgetDefine.path;
 const name = WaterReminderWidgetDefine.name;
 
-const configUrl = WaterReminderWidgetDefine.getConfigRoute()!.url;
+const configUrl = WaterReminderWidgetDefine.configPagePath;
 
 const WaterReminderWidgetRoutes = [
     {

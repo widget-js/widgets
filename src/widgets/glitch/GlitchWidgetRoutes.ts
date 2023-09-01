@@ -1,6 +1,6 @@
 import GlitchWidgetDefine from "./Glitch.widget";
 
-const url = GlitchWidgetDefine.getIndexRoute().url;
+const url = GlitchWidgetDefine.path;
 const name = GlitchWidgetDefine.name;
 
 const GlitchWidgetRoutes = [

@@ -1,4 +1,4 @@
-import {HostedMode, Widget, WidgetKeyword} from "@widget-js/core";
+import {DeployMode, Widget, WidgetKeyword} from "@widget-js/core";
 
 const name = "cn.widgetjs.widgets.sit_reminder";
 //组件标题
@@ -26,18 +26,9 @@ const SitReminderWidgetDefine = new Widget({
   previewImage: '/images/preview_sit_reminder.png',
   maxHeight: 2,
   backgroundThrottling: false,
-  supportHostedMode: HostedMode.BACKGROUND,
-  routes: [
-    {
-      url: url,
-      name: 'index'
-    },
-    {
-      url: configUrl,
-      name: 'config'
-    },
-
-  ]
+  supportDeployMode: DeployMode.BACKGROUND,
+  path: url,
+  configPagePath:configUrl,
 })
 
 export default SitReminderWidgetDefine;

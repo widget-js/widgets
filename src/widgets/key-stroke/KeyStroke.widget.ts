@@ -1,4 +1,4 @@
-import {HostedMode, Widget, WidgetKeyword} from '@widget-js/core'
+import {DeployMode, Widget, WidgetKeyword} from '@widget-js/core'
 
 const name = 'cn.widgetjs.widgets.key_stroke'
 //组件标题
@@ -24,17 +24,12 @@ const KeyStrokeWidgetDefine = new Widget({
   maxWidth: 4,
   minHeight: 3,
   maxHeight: 3,
-  supportHostedMode: HostedMode.BACKGROUND,
+  supportDeployMode: DeployMode.BACKGROUND,
   backgroundThrottling: false,
-  permissions: ['keyboard'],
   movable: false,
   previewImage: '/images/preview_keystroke.png',
-  routes: [
-    {
-      url: url,
-      name: 'index'
-    }
-  ]
+  path: url,
+  configPagePath:configUrl,
 })
 
 export default KeyStrokeWidgetDefine

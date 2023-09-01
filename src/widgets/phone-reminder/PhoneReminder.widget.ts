@@ -1,4 +1,4 @@
-import { HostedMode, Widget, WidgetKeyword } from '@widget-js/core'
+import { DeployMode, Widget, WidgetKeyword } from '@widget-js/core'
 
 const name = 'cn.widgetjs.widgets.phone_reminder'
 //组件标题
@@ -21,21 +21,13 @@ const PhoneReminderWidgetDefine = new Widget({
   width: 6,
   height: 4,
   minWidth: 1,
-  supportHostedMode: HostedMode.BACKGROUND,
+  supportDeployMode: DeployMode.BACKGROUND,
   maxWidth: 2,
   minHeight: 2,
   maxHeight: 2,
   previewImage: '/images/preview_phone_reminder.png',
-  routes: [
-    {
-      url: url,
-      name: 'index'
-    },
-    {
-      url: configUrl,
-      name: 'config'
-    }
-  ]
+  path: url,
+  configPagePath:configUrl,
 })
 
 export default PhoneReminderWidgetDefine

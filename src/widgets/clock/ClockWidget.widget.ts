@@ -10,6 +10,8 @@ const keywords = [WidgetKeyword.RECOMMEND];
 const url = "/widget/clock";
 const configUrl = "/widget/config/clock";
 const ClockWidgetDefine = new Widget({
+  path: url,
+  configPagePath:configUrl,
   name: name,
   title: title,
   description: description,
@@ -21,17 +23,7 @@ const ClockWidgetDefine = new Widget({
   maxWidth: 4,
   minHeight: 2,
   maxHeight: 4,
-  previewImage: '/images/preview_clock.png',
-  routes: [
-    {
-      url: url,
-      name: 'index'
-    },
-    {
-      url: configUrl,
-      name: 'config'
-    },
-  ]
+  previewImage: '/images/preview_clock.png'
 })
 
 

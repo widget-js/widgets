@@ -1,9 +1,9 @@
 import PhoneReminderWidgetDefine from "./PhoneReminder.widget";
 
-const url = PhoneReminderWidgetDefine.getIndexRoute().url;
+const url = PhoneReminderWidgetDefine.path;
 const name = PhoneReminderWidgetDefine.name;
 
-const configUrl = PhoneReminderWidgetDefine.getConfigRoute()!.url!.split("?")[0];
+const configUrl = PhoneReminderWidgetDefine.configPagePath!.split("?")[0];
 
 const PhoneReminderWidgetRoutes = [
     {

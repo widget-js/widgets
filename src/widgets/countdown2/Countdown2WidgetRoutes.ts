@@ -1,9 +1,9 @@
 import Countdown2WidgetDefine from "./Countdown2.widget";
 
-const url = Countdown2WidgetDefine.getIndexRoute().url;
+const url = Countdown2WidgetDefine.path;
 const name = Countdown2WidgetDefine.name;
 
-const configUrl = Countdown2WidgetDefine.getConfigRoute()!.url;
+const configUrl = Countdown2WidgetDefine.configPagePath;
 
 const Countdown2WidgetRoutes = [
     {

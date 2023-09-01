@@ -25,12 +25,8 @@ const MickeyClockWidgetDefine = new Widget({
   minHeight: 2,
   maxHeight: 3,
   previewImage: "/images/preview_micky_clock.png",
-  routes: [
-    {
-      url: url,
-      name: 'index'
-    }
-  ]
+  path: url,
+  configPagePath:configUrl,
 })
 
 export default MickeyClockWidgetDefine;

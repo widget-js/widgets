@@ -1,6 +1,6 @@
 import DynamicIslandWidgetDefine from "./DynamicIsland.widget";
 
-const url = DynamicIslandWidgetDefine.getIndexRoute().url;
+const url = DynamicIslandWidgetDefine.path;
 const name = DynamicIslandWidgetDefine.name;
 
 const DynamicIslandWidgetRoutes = [

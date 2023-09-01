@@ -1,9 +1,9 @@
 import TodoListWidgetDefine from "./TodoList.widget";
 
-const url = TodoListWidgetDefine.getIndexRoute().url;
+const url = TodoListWidgetDefine.path;
 const name = TodoListWidgetDefine.name;
 
-const configUrl = TodoListWidgetDefine.getConfigRoute()!.url;
+const configUrl = TodoListWidgetDefine.configPagePath;
 
 const TodoListWidgetRoutes = [
     {
