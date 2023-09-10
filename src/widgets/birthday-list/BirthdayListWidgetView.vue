@@ -5,25 +5,22 @@
 </template>
 
 <script lang="ts" setup>
-import BirthdayListWidget from "./BirthdayListWidget.vue";
-import BirthdayListData from "@/widgets/birthday-list/model/BirthdayListData";
-import {useWidget, WidgetWrapper} from "@widget-js/vue3";
-import {BrowserWindowApi, DepolyedWidgetApi, WidgetApi} from "@widget-js/core";
+import BirthdayListWidget from './BirthdayListWidget.vue'
+import BirthdayListData from '@/widgets/birthday-list/model/BirthdayListData'
+import { useWidget, WidgetWrapper } from '@widget-js/vue3'
+import { BrowserWindowApi, DeployedWidgetApi, WidgetApi } from '@widget-js/core'
 
-
-const {widgetData, widgetParams} = useWidget(BirthdayListData, {
+const { widgetData, widgetParams } = useWidget(BirthdayListData, {
   loadDataByWidgetName: true
 })
 
 const add = async () => {
-  const url = await WidgetApi.getWidgetConfigUrl(widgetData.value.name, widgetParams);
+  const url = await WidgetApi.getWidgetConfigUrl(widgetData.value.name, widgetParams)
   if (url) {
-    // DepolyedWidgetApi.openConfigRoute()
-    await BrowserWindowApi.openUrl(url);
+    // DeployedWidgetApi.openConfigRoute()
+    await BrowserWindowApi.openUrl(url)
   }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

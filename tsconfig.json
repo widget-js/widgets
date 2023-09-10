@@ -22,7 +22,6 @@
     "baseUrl": ".",
     "types": [
       "element-plus/global",
-      "@widget-js/core",
       "vue"
     ],
     "paths": {

@@ -1,6 +1,6 @@
 <template>
   <div class="picker-group">
-    <el-dialog v-model="visibleModel" :show-close="false" @opened="opened = true" @closed="opened= false">
+    <el-dialog v-model="visibleModel" :modal="false" :show-close="false" @opened="opened = true" @closed="opened= false">
       <template #header="{ close, titleId, titleClass }">
         <div class="header">
           <el-radio-group v-model="isLunarModel" label="label position">

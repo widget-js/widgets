@@ -27,12 +27,14 @@ import SolarDatePicker from '@/components/SolarDatePicker.vue'
 import dayjs from 'dayjs'
 import {DateType} from '@/countdown/Event'
 import {Lunar} from 'lunar-typescript'
-import {WidgetDataApi} from '@widget-js/core'
+import {BrowserWindowApi, WidgetDataApi} from '@widget-js/core'
 
 export default {
   name: '',
   components: {SolarDatePicker, DatePickerDialog, CountdownWidget, WidgetEditDialog},
   setup() {
+    BrowserWindowApi.setSize(600, 400)
+    BrowserWindowApi.center()
     const showDatePicker = ref(false)
     const date = ref(CountdownModel.DEFAULT_DATE)
     const isLunar = ref(false)

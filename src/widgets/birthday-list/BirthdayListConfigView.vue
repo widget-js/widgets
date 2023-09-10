@@ -3,6 +3,7 @@
     :widget-params="widgetParams"
     :widget-data="widgetData"
     :option="widgetConfigOption"
+    @apply="onApplyClick()"
     @confirm="onSaveClick()"
     :enable-background="true">
     <template v-slot:form>
@@ -18,7 +19,7 @@
         row-key="createdAt"
         style="width: 100%"
         table-layout="auto">
-        <el-table-column type="index" width="60" align="center"/>
+        <el-table-column type="index" width="60" align="center" />
         <el-table-column label="姓名" prop="name" align="center">
           <template #default="{ row }">
             <el-input v-model="row.name" maxlength="10" />
@@ -56,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import {NotificationApi, WidgetDataApi} from '@widget-js/core'
+import { BrowserWindowApi, NotificationApi, WidgetDataApi } from '@widget-js/core'
 import BirthdayListWidget from './BirthdayListWidget.vue'
 import BirthdayListData, { BirthdayPeople } from '@/widgets/birthday-list/model/BirthdayListData'
 import { useWidget, WidgetConfigOption, WidgetEditDialog } from '@widget-js/vue3'
@@ -65,9 +66,16 @@ export default {
   name: 'BirthdayListConfigView',
   components: { BirthdayListWidget, WidgetEditDialog },
   setup() {
+    BrowserWindowApi.setSize(950, 500)
+    BrowserWindowApi.center()
     const widgetConfigOption = new WidgetConfigOption({ backgroundColor: true, borderRadius: false })
     const { widgetData, widgetParams } = useWidget(BirthdayListData, {
-      loadDataByWidgetName: true
+      loadDataByWidgetName: true,
+      onDataLoaded: (data) => {
+        console.log(widgetParams.name)
+        console.log(widgetParams.id)
+        console.log(data)
+      }
     })
     return { widgetData, widgetParams, widgetConfigOption }
   },
@@ -79,6 +87,11 @@ export default {
      * 点击保存按钮
      */
     async onSaveClick() {
+      await this.onApplyClick()
+      window.close()
+    },
+
+    async onApplyClick() {
       let that = this
       if (that.widgetData.peopleList && that.widgetData.peopleList.length > 0) {
         var names = [] as any[]
@@ -109,7 +122,6 @@ export default {
         }
       }
       await WidgetDataApi.saveByName(this.widgetData)
-      window.close()
     },
     add() {
       const newPeople: BirthdayPeople = {

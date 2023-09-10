@@ -8,7 +8,7 @@ const desc = { 'zh-CN': '自动倒计时的生日列表' }
 //组件关键词
 const keywords = [WidgetKeyword.RECOMMEND]
 const path = '/widget/birthday_list'
-const configPagePath = '/widget/config/birthday_list?win_width=1100&win_height=900'
+const configPagePath = '/widget/config/birthday_list'
 const BirthdayListWidgetDefine = new Widget({
   name: name,
   title: title,

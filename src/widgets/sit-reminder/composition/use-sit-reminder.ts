@@ -20,7 +20,7 @@ import SitReminderWidgetDefine from "@/widgets/sit-reminder/SitReminder.widget";
  * 久坐提醒
  */
 const useSitReminder = () => {
-  const sitReminder = new SitReminder(SitReminderWidgetDefine.name)
+  const sitReminder = new SitReminder()
   const cancelBroadcast = sitReminder.name + '.cancel'
   const confirmBroadcast = sitReminder.name + '.confirm'
   const {widgetData: sitReminderData} = useWidget(SitReminder, {

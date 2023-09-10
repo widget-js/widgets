@@ -3,6 +3,7 @@
     :widget-params="widgetParams"
     :option="widgetConfigOption"
     :widget-data="widgetData"
+    @apply="onApplyClick()"
     @confirm="onSaveClick()">
     <template v-slot:widget>
       <clock-widget
@@ -15,7 +16,7 @@
 
 <script lang="ts">
 import { useWidget, WidgetConfigOption } from '@widget-js/vue3'
-import { WidgetData, WidgetDataApi } from '@widget-js/core'
+import {BrowserWindowApi, WidgetData, WidgetDataApi} from '@widget-js/core'
 import { reactive } from 'vue'
 import ClockWidget from '@/widgets/clock/ClockWidget.vue'
 
@@ -23,6 +24,8 @@ export default {
   name: '',
   components: { ClockWidget },
   setup() {
+    BrowserWindowApi.setSize(600,250);
+    BrowserWindowApi.center();
     const { widgetData, widgetParams } = useWidget(WidgetData)
 
     //修改成需要设置组件参数配置
@@ -30,7 +33,7 @@ export default {
       new WidgetConfigOption({
         custom: false,
         backgroundColor: true,
-        borderRadius: true
+        borderRadius: false
       })
     )
 
@@ -40,6 +43,9 @@ export default {
     async onSaveClick() {
       await WidgetDataApi.save(this.widgetData)
       window.close()
+    },
+    async onApplyClick() {
+      await WidgetDataApi.save(this.widgetData)
     }
   },
   mounted() {

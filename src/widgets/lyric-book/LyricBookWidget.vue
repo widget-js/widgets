@@ -19,7 +19,7 @@ import {
   BroadcastApi,
   BroadcastEvent,
   BrowserWindowApi,
-  DepolyedWidgetApi,
+  DeployedWidgetApi,
   WidgetApi,
   WidgetDataApi
 } from '@widget-js/core'
@@ -125,7 +125,7 @@ export default {
       BrowserWindowApi.hide()
     },
     close() {
-      DepolyedWidgetApi.removeDepolyedWidget(this.widgetId)
+      DeployedWidgetApi.removeDeployedWidget(this.widgetId)
     },
     saveData() {
       this.widgetData.currentPage = this.pageController.getCurrentPage()

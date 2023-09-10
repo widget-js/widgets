@@ -6,18 +6,18 @@
 
 <script lang="ts" setup>
 import WaterReminderWidget from './WaterReminderWidget.vue'
-import {useAppBroadcast, useWidget,WidgetWrapper} from '@widget-js/vue3'
-import {WaterReminderModel} from '@/widgets/water-reminder/model/WaterReminderModel'
-import {ref, watch} from 'vue'
-import {BroadcastEvent, LogApi, NotificationApi, WidgetDataApi} from '@widget-js/core'
+import { useAppBroadcast, useWidget, useWidgetSize, WidgetWrapper } from '@widget-js/vue3'
+import { WaterReminderModel } from '@/widgets/water-reminder/model/WaterReminderModel'
+import { ref, watch, computed, onMounted } from 'vue'
+import { BroadcastEvent, LogApi, NotificationApi, WidgetDataApi } from '@widget-js/core'
 import dayjs from 'dayjs'
-import {useIntervalFn} from '@vueuse/core'
+import { useIntervalFn } from '@vueuse/core'
 import WaterReminderWidgetDefine from '@/widgets/water-reminder/WaterReminder.widget'
 
 let lastReminderAt = dayjs()
 const cup = ref(0)
 
-const { widgetData, widgetParams, sizeStyle } = useWidget(WaterReminderModel, {
+const { widgetData, widgetParams } = useWidget(WaterReminderModel, {
   onDataLoaded: (data) => {
     cup.value = data?.getTodayHistory() ?? 0
     if (data?.lastReminderAt) {
@@ -39,6 +39,15 @@ const { widgetData, widgetParams, sizeStyle } = useWidget(WaterReminderModel, {
   loadDataByWidgetName: true
 })
 
+console.log(widgetParams)
+
+watch(
+  widgetData,
+  () => {
+    console.log(widgetData.value)
+  },
+  { deep: true }
+)
 const name = WaterReminderWidgetDefine.name
 const cancelBroadcast = name + '.cancel'
 const okBroadcast = name + '.ok'
@@ -68,6 +77,13 @@ useAppBroadcast([cancelBroadcast, okBroadcast], (broadcastEvent: BroadcastEvent)
     cup.value++
   }
 })
+
+const { windowWidth } = useWidgetSize()
+onMounted(() => {
+  const size = (windowWidth.value * 16) / 155
+  document.documentElement.style.fontSize = `${size}px`
+  return size
+})
 </script>
 
-<style scoped></style>
+<style lang="scss"></style>

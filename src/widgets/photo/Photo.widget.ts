@@ -13,7 +13,7 @@ const path = '/widget/photo'
 const configUrl = '/widget/config/photo'
 //组件关键词
 const PhotoWidgetDefine = new Widget({
-  previewImage: '',
+  previewImage: '/images/preview_photo.png',
   path: path,
   name: name,
   title: title,

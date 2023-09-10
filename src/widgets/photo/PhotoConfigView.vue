@@ -4,6 +4,7 @@
     :option="widgetConfigOption"
     :widget-data="widgetData"
     ref="dialog"
+    @apply="onApplyClick()"
     @confirm="onSaveClick()">
     <template v-slot:form>
       <ElFormItem label="文件夹">
@@ -44,6 +45,10 @@ const widgetConfigOption = reactive(
 const onSaveClick = async () => {
   await WidgetDataApi.save(widgetData.value)
   window.close()
+}
+
+const onApplyClick = async () => {
+  await WidgetDataApi.save(widgetData.value)
 }
 
 const directory = ref('')

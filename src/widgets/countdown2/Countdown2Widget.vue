@@ -159,7 +159,7 @@ export default {
       .date {
         color: #5d626c;
         font-size: 16px;
-        margin-bottom: 4px;
+        margin-bottom: 0.8rem;
       }
     }
   }

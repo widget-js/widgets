@@ -20,6 +20,7 @@ import {computed} from "vue";
 import dayjs from "dayjs";
 import '@/common/dayjs-extend'
 import Color from "color";
+import {BrowserWindowApi} from "../../../../core";
 
 export default {
   name: "CountdownWidget",
@@ -48,7 +49,6 @@ export default {
     }
   },
   setup(props) {
-    console.log(props.date)
     const days = computed(() => {
       const now = dayjs();
       return dayjs(props.date).diff(now, 'day')
@@ -70,9 +70,11 @@ export default {
     const titleFontSizePx = computed(() => {
       return props.fontSize / 2.8 + "px";
     })
+
     const descFontSizePx = computed(() => {
       return props.fontSize / 3 + "px";
     })
+
     const borderRadiusPx = computed(() => {
       return props.borderRadius + "px"
     })

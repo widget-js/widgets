@@ -29,7 +29,7 @@
 import {useWidget, WidgetWrapper} from '@widget-js/vue3'
 import {PhotoData} from '@/widgets/photo/PhotoData'
 import {ref} from 'vue'
-import {FileApi, DepolyedWidgetApi} from '@widget-js/core'
+import {FileApi, DeployedWidgetApi, WidgetApi} from '@widget-js/core'
 import photo1 from './assets/photo1.jpg'
 import photo2 from './assets/photo2.jpg'
 import photo3 from './assets/photo3.jpg'
@@ -67,7 +67,7 @@ const {widgetData, widgetParams} = useWidget(PhotoData, {
 const showConfig = async () => {
   // const widgetConfigUrl = await WidgetApi.getWidgetConfigUrl(widgetParams.name, widgetParams);
   // await BrowserWindowApi.openUrl(widgetConfigUrl!);
-  DepolyedWidgetApi.openConfigRoute(widgetParams.id!, widgetParams)
+  WidgetApi.openConfigPage(widgetParams.id!)
 }
 </script>
 

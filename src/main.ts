@@ -10,5 +10,17 @@ import { MotionPlugin } from '@vueuse/motion'
 import ElementPlus from 'element-plus'
 import './index.css'
 import 'element-plus/dist/index.css'
+import dayjs from "dayjs";
+import 'dayjs/locale/zh-cn.js'
+dayjs.locale('cn')
 
-createApp(App).use(ElementPlus).use(WidgetJsPlugin).use(MotionPlugin).use(router).use(createPinia()).mount('#app')
+const pinia = createPinia()
+const app = createApp(App)
+app.use(ElementPlus)
+app.use(WidgetJsPlugin)
+//@ts-ignore
+app.use(MotionPlugin)
+app.use(router)
+//@ts-ignore
+app.use(pinia)
+app.mount('#app')
