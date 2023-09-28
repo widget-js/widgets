@@ -3,6 +3,7 @@
     :widget-params="widgetParams"
     :widget-data="widgetData"
     :option="widgetConfigOption"
+    @apply="onApplyClick()"
     @confirm="onSaveClick()">
     <template v-slot:form>
       <el-form>
@@ -24,12 +25,14 @@ import LaborProgressWidget from './LaborProgressWidget.vue'
 import LaborProgressData from '@/widgets/labor-progress/model/LaborProgressData'
 import { useWidget, WidgetCheckboxField } from '@widget-js/vue3'
 import { WidgetTimeRangeField } from '@widget-js/vue3'
-import { WidgetDataApi } from '@widget-js/core'
+import {BrowserWindowApi, WidgetDataApi} from '@widget-js/core'
 
 export default {
   name: 'LaborProgressConfigView',
   components: { WidgetTimeRangeField, WidgetCheckboxField, LaborProgressWidget, WidgetEditDialog },
   setup() {
+    BrowserWindowApi.setSize(600, 500)
+    BrowserWindowApi.center()
     const widgetConfigOption = new WidgetConfigOption({ backgroundColor: true, borderRadius: true, preview: false })
 
     const { widgetData, widgetParams, sizeStyle } = useWidget(LaborProgressData, {
@@ -51,6 +54,9 @@ export default {
     async onSaveClick() {
       await WidgetDataApi.save(this.widgetData)
       window.close()
+    },
+    async onApplyClick(){
+      await WidgetDataApi.save(this.widgetData)
     }
   },
   watch: {

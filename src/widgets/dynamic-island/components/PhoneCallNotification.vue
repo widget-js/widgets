@@ -97,9 +97,9 @@ const {
 })
 
 
-watch(ringtoneEnd, () => {
-  voicePlaying.value = true
-});
+// watch(ringtoneEnd, () => {
+//   voicePlaying.value = true
+// });
 
 watch(voiceEnded, () => {
   hangupPlaying.value = true
@@ -129,8 +129,8 @@ const stop = () => {
 
 const start = () => {
   time = 0;
-  ringtonePlaying.value = true;
-  voicePlaying.value = false;
+  ringtonePlaying.value = false;
+  voicePlaying.value = true;
   hangup.value = false;
 }
 
@@ -196,7 +196,6 @@ $childHeight: calc($containerHeight - 1.6rem);
   padding: 0.8rem;
   width: 100%;
   border-radius: 12px;
-  max-height: $containerHeight;
   align-items: center;
 
   .avatar {

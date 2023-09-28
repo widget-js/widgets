@@ -3,6 +3,7 @@
     :widget-params="widgetParams"
     :option="widgetConfigOption"
     :widget-data="widgetData"
+    @apply="onApplyClick"
     @confirm="onSaveClick()">
     <template v-slot:form>
       <el-table :data="widgetData.reminders" :style="{ minHeight: '300px' }" style="width: 100%" table-layout="auto">
@@ -51,14 +52,15 @@
 
 <script lang="ts">
 import PhoneReminderWidget from './PhoneReminderWidget.vue'
-import { useWidget, WidgetConfigOption, WidgetEditDialog } from '@widget-js/vue3'
-import { NotificationApi, WidgetApi, WidgetDataApi } from '@widget-js/core'
+import { WidgetConfigOption, WidgetEditDialog } from '@widget-js/vue3'
+import { BrowserWindowApi, NotificationApi, WidgetApi, WidgetDataApi } from '@widget-js/core'
 import { reactive, ref } from 'vue'
 import { PhoneReminder, PhoneReminderData } from '@/widgets/phone-reminder/model/PhoneReminder'
 import PhoneReminderWidgetDefine from '@/widgets/phone-reminder/PhoneReminder.widget'
 import TimePickerDialog from '@/components/TimePickerDialog.vue'
 import 'dayjs/locale/zh-cn'
 import dayjs from 'dayjs'
+import { useWidget } from '@/hook/use-widget'
 
 let phoneReminder: PhoneReminder
 export default {
@@ -70,10 +72,14 @@ export default {
   },
   components: { TimePickerDialog, PhoneReminderWidget, WidgetEditDialog },
   setup() {
+    BrowserWindowApi.setup({ center: true, width: 1000, height: 600 })
     const phoneReminderData = new PhoneReminderData(PhoneReminderWidgetDefine.name)
     const { widgetData, widgetParams } = useWidget(PhoneReminderData, {
       defaultData: phoneReminderData,
-      loadDataByWidgetName: true
+      widgetName: PhoneReminderWidgetDefine.name,
+      loadDataByWidgetName: true,
+      onDataLoaded: (data) => {
+      }
     })
     //修改成需要设置组件参数配置
     const widgetConfigOption = reactive(
@@ -105,6 +111,9 @@ export default {
     async listen(reminder: PhoneReminder) {
       const appNotification = await reminder.toNotification()
       await NotificationApi.send(appNotification)
+    },
+    async onApplyClick() {
+      await WidgetDataApi.saveByName(this.widgetData)
     },
     async onSaveClick() {
       // this.widgetData.reset();

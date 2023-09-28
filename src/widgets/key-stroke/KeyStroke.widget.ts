@@ -26,6 +26,7 @@ const KeyStrokeWidgetDefine = new Widget({
   maxHeight: 3,
   supportDeployMode: DeployMode.BACKGROUND,
   backgroundThrottling: false,
+  permissions: ['keyboard'],
   movable: false,
   previewImage: '/images/preview_keystroke.png',
   path: url,

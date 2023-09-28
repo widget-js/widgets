@@ -3,12 +3,12 @@
     :option="widgetConfigOption"
     :widget-data="widgetData"
     :widget-params="widgetParams"
-    @apply="onApplyClick()"
-    @confirm="onSaveClick()">
+    @apply="save"
+    @confirm="save({ closeWindow: true })">
     <template v-slot:form>
       <el-form :model="widgetData">
         <el-form-item label="进度类型">
-          <el-radio-group v-model="widgetData.progressType" >
+          <el-radio-group v-model="widgetData.progressType">
             <el-radio :label="ProgressType.today">今天</el-radio>
             <el-radio :label="ProgressType.toWeek">本周</el-radio>
             <el-radio :label="ProgressType.toMonth">本月</el-radio>
@@ -41,51 +41,28 @@
   </widget-edit-dialog>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
 import { useWidget, WidgetConfigOption, WidgetEditDialog } from '@widget-js/vue3'
 import { ProgressType, WaveProgressData } from '@/widgets/wave-progress/model/WaveProgressData'
-import WaveProgressWidget from '@/widgets/wave-progress/WaveProgressWidget.vue'
-import { BrowserWindowApi, WidgetDataApi } from '@widget-js/core'
+import { BrowserWindowApi } from '@widget-js/core'
 
-export default defineComponent({
-  name: 'WaveProgressConfigView',
-  components: { WidgetEditDialog, WaveProgressWidget },
-  computed: {
-    ProgressType() {
-      return ProgressType
-    }
-  },
-  setup() {
-    BrowserWindowApi.setSize(600, 390);
-    BrowserWindowApi.center();
-    const { widgetData, widgetParams } = useWidget(WaveProgressData)
-    const widgetConfigOption = new WidgetConfigOption({
-      backgroundColor: true,
-      custom: true,
-      borderRadius: true,
-      preview: false
-    })
-    return { widgetData, widgetParams, widgetConfigOption }
-  },
-  methods: {
-    handleChangeCustomDate() {
-      const now = new Date()
-      if ((this.widgetData.startDate ?? now) > (this.widgetData.endDate ?? now)) {
-        const start: Date = this.widgetData.startDate ?? now
-        this.widgetData.startDate = this.widgetData.endDate
-        this.widgetData.endDate = start
-      }
-    },
-    async onApplyClick() {
-      await WidgetDataApi.save(this.widgetData)
-    },
-    async onSaveClick() {
-      await WidgetDataApi.save(this.widgetData)
-      window.close()
-    }
-  }
+BrowserWindowApi.setup({ width: 600, height: 390, center: true })
+const { widgetData, widgetParams, save } = useWidget(WaveProgressData)
+const widgetConfigOption = new WidgetConfigOption({
+  backgroundColor: true,
+  custom: true,
+  borderRadius: true,
+  preview: false
 })
+
+const handleChangeCustomDate = () => {
+  const now = new Date()
+  if ((widgetData.value.startDate ?? now) > (widgetData.value.endDate ?? now)) {
+    const start: Date = widgetData.value.startDate ?? now
+    widgetData.value.startDate = widgetData.value.endDate
+    widgetData.value.endDate = start
+  }
+}
 </script>
 
 <style scoped>

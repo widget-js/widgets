@@ -9,7 +9,7 @@ const SitReminderWidgetRoutes = [
   {
     path: url,
     name: `${name}`,
-    component: () => import(/* webpackChunkName: "com.wisdom.widgets.sit_reminder" */ './SitReminderWidgetView.vue')
+    component: () => import(/* webpackChunkName: "com.wisdom.widgets.sit_reminder" */ './SitReminderWidget.vue')
   },
   {
     path: configUrl,

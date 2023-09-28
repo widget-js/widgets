@@ -10,7 +10,7 @@ const keywords = [WidgetKeyword.RECOMMEND]
 //组件路由地址
 const url = '/widget/phone_reminder'
 //配置页路由地址
-const configUrl = '/widget/config/phone_reminder?win_width=1000'
+const configUrl = '/widget/config/phone_reminder'
 //组件关键词
 const PhoneReminderWidgetDefine = new Widget({
   name: name,

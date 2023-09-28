@@ -11,7 +11,7 @@
       </div>
       <div class="thumb" ref="container" :style="{ left: `${percent}%` }">
         <img :src="currentTimeline.emoji" class="emoji" alt="" />
-        <div class="time">{{ time.format('HH:mm') }}</div>
+<!--        <div class="time">{{ time.format('HH:mm') }}</div>-->
         <div
           class="second animate__animated animate__fadeOutUp animate__infinite"
           :style="{ left: `${secondLeft}px`, animationDuration: `${currentTimeline.titleAnimationDuration}s` }">
@@ -150,17 +150,17 @@ export default {
   justify-content: center;
   align-content: center;
   backdrop-filter: blur(10px);
+  align-items: center;
 
   .progress-bar {
     position: relative;
-    top: calc(50% - 16px);
     width: 80%;
     max-height: 54px;
-
+    display: flex;
+    align-items: center;
     .thumb {
       position: absolute;
       left: -25px;
-      top: -16px;
       width: 50px;
       display: flex;
       transform: translateX(-30px);

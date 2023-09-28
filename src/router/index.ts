@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import {createRouter, createWebHashHistory} from 'vue-router'
 import WidgetRouter from '@/widgets/widget-router'
 
 /**

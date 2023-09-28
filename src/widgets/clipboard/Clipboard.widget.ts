@@ -24,6 +24,7 @@ const ClipboardWidgetDefine = new Widget({
   height: 1,
   minWidth: 6,
   maxWidth: 6,
+  permissions:['clipboard'],
   previewImage: '/images/preview_clipboard.png',
   minHeight: 1,
   maxHeight: 1,

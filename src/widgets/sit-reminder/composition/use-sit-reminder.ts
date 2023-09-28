@@ -1,20 +1,11 @@
-import {useAppBroadcast, useWidget} from '@widget-js/vue3'
+import { useWidget } from '@widget-js/vue3'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
+import { BrowserWindowApi, DeviceApi, NotificationApi, WidgetApi, WidgetApiEvent } from '@widget-js/core'
+import { useIntervalFn, useStorage } from '@vueuse/core'
+import { SitReminder } from '@/widgets/sit-reminder/model/SitReminder'
 
 dayjs.extend(duration)
-import {
-  BroadcastEvent,
-  BrowserWindowApi,
-  DeviceApi,
-  NotificationApi,
-  WidgetApi,
-  WidgetApiEvent,
-  WidgetDataApi
-} from '@widget-js/core'
-import {useIntervalFn, useStorage} from '@vueuse/core'
-import {SitReminder} from "@/widgets/sit-reminder/model/SitReminder";
-import SitReminderWidgetDefine from "@/widgets/sit-reminder/SitReminder.widget";
 
 /**
  * 久坐提醒
@@ -23,10 +14,18 @@ const useSitReminder = () => {
   const sitReminder = new SitReminder()
   const cancelBroadcast = sitReminder.name + '.cancel'
   const confirmBroadcast = sitReminder.name + '.confirm'
-  const {widgetData: sitReminderData} = useWidget(SitReminder, {
+  const { widgetData: sitReminderData } = useWidget(SitReminder, {
     defaultData: sitReminder,
     loadDataByWidgetName: true,
     widgetName: sitReminder.name,
+    useBroadcastEvent: [cancelBroadcast, confirmBroadcast, WidgetApiEvent.DATA_CHANGED],
+    onBroadcastEvent: async (broadcastEvent) => {
+      console.log(broadcastEvent)
+      if (broadcastEvent.event == cancelBroadcast) {
+      } else if (broadcastEvent.event == confirmBroadcast) {
+        await BrowserWindowApi.openUrl(breakUrl)
+      }
+    },
     onDataLoaded(data) {
       loadBreakUrl(sitReminderData.value.breakInterval)
     }
@@ -38,27 +37,10 @@ const useSitReminder = () => {
   let breakUrl = ''
   let loadBreakUrl = async (minute: number) => {
     const url = await WidgetApi.getWidgetPackageIndexUrl('cn.widgetjs.widgets')
-    breakUrl = url + '/widget/sit_reminder/break?win_fullscreen=true&win_always_on_top=true&duration=' + minute * 60
+    breakUrl = url + '/#/widget/sit_reminder/break?win_fullscreen=true&win_always_on_top=true&duration=' + minute * 60
   }
-  useAppBroadcast([WidgetApiEvent.DATA_CHANGED, cancelBroadcast, confirmBroadcast], async (event: BroadcastEvent) => {
-    console.log(event)
-    if (event.event == WidgetApiEvent.DATA_CHANGED) {
-      if (event.payload.name == sitReminder.name) {
-        WidgetDataApi.findByName(sitReminder.name, SitReminder).then((data) => {
-          if (data) {
-            console.log(data)
-            sitReminderData.value = data
-            loadBreakUrl(sitReminderData.value.breakInterval)
-          }
-        })
-      }
-    } else if (event.event == cancelBroadcast) {
-    } else if (event.event == confirmBroadcast) {
-      await BrowserWindowApi.openUrl(breakUrl)
-    }
-  })
   const interval = 10
-  let lastPoint = {x: 0, y: 0}
+  let lastPoint = { x: 0, y: 0 }
   useIntervalFn(async () => {
     if (!sitReminderData.value.enable) {
       return
@@ -98,4 +80,4 @@ const useSitReminder = () => {
   }, interval * 1000)
 }
 
-export default useSitReminder;
+export default useSitReminder
