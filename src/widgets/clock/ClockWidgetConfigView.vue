@@ -24,7 +24,7 @@ export default {
   name: '',
   components: { ClockWidget },
   setup() {
-    BrowserWindowApi.setSize(600,250);
+    BrowserWindowApi.setSize(600,350);
     BrowserWindowApi.center();
     const { widgetData, widgetParams } = useWidget(WidgetData)
 

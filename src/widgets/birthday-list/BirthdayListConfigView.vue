@@ -66,7 +66,7 @@ export default {
   name: 'BirthdayListConfigView',
   components: { BirthdayListWidget, WidgetEditDialog },
   setup() {
-    BrowserWindowApi.setSize(950, 500)
+    BrowserWindowApi.setSize(1100, 500)
     BrowserWindowApi.center()
     const widgetConfigOption = new WidgetConfigOption({ backgroundColor: true, borderRadius: false })
     const { widgetData, widgetParams } = useWidget(BirthdayListData, {

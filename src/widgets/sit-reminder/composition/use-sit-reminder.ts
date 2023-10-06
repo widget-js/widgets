@@ -36,8 +36,9 @@ const useSitReminder = () => {
   let lastUsedAt = dayjs(lastUsedAtData.value)
   let breakUrl = ''
   let loadBreakUrl = async (minute: number) => {
-    const url = await WidgetApi.getWidgetPackageIndexUrl('cn.widgetjs.widgets')
-    breakUrl = url + '/#/widget/sit_reminder/break?win_fullscreen=true&win_always_on_top=true&duration=' + minute * 60
+    const widgetPackage = await WidgetApi.getWidgetPackage('cn.widgetjs.widgets')
+    breakUrl = widgetPackage.getUrl('widget/sit_reminder/break?win_fullscreen=true&win_always_on_top=true&duration=' + minute * 60)
+    console.log(breakUrl)
   }
   const interval = 10
   let lastPoint = { x: 0, y: 0 }

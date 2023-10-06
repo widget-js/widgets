@@ -6,7 +6,7 @@ export class SitReminder extends WidgetData {
   breakInterval = 5
   sitInterval = 30
   mouseCheckInterval = 5
-
+  name = SitReminderWidgetDefine.name
   constructor() {
     super(SitReminderWidgetDefine.name)
   }

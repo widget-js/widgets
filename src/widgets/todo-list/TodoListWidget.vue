@@ -13,11 +13,19 @@
     <el-scrollbar :height="height - 48">
       <div class="body">
         <div class="list" v-show="viewType === 'default'">
-          <transition-group name="list">
-            <template v-for="(item, index) in list" :key="item.id">
-              <TodoItem @finish="todoItemClick(item)" @delete="deleteTodo" editable @edit="edit" :todo="item" />
+          <!--          <transition-group name="list">-->
+          <draggable v-model="list" item-key="id" @end="saveOrder">
+            <template #item="{ element }">
+              <TodoItem
+                :key="element.id"
+                @finish="todoItemClick(element)"
+                @delete="deleteTodo(element)"
+                editable
+                @edit="edit(element)"
+                :todo="element" />
             </template>
-          </transition-group>
+          </draggable>
+          <!--          </transition-group>-->
         </div>
         <div class="list" v-show="viewType === 'history'">
           <template v-for="(item, index) in finishList" :key="item.id">
@@ -42,11 +50,11 @@ import { WidgetApi, WidgetDataApi } from '@widget-js/core'
 import { useElementSize, useMediaControls } from '@vueuse/core'
 import Color from 'color'
 import EditBox from '@/widgets/todo-list/components/EditBox.vue'
+import draggable from 'vuedraggable'
 
 type ViewType = 'default' | 'edit' | 'history'
 const viewType = ref<ViewType>('default')
 
-const list = ref<Todo[]>([])
 const finishList = ref<Todo[]>([])
 
 const props = defineProps({
@@ -71,7 +79,14 @@ const { widgetData, widgetParams } = useWidget(TodoListData, {
     finishList.value = widgetData.value.finishedList
   }
 })
-
+const list = computed<Todo[]>({
+  get: () => {
+    return widgetData.value.todoList
+  },
+  set: (value) => {
+    widgetData.value.todoList = value
+  }
+})
 if (widgetParams.preview) {
   const todo1 = new Todo('背单词')
   const todo2 = new Todo('游戏策划')
@@ -91,10 +106,19 @@ const saveTodo = (data: TodoUpdate) => {
   } else {
     widgetData.value.todoList.splice(0, 0, new Todo(data.content))
   }
+
   WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
   viewType.value = 'default'
   list.value = widgetData.value.todoList
 }
+
+const saveOrder = () => {
+  for (let i = 0; i < list.value.length; i++) {
+    list.value[i].order = i
+  }
+  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
+}
+
 const deleteTodo = (todo: Todo) => {
   widgetData.value.deleteTodo(todo)
   list.value = widgetData.value.todoList

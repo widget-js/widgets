@@ -66,6 +66,7 @@ export class Todo {
   createdAt: string
   content: string
   finishedAt?: string
+  order:number = 0
 
   constructor(content: string) {
     this.createdAt = new Date().toISOString()

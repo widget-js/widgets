@@ -3,30 +3,30 @@
     <div class="content">{{ data?.content }}</div>
     <div class="actions">
       <div class="search-engine" @click="search('bing')">
-        <img src="./assets/bing.png" alt="Bing" @click="search('bing')">
+        <img src="./assets/bing.png" alt="Bing" @click="search('bing')" />
       </div>
       <div class="search-engine">
-        <img src="./assets/google.png" alt="Google" @click="search('google')">
+        <img src="./assets/google.png" alt="Google" @click="search('google')" />
       </div>
       <div class="search-engine">
-        <img src="./assets/baidu.png" alt="BaiDu" @click="search('baidu')">
+        <img src="./assets/baidu.png" alt="BaiDu" @click="search('baidu')" />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {useAppBroadcast, useWidget} from "@widget-js/vue3";
-import {BrowserWindowApi, BrowserWindowApiEvent, ClipboardApiEvent} from "@widget-js/core";
-import {ClipboardData, ClipboardListData} from "@/widgets/clipboard/model/ClipboardData";
-import {ref, watch} from "vue";
-import {Transition, useMotion} from "@vueuse/motion";
-import {delay} from "lodash";
+import { useAppBroadcast, useWidget } from '@widget-js/vue3'
+import { BrowserWindowApi, BrowserWindowApiEvent, ClipboardApiEvent } from '@widget-js/core'
+import { ClipboardData, ClipboardListData } from '@/widgets/clipboard/model/ClipboardData'
+import { ref, watch } from 'vue'
+import { Transition, useMotion } from '@vueuse/motion'
+import { delay } from 'lodash'
 
 type SearchEngine = 'bing' | 'google' | 'baidu'
-const {widgetData} = useWidget(ClipboardListData, {
-  loadDataByWidgetName: true
-})
+// const { widgetData } = useWidget(ClipboardListData, {
+//   loadDataByWidgetName: true
+// })
 const showing = ref(false)
 const data = ref<ClipboardData | undefined>()
 
@@ -49,14 +49,14 @@ const clearHideTimer = () => {
   clearTimeout(hideTimerId)
 }
 
-const {apply, motionProperties} = useMotion(null, {
-  initial: {y: -100, transition},
+const { apply, motionProperties } = useMotion(null, {
+  initial: { y: -100, transition },
   hide: {
     y: -100,
     transition: {
       ...transition,
       onComplete: () => {
-        BrowserWindowApi.hide()
+        // BrowserWindowApi.hide()
       }
     }
   },
@@ -68,7 +68,6 @@ const {apply, motionProperties} = useMotion(null, {
       onComplete: () => {
         // electron bug，设置位置，会导致窗口大小变化，动画结束后恢复大小
         delay(() => {
-          console.log("onComplete")
           BrowserWindowApi.setSize(600, 56)
           BrowserWindowApi.setMaximumSize(600, 56)
           BrowserWindowApi.setMinimumSize(600, 56)
@@ -85,14 +84,14 @@ const hideWindow = () => {
 }
 const search = (se: SearchEngine) => {
   switch (se) {
-    case "bing":
-      BrowserWindowApi.openUrl(`https://cn.bing.com/search?q=${data.value?.content}`, {external: true})
+    case 'bing':
+      BrowserWindowApi.openUrl(`https://cn.bing.com/search?q=${data.value?.content}`, { external: true })
       break
-    case "google":
-      BrowserWindowApi.openUrl(`https://www.google.com/search?q=${data.value?.content}`, {external: true})
+    case 'google':
+      BrowserWindowApi.openUrl(`https://www.google.com/search?q=${data.value?.content}`, { external: true })
       break
-    case "baidu":
-      BrowserWindowApi.openUrl(`https://www.baidu.com/s?wd=${data.value?.content}`, {external: true})
+    case 'baidu':
+      BrowserWindowApi.openUrl(`https://www.baidu.com/s?wd=${data.value?.content}`, { external: true })
       break
   }
 }
@@ -101,27 +100,34 @@ watch(
   () => motionProperties['y'],
   (newY) => {
     BrowserWindowApi.setPosition({
-      y: newY,
+      y: newY
     })
   }
 )
 
-BrowserWindowApi.setSize(600, 56)
-
-BrowserWindowApi.setMovable(true)
-BrowserWindowApi.alignToScreen('top-center')
+const initWindow = async () => {
+  await BrowserWindowApi.setup({
+    width: 600,
+    height: 56,
+    maxWidth: 600,
+    maxHeight: 56,
+    resizable: false,
+    movable: false
+  })
+  await BrowserWindowApi.alignToScreen('top-center')
+  await BrowserWindowApi.hide()
+}
+initWindow()
 useAppBroadcast([ClipboardApiEvent.CHANGED, BrowserWindowApiEvent.FOCUS], async (broadcast) => {
   if (broadcast.event == ClipboardApiEvent.CHANGED) {
     const text = broadcast.payload['content'] as string
-    data.value = new ClipboardData(text);
-    console.log(text.substring(0, 20))
-    // widgetData.value.list.push(clipboardData)
-    // WidgetDataApi.saveByName(widgetData.value, {sendBroadcast: false})
+    data.value = new ClipboardData(text)
     await BrowserWindowApi.setAlwaysOnTop(true)
     showing.value = true
     await BrowserWindowApi.showInactive()
     apply('show')
     startHideTimer()
+    console.log(text.substring(0, 20))
   } else if (broadcast.event == BrowserWindowApiEvent.FOCUS) {
   }
 })
@@ -138,7 +144,7 @@ useAppBroadcast([ClipboardApiEvent.CHANGED, BrowserWindowApiEvent.FOCUS], async 
   gap: 12px;
   align-items: center;
   box-sizing: border-box;
-  border-image: linear-gradient(221deg, #A8A8A8 0%, rgba(168, 168, 168, 0.00) 70%) 1;
+  border-image: linear-gradient(221deg, #a8a8a8 0%, rgba(168, 168, 168, 0) 70%) 1;
   backdrop-filter: blur(40px);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 
@@ -176,8 +182,6 @@ useAppBroadcast([ClipboardApiEvent.CHANGED, BrowserWindowApiEvent.FOCUS], async 
         background-color: #d9d9d9;
       }
     }
-
-
   }
 }
 </style>

@@ -52,7 +52,7 @@
 
 <script lang="ts">
 import PhoneReminderWidget from './PhoneReminderWidget.vue'
-import { WidgetConfigOption, WidgetEditDialog } from '@widget-js/vue3'
+import {useWidget, WidgetConfigOption, WidgetEditDialog} from '@widget-js/vue3'
 import { BrowserWindowApi, NotificationApi, WidgetApi, WidgetDataApi } from '@widget-js/core'
 import { reactive, ref } from 'vue'
 import { PhoneReminder, PhoneReminderData } from '@/widgets/phone-reminder/model/PhoneReminder'
@@ -60,7 +60,6 @@ import PhoneReminderWidgetDefine from '@/widgets/phone-reminder/PhoneReminder.wi
 import TimePickerDialog from '@/components/TimePickerDialog.vue'
 import 'dayjs/locale/zh-cn'
 import dayjs from 'dayjs'
-import { useWidget } from '@/hook/use-widget'
 
 let phoneReminder: PhoneReminder
 export default {
