@@ -22,7 +22,7 @@
                 @delete="deleteTodo(element)"
                 editable
                 @edit="edit(element)"
-                :todo="element" />
+                :todo="element"/>
             </template>
           </draggable>
           <!--          </transition-group>-->
@@ -32,26 +32,25 @@
             <TodoItem @finish="finishTodoItemClick(item)" @delete="deleteTodo" :todo="item"></TodoItem>
           </template>
         </div>
-        <EditBox ref="editBox" @cancel="viewType = 'default'" @save="saveTodo($event)" v-show="viewType === 'edit'" />
+        <EditBox ref="editBox" @cancel="viewType = 'default'" @save="saveTodo($event)" v-show="viewType === 'edit'"/>
       </div>
     </el-scrollbar>
-    <audio ref="ding1"></audio>
-    <audio ref="ding2"></audio>
-    <audio ref="ding3"></audio>
+    <audio ref="ringtone" src="./audio/ding.mp3"></audio>
   </div>
 </template>
 
 <script lang="ts" setup>
 import TodoItem from './components/TodoItem.vue'
-import { computed, ref } from 'vue'
-import { useWidget } from '@widget-js/vue3'
-import { Todo, TodoListData, TodoUpdate } from '@/widgets/todo-list/model/TodoListData'
-import { WidgetApi, WidgetDataApi } from '@widget-js/core'
-import { useElementSize, useMediaControls } from '@vueuse/core'
+import {computed, ref} from 'vue'
+import {useWidget} from '@widget-js/vue3'
+import {Todo, TodoListData, TodoUpdate} from '@/widgets/todo-list/model/TodoListData'
+import {WidgetApi, WidgetDataApi} from '@widget-js/core'
+import {useElementSize, useMediaControls} from '@vueuse/core'
 import Color from 'color'
 import EditBox from '@/widgets/todo-list/components/EditBox.vue'
 import draggable from 'vuedraggable'
-import { useSortable } from '@vueuse/integrations/useSortable'
+import {useSortable} from '@vueuse/integrations/useSortable'
+
 type ViewType = 'default' | 'edit' | 'history'
 const viewType = ref<ViewType>('default')
 
@@ -72,7 +71,7 @@ const props = defineProps({
   }
 })
 
-const { widgetData, widgetParams } = useWidget(TodoListData, {
+const {widgetData, widgetParams} = useWidget(TodoListData, {
   loadDataByWidgetName: true,
   onDataLoaded: () => {
     list.value = widgetData.value.todoList
@@ -90,9 +89,9 @@ const list = computed<Todo[]>({
 
 const root = ref<HTMLElement>()
 const listRef = ref<HTMLElement>()
-useSortable(listRef,list);
+useSortable(listRef, list);
 const editBox = ref<typeof EditBox>()
-const { height } = useElementSize(root)
+const {height} = useElementSize(root)
 const saveTodo = (data: TodoUpdate) => {
   if (data.todo) {
     const findIndex = widgetData.value.todoList.findIndex((it) => it.id == data.todo!.id)
@@ -103,7 +102,7 @@ const saveTodo = (data: TodoUpdate) => {
     widgetData.value.todoList.splice(0, 0, new Todo(data.content))
   }
 
-  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
+  WidgetDataApi.saveByName(widgetData.value, {sendBroadcast: false})
   viewType.value = 'default'
   list.value = widgetData.value.todoList
 }
@@ -112,57 +111,38 @@ const saveOrder = () => {
   for (let i = 0; i < list.value.length; i++) {
     list.value[i].order = i
   }
-  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
+  WidgetDataApi.saveByName(widgetData.value, {sendBroadcast: false})
 }
 
 const deleteTodo = (todo: Todo) => {
   widgetData.value.deleteTodo(todo)
   list.value = widgetData.value.todoList
   finishList.value = widgetData.value.finishedList
-  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
+  WidgetDataApi.saveByName(widgetData.value, {sendBroadcast: false})
 }
 const edit = (todo: Todo) => {
   editBox.value!.setTodo(todo)
   viewType.value = 'edit'
 }
+const ringtone = ref<HTMLAudioElement>()
 
 const borderRadiusPx = computed(() => props.borderRadius + 'px')
 const todoItemClick = (todo: Todo) => {
   widgetData.value.finishTodo(todo)
   list.value = widgetData.value.todoList
   finishList.value = widgetData.value.finishedList
-  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
-  for (let ringtone of ringtoneArr) {
-    if (!ringtone.value) {
-      ringtone.value = true
-      break
-    }
-  }
+  WidgetDataApi.saveByName(widgetData.value, {sendBroadcast: false})
+  const clone = ringtone.value!.cloneNode(true) as HTMLAudioElement;
+  clone.play();
 }
 
 const finishTodoItemClick = (todo: Todo) => {
   widgetData.value.undoTodo(todo)
   list.value = widgetData.value.todoList
   finishList.value = widgetData.value.finishedList
-  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
+  WidgetDataApi.saveByName(widgetData.value, {sendBroadcast: false})
 }
 
-const ding1 = ref()
-const ding2 = ref()
-const ding3 = ref()
-const { playing: ringtonePlaying1 } = useMediaControls(ding1, {
-  src: './audio/ding.mp3'
-})
-
-const { playing: ringtonePlaying2 } = useMediaControls(ding2, {
-  src: './audio/ding.mp3'
-})
-
-const { playing: ringtonePlaying3 } = useMediaControls(ding3, {
-  src: './audio/ding.mp3'
-})
-
-const ringtoneArr = [ringtonePlaying1, ringtonePlaying2, ringtonePlaying3]
 
 const borderColor = computed(() => {
   return new Color(props.color).alpha(0.3).toString()
