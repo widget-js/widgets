@@ -15,7 +15,7 @@
   "dependencies": {
     "@icon-park/vue-next": "^1.4.2",
     "@vueuse/core": "^9.4.0",
-    "@vueuse/integrations": "^9.6.0",
+    "@vueuse/integrations": "^10.5.0",
     "@vueuse/motion": "2.0.0-beta.12",
     "@vueuse/router": "^9.9.0",
     "@widget-js/core": "^0.10.6",
@@ -33,6 +33,7 @@
     "lyric-resolver": "^0.1.6",
     "nanoid": "^4.0.2",
     "pinia": "^2.1.6",
+    "sortablejs": "^1.15.0",
     "vue": "^3.3.4",
     "vue-demi": "^0.14.5",
     "vue-i18n": "^9.2.2",

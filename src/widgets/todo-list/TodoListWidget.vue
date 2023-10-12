@@ -12,7 +12,7 @@
     </div>
     <el-scrollbar :height="height - 48">
       <div class="body">
-        <div class="list" v-show="viewType === 'default'">
+        <div class="list" ref="listRef" v-show="viewType === 'default'">
           <!--          <transition-group name="list">-->
           <draggable v-model="list" item-key="id" @end="saveOrder">
             <template #item="{ element }">
@@ -51,7 +51,7 @@ import { useElementSize, useMediaControls } from '@vueuse/core'
 import Color from 'color'
 import EditBox from '@/widgets/todo-list/components/EditBox.vue'
 import draggable from 'vuedraggable'
-
+import { useSortable } from '@vueuse/integrations/useSortable'
 type ViewType = 'default' | 'edit' | 'history'
 const viewType = ref<ViewType>('default')
 
@@ -87,14 +87,10 @@ const list = computed<Todo[]>({
     widgetData.value.todoList = value
   }
 })
-if (widgetParams.preview) {
-  const todo1 = new Todo('背单词')
-  const todo2 = new Todo('游戏策划')
-  const todo4 = new Todo('KOL合作方案评审')
-  widgetData.value.todoList = [todo1, todo2, todo4]
-}
 
-const root = ref()
+const root = ref<HTMLElement>()
+const listRef = ref<HTMLElement>()
+useSortable(listRef,list);
 const editBox = ref<typeof EditBox>()
 const { height } = useElementSize(root)
 const saveTodo = (data: TodoUpdate) => {
