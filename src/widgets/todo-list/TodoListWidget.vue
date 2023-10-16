@@ -10,51 +10,40 @@
         <span class="icon mgc_add_circle_line" @click="viewType = 'edit'"></span>
       </div>
     </div>
-    <el-scrollbar :height="height - 48">
-      <div class="body">
-        <div class="list" ref="listRef" v-show="viewType === 'default'">
-          <!--          <transition-group name="list">-->
-          <draggable v-model="list" item-key="id" @end="saveOrder">
-            <template #item="{ element }">
-              <TodoItem
-                :key="element.id"
-                @finish="todoItemClick(element)"
-                @delete="deleteTodo(element)"
-                editable
-                @edit="edit(element)"
-                :todo="element"/>
-            </template>
-          </draggable>
-          <!--          </transition-group>-->
-        </div>
-        <div class="list" v-show="viewType === 'history'">
-          <template v-for="(item, index) in finishList" :key="item.id">
-            <TodoItem @finish="finishTodoItemClick(item)" @delete="deleteTodo" :todo="item"></TodoItem>
-          </template>
-        </div>
-        <EditBox ref="editBox" @cancel="viewType = 'default'" @save="saveTodo($event)" v-show="viewType === 'edit'"/>
-      </div>
-    </el-scrollbar>
-    <audio ref="ringtone" src="./audio/ding.mp3"></audio>
+    <!-- list-body设置高度，解决todo拖动会导致视图上升，这个不知道是electron bug，还是文档流设置不当导致的      -->
+    <div class="list-body" :height="height - 48">
+      <el-scrollbar :height="height - 48">
+        <todo-list
+          :todos="todos"
+          @update="update"
+          :finished-todos="finishedTodos"
+          v-show="viewType === 'default'"
+          @edit="edit"></todo-list>
+
+        <finished-todo-list
+          v-show="viewType === 'history'"
+          :finished-todos="finishedTodos"
+          :todos="todos"
+          @update="update"></finished-todo-list>
+        <EditBox ref="editBox" @cancel="viewType = 'default'" @save="saveTodo($event)" v-show="viewType === 'edit'" />
+      </el-scrollbar>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import TodoItem from './components/TodoItem.vue'
-import {computed, ref} from 'vue'
-import {useWidget} from '@widget-js/vue3'
-import {Todo, TodoListData, TodoUpdate} from '@/widgets/todo-list/model/TodoListData'
-import {WidgetApi, WidgetDataApi} from '@widget-js/core'
-import {useElementSize, useMediaControls} from '@vueuse/core'
+import { computed, reactive, ref } from 'vue'
+import { useWidget } from '@widget-js/vue3'
+import { Todo, TodoListData, TodoUpdate } from '@/widgets/todo-list/model/TodoListData'
+import { WidgetDataApi } from '@widget-js/core'
+import { useElementSize } from '@vueuse/core'
 import Color from 'color'
 import EditBox from '@/widgets/todo-list/components/EditBox.vue'
-import draggable from 'vuedraggable'
-import {useSortable} from '@vueuse/integrations/useSortable'
+import TodoList from '@/widgets/todo-list/components/TodoList.vue'
+import FinishedTodoList from '@/widgets/todo-list/components/FinishedTodoList.vue'
 
 type ViewType = 'default' | 'edit' | 'history'
 const viewType = ref<ViewType>('default')
-
-const finishList = ref<Todo[]>([])
 
 const props = defineProps({
   borderRadius: {
@@ -71,78 +60,45 @@ const props = defineProps({
   }
 })
 
-const {widgetData, widgetParams} = useWidget(TodoListData, {
+const todos = reactive<Todo[]>([])
+const finishedTodos = reactive<Todo[]>([])
+const update = () => {
+  widgetData.value.todoList = todos
+  widgetData.value.finishedList = finishedTodos
+  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
+}
+const { widgetData } = useWidget(TodoListData, {
   loadDataByWidgetName: true,
-  onDataLoaded: () => {
-    list.value = widgetData.value.todoList
-    finishList.value = widgetData.value.finishedList
-  }
-})
-const list = computed<Todo[]>({
-  get: () => {
-    return widgetData.value.todoList
-  },
-  set: (value) => {
-    widgetData.value.todoList = value
+  onDataLoaded: (data) => {
+    console.log('onDataLoaded', widgetData.value)
+    todos.splice(0, todos.length, ...widgetData.value.todoList)
+    finishedTodos.splice(0, finishedTodos.length, ...widgetData.value.finishedList)
   }
 })
 
 const root = ref<HTMLElement>()
-const listRef = ref<HTMLElement>()
-useSortable(listRef, list);
+
 const editBox = ref<typeof EditBox>()
-const {height} = useElementSize(root)
+const { height } = useElementSize(root)
 const saveTodo = (data: TodoUpdate) => {
   if (data.todo) {
-    const findIndex = widgetData.value.todoList.findIndex((it) => it.id == data.todo!.id)
+    const findIndex = todos.findIndex((it) => it.id == data.todo!.id)
     if (findIndex > -1) {
-      widgetData.value.todoList[findIndex].content = data.content
+      todos[findIndex].content = data.content
     }
   } else {
-    widgetData.value.todoList.splice(0, 0, new Todo(data.content))
+    todos.splice(0, 0, new Todo(data.content))
   }
-
-  WidgetDataApi.saveByName(widgetData.value, {sendBroadcast: false})
+  update()
   viewType.value = 'default'
-  list.value = widgetData.value.todoList
 }
 
-const saveOrder = () => {
-  for (let i = 0; i < list.value.length; i++) {
-    list.value[i].order = i
-  }
-  WidgetDataApi.saveByName(widgetData.value, {sendBroadcast: false})
-}
-
-const deleteTodo = (todo: Todo) => {
-  widgetData.value.deleteTodo(todo)
-  list.value = widgetData.value.todoList
-  finishList.value = widgetData.value.finishedList
-  WidgetDataApi.saveByName(widgetData.value, {sendBroadcast: false})
-}
 const edit = (todo: Todo) => {
   editBox.value!.setTodo(todo)
   viewType.value = 'edit'
 }
-const ringtone = ref<HTMLAudioElement>()
 
 const borderRadiusPx = computed(() => props.borderRadius + 'px')
-const todoItemClick = (todo: Todo) => {
-  widgetData.value.finishTodo(todo)
-  list.value = widgetData.value.todoList
-  finishList.value = widgetData.value.finishedList
-  WidgetDataApi.saveByName(widgetData.value, {sendBroadcast: false})
-  const clone = ringtone.value!.cloneNode(true) as HTMLAudioElement;
-  clone.play();
-}
-
-const finishTodoItemClick = (todo: Todo) => {
-  widgetData.value.undoTodo(todo)
-  list.value = widgetData.value.todoList
-  finishList.value = widgetData.value.finishedList
-  WidgetDataApi.saveByName(widgetData.value, {sendBroadcast: false})
-}
-
 
 const borderColor = computed(() => {
   return new Color(props.color).alpha(0.3).toString()
@@ -185,15 +141,15 @@ const borderColor = computed(() => {
     }
   }
 
-  .body {
-    padding: 16px;
+  .list-body {
+    position: relative;
 
     .list {
-      .todo-item {
-        &:not(:last-child) {
-          margin-bottom: 8px;
-        }
-      }
+      width: 100%;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
   }
 }

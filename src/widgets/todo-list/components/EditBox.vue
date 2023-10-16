@@ -54,6 +54,7 @@ defineExpose({ setTodo })
 
 <style scoped lang="scss">
 .add-body {
+  padding: 16px;
   .todo-input {
     font-weight: normal;
   }
