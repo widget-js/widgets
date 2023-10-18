@@ -1,34 +1,36 @@
 <template>
   <widget-wrapper>
-    <div class="clock">
-      <div class="flipper" ref="hourRef">
-        <div class="gear"></div>
-        <div class="gear"></div>
-        <div class="top">
-          <div class="text">00</div>
+    <div class="clock-container">
+      <div class="clock">
+        <div class="flipper" ref="hourRef">
+          <div class="gear"></div>
+          <div class="gear"></div>
+          <div class="top">
+            <div class="text">00</div>
+          </div>
+          <div class="bottom">
+            <div class="text">00</div>
+          </div>
         </div>
-        <div class="bottom">
-          <div class="text">00</div>
+        <div class="flipper" ref="minuteRef">
+          <div class="gear"></div>
+          <div class="gear"></div>
+          <div class="top">
+            <div class="text">00</div>
+          </div>
+          <div class="bottom">
+            <div class="text">00</div>
+          </div>
         </div>
-      </div>
-      <div class="flipper" ref="minuteRef">
-        <div class="gear"></div>
-        <div class="gear"></div>
-        <div class="top">
-          <div class="text">00</div>
-        </div>
-        <div class="bottom">
-          <div class="text">00</div>
-        </div>
-      </div>
-      <div class="flipper" ref="secondRef">
-        <div class="gear"></div>
-        <div class="gear"></div>
-        <div class="top">
-          <div class="text">00</div>
-        </div>
-        <div class="bottom">
-          <div class="text">00</div>
+        <div class="flipper" ref="secondRef">
+          <div class="gear"></div>
+          <div class="gear"></div>
+          <div class="top">
+            <div class="text">00</div>
+          </div>
+          <div class="bottom">
+            <div class="text">00</div>
+          </div>
         </div>
       </div>
     </div>
@@ -36,82 +38,90 @@
 </template>
 
 <script lang="ts" setup>
-import {WidgetData} from '@widget-js/core';
-import {useWidget, WidgetWrapper} from '@widget-js/vue3'
-import {nextTick, onMounted, ref} from "vue";
+import { WidgetWrapper } from '@widget-js/vue3'
+import { nextTick, onMounted, ref } from 'vue'
 
-const {widgetData, widgetParams} = useWidget(WidgetData);
-
-var myhour, myminute, mysecond;
 const hourRef = ref<HTMLElement>()
 const minuteRef = ref<HTMLElement>()
 const secondRef = ref<HTMLElement>()
 
 function flipNumber(el: HTMLElement, newNumber: string) {
-  var newTop = el.querySelector(".top")!.cloneNode(true) as HTMLElement;
-  var newBottom = el.querySelector(".bottom")!.cloneNode(true) as HTMLElement;
-  newTop.classList.add("new");
-  newBottom.classList.add("new");
-  newBottom.querySelector(".text")!.textContent = newNumber;
-  el.querySelector(".top")!.after(newTop);
-  el.querySelector(".top.new")!.append(newBottom);
-  el.classList.add("flipping");
-  el.querySelector(".top:not(.new)")!.querySelector(".text")!.textContent = newNumber;
+  var newTop = el.querySelector('.top')!.cloneNode(true) as HTMLElement
+  var newBottom = el.querySelector('.bottom')!.cloneNode(true) as HTMLElement
+  newTop.classList.add('new')
+  newBottom.classList.add('new')
+  newBottom.querySelector('.text')!.textContent = newNumber
+  el.querySelector('.top')!.after(newTop)
+  el.querySelector('.top.new')!.append(newBottom)
+  el.classList.add('flipping')
+  el.querySelector('.top:not(.new)')!.querySelector('.text')!.textContent = newNumber
   setTimeout(function () {
-    el.querySelector(".bottom:not(.new)")!.querySelector(".text")!.textContent = newNumber;
-  }, 500);
+    el.querySelector('.bottom:not(.new)')!.querySelector('.text')!.textContent = newNumber
+  }, 500)
 }
 
 function setTime() {
   for (let elements of document.querySelectorAll('.flipper')) {
-    elements.classList.remove("flipping")
+    elements.classList.remove('flipping')
   }
   for (let elements of document.querySelectorAll('.flipper .new')) {
-    elements.remove();
+    elements.remove()
   }
-  const now = new Date();
-  let seconds = now.getSeconds().toString();
+  const now = new Date()
+  let seconds = now.getSeconds().toString()
   if (seconds.length == 1) {
-    seconds = "0" + seconds;
+    seconds = '0' + seconds
   }
-  let minutes = now.getMinutes().toString();
+  let minutes = now.getMinutes().toString()
   if (minutes.length == 1) {
-    minutes = "0" + minutes;
+    minutes = '0' + minutes
   }
-  let hour: string | number = now.getHours();
-  if (hour > 12) {
-    hour = hour - 12;
-  }
-  if (hour == 0) {
-    hour = 12;
-  }
-  hour = hour.toString();
+  let hour: string | number = now.getHours()
+  // if (hour > 12) {
+  //   hour = hour - 12
+  // }
+  // if (hour == 0) {
+  //   hour = 12
+  // }
+  hour = hour.toString()
   if (hour.length == 1) {
-    hour = "0" + hour;
+    hour = '0' + hour
+  }
+  if (hourRef.value!.querySelector('.top>.text')!.textContent !== hour) {
+    flipNumber(hourRef.value!, hour)
+  }
+  if (minuteRef.value!.querySelector('.top>.text')!.textContent !== minutes) {
+    flipNumber(minuteRef.value!, minutes)
   }
 
-  if (hourRef.value!.querySelector('.top.text')!.textContent !== hour) {
-    flipNumber(hourRef.value!, hour);
-  }
-  if (minuteRef.value!.querySelector('.top.text')!.textContent !== minutes) {
-    flipNumber(minuteRef.value!, hour);
-  }
-
-  if (secondRef.value!.querySelector('.top.text')!.textContent !== seconds) {
-    flipNumber(secondRef.value!, hour);
+  if (secondRef.value!.querySelector('.top>.text')!.textContent !== seconds) {
+    flipNumber(secondRef.value!, seconds)
   }
   setTimeout(function () {
-    setTime();
-  }, 500);
+    setTime()
+  }, 500)
 }
 
+
 onMounted(async () => {
-  await nextTick();
-  setTime();
+  await nextTick()
+  setTime()
 })
 </script>
 
-<style scoped>
+<style lang="scss">
+@font-face {
+  font-family: 'Saira ExtraCondensed';
+  src: url('/font/SairaExtraCondensed-Regular.eot');
+  src: url('/font/SairaExtraCondensed-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/font/SairaExtraCondensed-Regular.woff2') format('woff2'),
+    url('/font/SairaExtraCondensed-Regular.woff') format('woff'),
+    url('/font/SairaExtraCondensed-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*
 font-family: 'Barlow', sans-serif;
 font-family: 'Barlow Condensed', sans-serif;
@@ -137,45 +147,39 @@ html *::after {
   margin: 0;
 }
 
-body {
+.clock-container {
   margin: 0;
   display: flex;
   height: 100vh;
+  width: 100%;
   align-items: center;
   justify-content: center;
-  background-color: var(--bgcolor);
+  border-radius: 22px;
   color: #fff;
-  font-family: "Saira Extra Condensed", sans-serif;
 }
 
 .clock {
   display: grid;
+  width: 100%;
+  height: 100%;
   padding: 0 12px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 12px;
-  min-width: 200px;
-  height: var(--clockheight);
   /*   background: rgb(26, 25, 28); */
-  border-radius: var(--radius);
+  border-radius: 22px;
   /*   background-repeat: no-repeat; */
-  background-image: linear-gradient(
-    rgb(14, 14, 15) 0%,
-    rgb(26, 25, 28) 20%,
-    rgb(44, 44, 52) 50%,
-    rgb(20, 20, 27) 100%
-  );
+  background-image: linear-gradient(rgb(14, 14, 15) 0%, rgb(26, 25, 28) 20%, rgb(44, 44, 52) 50%, rgb(20, 20, 27) 100%);
   /*   border-top: 6px solid rgb(56, 56, 61); */
   /*   border-bottom: 6px solid rgb(59, 59, 65); */
-  box-shadow: inset 0 -3px 6px 3px rgba(0, 0, 0, 0.2),
-  inset 0 4px 8px 3px rgba(0, 0, 0, 0.4),
-  0 2px 3px 1px rgba(255, 255, 255, 0.3), 0 -2px 4px 4px rgba(56, 56, 61, 0.5);
+  box-shadow: inset 0 -3px 6px 3px rgba(0, 0, 0, 0.2), inset 0 4px 8px 3px rgba(0, 0, 0, 0.4),
+    0 2px 3px 1px rgba(255, 255, 255, 0.3), 0 -2px 4px 4px rgba(56, 56, 61, 0.5);
+  font-family: 'Saira ExtraCondensed', sans-serif;
 }
 
 .flipper {
   /*   border: 1px solid #c00; */
   position: relative;
   width: 100%;
-  min-width: 150px;
   height: 100%;
   transform-style: preserve-3d;
   perspective: 1600px;
@@ -183,9 +187,9 @@ body {
 
 .gear {
   position: absolute;
-  top: calc(var(--clockheight) / 3);
-  width: 12px;
-  height: calc(var(--clockheight) / 3);
+  top: calc(100vh / 2 - 100vh / 5);
+  width: 8px;
+  height: calc(100vh / 5);
   background: linear-gradient(
     to bottom,
     #000000 0%,
@@ -209,8 +213,7 @@ body {
 
 .top,
 .bottom {
-  box-shadow: 0 6px 6px 1px rgba(0, 0, 0, 0.5),
-  0 2px 2px 1px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 6px 1px rgba(0, 0, 0, 0.5), 0 2px 2px 1px rgba(255, 255, 255, 0.15);
   border-top: 2px solid rgb(102, 103, 110);
   border-bottom: 2px solid #000;
   /*   transition: all 1s ease-in-out; */
@@ -241,13 +244,15 @@ body {
 }
 
 .text {
-  font-size: 140px;
+  font-family: 'Saira ExtraCondensed', sans-serif;
+  font-size: 80px;
+  color: white;
   display: block;
   position: absolute;
   overflow: hidden;
   width: 100%;
   height: 100%;
-  line-height: 193px;
+  line-height: 120px;
   text-align: center;
 }
 
@@ -273,24 +278,6 @@ body {
   backface-visibility: hidden;
 }
 
-/* .top.new:before {
-  content: "";
-  position: absolute;
-  top: calc(var(--clockheight) / 3);
-  left: 0;
-  width: 15px;
-  height: calc(var(--clockheight) / 3);
-  background: #000;
-}
-.top.new:after {
-  content: "";
-  position: absolute;
-  top: calc(var(--clockheight) / 3);
-  right: 0;
-  width: 15px;
-  height: calc(var(--clockheight) / 3);
-  background: #000;
-} */
 .bottom.new {
   /*   background: red; */
   position: absolute;
@@ -335,6 +322,4 @@ body {
     transform: rotateX(-180deg) translateY(-10px);
   }
 }
-
-Resources
 </style>

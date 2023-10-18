@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TodoItem from '@/widgets/todo-list/components/TodoItem.vue'
-import { PropType } from 'vue/dist/vue'
+import { PropType } from 'vue'
 import { Todo } from '@/widgets/todo-list/model/TodoListData'
 import { WidgetDataApi } from '@widget-js/core'
 
