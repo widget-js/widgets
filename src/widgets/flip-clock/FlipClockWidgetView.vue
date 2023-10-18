@@ -48,17 +48,17 @@ const minuteRef = ref<HTMLElement>()
 const secondRef = ref<HTMLElement>()
 
 function flipNumber(el: HTMLElement, newNumber: string) {
-  var newTop = el.querySelector(".top").cloneNode(true) as HTMLElement;
-  var newBottom = el.querySelector(".bottom").cloneNode(true) as HTMLElement;
+  var newTop = el.querySelector(".top")!.cloneNode(true) as HTMLElement;
+  var newBottom = el.querySelector(".bottom")!.cloneNode(true) as HTMLElement;
   newTop.classList.add("new");
   newBottom.classList.add("new");
-  newBottom.querySelector(".text").textContent = newNumber;
-  el.querySelector(".top").after(newTop);
-  el.querySelector(".top.new").append(newBottom);
+  newBottom.querySelector(".text")!.textContent = newNumber;
+  el.querySelector(".top")!.after(newTop);
+  el.querySelector(".top.new")!.append(newBottom);
   el.classList.add("flipping");
-  el.querySelector(".top:not(.new)").querySelector(".text").textContent = newNumber;
+  el.querySelector(".top:not(.new)")!.querySelector(".text")!.textContent = newNumber;
   setTimeout(function () {
-    el.querySelector(".bottom:not(.new)").querySelector(".text").textContent = newNumber;
+    el.querySelector(".bottom:not(.new)")!.querySelector(".text")!.textContent = newNumber;
   }, 500);
 }
 
@@ -89,15 +89,17 @@ function setTime() {
   if (hour.length == 1) {
     hour = "0" + hour;
   }
-  // if ($(myhour[0]).text() !== hour) {
-  //   flipNumber($(myhour[0]).closest(".flipper"), hour);
-  // }
-  // if ($(myminute[0]).text() !== minutes) {
-  //   flipNumber($(myminute[0]).closest(".flipper"), minutes);
-  // }
-  // if ($(mysecond[0]).text() !== seconds) {
-  //   flipNumber($(mysecond[0]).closest(".flipper"), seconds);
-  // }
+
+  if (hourRef.value!.querySelector('.top.text')!.textContent !== hour) {
+    flipNumber(hourRef.value!, hour);
+  }
+  if (minuteRef.value!.querySelector('.top.text')!.textContent !== minutes) {
+    flipNumber(minuteRef.value!, hour);
+  }
+
+  if (secondRef.value!.querySelector('.top.text')!.textContent !== seconds) {
+    flipNumber(secondRef.value!, hour);
+  }
   setTimeout(function () {
     setTime();
   }, 500);
