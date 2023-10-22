@@ -1,9 +1,7 @@
 import TimeProgressWidgetRoutes from "@/widgets/time-progress/TimeProgressRoutes";
 import WaveProgressRoute from "@/widgets/wave-progress/WaveProgressRoute";
 import LaborProgressWidgetRoutes from "@/widgets/labor-progress/LaborProgressRoutes";
-import {ClockWidgetRoutes} from "@/widgets/clock/ClockWidgetRoutes";
 import BirthdayListWidgetRoutes from "@/widgets/birthday-list/BirthdayListWidgetRoutes";
-import GlitchWidgetRoutes from "./glitch/GlitchWidgetRoutes";
 import DynamicIslandWidgetRoutes from "@/widgets/dynamic-island/DynamicIslandWidgetRoutes";
 import MickeyClockWidgetRoutes from "@/widgets/mickey-clock/MickeyClockWidgetRoutes";
 import LyricBookWidgetRoutes from "@/widgets/lyric-book/LyricBookWidgetRoutes";
@@ -13,11 +11,9 @@ import Countdown2WidgetRoutes from "./countdown2/Countdown2WidgetRoutes";
 import PhoneReminderWidgetRoutes from "./phone-reminder/PhoneReminderWidgetRoutes";
 import WaterReminderWidgetRoutes from "./water-reminder/WaterReminderWidgetRoutes";
 import KeyStrokeWidgetRoutes from "./key-stroke/KeyStrokeWidgetRoutes";
-// import CollectionWidgetRoutes from "./collection/CollectionWidgetRoutes";
 import PhotoWidgetRoutes from "./photo/PhotoWidgetRoutes";
 import SitReminderWidgetRoutes from "./sit-reminder/SitReminderWidgetRoutes";
 import ClipboardWidgetRoutes from "./clipboard/ClipboardWidgetRoutes";
-import FlipClockWidgetRoutes from "./flip-clock/FlipClockWidgetRoutes";
 //FBI WANING! IMPORT PLACE, DONT DELETE THIS LINE
 
 
@@ -25,9 +21,7 @@ const WidgetRouter = [
     ...LaborProgressWidgetRoutes,
     ...WaveProgressRoute,
     ...TimeProgressWidgetRoutes,
-    ...ClockWidgetRoutes,
     ...BirthdayListWidgetRoutes,
-    ...GlitchWidgetRoutes,
     ...DynamicIslandWidgetRoutes,
     ...MickeyClockWidgetRoutes,
     ...LyricBookWidgetRoutes,
@@ -41,7 +35,6 @@ const WidgetRouter = [
     ...PhotoWidgetRoutes,
     ...SitReminderWidgetRoutes,
     ...ClipboardWidgetRoutes,
-    ...FlipClockWidgetRoutes,
     //FBI WANING! ROUTE PLACE, DONT DELETE THIS LINE
 ];
 export default WidgetRouter

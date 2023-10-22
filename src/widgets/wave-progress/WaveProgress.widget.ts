@@ -32,5 +32,4 @@ const WaveProgressWidgetDefine = new Widget({
   minHeight,
   previewImage: '/images/preview_wave_progress.png'
 })
-
 export default WaveProgressWidgetDefine

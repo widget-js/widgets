@@ -128,9 +128,6 @@ widget create
 - 配置路由：/widget/config/countdown
 
 
-#### 翻页时钟(src/widgets/filp-clock)
-![png](./public/images/preview_flip_clock.png)
-
 #### 倒计时2
 
 ![gif](public/images/preview_countdown2.png)
@@ -179,6 +176,17 @@ widget create
 ![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/weibo_hot_search.png)
 
 见热点组件包：https://github.com/widget-js/hotspot
+
+
+### 时钟组件包
+https://github.com/rtugeek/clock
+#### 翻页时钟
+![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_flip_clock.png)
+#### 时钟
+![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_clock.png)
+#### 故障时钟
+![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_glitch_clock.png)
+
 
 #### 歌词小说
 
