@@ -16,7 +16,6 @@ import SitReminderWidgetRoutes from "./sit-reminder/SitReminderWidgetRoutes";
 import ClipboardWidgetRoutes from "./clipboard/ClipboardWidgetRoutes";
 //FBI WANING! IMPORT PLACE, DONT DELETE THIS LINE
 
-
 const WidgetRouter = [
     ...LaborProgressWidgetRoutes,
     ...WaveProgressRoute,

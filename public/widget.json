@@ -30,6 +30,7 @@
       "width": 1,
       "height": 2,
       "maxWidth": 3,
+      "webviewTag": false,
       "maxHeight": 7,
       "minWidth": 1,
       "minHeight": 2,
@@ -61,6 +62,7 @@
       "width": 2,
       "height": 2,
       "maxWidth": 2,
+      "webviewTag": false,
       "maxHeight": 2,
       "minWidth": 2,
       "minHeight": 2,
@@ -92,6 +94,7 @@
       "width": 4,
       "height": 4,
       "maxWidth": 6,
+      "webviewTag": false,
       "maxHeight": 6,
       "minWidth": 3,
       "minHeight": 3,
@@ -123,6 +126,7 @@
       "width": 4,
       "height": 2,
       "maxWidth": 4,
+      "webviewTag": false,
       "maxHeight": 2,
       "minWidth": 2,
       "minHeight": 2,
@@ -153,6 +157,7 @@
       "width": 4,
       "height": 2,
       "maxWidth": 4,
+      "webviewTag": false,
       "maxHeight": 2,
       "minWidth": 4,
       "minHeight": 2,
@@ -184,6 +189,7 @@
       "width": 2,
       "height": 2,
       "maxWidth": 6,
+      "webviewTag": false,
       "maxHeight": 6,
       "minWidth": 1,
       "minHeight": 1,
@@ -215,6 +221,7 @@
       "width": 6,
       "height": 4,
       "maxWidth": 2,
+      "webviewTag": false,
       "maxHeight": 2,
       "minWidth": 1,
       "minHeight": 2,
@@ -246,6 +253,7 @@
       "width": 2,
       "height": 2,
       "maxWidth": 3,
+      "webviewTag": false,
       "maxHeight": 3,
       "minWidth": 2,
       "minHeight": 2,
@@ -276,6 +284,7 @@
       "width": 4,
       "height": 1,
       "maxWidth": 6,
+      "webviewTag": false,
       "maxHeight": 2,
       "minWidth": 3,
       "minHeight": 1,
@@ -309,6 +318,7 @@
       "width": 4,
       "height": 3,
       "maxWidth": 4,
+      "webviewTag": false,
       "maxHeight": 3,
       "minWidth": 4,
       "minHeight": 3,
@@ -320,66 +330,6 @@
       "backgroundThrottling": false,
       "previewImage": "/images/preview_keystroke.png",
       "supportDeployMode": 65536,
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.glitch",
-      "title": {
-        "zh-CN": "故障时钟"
-      },
-      "description": {
-        "zh-CN": "Glitch"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 2,
-      "maxWidth": 4,
-      "maxHeight": 2,
-      "minWidth": 4,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/glitch",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_glitch_clock.png",
-      "supportDeployMode": 17,
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.flip_clock",
-      "title": {
-        "zh-CN": "翻页时钟"
-      },
-      "description": {
-        "zh-CN": ""
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 2,
-      "maxWidth": 4,
-      "maxHeight": 2,
-      "minWidth": 4,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/flip_clock",
-      "meta": {},
-      "backgroundThrottling": false,
-      "previewImage": "/images/preview_flip_clock.png",
-      "supportDeployMode": 17,
       "routes": []
     },
     {
@@ -399,6 +349,7 @@
       "width": 6,
       "height": 4,
       "maxWidth": 6,
+      "webviewTag": false,
       "maxHeight": 4,
       "minWidth": 6,
       "minHeight": 4,
@@ -430,6 +381,7 @@
       "width": 2,
       "height": 2,
       "maxWidth": 4,
+      "webviewTag": false,
       "maxHeight": 4,
       "minWidth": 2,
       "minHeight": 2,
@@ -461,6 +413,7 @@
       "width": 2,
       "height": 2,
       "maxWidth": 4,
+      "webviewTag": false,
       "maxHeight": 4,
       "minWidth": 2,
       "minHeight": 2,
@@ -473,37 +426,6 @@
       "previewImage": "/images/preview_countdown.png",
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/countdown",
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.clock",
-      "title": {
-        "zh-CN": "时钟"
-      },
-      "description": {
-        "zh-CN": "带动画的时钟"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 2,
-      "height": 2,
-      "maxWidth": 4,
-      "maxHeight": 4,
-      "minWidth": 2,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/clock",
-      "meta": {},
-      "backgroundThrottling": false,
-      "previewImage": "/images/preview_clock.png",
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/clock",
       "routes": []
     },
     {
@@ -525,6 +447,7 @@
       "width": 6,
       "height": 1,
       "maxWidth": 6,
+      "webviewTag": false,
       "maxHeight": 1,
       "minWidth": 6,
       "minHeight": 1,
@@ -556,6 +479,7 @@
       "width": 4,
       "height": 4,
       "maxWidth": 4,
+      "webviewTag": false,
       "maxHeight": 6,
       "minWidth": 3,
       "minHeight": 3,

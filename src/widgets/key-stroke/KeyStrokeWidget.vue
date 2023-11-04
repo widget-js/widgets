@@ -95,7 +95,9 @@ const keyNameMap = [
 ]
 
 function isModifierKey(keycode) {
-  return keycode == ctlKey.keyCode || keycode == shiftKey.keyCode || keycode == altKey.keyCode
+  return (
+    keycode == ctlKey.keyCode || keycode == shiftKey.keyCode || keycode == altKey.keyCode || keycode == winKey.keyCode
+  )
 }
 
 /**
@@ -166,6 +168,9 @@ useKeyboardEventHook((event: NativeKeyboardEvent) => {
       } else {
         if (event.keyCode == ctlKey.keyCode) {
           event.name = ctlKey.name
+          event.isKeyUp = false
+        } else if (event.keyCode == winKey.keyCode) {
+          event.name = winKey.name
           event.isKeyUp = false
         }
         modifierKeys.push(event)

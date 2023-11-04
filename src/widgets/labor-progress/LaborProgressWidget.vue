@@ -11,7 +11,7 @@
       </div>
       <div class="thumb" ref="container" :style="{ left: `${percent}%` }">
         <img :src="currentTimeline.emoji" class="emoji" alt="" />
-<!--        <div class="time">{{ time.format('HH:mm') }}</div>-->
+        <div class="time">{{ time.format('HH:mm') }}</div>
         <div
           class="second animate__animated animate__fadeOutUp animate__infinite"
           :style="{ left: `${secondLeft}px`, animationDuration: `${currentTimeline.titleAnimationDuration}s` }">
@@ -143,6 +143,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$progressHeight: 56px;
 .container {
   user-select: none;
   display: flex;
@@ -161,6 +162,7 @@ export default {
     .thumb {
       position: absolute;
       left: -25px;
+      top: -30px;
       width: 50px;
       display: flex;
       transform: translateX(-30px);
@@ -171,10 +173,11 @@ export default {
       align-items: center;
 
       .time {
-        left: 24%;
+        left: 20%;
         font-weight: 700;
         font-size: 12px;
-        line-height: 15px;
+        position: absolute;
+        bottom: -12px;
         color: #453840;
       }
 
@@ -193,17 +196,16 @@ export default {
 
     .outline {
       box-sizing: border-box;
-      height: 26px;
-      border: 3px solid #422e26;
+      height: calc($progressHeight / 2);
+      border: 4px solid #422e26;
       border-radius: 39px;
       position: absolute;
       width: 100%;
 
       .progress {
-        height: 21px;
+        height: calc($progressHeight / 2 - 6px) ;
         left: 0;
         width: 0;
-        top: 14px;
         transition-property: width;
         transition-duration: 500ms;
         transition-timing-function: ease-out;
@@ -213,7 +215,7 @@ export default {
 
       .percent {
         position: absolute;
-        top: -2px;
+        top: 0px;
         color: #453840;
         font-weight: bold;
       }

@@ -24,10 +24,10 @@ const deleteTodo = (todo: Todo) => {
 }
 
 const todoItemClick = (todo: Todo) => {
-  // props.todos.splice(props.todos.indexOf(todo), 1)
-  todo.finishedAt = new Date().toISOString()
-  // props.finishedTodos.splice(0, 0, todo)
-  // emits('update')
+  props.todos.splice(props.todos.indexOf(todo), 1)
+  todo.dueDateTime = new Date().toISOString()
+  props.finishedTodos.splice(0, 0, todo)
+  emits('update')
   const clone = ringtone.value!.cloneNode(true) as HTMLAudioElement
   clone.play()
 }

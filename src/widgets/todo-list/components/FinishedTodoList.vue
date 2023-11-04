@@ -2,7 +2,6 @@
 import TodoItem from '@/widgets/todo-list/components/TodoItem.vue'
 import { PropType } from 'vue'
 import { Todo } from '@/widgets/todo-list/model/TodoListData'
-import { WidgetDataApi } from '@widget-js/core'
 
 const props = defineProps({
   todos: {
@@ -16,7 +15,7 @@ const props = defineProps({
 })
 const emits = defineEmits(['update'])
 const finishTodoItemClick = (todo: Todo) => {
-  todo.finishedAt = undefined
+  todo.dueDateTime = undefined
   todo.order = 0
   props.finishedTodos.splice(props.finishedTodos.indexOf(todo), 1)
   props.todos.splice(0, 0, todo)
