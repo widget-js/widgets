@@ -6,14 +6,14 @@
 </template>
 
 <script lang="ts" setup>
-import { NotificationApi } from '@widget-js/core'
+import {BrowserWindowApi, NotificationApi} from '@widget-js/core'
 import { computed, ref } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
 import { useWidget } from '@widget-js/vue3'
 import { PhoneReminderData } from '@/widgets/phone-reminder/model/PhoneReminder'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
-
+BrowserWindowApi.hide();
 dayjs.extend(duration)
 const { widgetData,widgetParams } = useWidget(PhoneReminderData, {
   loadDataByWidgetName: true,

@@ -8,7 +8,10 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/license/widget-js/widgets" alt="">
-  <a href="https://discord.gg/vwSAaRR8cT"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true" alt="Chat"></a>
+  <img src="https://img.shields.io/badge/Q%E7%BE%A4-701784679-EB1923?logo=tencentqq&logoColor=white&sanitize=true" alt="Chat">
+  <a href="https://space.bilibili.com/207395767"><img src="https://img.shields.io/badge/-Bilibili-00A1D6?logo=bilibili&logoColor=white" alt="bilibili"></a>
+  <a href="https://txc.qq.com/products/450189"><img src="https://img.shields.io/badge/-功能建议-2378ff?logo=vowpalwabbit&logoColor=white&sanitize=true" alt="Feedback"></a>
+  <a href="https://discord.gg/vwSAaRR8cT"><img src="https://img.shields.io/badge/-Discord-5865F2?logo=discord&logoColor=white" alt="discord"></a>
 </p>
 
 ![png](public/screenshot.jpg)

@@ -51,7 +51,6 @@
 </template>
 
 <script lang="ts">
-import PhoneReminderWidget from './PhoneReminderWidget.vue'
 import {useWidget, WidgetConfigOption, WidgetEditDialog} from '@widget-js/vue3'
 import { BrowserWindowApi, NotificationApi, WidgetApi, WidgetDataApi } from '@widget-js/core'
 import { reactive, ref } from 'vue'
@@ -69,7 +68,7 @@ export default {
       return dayjs
     }
   },
-  components: { TimePickerDialog, PhoneReminderWidget, WidgetEditDialog },
+  components: { TimePickerDialog, WidgetEditDialog },
   setup() {
     BrowserWindowApi.setup({ center: true, width: 1000, height: 600 })
     const phoneReminderData = new PhoneReminderData(PhoneReminderWidgetDefine.name)
