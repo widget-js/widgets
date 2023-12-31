@@ -1,19 +1,19 @@
 import { Widget, WidgetKeyword } from '@widget-js/core'
 
 const name = 'cn.widgetjs.widgets.birthday_list'
-//组件标题
+// 组件标题
 const title = { 'zh-CN': '生日列表' }
-//组件描述
+// 组件描述
 const desc = { 'zh-CN': '自动倒计时的生日列表' }
-//组件关键词
+// 组件关键词
 const keywords = [WidgetKeyword.RECOMMEND]
 const path = '/widget/birthday_list'
 const configPagePath = '/widget/config/birthday_list'
 const BirthdayListWidgetDefine = new Widget({
-  name: name,
-  title: title,
+  name,
+  title,
   description: desc,
-  keywords: keywords,
+  keywords,
   lang: 'zh-CN',
   width: 4,
   previewImage: '/images/preview_birthday_list.png',
@@ -22,8 +22,8 @@ const BirthdayListWidgetDefine = new Widget({
   maxWidth: 4,
   minHeight: 3,
   maxHeight: 6,
-  path: path,
-  configPagePath: configPagePath
+  path,
+  configPagePath,
 })
 
 export default BirthdayListWidgetDefine

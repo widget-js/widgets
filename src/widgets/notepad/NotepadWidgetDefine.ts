@@ -1,11 +1,14 @@
-import { Widget, WidgetKeyword } from '@widget-js/core'
+import {
+  Widget,
+  WidgetKeyword,
+} from '@widget-js/core'
 
 const name = 'cn.widgetjs.widgets.notepad'
-//组件标题
+// 组件标题
 const title = { 'zh-CN': '记事本' }
-//组件描述
+// 组件描述
 const description = { 'zh-CN': '' }
-//组件关键词
+// 组件关键词
 const keywords = [WidgetKeyword.RECOMMEND]
 const lang = 'zh-CN'
 const url = '/widget/notepad'
@@ -30,18 +33,18 @@ export const NotepadWidgetDefine = new Widget({
   minWidth,
   minHeight,
   path: url,
-  configPagePath: configUrl
+  configPagePath: configUrl,
 })
 
 export const NotepadWidgetRoutes = [
   {
     path: url,
     name: `${name}`,
-    component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.clock" */ './NotepadWidgetView.vue')
+    component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.clock" */ './NotepadWidgetView.vue'),
   },
   {
     path: configUrl,
     name: `${name}.config`,
-    component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.clock.config" */ './NotepadWidgetConfigView.vue')
-  }
+    component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.clock.config" */ './NotepadWidgetConfigView.vue'),
+  },
 ]

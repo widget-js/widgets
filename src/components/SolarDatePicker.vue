@@ -1,72 +1,78 @@
-<template>
-  <div class="picker-group">
-    <VueScrollPicker :options="solarYears" v-model="selectedYear"/>
-    <VueScrollPicker :options="solarMonths" v-model="selectedMonth"/>
-    <VueScrollPicker :options="solarDates" v-model="selectedDate"/>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import {computed, nextTick, onMounted, ref, watch} from "vue";
-import {VueScrollPicker} from 'vue-scroll-picker'
+import {
+  computed,
+  nextTick,
+  onMounted,
+  ref,
+  watch,
+} from 'vue'
+import { VueScrollPicker } from 'vue-scroll-picker'
 import 'vue-scroll-picker/lib/style.css'
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
 const props = defineProps({
   height: {
     type: Number,
-    default: 150
+    default: 150,
   },
-  date: {
+  modelValue: {
     type: Date,
-    required: true
+    required: true,
   },
-});
+})
 
-const startYear = 1901;
-const selectedYear = ref(props.date.getFullYear());
-const selectedMonth = ref(props.date.getMonth());
-const selectedDate = ref(props.date.getDate());
+const emits = defineEmits(['update:modelValue'])
+
+const startYear = 1901
+const selectedYear = ref(props.modelValue.getFullYear())
+const selectedMonth = ref(props.modelValue.getMonth())
+const selectedDate = ref(props.modelValue.getDate())
 
 const solarYears = computed(() => {
-  return Array.from({length: 200}, (_, index) => index + startYear)
-});
+  return Array.from({ length: 200 }, (_, index) => index + startYear)
+})
 
 const solarMonths = computed(() => {
-  return Array.from({length: 12}, (_, index) => index + 1)
+  return Array.from({ length: 12 }, (_, index) => index + 1)
 })
 
 const solarDates = computed(() => {
   const lastDay = new Date(selectedYear.value, selectedMonth.value, 0).getDate()
-  return Array.from({length: lastDay}, (_, index) => index + 1)
+  return Array.from({ length: lastDay }, (_, index) => index + 1)
 })
 
-const emits = defineEmits(["update:date"])
-
 function emitDateUpdate() {
-  emits("update:date", dayjs({
+  emits('update:modelValue', dayjs({
     year: selectedYear.value,
     month: selectedMonth.value - 1,
-    date: selectedDate.value
+    date: selectedDate.value,
   }).toDate())
 }
 
 watch(selectedYear, () => {
-  emitDateUpdate();
+  emitDateUpdate()
 })
 
 watch(selectedMonth, () => {
-  emitDateUpdate();
+  emitDateUpdate()
 })
 
 watch(selectedDate, () => {
-  emitDateUpdate();
+  emitDateUpdate()
 })
 
 onMounted(async () => {
-  await nextTick();
-});
+  await nextTick()
+})
 </script>
+
+<template>
+  <div class="picker-group">
+    <VueScrollPicker v-model="selectedYear" :options="solarYears" />
+    <VueScrollPicker v-model="selectedMonth" :options="solarMonths" />
+    <VueScrollPicker v-model="selectedDate" :options="solarDates" />
+  </div>
+</template>
 
 <style scoped lang="scss">
 .picker-group {

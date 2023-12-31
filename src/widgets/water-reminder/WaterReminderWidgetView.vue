@@ -1,57 +1,63 @@
-<template>
-  <widget-wrapper>
-    <water-reminder-widget v-bind="widgetData" v-model:cup="cup"></water-reminder-widget>
-  </widget-wrapper>
-</template>
-
 <script lang="ts" setup>
-import WaterReminderWidget from './WaterReminderWidget.vue'
-import { useAppBroadcast, useWidget, useWidgetSize, WidgetWrapper } from '@widget-js/vue3'
-import { WaterReminderModel } from '@/widgets/water-reminder/model/WaterReminderModel'
-import { ref, watch, computed, onMounted } from 'vue'
-import { BroadcastEvent, LogApi, NotificationApi, WidgetDataApi } from '@widget-js/core'
+import {
+  WidgetWrapper,
+  useAppBroadcast,
+  useWidget,
+  useWidgetSize,
+} from '@widget-js/vue3'
+import {
+  onMounted,
+  ref,
+  watch,
+} from 'vue'
+import type { BroadcastEvent } from '@widget-js/core'
+import {
+  LogApi,
+  NotificationApi,
+  WidgetDataApi,
+} from '@widget-js/core'
 import dayjs from 'dayjs'
 import { useIntervalFn } from '@vueuse/core'
+import WaterReminderWidget from './WaterReminderWidget.vue'
+import { WaterReminderModel } from '@/widgets/water-reminder/model/WaterReminderModel'
 import WaterReminderWidgetDefine from '@/widgets/water-reminder/WaterReminder.widget'
 
 let lastReminderAt = dayjs()
 const cup = ref(0)
 
-const { widgetData, widgetParams } = useWidget(WaterReminderModel, {
+const { widgetData } = useWidget(WaterReminderModel, {
   onDataLoaded: (data) => {
     cup.value = data?.getTodayHistory() ?? 0
     if (data?.lastReminderAt) {
       lastReminderAt = dayjs(data?.lastReminderAt)
     }
+
     if (data?.enableReminder) {
+      // eslint-disable-next-line ts/no-use-before-define
       resume()
-    } else {
+    }
+    else {
+      // eslint-disable-next-line ts/no-use-before-define
       pause()
     }
-    console.log(data?.lastReminderAt)
-    watch(cup, (newValue) => {
-      LogApi.log('cup changed!')
-      widgetData.value.history[widgetData.value.getTodayKey()] = newValue
-      WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
-      lastReminderAt = dayjs()
-    })
   },
-  loadDataByWidgetName: true
+  loadDataByWidgetName: true,
 })
 
-console.log(widgetParams)
+watch(cup, (newValue) => {
+  LogApi.log('cup changed!')
+  widgetData.value.history[widgetData.value.getTodayKey()] = newValue
+  WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
+  lastReminderAt = dayjs()
+})
 
-watch(
-  widgetData,
-  () => {
-    console.log(widgetData.value)
-  },
-  { deep: true }
-)
 const name = WaterReminderWidgetDefine.name
-const cancelBroadcast = name + '.cancel'
-const okBroadcast = name + '.ok'
-const { pause, resume } = useIntervalFn(() => {
+const cancelBroadcast = `${name}.cancel`
+const okBroadcast = `${name}.ok`
+const {
+  pause,
+  resume,
+} = useIntervalFn(() => {
   const now = dayjs()
   const second = now.diff(lastReminderAt, 'second')
   widgetData.value.lastReminderAt = lastReminderAt.toISOString()
@@ -67,7 +73,7 @@ const { pause, resume } = useIntervalFn(() => {
       '喝一杯',
       cancelBroadcast,
       okBroadcast,
-      5000
+      5000,
     )
   }
 }, 10000)
@@ -85,5 +91,11 @@ onMounted(() => {
   return size
 })
 </script>
+
+<template>
+  <WidgetWrapper>
+    <WaterReminderWidget v-bind="widgetData.theme" v-model:cup="cup" />
+  </WidgetWrapper>
+</template>
 
 <style lang="scss"></style>

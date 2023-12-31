@@ -1,36 +1,38 @@
-<template>
-  <div class="message-notification ">
-    <span :class="`icon mgc_${icon} ${type}`"></span>
-    <div class="message">{{ message }}</div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import {computed} from "vue";
+import { computed } from 'vue'
 
 const props = defineProps({
   type: {
     type: String,
-    default: "info"
+    default: 'info',
   },
-  message: {
-    type: String,
-  }
+  message: { type: String },
 })
 
 const icon = computed(() => {
   if (props.type == 'error') {
-    return "close_circle_line";
-  } else if (props.type == 'warning') {
-    return "warning_line";
-  } else if (props.type == 'info') {
-    return "information_line";
-  } else if (props.type == 'success') {
-    return "check_circle_line"
+    return 'close_circle_line'
+  }
+  else if (props.type == 'warning') {
+    return 'warning_line'
+  }
+  else if (props.type == 'success') {
+    return 'check_circle_line'
+  }
+  else {
+    return 'information_line'
   }
 })
-
 </script>
+
+<template>
+  <div class="message-notification ">
+    <span :class="`icon mgc_${icon} ${type}`" />
+    <div class="message">
+      {{ message }}
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 @import "../scss/notification.scss";
@@ -74,5 +76,4 @@ const icon = computed(() => {
 
   }
 }
-
 </style>

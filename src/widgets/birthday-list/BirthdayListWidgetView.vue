@@ -1,20 +1,21 @@
-<template>
-  <widget-wrapper shadowColor="#fb604b">
-    <birthday-list-widget @add="add" :birthday-list-data="widgetData"></birthday-list-widget>
-  </widget-wrapper>
-</template>
-
 <script lang="ts" setup>
+import {
+  WidgetWrapper,
+  useWidget,
+} from '@widget-js/vue3'
+import {
+  BrowserWindowApi,
+  WidgetApi,
+} from '@widget-js/core'
 import BirthdayListWidget from './BirthdayListWidget.vue'
 import BirthdayListData from '@/widgets/birthday-list/model/BirthdayListData'
-import { useWidget, WidgetWrapper } from '@widget-js/vue3'
-import { BrowserWindowApi, DeployedWidgetApi, WidgetApi } from '@widget-js/core'
 
-const { widgetData, widgetParams } = useWidget(BirthdayListData, {
-  loadDataByWidgetName: true
-})
+const {
+  widgetData,
+  widgetParams,
+} = useWidget(BirthdayListData, { loadDataByWidgetName: true })
 
-const add = async () => {
+async function add() {
   const url = await WidgetApi.getWidgetConfigUrl(widgetData.value.name, widgetParams)
   if (url) {
     // DeployedWidgetApi.openConfigRoute()
@@ -22,5 +23,11 @@ const add = async () => {
   }
 }
 </script>
+
+<template>
+  <WidgetWrapper shadow-color="#fb604b">
+    <BirthdayListWidget :birthday-list-data="widgetData" @add="add" />
+  </WidgetWrapper>
+</template>
 
 <style scoped></style>

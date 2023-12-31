@@ -1,62 +1,53 @@
-<template>
-  <widget-edit-dialog
-    :widget-params="widgetParams"
-    :widget-data="widgetData"
-    :option="widgetConfigOption"
-    @apply="onApplyClick()"
-    @confirm="onSaveClick()">
-    <template v-slot:form>
-      <el-form>
-        <widget-time-range-field
-          title="工作时间"
-          start-placeholder="开始时间"
-          v-model:start-time="startTime"
-          v-model:end-time="endTime"
-          end-placeholder="结束时间" />
-      </el-form>
-    </template>
-  </widget-edit-dialog>
-</template>
-
 <script lang="ts">
 import { ref } from 'vue'
-import { WidgetConfigOption, WidgetEditDialog } from '@widget-js/vue3'
-import LaborProgressWidget from './LaborProgressWidget.vue'
+import {
+  WidgetConfigOption,
+  WidgetEditDialog,
+  WidgetTimeRangeField,
+  useWidget,
+} from '@widget-js/vue3'
+import { BrowserWindowApi } from '@widget-js/core'
 import LaborProgressData from '@/widgets/labor-progress/model/LaborProgressData'
-import { useWidget, WidgetCheckboxField } from '@widget-js/vue3'
-import { WidgetTimeRangeField } from '@widget-js/vue3'
-import {BrowserWindowApi, WidgetDataApi} from '@widget-js/core'
 
 export default {
   name: 'LaborProgressConfigView',
-  components: { WidgetTimeRangeField, WidgetCheckboxField, LaborProgressWidget, WidgetEditDialog },
+  components: {
+    WidgetTimeRangeField,
+    WidgetEditDialog,
+  },
   setup() {
     BrowserWindowApi.setSize(600, 500)
     BrowserWindowApi.center()
-    const widgetConfigOption = new WidgetConfigOption({ backgroundColor: true, borderRadius: true, preview: false })
-
-    const { widgetData, widgetParams, sizeStyle } = useWidget(LaborProgressData, {
-      onDataLoaded: <LaborProgressData>(data) => {
-        startTime.value = data.getStartTime()
-        endTime.value = data.getEndTime()
-      }
+    const widgetConfigOption = new WidgetConfigOption({
+      theme: {
+        backgroundColor: true,
+        borderRadius: true,
+      },
     })
 
-    const startTime = ref(widgetData.value.getStartTime())
-    const endTime = ref(widgetData.value.getEndTime())
+    const startTime = ref<Date>()
+    const endTime = ref<Date>()
 
-    return { widgetData, widgetParams, startTime, endTime, widgetConfigOption, sizeStyle }
-  },
-  methods: {
-    /**
-     * 点击保存按钮
-     */
-    async onSaveClick() {
-      await WidgetDataApi.save(this.widgetData)
-      window.close()
-    },
-    async onApplyClick(){
-      await WidgetDataApi.save(this.widgetData)
+    const {
+      widgetData,
+      widgetParams,
+      save,
+    } = useWidget(LaborProgressData, {
+      onDataLoaded: (data) => {
+        if (data) {
+          startTime.value = data.getStartTime()
+          endTime.value = data.getEndTime()
+        }
+      },
+    })
+
+    return {
+      widgetData,
+      widgetParams,
+      startTime,
+      endTime,
+      widgetConfigOption,
+      save,
     }
   },
   watch: {
@@ -65,9 +56,32 @@ export default {
     },
     endTime(newValue) {
       this.widgetData.setEndTime(newValue)
-    }
-  }
+    },
+  },
 }
 </script>
+
+<template>
+  <WidgetEditDialog
+    v-model="widgetData"
+    :widget-params="widgetParams"
+    :option="widgetConfigOption"
+    @apply="save()"
+    @confirm="save({ closeWindow: true })"
+  >
+    <template #custom>
+      <el-form>
+        <WidgetTimeRangeField
+          v-model:start-time="startTime"
+
+          v-model:end-time="endTime"
+          title="工作时间"
+          start-placeholder="开始时间"
+          end-placeholder="结束时间"
+        />
+      </el-form>
+    </template>
+  </WidgetEditDialog>
+</template>
 
 <style scoped></style>

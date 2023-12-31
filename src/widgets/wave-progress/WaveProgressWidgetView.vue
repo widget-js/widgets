@@ -1,23 +1,20 @@
-<template>
-  <widget-wrapper>
-    <wave-progress-widget v-bind="widgetData"></wave-progress-widget>
-  </widget-wrapper>
-</template>
-
 <script lang="ts" setup>
-import WaveProgressWidget from "./WaveProgressWidget.vue";
-import {useWidget, WidgetWrapper} from "@widget-js/vue3";
-import {WaveProgressData} from "@/widgets/wave-progress/model/WaveProgressData";
+import {
+  WidgetWrapper,
+  useWidget,
+} from '@widget-js/vue3'
+import WaveProgressWidget from './WaveProgressWidget.vue'
+import { WaveProgressData } from '@/widgets/wave-progress/model/WaveProgressData'
 
-//从url地址获取组件参数
-const {widgetParams, widgetData} = useWidget(WaveProgressData,{
-  onDataLoaded: (data) => {
-    console.log(widgetParams.id)
-    console.log(widgetData.value)
-  }
-});
-
+// 从url地址获取组件参数
+const { widgetData } = useWidget(WaveProgressData, {})
 </script>
+
+<template>
+  <WidgetWrapper>
+    <WaveProgressWidget v-bind="widgetData" />
+  </WidgetWrapper>
+</template>
 
 <style scoped>
 

@@ -1,45 +1,27 @@
-<template>
-  <div class="container">
-    <div
-      class="keyboard"
-      @mouseenter="BrowserWindowApi.setIgnoreMouseEvent(false)"
-      @mouseleave="BrowserWindowApi.setIgnoreMouseEvent(true)"
-      ref="keyboard">
-      <div class="keyboard-inner">
-        <template v-for="modifierKey in modifierKeys" :key="modifierKey.keyCode">
-          <div class="key">
-            <div :class="{ 'key-content': true, active: !modifierKey.isKeyUp }">{{ modifierKey.name }}</div>
-          </div>
-        </template>
-
-        <div class="key" v-if="normalKey">
-          <div ref="normalKeyContent" :class="{ 'key-content': true, active: !normalKey.isKeyUp }">
-            {{ normalKey?.name }}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import { MotionVariants, useMotion } from '@vueuse/motion'
-import { nextTick, onMounted, reactive, ref } from 'vue'
+import type { MotionVariants } from '@vueuse/motion'
+import { useMotion } from '@vueuse/motion'
+import {
+  nextTick,
+  onMounted,
+  reactive,
+  ref,
+} from 'vue'
 import { useKeyboardEventHook } from '@widget-js/vue3'
-import { BrowserWindowApi, DeviceApi, NativeKeyboardEvent } from '@widget-js/core'
-import { debounce, delay } from 'lodash'
-import { useIntervalFn } from '@vueuse/core'
+import type { NativeKeyboardEvent } from '@widget-js/core'
+import { BrowserWindowApi } from '@widget-js/core'
+import { delay } from 'lodash'
 
 const keyboard = ref<HTMLElement>()
 const transition = {
   type: 'spring',
   stiffness: 220,
-  damping: 25
+  damping: 25,
 }
 const hideProperties = {
   translateY: 150,
   opacity: 0,
-  transition
+  transition,
 }
 const variants = ref<MotionVariants>({
   initial: hideProperties,
@@ -51,47 +33,97 @@ const variants = ref<MotionVariants>({
       onComplete: () => {
         BrowserWindowApi.hide()
         clearAllKeys()
-      }
-    }
+      },
+    },
   },
   show: {
     translateY: 0,
     opacity: 1,
-    transition
-  }
+    transition,
+  },
 })
 
-const clearAllKeys = () => {
-  modifierKeys.splice(0, modifierKeys.length)
-  normalKey.value = null
-}
 const normalKeyContent = ref<HTMLElement>()
 const modifierKeys = reactive<NativeKeyboardEvent[]>([])
 const normalKey = ref<NativeKeyboardEvent | null>(null)
-const { apply, state } = useMotion(keyboard, variants)
-onMounted(async () => {
-  await nextTick()
-})
-let hideTimeoutId = 0
-const winKey = { name: 'Win', keyCode: 91 }
-const ctlKey = { name: 'Ctrl', keyCode: 162 }
-const shiftKey = { name: 'Shift', keyCode: 160 }
-const altKey = { name: 'Alt', keyCode: 164 }
+const { apply } = useMotion(keyboard, variants)
+
+function clearAllKeys() {
+  modifierKeys.splice(0, modifierKeys.length)
+  normalKey.value = null
+}
+
+const hideTimeoutId = 0
+const winKey = {
+  name: 'Win',
+  keyCode: 91,
+}
+const ctlKey = {
+  name: 'Ctrl',
+  keyCode: 162,
+}
+const shiftKey = {
+  name: 'Shift',
+  keyCode: 160,
+}
+const altKey = {
+  name: 'Alt',
+  keyCode: 164,
+}
 const hideTimeout = 4000
 const keyNameMap = [
-  { name: '⌫', keyCode: 8 },
-  { name: 'Caps', keyCode: 20 },
-  { name: 'Home', keyCode: 36 },
-  { name: '←', keyCode: 37 },
-  { name: '↑', keyCode: 38 },
-  { name: '→', keyCode: 39 },
-  { name: 'Esc', keyCode: 27 },
-  { name: '↓', keyCode: 40 },
-  { name: 'Space', keyCode: 32 },
-  { name: '⇧', keyCode: 33 },
-  { name: '⇩', keyCode: 34 },
-  { name: '📸', keyCode: 44 },
-  { name: '☰', keyCode: 93 }
+  {
+    name: '⌫',
+    keyCode: 8,
+  },
+  {
+    name: 'Caps',
+    keyCode: 20,
+  },
+  {
+    name: 'Home',
+    keyCode: 36,
+  },
+  {
+    name: '←',
+    keyCode: 37,
+  },
+  {
+    name: '↑',
+    keyCode: 38,
+  },
+  {
+    name: '→',
+    keyCode: 39,
+  },
+  {
+    name: 'Esc',
+    keyCode: 27,
+  },
+  {
+    name: '↓',
+    keyCode: 40,
+  },
+  {
+    name: 'Space',
+    keyCode: 32,
+  },
+  {
+    name: '⇧',
+    keyCode: 33,
+  },
+  {
+    name: '⇩',
+    keyCode: 34,
+  },
+  {
+    name: '📸',
+    keyCode: 44,
+  },
+  {
+    name: '☰',
+    keyCode: 93,
+  },
 ]
 
 function isModifierKey(keycode) {
@@ -103,8 +135,8 @@ function isModifierKey(keycode) {
 /**
  * 检测修饰键是否都已经松开
  */
-const isModifierKeysReleased = (): boolean => {
-  return !modifierKeys.find((it) => !it.isKeyUp)
+function isModifierKeysReleased(): boolean {
+  return !modifierKeys.find(it => !it.isKeyUp)
 }
 
 function show() {
@@ -147,41 +179,49 @@ function startHideTimer() {
 useKeyboardEventHook((event: NativeKeyboardEvent) => {
   if (event.isKeyUp) {
     if (isModifierKey(event.keyCode)) {
-      const modifierKey = modifierKeys.find((it) => it.keyCode == event.keyCode)
+      const modifierKey = modifierKeys.find(it => it.keyCode == event.keyCode)
       if (modifierKey) {
         modifierKey.isKeyUp = true
       }
+
       startHideTimer()
-    } else {
+    }
+    else {
       if (normalKey.value) {
         normalKey.value.isKeyUp = true
       }
     }
-  } else {
+  }
+  else {
     if (isModifierKey(event.keyCode)) {
       if (isModifierKeysReleased()) {
         clearAllKeys()
       }
-      const modifierKey = modifierKeys.find((it) => it.keyCode == event.keyCode)
+
+      const modifierKey = modifierKeys.find(it => it.keyCode == event.keyCode)
       if (modifierKey) {
         modifierKey.isKeyUp = false
-      } else {
+      }
+      else {
         if (event.keyCode == ctlKey.keyCode) {
           event.name = ctlKey.name
           event.isKeyUp = false
-        } else if (event.keyCode == winKey.keyCode) {
+        }
+        else if (event.keyCode == winKey.keyCode) {
           event.name = winKey.name
           event.isKeyUp = false
         }
         modifierKeys.push(event)
         show()
       }
-    } else {
+    }
+    else {
       if (!isModifierKeysReleased()) {
-        const find = keyNameMap.find((it) => it.keyCode == event.keyCode)
+        const find = keyNameMap.find(it => it.keyCode == event.keyCode)
         if (find) {
           event.name = find.name
         }
+
         event.isKeyUp = false
         normalKey.value = event
         clearTimeout(hideTimeoutId)
@@ -197,7 +237,7 @@ onMounted(async () => {
       name: '😎',
       keyCode: 8,
       scanCode: 17,
-      isKeyUp: true
+      isKeyUp: true,
     }
     await BrowserWindowApi.setBounds({ height: 220 })
     await BrowserWindowApi.alignToScreen('bottom-center')
@@ -207,6 +247,33 @@ onMounted(async () => {
   }, 1000)
 })
 </script>
+
+<template>
+  <div class="container">
+    <div
+      ref="keyboard"
+      class="keyboard"
+      @mouseenter="BrowserWindowApi.setIgnoreMouseEvent(false)"
+      @mouseleave="BrowserWindowApi.setIgnoreMouseEvent(true)"
+    >
+      <div class="keyboard-inner">
+        <template v-for="modifierKey in modifierKeys" :key="modifierKey.keyCode">
+          <div class="key">
+            <div class="key-content" :class="{ active: !modifierKey.isKeyUp }">
+              {{ modifierKey.name }}
+            </div>
+          </div>
+        </template>
+
+        <div v-if="normalKey" class="key">
+          <div ref="normalKeyContent" class="key-content" :class="{ active: !normalKey.isKeyUp }">
+            {{ normalKey?.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .container {

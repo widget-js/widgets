@@ -1,54 +1,47 @@
-<template>
-  <widget-edit-dialog
-    :widget-params="widgetParams"
-    :option="widgetConfigOption"
-    :widget-data="widgetData"
-    @confirm="onSaveClick()">
-    <template v-slot:widget>
-      <!-- 组件配置内容   -->
-      <quick-search-widget
-        :style="{
-          width: `${widgetParams.widthPx}px`,
-          height: `${widgetParams.heightPx}px`
-        }"
-        :background-color="widgetData.backgroundColor"></quick-search-widget>
-    </template>
-    <template v-slot:form>
-      <!--  TODO 这里写自定义表单内容          -->
-    </template>
-  </widget-edit-dialog>
-</template>
-
 <script lang="ts">
-import QuickSearchWidget from './QuickSearchWidget.vue'
-import { useWidget, WidgetConfigOption, WidgetEditDialog } from '@widget-js/vue3'
-import { WidgetData, WidgetDataApi } from '@widget-js/core'
-import { reactive } from 'vue'
+import {
+  WidgetConfigOption,
+  WidgetEditDialog,
+  useWidget,
+} from '@widget-js/vue3'
+import { WidgetData } from '@widget-js/core'
 
 export default {
   name: '',
-  components: { QuickSearchWidget, WidgetEditDialog },
+  components: { WidgetEditDialog },
   setup() {
-    const { widgetData, widgetParams } = useWidget(WidgetData)
+    const {
+      widgetData,
+      widgetParams,
+      save,
+    } = useWidget(WidgetData)
 
-    //修改成需要设置组件参数配置
-    const widgetConfigOption = reactive(
-      new WidgetConfigOption({
-        custom: true,
+    // 修改成需要设置组件参数配置
+    const widgetConfigOption = new WidgetConfigOption({
+      custom: true,
+      theme: {
         backgroundColor: true,
-        borderRadius: true
-      })
-    )
+        borderRadius: true,
+      },
+    })
 
-    return { widgetData, widgetParams, widgetConfigOption }
-  },
-  methods: {
-    async onSaveClick() {
-      await WidgetDataApi.save(this.widgetData)
-      window.close()
+    return {
+      widgetData,
+      widgetParams,
+      widgetConfigOption,
+      save,
     }
-  }
+  },
 }
 </script>
+
+<template>
+  <WidgetEditDialog
+    v-model="widgetData"
+    :widget-params="widgetParams"
+    :option="widgetConfigOption"
+    @confirm="save({ closeWindow: true })"
+  />
+</template>
 
 <style scoped></style>

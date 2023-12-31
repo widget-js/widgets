@@ -1,19 +1,21 @@
-<template>
-  <widget-wrapper>
-    <mickey-clock-widget
-      :borderRadius="widgetData.borderRadius??22">
-    </mickey-clock-widget>
-  </widget-wrapper>
-</template>
-
 <script lang="ts" setup>
-import {WidgetData, WidgetParams} from "@widget-js/core";
-import MickeyClockWidget from "./MickeyClockWidget.vue"
-import {useWidget, WidgetWrapper} from "@widget-js/vue3";
-import MickeyClockWidgetDefine from "@/widgets/mickey-clock/MickeyClock.widget";
+import { WidgetData } from '@widget-js/core'
+import {
+  WidgetWrapper,
+  useWidget,
+} from '@widget-js/vue3'
+import MickeyClockWidget from './MickeyClockWidget.vue'
 
-const {widgetData, widgetParams, sizeStyle} = useWidget(WidgetData);
+const { widgetData } = useWidget(WidgetData)
 </script>
+
+<template>
+  <WidgetWrapper>
+    <MickeyClockWidget
+      :border-radius="widgetData.borderRadius ?? 22"
+    />
+  </WidgetWrapper>
+</template>
 
 <style scoped>
 </style>

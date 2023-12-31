@@ -1,9 +1,87 @@
+<script lang="ts">
+import { computed } from 'vue'
+import dayjs from 'dayjs'
+import '@/common/dayjs-extend'
+import Color from 'color'
+import { Lunar } from 'lunar-typescript'
+
+export default {
+  name: 'Countdown2Widget',
+  props: {
+    title: { type: String },
+    date: { type: String },
+    isLunar: {
+      type: Boolean,
+      default: false,
+    },
+    primaryColor: {
+      type: String,
+      default: 'rgb(0,149,255)',
+    },
+    backgroundColor: {
+      type: String,
+      default: 'rgba(255,255,255,0.2)',
+    },
+    fontSize: {
+      type: Number,
+      default: 54,
+    },
+    borderRadius: {
+      type: String,
+      default: '22px',
+    },
+  },
+  setup(props) {
+    const days = computed(() => {
+      const now = dayjs()
+      return dayjs(props.date).diff(now, 'day')
+    })
+
+    const titleBgColor = computed(() => {
+      const color = new Color(props.primaryColor)
+      return `linear-gradient(180deg,${color.toString()} 0%, ${color.darken(0.2).toString()} 100%)`
+    })
+
+    const dateStr = computed(() => {
+      const targetDate = dayjs(props.date)
+      if (props.isLunar) {
+        const lunar = Lunar.fromDate(targetDate.toDate())
+        return lunar.toString()
+      }
+      return targetDate.format('YYYY/MM/DD')
+    })
+
+    const shadowColor = computed(() => {
+      const color = new Color(props.primaryColor)
+      return color.lighten(0.2).alpha(0.5).toString()
+    })
+    const fontSizePx = computed(() => {
+      return `${props.fontSize}px`
+    })
+    const titleFontSizePx = computed(() => {
+      return `${props.fontSize / 2.8}px`
+    })
+
+    return {
+      days,
+      titleBgColor,
+      dateStr,
+      titleFontSizePx,
+      shadowColor,
+      fontSizePx,
+    }
+  },
+}
+</script>
+
 <template>
   <div class="countdown-widget">
-    <div class="title">{{ title }}{{ days < 0 ? '已经' : '还有' }}</div>
+    <div class="title">
+      {{ title }}{{ days < 0 ? '已经' : '还有' }}
+    </div>
     <div class="stack">
-      <div class="card"></div>
-      <div class="card"></div>
+      <div class="card" />
+      <div class="card" />
       <div class="info">
         <span class="days">{{ Math.abs(days) }}</span>
         <span class="date">{{ dateStr }}</span>
@@ -12,84 +90,10 @@
   </div>
 </template>
 
-<script lang="ts">
-
-import {computed} from "vue";
-import dayjs from "dayjs";
-import '@/common/dayjs-extend'
-import Color from "color";
-import {Lunar} from "lunar-typescript";
-
-export default {
-  name: "Countdown2Widget",
-  props: {
-    title: {
-      type: String,
-    },
-    date: {
-      type: String,
-    },
-    isLunar: {
-      type: Boolean,
-      default: false,
-    },
-    backgroundColor: {
-      type: String,
-      default: "rgb(0,149,255)"
-    },
-    fontSize: {
-      type: Number,
-      default: 54,
-    },
-    borderRadius: {
-      type: Number,
-      default: 22
-    }
-  },
-  setup(props) {
-    const days = computed(() => {
-      const now = dayjs();
-      return dayjs(props.date).diff(now, 'day')
-    })
-
-    const titleBgColor = computed(() => {
-      const color = new Color(props.backgroundColor);
-      return `linear-gradient(180deg,${color.toString()} 0%, ${color.darken(0.2).toString()} 100%)`
-    })
-
-    const dateStr = computed(() => {
-      const targetDate = dayjs(props.date);
-      if (props.isLunar) {
-        const lunar = Lunar.fromDate(targetDate.toDate());
-        return lunar.toString();
-      }
-      return targetDate.format("YYYY/MM/DD");
-    })
-
-    const shadowColor = computed(() => {
-      const color = new Color(props.backgroundColor);
-      console.log(color.darken(0.1).toString())
-      return color.lighten(0.2).alpha(0.5).toString();
-    })
-    const fontSizePx = computed(() => {
-      return props.fontSize + "px";
-    })
-    const titleFontSizePx = computed(() => {
-      return props.fontSize / 2.8 + "px";
-    })
-    const borderRadiusPx = computed(() => {
-      return props.borderRadius + "px"
-    })
-
-    return {days, borderRadiusPx, titleBgColor, dateStr, titleFontSizePx, shadowColor, fontSizePx};
-  }
-}
-</script>
-
 <style scoped lang="scss">
 .countdown-widget {
   width: 100%;
-  border-radius: v-bind(borderRadiusPx);
+  border-radius: v-bind(borderRadius);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -115,11 +119,12 @@ export default {
 
     .card {
       color: white;
-      border-radius: 0 0 v-bind(borderRadiusPx) v-bind(borderRadiusPx);
+      border-radius: 0 0 v-bind(borderRadius) v-bind(borderRadius);
       width: 100%;
       position: absolute;
       height: 100%;
-      background-color: white;
+      background-color: v-bind(backgroundColor);
+
       &:nth-child(2) {
         z-index: 0;
         top: -5px;

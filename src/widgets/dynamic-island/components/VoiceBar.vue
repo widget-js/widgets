@@ -1,24 +1,23 @@
-<template>
-  <div class="voice-bar">
-    <span class="background" :style="{transform:`scaleY(${backgroundHeight}%)`,backgroundColor: backgroundColor}"/>
-    <span class="foreground" :style="{transform:`scaleY(${foregroundHeight}%)`}"/>
-  </div>
-</template>
-
 <script lang="ts">
-import {useIntervalFn} from "@vueuse/core";
-import {ref} from "vue";
+import { useIntervalFn } from '@vueuse/core'
+import { ref } from 'vue'
 
 export default {
-  name: "VoiceBar",
+  name: 'VoiceBar',
   props: {
-    backgroundColor: "#86D98A"
+    backgroundColor: {
+      type: String,
+      default: '#86D98A',
+    },
   },
   setup() {
     const foregroundHeight = ref(100)
     const backgroundHeight = ref(100)
 
-    return {foregroundHeight, backgroundHeight}
+    return {
+      foregroundHeight,
+      backgroundHeight,
+    }
   },
   mounted() {
     useIntervalFn(() => {
@@ -28,11 +27,18 @@ export default {
   },
   methods: {
     getRandomArbitrary: (min, max) => {
-      return Math.random() * (max - min) + min;
-    }
-  }
+      return Math.random() * (max - min) + min
+    },
+  },
 }
 </script>
+
+<template>
+  <div class="voice-bar">
+    <span class="background" :style="{ transform: `scaleY(${backgroundHeight}%)`, backgroundColor }" />
+    <span class="foreground" :style="{ transform: `scaleY(${foregroundHeight}%)` }" />
+  </div>
+</template>
 
 <style scoped lang="scss">
 .voice-bar {
@@ -46,7 +52,7 @@ export default {
     position: absolute;
     height: 100%;
     left: 0;
-    top:0;
+    top: 0;
     transition-property: transform;
     transition-duration: 0.5s;
   }

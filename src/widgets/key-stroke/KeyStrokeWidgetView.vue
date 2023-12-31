@@ -1,10 +1,10 @@
-<template>
-    <key-stroke-widget></key-stroke-widget>
-</template>
-
 <script lang="ts" setup>
-import KeyStrokeWidget from "./KeyStrokeWidget.vue"
+import KeyStrokeWidget from './KeyStrokeWidget.vue'
 </script>
+
+<template>
+  <KeyStrokeWidget />
+</template>
 
 <style scoped>
 

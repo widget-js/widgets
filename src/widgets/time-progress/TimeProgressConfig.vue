@@ -1,32 +1,41 @@
-<template>
-  <widget-edit-dialog :title="widgetParams.title" @confirm="onSaveClick()">
-    <template v-slot:widget>
-      <!-- 组件配置内容   -->
-      <time-progress-widget
-        :style="{
-          width: `${widgetParams.widthPx}px`,
-          height: `${widgetParams.heightPx}px`
-        }"
-        :background-color="widgetData.backgroundColor"></time-progress-widget>
-    </template>
-    <template v-slot:form> </template>
-  </widget-edit-dialog>
-</template>
-
 <script lang="ts" setup>
-import { useWidget, WidgetEditDialog } from '@widget-js/vue3'
-import { WidgetData, WidgetDataApi } from '@widget-js/core'
-import TimeProgressWidget from './TimeProgressWidget.vue'
+import {
+  WidgetConfigOption,
+  WidgetEditDialog,
+  useWidget,
+} from '@widget-js/vue3'
+import {
+  BrowserWindowApi,
+  WidgetData,
+} from '@widget-js/core'
 
-const { widgetData, widgetParams } = useWidget(WidgetData)
+const {
+  widgetData,
+  widgetParams,
+  save,
+} = useWidget(WidgetData, { loadDataByWidgetName: true })
+BrowserWindowApi.setup({
+  width: 600,
+  height: 400,
+  center: true,
+})
 
-/**
- * 点击保存按钮
- */
-async function onSaveClick() {
-  await WidgetDataApi.save(widgetData.value)
-  window.close()
-}
+const widgetConfigOption = new WidgetConfigOption({
+  custom: false,
+  theme: {
+    backgroundColor: true,
+    color: true,
+    borderRadius: true,
+  },
+})
 </script>
+
+<template>
+  <WidgetEditDialog
+    v-model="widgetData" :option="widgetConfigOption" :widget-params="widgetParams"
+    @apply="save"
+    @confirm="save({ closeWindow: true })"
+  />
+</template>
 
 <style scoped></style>

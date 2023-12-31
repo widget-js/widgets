@@ -1,14 +1,11 @@
+<script lang="ts" setup>
+</script>
+
 <template>
   <widget-base-dialog title="事项设置">
-    <template #main></template>
+    <template #main />
   </widget-base-dialog>
 </template>
-
-<script lang="ts" setup>
-import { WidgetApi } from '@widget-js/core'
-
-const store = WidgetApi.getStore('cn.widgetjs.widgets.countdown-list')
-</script>
 
 <style scoped lang="scss">
 .main {

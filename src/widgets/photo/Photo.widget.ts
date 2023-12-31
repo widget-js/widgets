@@ -1,24 +1,27 @@
-import { Widget, WidgetKeyword } from '@widget-js/core'
+import {
+  Widget,
+  WidgetKeyword,
+} from '@widget-js/core'
 
 const name = 'cn.widgetjs.widgets.photo'
-//组件标题
+// 组件标题
 const title = { 'zh-CN': '轮播相册' }
-//组件描述
+// 组件描述
 const description = { 'zh-CN': '轮播文件夹内的图片' }
-//组件关键词
+// 组件关键词
 const keywords = [WidgetKeyword.RECOMMEND]
-//组件路由地址
+// 组件路由地址
 const path = '/widget/photo'
-//配置页路由地址
+// 配置页路由地址
 const configUrl = '/widget/config/photo'
-//组件关键词
+// 组件关键词
 const PhotoWidgetDefine = new Widget({
   previewImage: '/images/preview_photo.png',
-  path: path,
-  name: name,
-  title: title,
-  description: description,
-  keywords: keywords,
+  path,
+  name,
+  title,
+  description,
+  keywords,
   lang: 'zh-CN',
   width: 2,
   height: 2,
@@ -26,7 +29,7 @@ const PhotoWidgetDefine = new Widget({
   maxWidth: 6,
   minHeight: 1,
   maxHeight: 6,
-  configPagePath:configUrl,
+  configPagePath: configUrl,
 })
 
 export default PhotoWidgetDefine

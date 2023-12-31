@@ -84,6 +84,7 @@ widget create
 ### 组件列表
 
 #### 键盘演示(src/widgets/keystroke)
+
 ![png](./public/images/preview_keystroke.png)
 
 #### 抖音热榜（热点组件包：https://github.com/widget-js/hotspot）
@@ -129,7 +130,6 @@ widget create
 - 代码路径：/widgets/countdown
 - 组件路由：/widget/countdown
 - 配置路由：/widget/config/countdown
-
 
 #### 倒计时2
 
@@ -180,16 +180,21 @@ widget create
 
 见热点组件包：https://github.com/widget-js/hotspot
 
-
 ### 时钟组件包
-https://github.com/rtugeek/clock
-#### 翻页时钟
-![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_flip_clock.png)
-#### 时钟
-![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_clock.png)
-#### 故障时钟
-![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_glitch_clock.png)
 
+https://github.com/rtugeek/clock
+
+#### 翻页时钟
+
+![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_flip_clock.png)
+
+#### 时钟
+
+![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_clock.png)
+
+#### 故障时钟
+
+![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_glitch_clock.png)
 
 #### 歌词小说
 
@@ -197,5 +202,3 @@ https://github.com/rtugeek/clock
 
 - 代码路径：/widgets/lyric_book
 - 组件路由：/widget/lyric_book
-
-

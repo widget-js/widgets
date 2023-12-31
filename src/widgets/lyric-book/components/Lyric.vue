@@ -1,37 +1,7 @@
-<template>
-  <div class="lyric">
-    <!--封面-->
-    <dl class="music-info">
-      <dt>
-        <img src="../img/player_cover.png"/>
-      </dt>
-      <dd>爱拼才会赢</dd>
-      <dd class="author">歌手：叶启田</dd>
-      <dd class="album">专辑：《闽南情歌大对唱》</dd>
-    </dl>
-    <!--歌词-->
-    <div ref="musicLyric" class="music-lyric"
-         :style="{paddingTop:`${LyricBookData.lineHeight}px`,paddingBottom:`${verticalPadding}px`}">
-      <div class="music-lyric-items" :style="{lineHeight:`${LyricBookData.lineHeight}px`}">
-        <template v-if="lyric.length > 0">
-          <p
-              v-for="(item, index) in lyric"
-              :key="index"
-              :class="{ on: lyricIndex === index }"
-          >
-            {{ item }}
-          </p>
-        </template>
-        <p v-else>歌词加载失败！</p>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script lang="js">
-import {useScroll} from "@vueuse/core";
-import {ref} from "vue";
-import LyricBookData from "@/widgets/lyric-book/model/LyricBookData";
+import { useScroll } from '@vueuse/core'
+import { ref } from 'vue'
+import LyricBookData from '@/widgets/lyric-book/model/LyricBookData'
 
 export default {
   name: 'Lyric',
@@ -39,48 +9,49 @@ export default {
     // 歌词数据
     lyric: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     // 是否无歌词
     nolyric: {
       type: Boolean,
-      default: false
+      default: false,
     },
     topPadding: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // 当前歌词下标
     lyricIndex: {
       type: Number,
-      default: 0
+      default: 0,
+    },
+  },
+  setup() {
+    const musicLyric = ref()
+    const { y: scrollY } = useScroll(musicLyric, { behavior: 'smooth' })
+    return {
+      musicLyric,
+      scrollY,
     }
   },
   data() {
-    return {
-      top: 0 // 歌词居中
-    }
+    return { top: 0 }
   },
   computed: {
     LyricBookData() {
       return LyricBookData
     },
     verticalPadding() {
-      return this.top * LyricBookData.lineHeight;
+      return this.top * LyricBookData.lineHeight
     },
     currentScrollY() {
-      return LyricBookData.lineHeight * this.lyricIndex;
-    }
-  },
-  setup() {
-    const musicLyric = ref();
-    const {y: scrollY} = useScroll(musicLyric, {behavior: "smooth"});
-    return {musicLyric, scrollY}
+      return LyricBookData.lineHeight * this.lyricIndex
+    },
   },
   watch: {
     lyricIndex() {
-      this.scrollY = this.currentScrollY;
-    }
+      this.scrollY = this.currentScrollY
+    },
   },
   mounted() {
     window.addEventListener('resize', () => {
@@ -93,16 +64,55 @@ export default {
     // 计算歌词居中的 top值
     calcTop() {
       const dom = this.$refs.musicLyric
-      const {display = ''} = window.getComputedStyle(dom)
+      const { display = '' } = window.getComputedStyle(dom)
       if (display === 'none') {
         return
       }
+
       const height = dom.offsetHeight
-      this.top = Math.floor((height - 56) / LyricBookData.lineHeight / 2);
-    }
-  }
+      this.top = Math.floor((height - 56) / LyricBookData.lineHeight / 2)
+    },
+  },
 }
 </script>
+
+<template>
+  <div class="lyric">
+    <!-- 封面 -->
+    <dl class="music-info">
+      <dt>
+        <img src="../img/player_cover.png">
+      </dt>
+      <dd>爱拼才会赢</dd>
+      <dd class="author">
+        歌手：叶启田
+      </dd>
+      <dd class="album">
+        专辑：《闽南情歌大对唱》
+      </dd>
+    </dl>
+    <!-- 歌词 -->
+    <div
+      ref="musicLyric" class="music-lyric"
+      :style="{ paddingTop: `${LyricBookData.lineHeight}px`, paddingBottom: `${verticalPadding}px` }"
+    >
+      <div class="music-lyric-items" :style="{ lineHeight: `${LyricBookData.lineHeight}px` }">
+        <template v-if="lyric.length > 0">
+          <p
+            v-for="(item, index) in lyric"
+            :key="index"
+            :class="{ on: lyricIndex === index }"
+          >
+            {{ item }}
+          </p>
+        </template>
+        <p v-else>
+          歌词加载失败！
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .lyric {
@@ -167,13 +177,13 @@ p {
   overflow: hidden;
   text-align: center;
   mask-image: linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 0) 0,
-          rgba(255, 255, 255, 0.6) 5%,
-          rgba(255, 255, 255, 1) 25%,
-          rgba(255, 255, 255, 1) 75%,
-          rgba(255, 255, 255, 0.2) 95%,
-          rgba(255, 255, 255, 0) 100%
+      to bottom,
+      rgba(255, 255, 255, 0) 0,
+      rgba(255, 255, 255, 0.6) 5%,
+      rgba(255, 255, 255, 1) 25%,
+      rgba(255, 255, 255, 1) 75%,
+      rgba(255, 255, 255, 0.2) 95%,
+      rgba(255, 255, 255, 0) 100%
   );
 
   .music-lyric-items {

@@ -1,45 +1,58 @@
-<template>
-
-    <widget-edit-dialog :widget-params="widgetParams" :option="widgetConfigOption"
-                        :widget-data="widgetData"
-                        @confirm="onSaveClick()">
-        <template v-slot:form>
-            <!--  TODO 这里写自定义表单内容          -->
-        </template>
-    </widget-edit-dialog>
-</template>
-
 <script lang="ts">
-
-import ClipboardWidget from "./ClipboardWidget.vue";
-import {useWidget, WidgetConfigOption, WidgetEditDialog} from "@widget-js/vue3";
-import {WidgetData, WidgetDataApi} from "@widget-js/core";
-import {reactive} from "vue";
+import {
+  WidgetConfigOption,
+  WidgetEditDialog,
+  useWidget,
+} from '@widget-js/vue3'
+import {
+  WidgetData,
+  WidgetDataApi,
+} from '@widget-js/core'
+import { reactive } from 'vue'
 
 export default {
-  name: "",
-  components: {ClipboardWidget, WidgetEditDialog},
+  name: '',
+  components: { WidgetEditDialog },
   setup() {
-    const {widgetData, widgetParams} = useWidget(WidgetData)
+    const {
+      widgetData,
+      widgetParams,
+    } = useWidget(WidgetData)
 
-    //修改成需要设置组件参数配置
+    // 修改成需要设置组件参数配置
     const widgetConfigOption = reactive(new WidgetConfigOption({
       custom: true,
       backgroundColor: true,
       borderRadius: true,
-      preview: false
-    }));
+      preview: false,
+    }))
 
-    return {widgetData, widgetParams, widgetConfigOption}
+    return {
+      widgetData,
+      widgetParams,
+      widgetConfigOption,
+    }
   },
   methods: {
     async onSaveClick() {
-      await WidgetDataApi.save(this.widgetData);
-      window.close();
-    }
-  }
+      await WidgetDataApi.save(this.widgetData)
+      window.close()
+    },
+  },
 }
 </script>
+
+<template>
+  <WidgetEditDialog
+    v-model="widgetData" :widget-params="widgetParams"
+    :option="widgetConfigOption"
+    @confirm="onSaveClick()"
+  >
+    <template #custom>
+      <!--  TODO 这里写自定义表单内容          -->
+    </template>
+  </WidgetEditDialog>
+</template>
 
 <style scoped>
 

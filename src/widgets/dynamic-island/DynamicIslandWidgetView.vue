@@ -1,20 +1,31 @@
-<template>
-  <dynamic-island-widget
-    ref="dynamicIslandWidget"
-    v-model:state="state"
-    @mouseenter="onMouseEnter"
-    @mouseleave="onMouseLeave"
-    :notification="notification" />
-</template>
-
 <script lang="ts">
-import {AppNotification, BrowserWindowApi, ElectronUtils, WidgetApi, WidgetData} from '@widget-js/core'
+import {
+  AppNotification,
+  BrowserWindowApi,
+  ElectronUtils,
+  WidgetApi,
+  WidgetData,
+} from '@widget-js/core'
+import {
+  useNotification,
+  useWidget,
+} from '@widget-js/vue3'
+import {
+  computed,
+  reactive,
+  ref,
+  watch,
+} from 'vue'
+import {
+  useIntervalFn,
+  useTimeoutFn,
+} from '@vueuse/core'
 import DynamicIslandWidget from './DynamicIslandWidget.vue'
-import {useNotification, useWidget} from '@widget-js/vue3'
-import {computed, reactive, ref, watch} from 'vue'
-import {useIntervalFn, useTimeoutFn} from '@vueuse/core'
-import {NotificationState} from '@/widgets/dynamic-island/model/NotificationState'
-import {getCountdownDemo, SitReminderDemo} from '@/widgets/dynamic-island/model/Demo'
+import { NotificationState } from '@/widgets/dynamic-island/model/NotificationState'
+import {
+  SitReminderDemo,
+  getCountdownDemo,
+} from '@/widgets/dynamic-island/model/Demo'
 import '@/common/dayjs-extend'
 
 export default {
@@ -28,7 +39,7 @@ export default {
       duration: 0,
       message: '欢迎',
       title: '',
-      type: 'info'
+      type: 'info',
     })
 
     const notification = reactive(defaultNotification)
@@ -36,31 +47,22 @@ export default {
       state.value = NotificationState.HIDE
     }
 
-    useNotification((newNotification) => {
-      if (newNotification) {
-        BrowserWindowApi.showInactive()
-        BrowserWindowApi.setAlwaysOnTop(true)
-        Object.assign(notification, newNotification)
-        setState()
-        startHideTimeout()
-      } else {
-        hide()
-      }
-    })
-
-    watch(state, (newValue) => {
-      if (newValue == NotificationState.HIDE) {
-        startHideWindow()
-      } else {
-        stopHideWindow()
-      }
-    })
-    const { start: startHideWindow, stop: stopHideWindow } = useTimeoutFn(() => {
+    const {
+      start: startHideWindow,
+      stop: stopHideWindow,
+    } = useTimeoutFn(() => {
       BrowserWindowApi.hide()
     }, 1000)
 
     stopHideWindow()
-
+    watch(state, (newValue) => {
+      if (newValue == NotificationState.HIDE) {
+        startHideWindow()
+      }
+      else {
+        stopHideWindow()
+      }
+    })
     const hideTimeout = computed(() => {
       return notification.duration
     })
@@ -84,7 +86,10 @@ export default {
       }
     }
 
-    const { start, stop: stopHideTimeout } = useTimeoutFn(() => {
+    const {
+      start,
+      stop: stopHideTimeout,
+    } = useTimeoutFn(() => {
       hide()
     }, hideTimeout)
 
@@ -95,7 +100,10 @@ export default {
       }
     }
 
-    const { pause, resume } = useIntervalFn(
+    const {
+      pause,
+      resume,
+    } = useIntervalFn(
       async () => {
         state.value = NotificationState.NORMAL
         previousStateIndex++
@@ -103,19 +111,21 @@ export default {
           case 0:
             Object.assign(notification, getCountdownDemo())
             break
-          case 1:
+          case 1: {
             const packageUrl = await WidgetApi.getWidgetPackageUrl('cn.widgetjs.widgets')
-            notification.avatar = packageUrl + '/images/zhangyuge.jpg'
+            notification.avatar = `${packageUrl}/images/zhangyuge.jpg`
             notification.title = '章鱼哥'
             notification.message = '下班提醒'
             notification.type = 'call'
             notification.backgroundColor = 'black'
             break
-          case 2:
+          }
+          case 2: {
             notification.type = 'info'
             notification.backgroundColor = 'black'
             notification.message = '您好'
             break
+          }
           case 3:
             Object.assign(notification, SitReminderDemo)
             break
@@ -123,13 +133,28 @@ export default {
         setState()
       },
       2000,
-      { immediate: true }
+      { immediate: true },
     )
     if (widgetParams.preview) {
       resume()
-    } else {
+    }
+    else {
       pause()
     }
+
+    useNotification((newNotification) => {
+      if (newNotification) {
+        BrowserWindowApi.showInactive()
+        BrowserWindowApi.setAlwaysOnTop(true)
+        Object.assign(notification, newNotification)
+        setState()
+        startHideTimeout()
+      }
+      else {
+        hide()
+      }
+    })
+
     return {
       setState,
       dynamicIslandWidget,
@@ -139,7 +164,7 @@ export default {
       widgetParams,
       startHideTimeout,
       stopHideTimeout,
-      hide
+      hide,
     }
   },
   methods: {
@@ -155,9 +180,19 @@ export default {
       await BrowserWindowApi.setIgnoreMouseEvent(false)
       await BrowserWindowApi.setPosition({ y: -10000 })
       // await BrowserWindowApi.hide()
-    }
-  }
+    },
+  },
 }
 </script>
+
+<template>
+  <DynamicIslandWidget
+    ref="dynamicIslandWidget"
+    v-model:state="state"
+    :notification="notification"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
+  />
+</template>
 
 <style scoped></style>

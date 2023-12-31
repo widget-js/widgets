@@ -1,72 +1,76 @@
-<template>
-  <div class="countdown" @click="onNotificationClick">
-    <div class="content">
-      <div class="title">{{ message }}</div>
-    </div>
-    <span class="timing">{{ timeString }}</span>
-    <div class="progress">
-      <div class="progress-bar" :style="{width:`${progress}%`}"></div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import {computed, ref, watch} from "vue";
-import {useIntervalFn} from "@vueuse/core";
+import {
+  computed,
+  ref,
+  watch,
+} from 'vue'
+import { useIntervalFn } from '@vueuse/core'
 
-import dayjs from "dayjs";
-import "@/common/dayjs-extend"
-import {NotificationApi} from "@widget-js/core";
+import dayjs from 'dayjs'
+import '@/common/dayjs-extend'
+import { NotificationApi } from '@widget-js/core'
 
 const props = defineProps({
-  message: {
-    type: String
-  },
+  message: { type: String },
   targetTime: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 })
-const onNotificationClick = () => {
+
+function onNotificationClick() {
 
 }
 
-
-const timeStr1 = ref("00:00")
-let timeStr2 = ref("00")
-let count = 0;
+const timeStr1 = ref('00:00')
+const timeStr2 = ref('00')
+let count = 0
 useIntervalFn(() => {
-  count++;
+  count++
   if (count > 99) {
-    count = 0;
+    count = 0
   }
+
   timeStr2.value = count < 10 ? `0${count}` : `${count}`
 }, 10)
 
 const targetTime = computed(() => dayjs(props.targetTime))
 let startAt = dayjs()
-let remindSeconds = 0;
+let remindSeconds = 0
 watch(targetTime, () => {
-  startAt = dayjs();
-  remindSeconds = 0;
+  startAt = dayjs()
+  remindSeconds = 0
 })
 const totalSeconds = computed(() => dayjs.duration(targetTime.value.diff(startAt)).asSeconds())
 const progress = ref(1)
 useIntervalFn(() => {
-  const duration = dayjs.duration(targetTime.value.diff(dayjs()));
+  const duration = dayjs.duration(targetTime.value.diff(dayjs()))
   timeStr1.value = duration.format('mm:ss')
-  remindSeconds = duration.asSeconds();
+  remindSeconds = duration.asSeconds()
   progress.value = remindSeconds / totalSeconds.value * 100
   if (remindSeconds < 0) {
-    NotificationApi.hide();
+    NotificationApi.hide()
   }
 }, 1000)
 
 const timeString = computed(() => {
-  return timeStr1.value + ":" + timeStr2.value;
+  return `${timeStr1.value}:${timeStr2.value}`
 })
-
 </script>
+
+<template>
+  <div class="countdown" @click="onNotificationClick">
+    <div class="content">
+      <div class="title">
+        {{ message }}
+      </div>
+    </div>
+    <span class="timing">{{ timeString }}</span>
+    <div class="progress">
+      <div class="progress-bar" :style="{ width: `${progress}%` }" />
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 $easing: cubic-bezier(1, 0, 1, 0);
@@ -119,6 +123,4 @@ $easing: cubic-bezier(1, 0, 1, 0);
   }
 
 }
-
-
 </style>

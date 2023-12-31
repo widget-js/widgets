@@ -1,42 +1,37 @@
-<template>
-  <div class="island" ref="island">
-    <counting-notification v-if="notification.type === 'countdown'" v-bind="notification" />
-    <advance-countdown-notification v-else-if="notification.type === 'advance-countdown'" v-bind="notification" />
-    <reminder-notification v-else-if="notification.type === 'reminder'" :notification="notification" />
-    <phone-call-notification
-      :key="notification.createdAt"
-      ref="phoneCall"
-      v-else-if="notification.type === 'call'"
-      :mute="preview"
-      v-bind="notification" />
-    <message-notification v-else v-bind="notification" />
-  </div>
-</template>
-
 <script lang="ts" setup>
+import {
+  computed,
+  nextTick,
+  onMounted,
+  ref,
+  watch,
+} from 'vue'
+import { useMotion } from '@vueuse/motion'
+import { usePointerSwipe } from '@vueuse/core'
+import {
+  AppNotification,
+  BrowserWindowApi,
+} from '@widget-js/core'
 import AdvanceCountdownNotification from '@/widgets/dynamic-island/components/AdvanceCountdownNotification.vue'
 import PhoneCallNotification from '@/widgets/dynamic-island/components/PhoneCallNotification.vue'
 import MessageNotification from '@/widgets/dynamic-island/components/MessageNotification.vue'
 import CountingNotification from '@/widgets/dynamic-island/components/CountingNotification.vue'
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import ReminderNotification from '@/widgets/dynamic-island/components/ReminderNotification.vue'
 import { NotificationState } from '@/widgets/dynamic-island/model/NotificationState'
-import { useMotion } from '@vueuse/motion'
-import { SwipeDirection, usePointerSwipe } from '@vueuse/core'
-import { AppNotification, BrowserWindowApi } from '@widget-js/core'
 
 const props = defineProps({
   notification: {
-    type: AppNotification
+    type: AppNotification,
+    required: true,
   },
   state: {
     type: String,
-    default: NotificationState.HIDE
+    default: NotificationState.HIDE,
   },
   preview: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 const emits = defineEmits(['mouseEnter', 'mouseLeave', 'update:state'])
 
@@ -53,10 +48,10 @@ const transition = {
   type: 'spring', // 弹簧动画
   stiffness: 300, // 刚度值/弹性系数
   damping: 20, // 阻尼值
-  mass: 1 // 质量
+  mass: 1, // 质量
 }
 
-const getSize = (size: number) => {
+function getSize(size: number) {
   return size + padding
 }
 
@@ -65,15 +60,15 @@ const hide = {
   width: getSize(48),
   height: getSize(48),
   scale: 1,
-  backgroundColor: backgroundColor,
-  transition
+  backgroundColor,
+  transition,
 }
 
 const islandHide = {
   width: 48,
   scale: 1,
-  backgroundColor: backgroundColor,
-  transition
+  backgroundColor,
+  transition,
 }
 
 const { apply: applyIsland } = useMotion(island, {
@@ -81,69 +76,72 @@ const { apply: applyIsland } = useMotion(island, {
   hide: islandHide,
   tapped: {
     scale: 0.95,
-    backgroundColor: backgroundColor,
+    backgroundColor,
     transition: {
       ...transition,
-      onComplete: () => applyIsland('hovered')
-    }
+      onComplete: () => applyIsland('hovered'),
+    },
   },
   hovered: {
     scale: 1,
-    backgroundColor: backgroundColor,
-    transition
+    backgroundColor,
+    transition,
   },
   small: {
     width: maxWidth - paddingHorizontal - 16,
     scale: 1,
-    backgroundColor: backgroundColor,
-    transition
+    backgroundColor,
+    transition,
   },
   normal: {
     width: maxWidth - paddingHorizontal,
     scale: 1,
-    backgroundColor: backgroundColor,
-    transition
+    backgroundColor,
+    transition,
   },
   large: {
     width: maxWidth - paddingHorizontal,
     scale: 1,
-    backgroundColor: backgroundColor,
-    transition
-  }
+    backgroundColor,
+    transition,
+  },
 })
 
-const { apply, motionProperties } = useMotion(null, {
+const {
+  apply,
+  motionProperties,
+} = useMotion(null, {
   initial: { ...hide },
   hide,
   small: {
     y: maxY - 20,
     height: getSize(48),
     scale: 1,
-    transition
+    transition,
   },
   normal: {
     y: maxY - 20,
     height: getSize(72),
     scale: 1,
-    transition
+    transition,
   },
   large: {
     y: maxY,
     height: getSize(144),
     scale: 1,
-    transition
-  }
+    transition,
+  },
 })
 watch(
-  () => [motionProperties['y'], motionProperties['height']],
+  () => [motionProperties.y, motionProperties.height],
   ([newY, height]) => {
     BrowserWindowApi.setBounds({
       y: newY,
       x: (screen.width - maxWidth) / 2,
       width: maxWidth,
-      height: height
+      height,
     })
-  }
+  },
 )
 
 const stateModel = computed({
@@ -152,12 +150,12 @@ const stateModel = computed({
   },
   set: (value) => {
     if (value == NotificationState.HIDE) {
-      if (phoneCall) {
+      if (phoneCall.value) {
         phoneCall.value?.stop()
       }
     }
     emits('update:state', value)
-  }
+  },
 })
 
 watch(stateModel, (value) => {
@@ -167,29 +165,30 @@ watch(stateModel, (value) => {
   }
 })
 let startTranslateY = -100
-const { distanceY, isSwiping } = usePointerSwipe(island, {
+const { distanceY } = usePointerSwipe(island, {
   threshold: 10,
-  onSwipeStart(e) {
-    startTranslateY = motionProperties['y']
+  onSwipeStart() {
+    startTranslateY = motionProperties.y
   },
-  async onSwipe(e: PointerEvent) {
+  async onSwipe() {
     const value = startTranslateY - distanceY.value
     const y = Math.min(500, value)
-    //最小缩放为 maxY的0.75，最大缩放为1
+    // 最小缩放为 maxY的0.75，最大缩放为1
     const scale = Math.min(1, Math.max(y, maxY * 0.75) / maxY)
     await apply({
       y,
-      scale: scale,
-      transition
+      scale,
+      transition,
     })
   },
-  async onSwipeEnd(e: PointerEvent, direction: SwipeDirection) {
-    if (motionProperties['y'] < 30) {
+  async onSwipeEnd() {
+    if (motionProperties.y < 30) {
       stateModel.value = NotificationState.HIDE
-    } else {
+    }
+    else {
       await apply(stateModel.value)
     }
-  }
+  },
 })
 
 watch(
@@ -198,7 +197,7 @@ watch(
     if (newValue && newValue.backgroundColor) {
       backgroundColor.value = newValue.backgroundColor
     }
-  }
+  },
 )
 
 onMounted(async () => {
@@ -206,6 +205,22 @@ onMounted(async () => {
   await apply(props.state)
 })
 </script>
+
+<template>
+  <div ref="island" class="island">
+    <CountingNotification v-if="notification.type === 'countdown'" v-bind="notification" />
+    <AdvanceCountdownNotification v-else-if="notification.type === 'advance-countdown'" v-bind="notification" />
+    <ReminderNotification v-else-if="notification.type === 'reminder'" :notification="notification" />
+    <PhoneCallNotification
+      v-else-if="notification.type === 'call'"
+      :key="notification.createdAt"
+      ref="phoneCall"
+      :mute="preview"
+      v-bind="notification"
+    />
+    <MessageNotification v-else v-bind="notification" />
+  </div>
+</template>
 
 <style scoped lang="scss">
 $cubic-bezier: cubic-bezier(0, 1, 0.68, 1.05);

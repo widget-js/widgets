@@ -1,48 +1,19 @@
-<template>
-  <div class="mickey-clock">
-    <div class="bg" :style="{borderRadius: `${borderRadius??22}px`}"></div>
-    <div id="watch" :style="{transform:`translate(-50%, -50%) scale(${scale}) `}">
-      <div class="digit"><span>1</span></div>
-      <div class="digit"><span>2</span></div>
-      <div class="digit"><span>3</span></div>
-      <div class="digit"><span>4</span></div>
-      <div class="digit"><span>5</span></div>
-      <div class="digit"><span>6</span></div>
-      <div class="digit"><span>7</span></div>
-      <div class="digit"><span>8</span></div>
-      <div class="digit"><span>9</span></div>
-      <div class="digit"><span>10</span></div>
-      <div class="digit"><span>11</span></div>
-      <div class="digit"><span>12</span></div>
-      <div id="mickey"></div>
-      <div id="hours" class="right" :style="{'transform': hoursRotate}">
-      </div>
-      <div id="minutes" class="back left" :style="{'transform': minutesRotate}"></div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
-import {useWidgetScale, WidgetFitBox} from '@widget-js/vue3'
+import { useWidgetScale } from '@widget-js/vue3'
 
 export default {
-  name: "MickeyClockWidget",
-  components: {WidgetFitBox},
+  name: 'MickeyClockWidget',
   props: {
     backgroundColor: {
       type: String,
-      default: "#333"
+      default: '#333',
     },
-    width: {
-      type: Number
-    },
-    height: {
-      type: Number
-    },
+    width: { type: Number },
+    height: { type: Number },
     borderRadius: {
       type: Number,
       default: 22,
-    }
+    },
   },
   data() {
     return {
@@ -50,39 +21,93 @@ export default {
       minutes: 0,
       hoursRotate: 'rotate(0deg) ',
       minutesRotate: 'rotate(0deg)',
-      scale: 1
+      scale: 1,
     }
-  },
-  created() {
-    this.updateTime();
-    this.scale = useWidgetScale(this.width, this.height, 450, 450) - 0.1;
-    console.log(this.borderRadius);
   },
   computed: {
     fillClass() {
       if (this.width > this.height) {
-        return {"fill-height": true, "fill-width": false}
+        return {
+          'fill-height': true,
+          'fill-width': false,
+        }
       }
-      return {"fill-height": false, "fill-width": true}
-    }
+
+      return {
+        'fill-height': false,
+        'fill-width': true,
+      }
+    },
+  },
+  created() {
+    this.updateTime()
+    this.scale = useWidgetScale(this.width, this.height, 450, 450) - 0.1
   },
   methods: {
     updateTime() {
       setInterval(() => {
-        this.hours = new Date().getHours();
-        this.minutes = new Date().getMinutes();
+        this.hours = new Date().getHours()
+        this.minutes = new Date().getMinutes()
         if (this.hours > 12) {
-          this.hours = this.hours - 12;
+          this.hours = this.hours - 12
         }
+
         this.hours = 3
         this.minutes = 40
-        this.hoursRotate = 'rotate(' + (this.hours * 30) + 'deg)';
-        this.minutesRotate = 'rotate(' + (this.minutes * 6) + 'deg)';
+        this.hoursRotate = `rotate(${this.hours * 30}deg)`
+        this.minutesRotate = `rotate(${this.minutes * 6}deg)`
       }, 1000)
     },
   },
 }
 </script>
+
+<template>
+  <div class="mickey-clock">
+    <div class="bg" :style="{ borderRadius: `${borderRadius ?? 22}px` }" />
+    <div id="watch" :style="{ transform: `translate(-50%, -50%) scale(${scale}) ` }">
+      <div class="digit">
+        <span>1</span>
+      </div>
+      <div class="digit">
+        <span>2</span>
+      </div>
+      <div class="digit">
+        <span>3</span>
+      </div>
+      <div class="digit">
+        <span>4</span>
+      </div>
+      <div class="digit">
+        <span>5</span>
+      </div>
+      <div class="digit">
+        <span>6</span>
+      </div>
+      <div class="digit">
+        <span>7</span>
+      </div>
+      <div class="digit">
+        <span>8</span>
+      </div>
+      <div class="digit">
+        <span>9</span>
+      </div>
+      <div class="digit">
+        <span>10</span>
+      </div>
+      <div class="digit">
+        <span>11</span>
+      </div>
+      <div class="digit">
+        <span>12</span>
+      </div>
+      <div id="mickey" />
+      <div id="hours" class="right" :style="{ transform: hoursRotate }" />
+      <div id="minutes" class="back left" :style="{ transform: minutesRotate }" />
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .bg {
@@ -199,10 +224,8 @@ export default {
 }
 
 @media only screen and (max-width: 160px) {
-  #watch{
+  #watch {
     transform: translate(-50%, -50%) scale(0.23);
   }
 }
-
-
 </style>

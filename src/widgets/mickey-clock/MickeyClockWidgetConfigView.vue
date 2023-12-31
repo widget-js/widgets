@@ -1,49 +1,45 @@
-<template>
-  <widget-edit-dialog :widget-params="widgetParams" :option="widgetConfigOption"
-                      :widget-data="widgetData"
-                      @confirm="onSaveClick()">
-    <template v-slot:widget>
-      <div class="" style=" width: 200px;  height: 200px;"></div>
-      <mickey-clock-widget :width="widgetParams.widthPx" :height="widgetParams.heightPx"
-                           :border-radius="widgetData.borderRadius??22"
-                           :background-color="widgetData.backgroundColor"></mickey-clock-widget>
-    </template>
-  </widget-edit-dialog>
-</template>
-
 <script lang="ts">
-import {useWidget, WidgetConfigOption} from "@widget-js/vue3";
-import {WidgetData, WidgetDataApi} from "@widget-js/core";
-import {reactive} from "vue";
-import MickeyClockWidget from "@/widgets/mickey-clock/MickeyClockWidget.vue";
+import {
+  WidgetConfigOption,
+  useWidget,
+} from '@widget-js/vue3'
+import { WidgetData } from '@widget-js/core'
 
 export default {
-  name: "",
-  components: {MickeyClockWidget},
+  name: '',
   setup() {
-    const {widgetData, widgetParams} = useWidget(WidgetData)
+    const {
+      widgetData,
+      widgetParams,
+      save,
+    } = useWidget(WidgetData)
 
-    //修改成需要设置组件参数配置
-    const widgetConfigOption = reactive(new WidgetConfigOption({
+    // 修改成需要设置组件参数配置
+    const widgetConfigOption = new WidgetConfigOption({
       custom: false,
-      backgroundColor: true,
-      borderRadius: true,
-      previewWidth: 200,
-      previewHeight: 200,
-    }));
-    return {widgetData, widgetParams, widgetConfigOption}
-  },
-  methods: {
-    async onSaveClick() {
-      await WidgetDataApi.save(this.widgetData);
-      window.close();
+      theme: {
+        backgroundColor: true,
+        borderRadius: true,
+      },
+    })
+    return {
+      widgetData,
+      widgetParams,
+      save,
+      widgetConfigOption,
     }
   },
-  mounted() {
-    console.log(window.location)
-  }
 }
 </script>
+
+<template>
+  <widget-edit-dialog
+    v-model="widgetData" :widget-params="widgetParams"
+    :option="widgetConfigOption"
+    @apply="save"
+    @confirm="save({ closeWindow: true })"
+  />
+</template>
 
 <style scoped lang="scss">
 </style>

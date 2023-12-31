@@ -38,5 +38,6 @@ declare module '@vue/runtime-core' {
     SolarDatePicker: typeof import('./src/components/SolarDatePicker.vue')['default']
     TimePicker: typeof import('./src/components/TimePicker.vue')['default']
     TimePickerDialog: typeof import('./src/components/TimePickerDialog.vue')['default']
+    WidgetEditDialog: typeof import('@widget-js')['WidgetEditDialog']
   }
 }

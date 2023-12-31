@@ -1,12 +1,22 @@
-import TimeProgressWidgetDefine from "@/widgets/time-progress/TimeProgress.widget";
+import type { RouteRecordRaw } from 'vue-router'
+import TimeProgressWidgetDefine from '@/widgets/time-progress/TimeProgress.widget'
 
-const TimeProgressWidgetRoutes = [
-    {
-        path: TimeProgressWidgetDefine.path,
-        name: `${TimeProgressWidgetDefine.name}`,
-        component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.time_progress" */ './TimeProgressWidgetView.vue')
-    },
+const url = TimeProgressWidgetDefine.path
+const name = TimeProgressWidgetDefine.name
 
-];
+const configUrl = TimeProgressWidgetDefine.configPagePath
 
-export default TimeProgressWidgetRoutes;
+const TimeProgressWidgetDefineRoutes: RouteRecordRaw[] = [
+  {
+    path: url,
+    name: `${name}`,
+    component: () => import(/* webpackChunkName: "com.wisdom.widgets.time_progress" */ './TimeProgressWidgetView.vue'),
+  },
+  {
+    path: configUrl!,
+    name: `${name}.config`,
+    component: () => import(/* webpackChunkName: "com.wisdom.widgets.time_progress.config" */ './TimeProgressConfig.vue'),
+  },
+]
+
+export default TimeProgressWidgetDefineRoutes

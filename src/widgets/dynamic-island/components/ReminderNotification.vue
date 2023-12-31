@@ -1,54 +1,63 @@
-<template>
-  <div class="message-notification">
-    <div class="info">
-      <span :class="`icon mgc_${notification.icon}`" v-if="notification.icon"></span>
-      <div class="text">
-        <div class="title">{{ notification.title }}</div>
-        <div class="message">{{ notification.message }}</div>
-      </div>
-    </div>
-    <div class="action">
-      <div class="button cancel" @click="cancel" v-if="notification.cancelButtonText"
-        >{{ notification.cancelButtonText }}
-      </div>
-      <div class="button confirm" @click="confirm" v-if="notification.confirmButtonText">
-        {{ notification.confirmButtonText }}
-      </div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import { AppNotification, BroadcastApi, BroadcastEvent, NotificationApi, NotificationApiEvent } from '@widget-js/core'
-import {unref} from "vue";
+import {
+  AppNotification,
+  BroadcastApi,
+  BroadcastEvent,
+  NotificationApi,
+  NotificationApiEvent,
+} from '@widget-js/core'
 
 const props = defineProps({
   notification: {
     type: AppNotification,
-    required: true
-  }
+    required: true,
+  },
 })
 
-const cancel = () => {
+function cancel() {
   const broadcastCancelEvent = new BroadcastEvent({
     event: props.notification.cancelBroadcast ?? NotificationApiEvent.CANCEL,
-    payload: JSON.stringify(props.notification)
+    payload: JSON.stringify(props.notification),
   })
 
   BroadcastApi.send(broadcastCancelEvent)
   NotificationApi.hide()
 }
 
-const confirm = () => {
+function confirm() {
   const broadcastConfirmEvent = new BroadcastEvent({
     event: props.notification.confirmBroadcast ?? NotificationApiEvent.CONFIRM,
-    payload: JSON.stringify(props.notification)
+    payload: JSON.stringify(props.notification),
   })
 
   BroadcastApi.send(broadcastConfirmEvent)
   NotificationApi.hide()
 }
 </script>
+
+<template>
+  <div class="message-notification">
+    <div class="info">
+      <span v-if="notification.icon" :class="`icon mgc_${notification.icon}`" />
+      <div class="text">
+        <div class="title">
+          {{ notification.title }}
+        </div>
+        <div class="message">
+          {{ notification.message }}
+        </div>
+      </div>
+    </div>
+    <div class="action">
+      <div v-if="notification.cancelButtonText" class="button cancel" @click="cancel">
+        {{ notification.cancelButtonText }}
+      </div>
+      <div v-if="notification.confirmButtonText" class="button confirm" @click="confirm">
+        {{ notification.confirmButtonText }}
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 @import '../scss/notification.scss';

@@ -1,21 +1,22 @@
-import QuickSearchWidgetDefine from "./QuickSearch";
+import type { RouteRecordRaw } from 'vue-router'
+import QuickSearchWidgetDefine from './QuickSearch'
 
-const url = QuickSearchWidgetDefine.path;
-const name = QuickSearchWidgetDefine.name;
+const url = QuickSearchWidgetDefine.path
+const name = QuickSearchWidgetDefine.name
 
-const configUrl = QuickSearchWidgetDefine.configPagePath;
+const configUrl = QuickSearchWidgetDefine.configPagePath
 
-const QuickSearchWidgetRoutes = [
-    {
-        path: url,
-        name: `${name}`,
-        component: () => import(/* webpackChunkName: "com.wisdom.widgets.quick_search" */ './QuickSearchWidgetView.vue')
-    },
-    {
-        path: configUrl,
-        name: `${name}.config`,
-        component: () => import(/* webpackChunkName: "com.wisdom.widgets.quick_search.config" */ './QuickSearchConfigView.vue')
-    }
+const QuickSearchWidgetRoutes: RouteRecordRaw[] = [
+  {
+    path: url,
+    name: `${name}`,
+    component: () => import(/* webpackChunkName: "com.wisdom.widgets.quick_search" */ './QuickSearchWidgetView.vue'),
+  },
+  {
+    path: configUrl!,
+    name: `${name}.config`,
+    component: () => import(/* webpackChunkName: "com.wisdom.widgets.quick_search.config" */ './QuickSearchConfigView.vue'),
+  },
 ]
 
-export default QuickSearchWidgetRoutes;
+export default QuickSearchWidgetRoutes

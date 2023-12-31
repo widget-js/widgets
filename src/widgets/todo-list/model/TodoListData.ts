@@ -7,13 +7,17 @@ export class TodoListData extends WidgetData {
   todoList: Todo[] = []
   finishedList: Todo[] = []
 
+  constructor(name: string) {
+    super(name, undefined)
+  }
+
   finishTodo(todo: Todo) {
-    remove(this.todoList, function (item) {
+    remove(this.todoList, (item) => {
       return item.id === todo.id
     })
     todo.dueDateTime = new Date().toISOString()
-    //防止快速点击重复添加
-    if (!this.finishedList.find((item) => item.id == todo.id)) {
+    // 防止快速点击重复添加
+    if (!this.finishedList.find(item => item.id == todo.id)) {
       this.finishedList.splice(0, 0, todo)
     }
   }
@@ -23,21 +27,21 @@ export class TodoListData extends WidgetData {
   }
 
   deleteTodo(todo: Todo) {
-    remove(this.todoList, function (item) {
+    remove(this.todoList, (item) => {
       return item.id === todo.id
     })
-    remove(this.finishedList, function (item) {
+    remove(this.finishedList, (item) => {
       return item.id === todo.id
     })
   }
 
   undoTodo(todo: Todo) {
-    remove(this.finishedList, function (item) {
+    remove(this.finishedList, (item) => {
       return item.id === todo.id
     })
     todo.dueDateTime = undefined
     todo.order = 0
-    if (!this.todoList.find((item) => item.id == todo.id)) {
+    if (!this.todoList.find(item => item.id == todo.id)) {
       this.todoList.splice(0, 0, todo)
     }
   }
@@ -50,6 +54,7 @@ export class TodoListData extends WidgetData {
     if (!todo.title) {
       todo.title = todo.content
     }
+
     if (!todo.createdDateTime) {
       todo.createdDateTime = todo.content
     }
@@ -57,10 +62,11 @@ export class TodoListData extends WidgetData {
     if (todo.finishedAt && !todo.dueDateTime) {
       todo.dueDateTime = todo.finishedAt
     }
+
     return todo
   }
 
-  parseJSON(json: {}) {
+  parseJSON(json: object) {
     super.parseJSON(json)
     if (this.todoList) {
       for (let i = 0; i < this.todoList.length; i++) {
@@ -102,7 +108,7 @@ export class Todo {
    */
   finishedAt?: string
   title: string
-  order: number = 0
+  order = 0
   /**
    *
    */
@@ -124,7 +130,7 @@ export class Todo {
    * @example midnight UTC on Jan 1, 2020 would look like this: '2020-01-01T00:00:00Z'.
    */
   lastModifiedDateTime: string
-  isReminderOn: boolean = false
+  isReminderOn = false
 
   constructor(title: string) {
     this.title = title
@@ -133,7 +139,7 @@ export class Todo {
     this.createdDateTime = new Date().toISOString()
     this.lastModifiedDateTime = this.createdAt
     this.dueDateTime = undefined
-    this.id = parseInt(customAlphabet('0123456789', 10)())
+    this.id = Number.parseInt(customAlphabet('0123456789', 10)())
   }
 
   isFinished = (): boolean => {

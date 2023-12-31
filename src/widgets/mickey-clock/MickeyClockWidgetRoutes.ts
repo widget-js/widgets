@@ -1,14 +1,15 @@
-import MickeyClockWidgetDefine from "./MickeyClock.widget";
+import type { RouteRecordRaw } from 'vue-router'
+import MickeyClockWidgetDefine from './MickeyClock.widget'
 
-const url = MickeyClockWidgetDefine.path;
-const name = MickeyClockWidgetDefine.name;
+const url = MickeyClockWidgetDefine.path
+const name = MickeyClockWidgetDefine.name
 
-const MickeyClockWidgetRoutes = [
-    {
-        path: url,
-        name: `${name}`,
-        component: () => import(/* webpackChunkName: "com.wisdom.widgets.mickey_clock" */ './MickeyClockWidgetView.vue')
-    }
+const MickeyClockWidgetRoutes: RouteRecordRaw[] = [
+  {
+    path: url,
+    name: `${name}`,
+    component: () => import(/* webpackChunkName: "com.wisdom.widgets.mickey_clock" */ './MickeyClockWidgetView.vue'),
+  },
 ]
 
-export default MickeyClockWidgetRoutes;
+export default MickeyClockWidgetRoutes

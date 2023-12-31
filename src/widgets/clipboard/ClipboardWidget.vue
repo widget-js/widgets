@@ -1,27 +1,18 @@
-<template>
-  <div class="hover-wrapper" @mouseenter="clearHideTimer" @mouseleave="startHideTimer">
-    <div class="content">{{ data?.content }}</div>
-    <div class="actions">
-      <div class="search-engine" @click="search('bing')">
-        <img src="./assets/bing.png" alt="Bing" @click="search('bing')" />
-      </div>
-      <div class="search-engine">
-        <img src="./assets/google.png" alt="Google" @click="search('google')" />
-      </div>
-      <div class="search-engine">
-        <img src="./assets/baidu.png" alt="BaiDu" @click="search('baidu')" />
-      </div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import { useAppBroadcast, useWidget } from '@widget-js/vue3'
-import { BrowserWindowApi, BrowserWindowApiEvent, ClipboardApiEvent } from '@widget-js/core'
-import { ClipboardData, ClipboardListData } from '@/widgets/clipboard/model/ClipboardData'
-import { ref, watch } from 'vue'
-import { Transition, useMotion } from '@vueuse/motion'
+import { useAppBroadcast } from '@widget-js/vue3'
+import {
+  BrowserWindowApi,
+  BrowserWindowApiEvent,
+  ClipboardApiEvent,
+} from '@widget-js/core'
+import {
+  ref,
+  watch,
+} from 'vue'
+import type { Transition } from '@vueuse/motion'
+import { useMotion } from '@vueuse/motion'
 import { delay } from 'lodash'
+import { ClipboardData } from '@/widgets/clipboard/model/ClipboardData'
 
 type SearchEngine = 'bing' | 'google' | 'baidu'
 // const { widgetData } = useWidget(ClipboardListData, {
@@ -33,32 +24,31 @@ const data = ref<ClipboardData | undefined>()
 const transition: Transition = {
   type: 'keyframes',
   duration: 300,
-  ease: 'easeOut'
+  ease: 'easeOut',
 }
 
-let hideTimerId: number = -1
-const startHideTimer = () => {
-  clearHideTimer()
-  hideTimerId = window.setTimeout(() => {
-    apply('hide')
-    showing.value = false
-  }, 3000)
-}
+let hideTimerId = -1
 
-const clearHideTimer = () => {
+function clearHideTimer() {
   clearTimeout(hideTimerId)
 }
 
-const { apply, motionProperties } = useMotion(null, {
-  initial: { y: -100, transition },
+const {
+  apply,
+  motionProperties,
+} = useMotion(null, {
+  initial: {
+    y: -100,
+    transition,
+  },
   hide: {
     y: -100,
     transition: {
       ...transition,
       onComplete: () => {
         // BrowserWindowApi.hide()
-      }
-    }
+      },
+    },
   },
   show: {
     y: 0,
@@ -73,16 +63,20 @@ const { apply, motionProperties } = useMotion(null, {
           BrowserWindowApi.setMinimumSize(600, 56)
         }, 500)
         // BrowserWindowApi.setSize(600, 36)
-      }
-    }
-  }
+      },
+    },
+  },
 })
 
-const hideWindow = () => {
-  showing.value = false
-  apply('hide')
+function startHideTimer() {
+  clearHideTimer()
+  hideTimerId = window.setTimeout(() => {
+    apply('hide')
+    showing.value = false
+  }, 3000)
 }
-const search = (se: SearchEngine) => {
+
+function search(se: SearchEngine) {
   switch (se) {
     case 'bing':
       BrowserWindowApi.openUrl(`https://cn.bing.com/search?q=${data.value?.content}`, { external: true })
@@ -97,41 +91,57 @@ const search = (se: SearchEngine) => {
 }
 
 watch(
-  () => motionProperties['y'],
+  () => motionProperties.y,
   (newY) => {
-    BrowserWindowApi.setPosition({
-      y: newY
-    })
-  }
+    BrowserWindowApi.setPosition({ y: newY })
+  },
 )
 
-const initWindow = async () => {
+async function initWindow() {
   await BrowserWindowApi.setup({
     width: 600,
     height: 56,
     maxWidth: 600,
     maxHeight: 56,
     resizable: false,
-    movable: false
+    movable: false,
   })
   await BrowserWindowApi.alignToScreen('top-center')
   await BrowserWindowApi.hide()
 }
+
 initWindow()
 useAppBroadcast([ClipboardApiEvent.CHANGED, BrowserWindowApiEvent.FOCUS], async (broadcast) => {
   if (broadcast.event == ClipboardApiEvent.CHANGED) {
-    const text = broadcast.payload['content'] as string
+    const text = broadcast.payload.content as string
     data.value = new ClipboardData(text)
     await BrowserWindowApi.setAlwaysOnTop(true)
     showing.value = true
     await BrowserWindowApi.showInactive()
     apply('show')
     startHideTimer()
-    console.log(text.substring(0, 20))
-  } else if (broadcast.event == BrowserWindowApiEvent.FOCUS) {
   }
 })
 </script>
+
+<template>
+  <div class="hover-wrapper" @mouseenter="clearHideTimer" @mouseleave="startHideTimer">
+    <div class="content">
+      {{ data?.content }}
+    </div>
+    <div class="actions">
+      <div class="search-engine" @click="search('bing')">
+        <img src="./assets/bing.png" alt="Bing" @click="search('bing')">
+      </div>
+      <div class="search-engine">
+        <img src="./assets/google.png" alt="Google" @click="search('google')">
+      </div>
+      <div class="search-engine">
+        <img src="./assets/baidu.png" alt="BaiDu" @click="search('baidu')">
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .hover-wrapper {

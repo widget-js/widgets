@@ -1,4 +1,11 @@
-build/*.js
-config/*.js
-src/assets
-src/
+dist/
+node_modules
+node_modules/
+patches/
+types/
+cache/
+!packages/.vitepress
+!/.eslintrc.js
+!/rollup.config.js
+!.test
+.temp

@@ -1,133 +1,134 @@
-<template>
-  <div
-    class="wave-progress-container"
-    ref="containerRef"
-    :style="{ fontSize: fontSize, backgroundColor: backgroundColors[0], height: height + 'px', width: width + 'px', borderRadius: $props.extra?.borderRadius + 'px' }"
-  >
-    <div class="tips">
-      <div class="title">{{ title }}</div>
-      <div class="desc">剩余</div>
-    </div>
-
-    <canvas
-      ref="canvasRef"
-      class="wave-canvas"
-      :width="cbWidth"
-      :height="cbHeight"
-      :style="{ backgroundColor: backgroundColors[0], height: cbHeight + 'px', width: cbWidth + 'px' }"
-    ></canvas>
-    <div class="percentage">{{ 100 - floor(transitionRation, 0) }}%</div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import {computed, nextTick, onMounted, ref, watch} from "vue";
-import dayjs, {Dayjs} from "dayjs";
-import {TransitionPresets, useInterval, useTransition} from "@vueuse/core";
-import {Lunar, LunarMonth} from "lunar-typescript";
-import {ProgressType} from "./model/WaveProgressData";
-import Color from "color";
-import {delay, floor} from 'lodash'
-import {useWidgetSize} from "@widget-js/vue3";
-
-dayjs.locale("zh-cn");
-
-const ratio = ref(1);
-const {width, height} = useWidgetSize();
-
-const canvasRef = ref<HTMLCanvasElement>();
-const containerRef = ref<HTMLDivElement>();
-
-const cbHeight = ref(0);
-const cbWidth = ref(0);
+import {
+  computed,
+  nextTick,
+  onMounted,
+  ref,
+  watch,
+} from 'vue'
+import type { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
+import {
+  TransitionPresets,
+  useInterval,
+  useTransition,
+} from '@vueuse/core'
+import {
+  Lunar,
+  LunarMonth,
+} from 'lunar-typescript'
+import Color from 'color'
+import {
+  delay,
+  floor,
+} from 'lodash'
+import { useWidgetSize } from '@widget-js/vue3'
+import { ProgressType } from './model/WaveProgressData'
 
 const props = defineProps({
   locale: {
     type: String,
-    default: "zh-cn",
+    default: 'zh-cn',
     required: false,
   },
   progressType: {
     type: Number,
-    default: 0
+    default: 0,
   },
   eventName: {
     type: String,
-    default: "今天"
+    default: '今天',
   },
-  startDate: {
-    type: Date
-  },
-  endDate: {
-    type: Date
-  },
+  startDate: { type: Date },
+  endDate: { type: Date },
   isLunar: {
     type: Boolean,
-    default: false
+    default: false,
   },
-  backgroundColor: {
-    type: String
-  }
-});
+  backgroundColor: { type: String },
+})
+
+dayjs.locale('zh-cn')
+
+const ratio = ref(1)
+const {
+  width,
+  height,
+} = useWidgetSize()
+
+const canvasRef = ref<HTMLCanvasElement>()
+const containerRef = ref<HTMLDivElement>()
+
+const cbHeight = ref(0)
+const cbWidth = ref(0)
+
+const startDate = computed(() => {
+  return dayjs(props.startDate)
+})
+
+const endDate = computed(() => {
+  return dayjs(props.endDate)
+})
+
 watch(() => props.progressType, () => {
   refresh()
 })
 const backgroundColors = computed(() => {
-  const hex = props.backgroundColor;
-  let color = hex;
+  const hex = props.backgroundColor
+  let color = hex
   if (!color) {
     switch (props.progressType) {
       case ProgressType.today:
-        color = "#ff5594ff";
-        break;
+        color = '#ff5594ff'
+        break
       case ProgressType.toWeek:
-        color = "#ff8e55ff";
-        break;
+        color = '#ff8e55ff'
+        break
       case ProgressType.toMonth:
-        color = "#bb55ffff";
-        break;
+        color = '#bb55ffff'
+        break
       case ProgressType.toYear:
-        color = "#6055ffff";
-        break;
+        color = '#6055ffff'
+        break
       default:
-        color = "#ff8e55ff";
+        color = '#ff8e55ff'
     }
   }
-  const colorValue = Color(color);
-  return [0.4, 0.8, 0.9, 0.95].map((item) => colorValue.alpha(item).string());
-});
-const currentHeight = ref(0);
+  const colorValue = Color(color)
+  return [0.4, 0.8, 0.9, 0.95].map(item => colorValue.alpha(item).string())
+})
+const currentHeight = ref(0)
 const transitionCurrentHeight = useTransition(currentHeight, {
   duration: 1000,
-  transition: TransitionPresets.easeOutBack
-});
+  transition: TransitionPresets.easeOutBack,
+})
 
-const onInitCanvas = () => {
+function onInitCanvas() {
   nextTick(() => {
-    const ctx = canvasRef.value!.getContext("2d")!; // height: number = canvas.offsetHeight,
+    const ctx = canvasRef.value!.getContext('2d')! // height: number = canvas.offsetHeight,
     // width: number = width.value
 
-    let step: number = 0;
+    let step = 0
     // 动起来
     const loop = function () {
-      step++;
-      const lines: string[] = [backgroundColors.value[1] + backgroundColors.value[2], backgroundColors.value[3]];
+      step++
+      const lines: string[] = [backgroundColors.value[1] + backgroundColors.value[2], backgroundColors.value[3]]
       // const offset = parseInt(fontSize.value) / 2;
 
-      const boxHeight = (cbHeight.value = containerRef.value?.offsetHeight ?? 158);
-      const boxWidth = (cbWidth.value = containerRef.value?.offsetWidth ?? 58);
-      currentHeight.value = (boxHeight * ratio.value) / 100;
+      const boxHeight = (cbHeight.value = containerRef.value?.offsetHeight ?? 158)
+      const boxWidth = (cbWidth.value = containerRef.value?.offsetWidth ?? 58)
+      currentHeight.value = (boxHeight * ratio.value) / 100
 
-      ctx.clearRect(0, 0, boxWidth, boxHeight);
+      ctx.clearRect(0, 0, boxWidth, boxHeight)
       // 画三个不同颜色的矩阵
       for (let j = lines.length - 1; j >= 0; j--) {
         // 每个矩阵的角度都不同，每个之间相差100度
-        const angle: number = ((step + j * 100) * Math.PI) / 180;
-        const deltaHeight: number = Math.sin(angle) * 20;
-        ctx.fillStyle = backgroundColors.value[j];
-        ctx.beginPath(); // 开始绘制
-        ctx.moveTo(0, transitionCurrentHeight.value);
-        const relativeX: number = boxWidth / 4;
+        const angle: number = ((step + j * 100) * Math.PI) / 180
+        const deltaHeight: number = Math.sin(angle) * 20
+        ctx.fillStyle = backgroundColors.value[j]
+        ctx.beginPath() // 开始绘制
+        ctx.moveTo(0, transitionCurrentHeight.value)
+        const relativeX: number = boxWidth / 4
 
         // const sinX = Math.sin(relativeX);
         ctx.bezierCurveTo(
@@ -136,148 +137,170 @@ const onInitCanvas = () => {
           boxWidth - relativeX,
           transitionCurrentHeight.value + deltaHeight,
           boxWidth,
-          transitionCurrentHeight.value
-        );
-        ctx.lineTo(boxWidth, boxHeight);
-        ctx.lineTo(0, boxHeight);
-        ctx.fill(); // 上色
-        ctx.closePath(); // 结束绘制
+          transitionCurrentHeight.value,
+        )
+        ctx.lineTo(boxWidth, boxHeight)
+        ctx.lineTo(0, boxHeight)
+        ctx.fill() // 上色
+        ctx.closePath() // 结束绘制
       }
-      requestAnimationFrame(loop); // 启动函数
-    };
+      requestAnimationFrame(loop) // 启动函数
+    }
 
-    loop();
-  });
-};
+    loop()
+  })
+}
 
-const refresh = async () => {
-  await nextTick();
-  dayjs.locale(props.locale);
-  const now = dayjs();
-  initRenderView(now);
+async function refresh() {
+  await nextTick()
+  dayjs.locale(props.locale)
+  const now = dayjs()
+  initRenderView(now)
 
-  const dayEnd = now.endOf("day");
-  const day = getRatioValue(now, props.progressType);
+  const dayEnd = now.endOf('day')
+  const day = getRatioValue(now, props.progressType)
   // 每个百分比刷新一次就好
-  const daySurplus = 100 - day;
-  const interval = dayEnd.diff(now) / daySurplus;
-  intervalRenderView(interval);
+  const daySurplus = 100 - day
+  const interval = dayEnd.diff(now) / daySurplus
+  intervalRenderView(interval)
 }
 
 onMounted(async () => {
   delay(async () => {
-    await refresh();
+    await refresh()
   }, 500)
-  onInitCanvas();
-});
+  onInitCanvas()
+})
 
 const fontSize = computed(() => {
-  return Math.min(width.value / 76, height.value / 134, (containerRef.value?.offsetWidth ?? 58) / 76) * 21 + "px";
-});
+  return `${Math.min(width.value / 76, height.value / 134, (containerRef.value?.offsetWidth ?? 58) / 76) * 21}px`
+})
 
 // 渲染视图
 function initRenderView(now: Dayjs) {
-  ratio.value = getRatioValue(now, props.progressType);
+  ratio.value = getRatioValue(now, props.progressType)
 }
 
 const transitionRation = useTransition(ratio, {
   duration: 1000,
-  transition: TransitionPresets.easeOutCubic
-});
+  transition: TransitionPresets.easeOutCubic,
+})
 
 const title = computed(() => {
   switch (props.progressType) {
     case ProgressType.today:
-      return "今天";
+      return '今天'
     case ProgressType.toWeek:
-      return "本周";
+      return '本周'
     case ProgressType.toMonth:
-      return "本月";
+      return '本月'
     case ProgressType.toYear:
-      return "今年";
+      return '今年'
     default:
-      return props.eventName;
+      return props.eventName
   }
 })
 
 // 计算百分比
-const getRatioValue = (now: Dayjs, progressType: ProgressType): number => {
-  let start: Dayjs;
-  let end: Dayjs;
+function getRatioValue(now: Dayjs, progressType: ProgressType): number {
+  let start: Dayjs
+  let end: Dayjs
   switch (progressType) {
     case ProgressType.today:
-      start = now.startOf("day");
-      end = now.endOf("day");
-      break;
+      start = now.startOf('day')
+      end = now.endOf('day')
+      break
     case ProgressType.toWeek:
-      start = now.startOf("week");
-      end = now.endOf("week");
-      break;
+      start = now.startOf('week')
+      end = now.endOf('week')
+      break
     case ProgressType.toMonth:
       if (props.isLunar) {
-        const nowLunar = Lunar.fromDate(now.toDate());
-        const monthDay = LunarMonth.fromYm(nowLunar.getYear(), nowLunar.getMonth());
-        const firstDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), 1).getSolar();
-        const endDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), monthDay!.getDayCount()).getSolar();
-        start = dayjs(firstDay.getCalendar());
-        end = dayjs(endDay.getCalendar()).endOf("day");
-      } else {
-        start = now.startOf("month");
-        end = now.endOf("month");
+        const nowLunar = Lunar.fromDate(now.toDate())
+        const monthDay = LunarMonth.fromYm(nowLunar.getYear(), nowLunar.getMonth())
+        const firstDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), 1).getSolar()
+        const endDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), monthDay!.getDayCount()).getSolar()
+        start = dayjs(firstDay.getCalendar())
+        end = dayjs(endDay.getCalendar()).endOf('day')
+      }
+      else {
+        start = now.startOf('month')
+        end = now.endOf('month')
       }
 
-      break;
+      break
     case ProgressType.toYear:
       if (props.isLunar) {
-        const nowLunar = Lunar.fromDate(now.toDate());
-        const firstDay = Lunar.fromYmd(nowLunar.getYear(), 1, 1).getSolar();
-        const endDay = Lunar.fromYmd(nowLunar.getYear() + 1, 1, 1).getSolar();
-        end = dayjs(endDay.getCalendar());
-        start = dayjs(firstDay.getCalendar());
-      } else {
-        start = now.startOf("year");
-        end = now.endOf("year");
+        const nowLunar = Lunar.fromDate(now.toDate())
+        const firstDay = Lunar.fromYmd(nowLunar.getYear(), 1, 1).getSolar()
+        const endDay = Lunar.fromYmd(nowLunar.getYear() + 1, 1, 1).getSolar()
+        end = dayjs(endDay.getCalendar())
+        start = dayjs(firstDay.getCalendar())
       }
-      break;
+      else {
+        start = now.startOf('year')
+        end = now.endOf('year')
+      }
+      break
     case ProgressType.custom:
-      start = startDate.value;
-      end = endDate.value;
-      break;
+      start = startDate.value
+      end = endDate.value
+      break
     default:
-      start = now.startOf("day");
-      end = now.endOf("day");
+      start = now.startOf('day')
+      end = now.endOf('day')
   }
   if (start.isAfter(now) || start.isAfter(end)) {
-    return 0;
+    return 0
   }
 
-  const ratio = now.diff(start) / end.diff(start);
-  return parseInt(Math.round(Number(ratio * 100)).toFixed(0));
+  const ratio = now.diff(start) / end.diff(start)
+  return Number.parseInt(Math.round(Number(ratio * 100)).toFixed(0))
 }
 
-const startDate = computed(() => {
-  return dayjs(props.startDate)
-});
-
-const endDate = computed(() => {
-  return dayjs(props.endDate)
-});
 // 定时刷新视图
-const intervalRenderView = (interval: number) => {
+function intervalRenderView(interval: number) {
   if (interval < 1000) {
-    interval = 1000;
+    interval = 1000
   }
+
   useInterval(interval, {
     callback: () => {
-      initRenderView(dayjs());
+      initRenderView(dayjs())
     },
-  });
+  })
 }
 
-defineExpose({
-  refresh,
-});
+defineExpose({ refresh })
 </script>
+
+<template>
+  <div
+    ref="containerRef"
+    class="wave-progress-container"
+    :style="{ fontSize, backgroundColor: backgroundColors[0], height: `${height}px`, width: `${width}px`, borderRadius: `${$props.extra?.borderRadius}px` }"
+  >
+    <div class="tips">
+      <div class="title">
+        {{ title }}
+      </div>
+      <div class="desc">
+        剩余
+      </div>
+    </div>
+
+    <canvas
+      ref="canvasRef"
+      class="wave-canvas"
+      :width="cbWidth"
+      :height="cbHeight"
+      :style="{ backgroundColor: backgroundColors[0], height: `${cbHeight}px`, width: `${cbWidth}px` }"
+    />
+    <div class="percentage">
+      {{ 100 - floor(transitionRation, 0) }}%
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 body {

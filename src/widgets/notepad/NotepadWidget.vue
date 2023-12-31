@@ -1,14 +1,28 @@
+<script>
+export default {
+  data() {
+    return {
+      title: '记事本',
+      content: '你可以使用&nbsp;disabled&nbsp;属性来定义按钮是否被禁用。<br />使用&nbsp;disabled&nbsp;属性来控制按钮是否为...',
+      time: '2022/10/27 15:04',
+    }
+  },
+  methods: {},
+}
+</script>
+
 <template>
   <div class="notepad-container">
     <div class="notepad-one">
-      <div class="notepad-title">记事本</div>
+      <div class="notepad-title">
+        记事本
+      </div>
       <div class="notepad-add">
-        <span class="mgc_add_circle_line"></span>
-
+        <span class="mgc_add_circle_line" />
       </div>
     </div>
 
-    <div class="notepad-line"></div>
+    <div class="notepad-line" />
 
     <div class="notepad-content">
       你可以使用 disabled 属性来定义按钮是否被禁用。 使用 disabled 属性来控制按钮是否为...
@@ -16,29 +30,18 @@
 
     <div class="notepad-two">
       <div class="notepad-left">
-        <span class="mgc_left_line"></span>
+        <span class="mgc_left_line" />
       </div>
-      <div class="notepad-two-time">2022/10/27 15:04</div>
+      <div class="notepad-two-time">
+        2022/10/27 15:04
+      </div>
       <div class="notepad-left">
-        <span class="mgc_right_line"></span>
+        <span class="mgc_right_line" />
       </div>
     </div>
-
   </div>
 </template>
-<script>
 
-export default {
-  data() {
-    return {
-      title: '记事本',
-      content: "你可以使用&nbsp;disabled&nbsp;属性来定义按钮是否被禁用。<br />使用&nbsp;disabled&nbsp;属性来控制按钮是否为...",
-      time: '2022/10/27 15:04',
-    };
-  },
-  methods: {},
-};
-</script>
 <style lang="scss" scoped>
 body * {
   background: transparent;

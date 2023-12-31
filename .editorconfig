@@ -1,16 +1,13 @@
+# editorconfig.org
+root = true
+
 [*]
-charset = utf-8
-end_of_line = lf
-indent_size = 2
 indent_style = space
-insert_final_newline = true
-max_line_length = 120
-tab_width = 2
+indent_size = 2
+end_of_line = lf
+charset = utf-8
 trim_trailing_whitespace = true
-ij_continuation_indent_size = 2
-ij_formatter_off_tag = @formatter:off
-ij_formatter_on_tag = @formatter:on
-ij_formatter_tags_enabled = false
-ij_smart_tabs = false
-ij_visual_guides = none
-ij_wrap_on_typing = false
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false

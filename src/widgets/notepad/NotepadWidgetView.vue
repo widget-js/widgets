@@ -1,8 +1,9 @@
-<template>
-</template>
-
 <script>
 </script>
+
+<template>
+  <div />
+</template>
 
 <style>
 </style>

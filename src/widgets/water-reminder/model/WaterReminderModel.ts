@@ -9,7 +9,8 @@ export class WaterReminderModel extends WidgetData {
   interval = 30
   history: Record<string, number> = {}
   lastReminderAt: string = dayjs().toISOString()
-  enableReminder: boolean = true
+  enableReminder = true
+
   getTodayKey(): string {
     return dayjs().format('YYYY/MM/DD')
   }
@@ -19,6 +20,7 @@ export class WaterReminderModel extends WidgetData {
     if (history) {
       return history
     }
+
     return 0
   }
 }

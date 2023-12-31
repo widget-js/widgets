@@ -1,34 +1,29 @@
-<template>
-  <!--  <dynamic-island-widget-->
-  <!--    ref="dynamicIslandWidget"-->
-  <!--    v-model:state="state"-->
-  <!--    :notification="notification" />-->
-</template>
-
 <script lang="ts" setup>
-import {BrowserWindowApi, NotificationApi} from '@widget-js/core'
-import { computed, ref } from 'vue'
+import {
+  BrowserWindowApi,
+  NotificationApi,
+} from '@widget-js/core'
+import {
+  computed,
+  ref,
+} from 'vue'
 import { useIntervalFn } from '@vueuse/core'
 import { useWidget } from '@widget-js/vue3'
-import { PhoneReminderData } from '@/widgets/phone-reminder/model/PhoneReminder'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
-BrowserWindowApi.hide();
+import { PhoneReminderData } from '@/widgets/phone-reminder/model/PhoneReminder'
+
+BrowserWindowApi.hide()
 dayjs.extend(duration)
-const { widgetData,widgetParams } = useWidget(PhoneReminderData, {
-  loadDataByWidgetName: true,
-  onDataLoaded(data) {
-    console.log(data)
-  }
-})
+const { widgetData } = useWidget(PhoneReminderData, { loadDataByWidgetName: true })
 const now = ref(dayjs())
 const enableReminders = computed(() => {
   const weekday = now.value.day()
-  return widgetData.value.reminders.filter((it) => it.enable && it.workdays.includes(weekday))
+  return widgetData.value.reminders.filter(it => it.enable && it.workdays.includes(weekday))
 })
 useIntervalFn(async () => {
   now.value = dayjs().set('milliseconds', 0)
-  for (let phoneReminder of enableReminders.value) {
+  for (const phoneReminder of enableReminders.value) {
     const time = phoneReminder.getTimes()[0]
     const targetTime = dayjs()
       .set('hour', time.getHours())
@@ -44,5 +39,13 @@ useIntervalFn(async () => {
   }
 }, 1000)
 </script>
+
+<template>
+  <div />
+  <!--  <dynamic-island-widget -->
+  <!--    ref="dynamicIslandWidget" -->
+  <!--    v-model:state="state" -->
+  <!--    :notification="notification" /> -->
+</template>
 
 <style scoped></style>

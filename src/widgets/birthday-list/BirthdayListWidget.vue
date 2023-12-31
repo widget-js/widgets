@@ -1,37 +1,131 @@
+<script lang="ts">
+// import {useInterval} from '@vueuse/core'
+import dayjs from 'dayjs'
+import type { Solar } from 'lunar-typescript'
+import {
+  Lunar,
+  LunarMonth,
+} from 'lunar-typescript'
+import type { PropType } from 'vue'
+import type { BirthdayPeople } from '@/widgets/birthday-list/model/BirthdayListData'
+import type BirthdayListData from '@/widgets/birthday-list/model/BirthdayListData'
+
+// import {delay} from "lodash";
+// import BirthdayListData from './model/BirthdayListData';
+
+/**
+ * 按照生日到期时间排序展示
+ */
+export default {
+  name: 'BirthdayListWidget',
+  props: { birthdayListData: { type: Object as PropType<BirthdayListData> } },
+  emits: ['add'],
+  computed: {
+    peopleList() {
+      const peopleList: BirthdayPeople[] = []
+      this.birthdayListData.peopleList.forEach(it => peopleList.push(it))
+      const curDate = dayjs()
+      for (let i = 0; i < peopleList.length; i++) {
+        const people = peopleList[i]
+        let newDate
+        if (people.type == 'Y') {
+          const solarDate = this.getSolarDate(curDate.year(), people.month, people.day)
+          newDate = dayjs(solarDate.toString())
+        }
+        else {
+          newDate = dayjs(`${curDate.year()}-${people.month > 9 ? '' : '0'}${people.month}-${people.day > 9 ? '' : '0'}${people.day}`)
+        }
+        const diff = newDate.diff(curDate, 'day')
+        if (diff >= 0) {
+          peopleList[i].qty = diff
+        }
+        else {
+          peopleList[i].qty = newDate.add(1, 'year').diff(curDate, 'day')
+        }
+      }
+      peopleList.sort((a, b) => {
+        return a.qty - b.qty
+      })
+      return peopleList
+    },
+  },
+  watch: {
+    birthdayListData() {
+      // this.update();
+    },
+  },
+  // emits: ["confirm", "cancel"],
+  methods: {
+    getSolarDate(year: number, month: number, day: number): Solar {
+      const lunarMonth = LunarMonth.fromYm(year, month)
+      const lastDay = lunarMonth!.getDayCount()
+      return Lunar.fromYmd(year, month, day > lastDay ? lastDay : day).getSolar()
+    },
+    update() {
+
+    },
+    getShowDate(item) {
+      if (item.type == 'N') {
+        return `${item.month}月${item.day}日`
+      }
+
+      const lunar = this.getSolarDate(dayjs().year(), item.month, item.day)
+      return `${lunar.getMonth()}月${lunar.getDay()}日`
+    },
+  },
+}
+</script>
+
 <template>
-  <div ref="container" class="birthday-list-container" :style="{
-          backgroundColor:birthdayListData?.backgroundColor
-       }">
+  <div
+    class="birthday-list-container" :style="{
+      backgroundColor: birthdayListData?.backgroundColor,
+    }"
+  >
     <img class="image" src="./images/balloon.png">
     <div class="title">
       <span>{{ birthdayListData.title }}</span>
-      <div class="add mgc_add_circle_line" @click="this.$emit('add')"></div>
+      <div class="add mgc_add_circle_line" @click="$emit('add')" />
     </div>
     <div class="people-list" style="flex:1; display:flex; flex-flow:column; overflow: auto;">
-      <template v-for="item in peopleList">
-        <div class="list" :class="{active: item.qty==0}">
+      <template v-for="item in peopleList" :key="item.createdAt">
+        <div class="list" :class="{ active: item.qty == 0 }">
           <div class="left">
             <div class="name">
-              <div class="name-value">{{ item.name }}</div>
+              <div class="name-value">
+                {{ item.name }}
+              </div>
             </div>
             <div class="dates">
-              <div class="date" v-if="item.type=='Y'">
-                <div class="date-type">农</div>
-                <div class="date-value">{{ item.month }}月{{ item.day }}日</div>
+              <div v-if="item.type == 'Y'" class="date">
+                <div class="date-type">
+                  农
+                </div>
+                <div class="date-value">
+                  {{ item.month }}月{{ item.day }}日
+                </div>
               </div>
               <div class="date">
-                <div class="date-type">公</div>
-                <div class="date-value">{{ getShowDate(item) }}</div>
+                <div class="date-type">
+                  公
+                </div>
+                <div class="date-value">
+                  {{ getShowDate(item) }}
+                </div>
               </div>
             </div>
           </div>
-          <div class="right" :class="{active: item.qty==0}">
+          <div class="right" :class="{ active: item.qty == 0 }">
             <template v-if="item.qty == 0">
-              <span class="icon mgc_cake_line"></span>
+              <span class="icon mgc_cake_line" />
             </template>
             <template v-else>
-              <div class="qty">{{ item.qty }}</div>
-              <div class="unit">天</div>
+              <div class="qty">
+                {{ item.qty }}
+              </div>
+              <div class="unit">
+                天
+              </div>
             </template>
           </div>
         </div>
@@ -39,85 +133,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-// import {useInterval} from '@vueuse/core'
-import dayjs, {Dayjs} from "dayjs";
-import {Lunar, LunarMonth, Solar, SolarMonth} from 'lunar-typescript';
-import BirthdayListData, {BirthdayPeople} from "@/widgets/birthday-list/model/BirthdayListData";
-import {WidgetApi} from "@widget-js/core";
-import {PropType} from "vue";
-// import {delay} from "lodash";
-//import BirthdayListData from './model/BirthdayListData';
-
-/**
- * 按照生日到期时间排序展示
- */
-export default {
-  name: "BirthdayListWidget",
-  //components: {SliderField, DialogTitleBar, ColorPickerField},
-  setup: (props, {emit}) => {
-    // const birthdayListData = ref(props.birthdayListData);
-    // return {birthdayListData}
-  },
-  emits: ["add"],
-  props: {
-    birthdayListData: {
-      type: Object as PropType<BirthdayListData>
-    }
-  },
-  watch: {
-    birthdayListData() {
-      // this.update();
-    }
-  },
-  computed: {
-    peopleList() {
-      const peopleList: BirthdayPeople[] = [];
-      this.birthdayListData.peopleList.forEach((it) => peopleList.push(it));
-      const curDate = dayjs();
-      for (let i = 0; i < peopleList.length; i++) {
-        const people = peopleList[i];
-        let newDate;
-        if (people.type == 'Y') {
-          const solarDate = this.getSolarDate(curDate.year(), people.month, people.day);
-          newDate = dayjs(solarDate.toString());
-        } else {
-          newDate = dayjs('' + curDate.year() + '-' + (people.month > 9 ? '' : '0') + people.month + '-' + (people.day > 9 ? '' : '0') + people.day);
-        }
-        const diff = newDate.diff(curDate, 'day');
-        if (diff >= 0) {
-          peopleList[i]["qty"] = diff;
-        } else {
-          peopleList[i]["qty"] = newDate.add(1, 'year').diff(curDate, 'day');
-        }
-      }
-      peopleList.sort(function (a, b) {
-        return a.qty - b.qty;
-      });
-      return peopleList
-    }
-  },
-  //emits: ["confirm", "cancel"],
-  methods: {
-    getSolarDate(year: number, month: number, day: number): Solar {
-      const lunarMonth = LunarMonth.fromYm(year, month);
-      const lastDay = lunarMonth!.getDayCount();
-      return Lunar.fromYmd(year, month, day > lastDay ? lastDay : day).getSolar();
-    },
-    update() {
-
-    },
-    getShowDate(item) {
-      if (item.type == 'N') {
-        return item.month + '月' + item.day + '日';
-      }
-      let lunar = this.getSolarDate(dayjs().year(), item.month, item.day);
-      return lunar.getMonth() + '月' + lunar.getDay() + '日';
-    }
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 //背景设置为透明，并隐藏滚动条

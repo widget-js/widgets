@@ -1,11 +1,15 @@
-import { Widget, WidgetKeyword } from '@widget-js/core'
-//TODO 修改组件信息，标题，描述，关键词
+import {
+  Widget,
+  WidgetKeyword,
+} from '@widget-js/core'
+
+// TODO 修改组件信息，标题，描述，关键词
 const name = 'cn.widgetjs.widgets.wave_progress'
 const title = { 'zh-CN': '波浪进度' }
-//组件标题
+// 组件标题
 const description = { 'zh-CN': '用波浪显示事件进度' }
-//组件描述
-//组件关键词
+// 组件描述
+// 组件关键词
 const keywords = [WidgetKeyword.RECOMMEND]
 const lang = 'zh-CN'
 const path = '/widget/wave_progress'
@@ -30,6 +34,6 @@ const WaveProgressWidgetDefine = new Widget({
   maxHeight,
   minWidth,
   minHeight,
-  previewImage: '/images/preview_wave_progress.png'
+  previewImage: '/images/preview_wave_progress.png',
 })
 export default WaveProgressWidgetDefine

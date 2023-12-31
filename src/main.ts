@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import dayjs from 'dayjs'
 import 'animate.css'
 import { WidgetJsPlugin } from '@widget-js/vue3'
 import '@widget-js/vue3/dist/style.css'
@@ -10,17 +9,17 @@ import { MotionPlugin } from '@vueuse/motion'
 import ElementPlus from 'element-plus'
 import './index.css'
 import 'element-plus/dist/index.css'
-import dayjs from "dayjs";
+import router from './router'
 import 'dayjs/locale/zh-cn.js'
+import App from './App.vue'
+
 dayjs.locale('cn')
 
 const pinia = createPinia()
 const app = createApp(App)
 app.use(ElementPlus)
 app.use(WidgetJsPlugin)
-//@ts-ignore
 app.use(MotionPlugin)
 app.use(router)
-//@ts-ignore
 app.use(pinia)
 app.mount('#app')

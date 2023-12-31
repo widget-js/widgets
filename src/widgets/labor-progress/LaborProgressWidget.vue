@@ -1,31 +1,12 @@
-<template>
-  <div
-    class="container"
-    ref="container"
-    @mouseenter="mouseEnter"
-    :style="{ backgroundColor: backgroundColor, borderRadius: `${borderRadius}px` }">
-    <div class="progress-bar">
-      <div class="outline">
-        <div class="progress" :style="{ width: `${percent}%` }"></div>
-        <div class="percent" :style="percentPosition">{{ percent }}%</div>
-      </div>
-      <div class="thumb" ref="container" :style="{ left: `${percent}%` }">
-        <img :src="currentTimeline.emoji" class="emoji" alt="" />
-        <div class="time">{{ time.format('HH:mm') }}</div>
-        <div
-          class="second animate__animated animate__fadeOutUp animate__infinite"
-          :style="{ left: `${secondLeft}px`, animationDuration: `${currentTimeline.titleAnimationDuration}s` }">
-          {{ currentTimeline.title }}
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
-import { computed, ref } from 'vue'
-import { useIntervalFn, useWindowSize } from '@vueuse/core'
+import {
+  computed,
+  ref,
+} from 'vue'
+import { useIntervalFn } from '@vueuse/core'
 import dayjs from 'dayjs'
+import { NotificationApi } from '@widget-js/core'
+import { floor } from 'lodash'
 import faceWithTears from './images/face_holding_back_tears_3d.png'
 import faceSpiralEyes from './images/face_with_spiral_eyes_3d.png'
 import faceSteam from './images/face_with_steam_from_nose_3d.png'
@@ -39,12 +20,25 @@ import faceSleepy from './images/sleepy_face_3d.png'
 import facePartying from './images/partying_face_3d.png'
 import EmojiTimeline from '@/widgets/labor-progress/model/EmojiTimeline'
 import '@/common/dayjs-extend'
-import { NotificationApi, WidgetApi } from '@widget-js/core'
-import { delay, floor } from 'lodash'
-import { SitReminderDemo } from '@/widgets/dynamic-island/model/Demo'
 
 export default {
   name: 'LaborProgressWidget',
+  props: {
+    backgroundColor: {
+      type: String,
+      default: 'white',
+    },
+    borderRadius: {
+      type: Number,
+      default: 22,
+    },
+    startTime: { type: Date },
+    endTime: { type: Date },
+    enablePhoneReminder: {
+      type: Boolean,
+      boolean: false,
+    },
+  },
   setup: (props) => {
     const workStartTime = computed(() => {
       return dayjs(props.startTime)
@@ -54,13 +48,9 @@ export default {
       return dayjs(props.endTime)
     })
 
-    console.info('start', workStartTime.value.format())
-    console.info('end', workEndTime.value.format())
-
     const totalSeconds = computed(() => {
       return dayjs.duration(workEndTime.value.diff(workStartTime.value)).asSeconds()
     })
-    console.info('Total Second', totalSeconds.value)
     // 获取一周的第几天，1代表周一，7代表周天
     const weekday = dayjs().isoWeekday()
     const weekdayEmojis = [
@@ -70,7 +60,7 @@ export default {
       faceRollingEyes,
       faceWithTears,
       faceWithTears,
-      faceWithTears
+      faceWithTears,
     ]
     const percent = ref(0)
     const percentPosition = ref()
@@ -81,7 +71,7 @@ export default {
       new EmojiTimeline(faceSleeping, 49.1, 55.6, 1, '困'),
       new EmojiTimeline(faceSunglasses, 55.7, 94.9, 1, '冲'),
       new EmojiTimeline(faceStarStruck, 95, 99.9, 0.2, '快'),
-      new EmojiTimeline(facePartying, 100, 100, 3, '❤')
+      new EmojiTimeline(facePartying, 100, 100, 3, '❤'),
     ]
 
     const time = ref(dayjs())
@@ -95,52 +85,71 @@ export default {
       if (remindSeconds == 5 * 60) {
         NotificationApi.countdown('下班倒计时', workEndTime.value.format())
       }
+
       percent.value = floor((duration.asSeconds() / totalSeconds.value) * 100, 1)
       if (percent.value > 100) {
         percent.value = 100
-      } else if (percent.value < 0) {
+      }
+      else if (percent.value < 0) {
         percent.value = 0
       }
+
       percentPosition.value = percent.value > 70 ? { left: '4px' } : { right: '4px' }
       secondLeft.value = percent.value > 95 ? -15 : 50
-      for (let timeline of emojiTimeline) {
+      for (const timeline of emojiTimeline) {
         if (timeline.isActivated(percent.value)) {
           currentTimeline.value = timeline
           break
         }
       }
     }, 1000)
-    return { time, currentTimeline, percent, workEndTime, secondLeft, percentPosition }
+    return {
+      time,
+      currentTimeline,
+      percent,
+      workEndTime,
+      secondLeft,
+      percentPosition,
+    }
   },
   methods: {
     async mouseEnter() {
       // await NotificationApi.countdown("下班倒计时", dayjs().add(5, 'second').toISOString())
       // SitReminderDemo.duration = -1;
       // await NotificationApi.send(SitReminderDemo);
-    }
+    },
   },
-  props: {
-    backgroundColor: {
-      type: String,
-      default: 'white'
-    },
-    borderRadius: {
-      type: Number,
-      default: 22
-    },
-    startTime: {
-      type: Date
-    },
-    endTime: {
-      type: Date
-    },
-    enablePhoneReminder: {
-      type: Boolean,
-      boolean: false
-    }
-  }
 }
 </script>
+
+<template>
+  <div
+    class="container"
+    :style="{ backgroundColor, borderRadius: `${borderRadius}px` }"
+    @mouseenter="mouseEnter"
+  >
+    <div class="progress-bar">
+      <div class="outline">
+        <div class="progress" :style="{ width: `${percent}%` }" />
+        <div class="percent" :style="percentPosition">
+          {{ percent }}%
+        </div>
+      </div>
+      <div class="thumb" :style="{ left: `${percent}%` }">
+        <img :src="currentTimeline.emoji" class="emoji" alt="">
+        <div class="time">
+          {{ time.format('HH:mm') }}
+        </div>
+        <div
+          class="second animate__animated animate__fadeOutUp animate__infinite"
+          :style="{ left: `${secondLeft}px`, animationDuration: `${currentTimeline.titleAnimationDuration}s` }"
+        >
+          {{ currentTimeline.title }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 $progressHeight: 56px;
@@ -159,6 +168,7 @@ $progressHeight: 56px;
     max-height: 54px;
     display: flex;
     align-items: center;
+
     .thumb {
       position: absolute;
       left: -25px;
@@ -203,7 +213,7 @@ $progressHeight: 56px;
       width: 100%;
 
       .progress {
-        height: calc($progressHeight / 2 - 6px) ;
+        height: calc($progressHeight / 2 - 6px);
         left: 0;
         width: 0;
         transition-property: width;
