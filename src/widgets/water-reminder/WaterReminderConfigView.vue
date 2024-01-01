@@ -36,7 +36,7 @@ const widgetConfigOption = new WidgetConfigOption({
     color: true,
     primaryColor: true,
   },
-}),
+})
 </script>
 
 <template>

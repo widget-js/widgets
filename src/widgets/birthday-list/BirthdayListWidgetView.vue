@@ -18,7 +18,6 @@ const {
 async function add() {
   const url = await WidgetApi.getWidgetConfigUrl(widgetData.value.name, widgetParams)
   if (url) {
-    // DeployedWidgetApi.openConfigRoute()
     await BrowserWindowApi.openUrl(url)
   }
 }

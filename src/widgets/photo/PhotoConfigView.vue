@@ -12,12 +12,12 @@ import {
   computed,
   ref,
 } from 'vue'
-import { PhotoData } from '@/widgets/photo/PhotoData'
+import { PhotoData } from '@/widgets/photo/model/PhotoData'
 import PhotoWidget from '@/widgets/photo/Photo.widget'
 
 const directory = ref('')
 const defaultData = new PhotoData(PhotoWidget.name)
-defaultData.borderRadius = 22
+defaultData.theme.borderRadius = '22px'
 const {
   widgetData,
   widgetParams,
@@ -78,6 +78,9 @@ async function onPickFolderFocus() {
       </ElFormItem>
       <el-form-item label="轮播时间（秒）">
         <el-input-number v-model="durationModel" :min="1" :max="1000" />
+      </el-form-item>
+      <el-form-item label="随机播放">
+        <el-switch v-model="widgetData.random" />
       </el-form-item>
     </template>
   </WidgetEditDialog>

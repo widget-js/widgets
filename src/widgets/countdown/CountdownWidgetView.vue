@@ -9,6 +9,7 @@ import { CountdownModel } from '@/widgets/countdown/model/CountdownModel'
 import CountdownWidget from '@/widgets/countdown/CountdownWidget.vue'
 
 const defaultData = new CountdownModel(CountdownWidgetDefine.name)
+defaultData.theme.backgroundColor = '#FFC455'
 const {
   widgetData,
   widgetParams,

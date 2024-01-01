@@ -1,7 +1,7 @@
 import antfu from '@antfu/eslint-config'
 
 export default antfu({
-  ignores: ['**/*.md', '**/*.md/*.*', 'dist/', '**/dist/**/', 'node_modules', '**/node_modules/**', 'node_modules/', '**/node_modules/**/', 'patches/', '**/patches/**/', 'types/', '**/types/**/', 'cache/', '**/cache/**/', '!packages/.vitepress', '!packages/.vitepress/**', '!.eslintrc.js', '!.eslintrc.js/**', '!rollup.config.js', '!rollup.config.js/**', '!.test', '!**/.test/**', '.temp', '**/.temp/**'],
+  ignores: ['**/*.md', '**/*.md/*.*', 'dist/', 'public/', '**/dist/**/', 'node_modules', '**/node_modules/**', 'node_modules/', '**/node_modules/**/', 'patches/', '**/patches/**/', 'types/', '**/types/**/', 'cache/', '**/cache/**/', '!packages/.vitepress', '!packages/.vitepress/**', '!.eslintrc.js', '!.eslintrc.js/**', '!rollup.config.js', '!rollup.config.js/**', '!.test', '!**/.test/**', '.temp', '**/.temp/**'],
 }, {
   rules: {
     'vue/no-deprecated-functional-template': 'off',

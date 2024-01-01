@@ -196,6 +196,9 @@ https://github.com/rtugeek/clock
 
 ![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_glitch_clock.png)
 
+#### 米奇时钟
+
+![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_micky_clock.png)
 #### 歌词小说
 
 ![歌词小说](public/images/preview_lyric_book.png)

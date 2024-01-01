@@ -21,10 +21,6 @@ export default {
       type: Number,
       default: 54,
     },
-    borderRadius: {
-      type: Number,
-      default: 22,
-    },
   },
   setup(props) {
     const days = computed(() => {
@@ -52,13 +48,8 @@ export default {
       return `${props.fontSize / 3}px`
     })
 
-    const borderRadiusPx = computed(() => {
-      return `${props.borderRadius}px`
-    })
-
     return {
       days,
-      borderRadiusPx,
       daysColor,
       titleFontSizePx,
       descFontSizePx,
@@ -88,13 +79,13 @@ export default {
 <style scoped lang="scss">
 .countdown-widget {
   width: 100%;
-  border-radius: v-bind(borderRadiusPx);
+  border-radius: var(--widget-border-radius);
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: 8px 16px;
   align-items: center;
-  background-color: v-bind(backgroundColor);
+  background-color: var(--widget-background-color);
 
   .title {
     font-size: v-bind(titleFontSizePx);

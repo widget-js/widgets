@@ -1,4 +1,5 @@
 import { WidgetData } from '@widget-js/core'
+import BirthdayListWidgetDefine from '@/widgets/birthday-list/BirthdayList.widget'
 
 export interface BirthdayPeople {
   name: string
@@ -14,6 +15,10 @@ export interface BirthdayPeople {
 
 export default class BirthdayListData extends WidgetData {
   peopleList: BirthdayPeople[] = []
-  backgroundColor = '#FB604B'
   title = '生日列表'
+
+  constructor() {
+    super(BirthdayListWidgetDefine.name)
+    this.theme.backgroundColor = '#FB604B'
+  }
 }

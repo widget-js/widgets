@@ -11,7 +11,7 @@ import {
 } from 'vue'
 import type { Transition } from '@vueuse/motion'
 import { useMotion } from '@vueuse/motion'
-import { delay } from 'lodash'
+import delay from 'lodash-es/delay'
 import { ClipboardData } from '@/widgets/clipboard/model/ClipboardData'
 
 type SearchEngine = 'bing' | 'google' | 'baidu'

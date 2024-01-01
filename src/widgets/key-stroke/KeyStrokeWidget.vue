@@ -10,7 +10,7 @@ import {
 import { useKeyboardEventHook } from '@widget-js/vue3'
 import type { NativeKeyboardEvent } from '@widget-js/core'
 import { BrowserWindowApi } from '@widget-js/core'
-import { delay } from 'lodash'
+import delay from 'lodash-es/delay'
 
 const keyboard = ref<HTMLElement>()
 const transition = {

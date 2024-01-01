@@ -7,5 +7,10 @@ export class CountdownModel extends WidgetData {
   title = '新年'
   date: string = CountdownModel.DEFAULT_DATE.toISOString()
   dateType = DateType.SOLAR
-  backgroundColor = '#FFC455'
+
+  constructor(name: string, id?: string) {
+    super(name, id)
+    this.theme.backgroundColor = '#FFF'
+    this.theme.primaryColor = '#FFC455'
+  }
 }

@@ -10,7 +10,7 @@ import {
   useElementSize,
   useIntervalFn,
 } from '@vueuse/core'
-import { delay } from 'lodash'
+import delay from 'lodash-es/delay'
 import Driver from 'driver.js'
 import {
   BrowserWindowApi,

@@ -6,7 +6,7 @@ import {
 import { useIntervalFn } from '@vueuse/core'
 import dayjs from 'dayjs'
 import { NotificationApi } from '@widget-js/core'
-import { floor } from 'lodash'
+import floor from 'lodash-es/floor'
 import faceWithTears from './images/face_holding_back_tears_3d.png'
 import faceSpiralEyes from './images/face_with_spiral_eyes_3d.png'
 import faceSteam from './images/face_with_steam_from_nose_3d.png'

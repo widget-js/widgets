@@ -18,10 +18,6 @@ import Color from 'color'
 import { WaveBall } from '@/widgets/water-reminder/model/WaveBall'
 
 const props = defineProps({
-  backgroundColor: {
-    type: String,
-    default: 'white',
-  },
   primaryColor: {
     type: String,
     default: '#2596FF',
@@ -143,7 +139,7 @@ const circleBorderColor = computed(() => {
   border-radius: 22px;
   width: 100%;
   height: 100%;
-  background-color: v-bind(backgroundColor);
+  background-color: var(--widget-background-color);
 
   .circle {
     height: 70%;
@@ -222,7 +218,7 @@ const circleBorderColor = computed(() => {
     left: 0;
     width: 100%;
     text-align: center;
-    color: v-bind(color);
+    color: var(--widget-color);
   }
 }
 </style>

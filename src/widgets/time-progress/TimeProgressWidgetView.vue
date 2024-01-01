@@ -14,7 +14,7 @@ import {
   useInterval,
   useTransition,
 } from '@vueuse/core'
-import { floor } from 'lodash'
+import floor from 'lodash-es/floor'
 import {
   WidgetWrapper,
   useWidget,

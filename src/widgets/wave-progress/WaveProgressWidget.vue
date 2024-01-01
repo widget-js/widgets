@@ -18,10 +18,8 @@ import {
   LunarMonth,
 } from 'lunar-typescript'
 import Color from 'color'
-import {
-  delay,
-  floor,
-} from 'lodash'
+import delay from 'lodash-es/delay'
+import floor from 'lodash-es/floor'
 import { useWidgetSize } from '@widget-js/vue3'
 import { ProgressType } from './model/WaveProgressData'
 

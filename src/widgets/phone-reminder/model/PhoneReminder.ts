@@ -109,7 +109,7 @@ export class PhoneReminderData extends WidgetData {
 
   parseJSON(json: object) {
     super.parseJSON(json)
-    const jsonElement = json.reminders
+    const jsonElement = (json as any).reminders ?? []
     this.reminders = []
     for (const json of jsonElement) {
       const phoneReminder = new PhoneReminder('', '', '', '', [])

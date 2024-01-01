@@ -1,5 +1,5 @@
 import { WidgetData } from '@widget-js/core'
-import { remove } from 'lodash'
+import remove from 'lodash-es/remove'
 import { customAlphabet } from 'nanoid'
 
 export class TodoListData extends WidgetData {

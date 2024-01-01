@@ -22,7 +22,7 @@
     "resolveJsonModule": true,
     "types": [
       "element-plus/global",
-      "@widget-js/global",
+      "@widget-js/vue3/global",
       "vue"
     ],
     "strict": true,

@@ -1,5 +1,5 @@
 import { WidgetData } from '@widget-js/core'
-import { remove } from 'lodash'
+import remove from 'lodash-es/remove'
 import { nanoid } from 'nanoid'
 
 type ClipboardType = 'text' | 'image'
@@ -16,7 +16,7 @@ export class ClipboardListData extends WidgetData {
   parseJSON(json: object) {
     super.parseJSON(json)
     this.list = []
-    const list = json.list
+    const list = (json as any).list ?? []
     for (const todoJson of list) {
       this.list.push(Object.assign(new ClipboardData(''), todoJson))
     }

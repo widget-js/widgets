@@ -14,6 +14,7 @@ import {
 import { CountdownModel } from '@/widgets/countdown/model/CountdownModel'
 import DatePickerDialog from '@/components/DatePickerDialog.vue'
 import { DateType } from '@/countdown/Event'
+import CountdownWidgetDefine from '@/widgets/countdown/Countdown.widget'
 
 export default {
   name: 'CountdownConfigView',
@@ -27,10 +28,13 @@ export default {
     const showDatePicker = ref(false)
     const date = ref(CountdownModel.DEFAULT_DATE)
     const isLunar = ref(false)
+    const defaultData = new CountdownModel(CountdownWidgetDefine.name)
+    defaultData.theme.backgroundColor = '#FFC455'
     const {
       widgetData,
       widgetParams,
     } = useWidget(CountdownModel, {
+      defaultData,
       onDataLoaded: (data) => {
         if (data) {
           date.value = dayjs(data.date).toDate()

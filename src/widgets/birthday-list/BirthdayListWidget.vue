@@ -79,7 +79,7 @@ export default {
 <template>
   <div
     class="birthday-list-container" :style="{
-      backgroundColor: birthdayListData?.backgroundColor,
+      backgroundColor: birthdayListData?.theme.backgroundColor,
     }"
   >
     <img class="image" src="./images/balloon.png">

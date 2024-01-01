@@ -10,7 +10,7 @@ const PhotoWidgetRoutes: RouteRecordRaw[] = [
   {
     path: url,
     name: `${name}`,
-    component: () => import(/* webpackChunkName: "com.wisdom.widgets.photo" */ './PhotoWidget.vue'),
+    component: () => import(/* webpackChunkName: "com.wisdom.widgets.photo" */ './PhotoWidgetView.vue'),
   },
   {
     path: configUrl!,

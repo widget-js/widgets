@@ -8,7 +8,6 @@ import {
   WidgetData,
   WidgetDataApi,
 } from '@widget-js/core'
-import { reactive } from 'vue'
 
 export default {
   name: '',
@@ -20,12 +19,13 @@ export default {
     } = useWidget(WidgetData)
 
     // 修改成需要设置组件参数配置
-    const widgetConfigOption = reactive(new WidgetConfigOption({
+    const widgetConfigOption = new WidgetConfigOption({
       custom: true,
-      backgroundColor: true,
-      borderRadius: true,
-      preview: false,
-    }))
+      theme: {
+        backgroundColor: true,
+        borderRadius: true,
+      },
+    })
 
     return {
       widgetData,

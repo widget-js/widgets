@@ -9,7 +9,7 @@ import {
   FileApi,
   WidgetApi,
 } from '@widget-js/core'
-import { PhotoData } from '@/widgets/photo/PhotoData'
+import { PhotoData } from '@/widgets/photo/model/PhotoData'
 
 const photos = ref<string[]>([])
 const showGuide = ref(false)
@@ -19,16 +19,16 @@ const {
 } = useWidget(PhotoData, {
   onDataLoaded: (data) => {
     if (data && data.directory) {
-      FileApi.readDirectory(data.directory).then((files) => {
-        photos.value = files.filter((file) => {
-          const ignoreCase = file.toLowerCase()
+      FileApi.readDirectory(data.directory, { ignoreDir: true, traverseDir: false }).then((rootFile) => {
+        photos.value = rootFile.children?.filter((file) => {
+          const ignoreCase = file.absolutePath.toLowerCase()
           return (
             ignoreCase.endsWith('.jpg')
             || ignoreCase.endsWith('.jpeg')
             || ignoreCase.endsWith('.gif')
             || ignoreCase.endsWith('.png')
           )
-        })
+        }).map(file => file.absolutePath) ?? []
       })
       showGuide.value = false
     }
@@ -41,8 +41,6 @@ const {
 const widgetSize = useWidgetSize()
 
 async function showConfig() {
-  // const widgetConfigUrl = await WidgetApi.getWidgetConfigUrl(widgetParams.name, widgetParams);
-  // await BrowserWindowApi.openUrl(widgetConfigUrl!);
   WidgetApi.openConfigPage(widgetParams.id!)
 }
 </script>
@@ -50,7 +48,7 @@ async function showConfig() {
 <template>
   <WidgetWrapper>
     <div class="">
-      <div class="photo" :style="{ borderRadius: `${widgetData.borderRadius ?? 0}px` }">
+      <div class="photo">
         <el-carousel
           :height="`${widgetSize.height.value}px`"
           indicator-position="none"
@@ -81,6 +79,7 @@ async function showConfig() {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  border-radius: var(--widget-border-radius);
   background-color: rgba(0, 0, 0, 0.2);
 
   .guide {

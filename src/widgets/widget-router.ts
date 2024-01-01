@@ -9,7 +9,6 @@ import PhotoWidgetRoutes from './photo/PhotoWidgetRoutes'
 import SitReminderWidgetRoutes from './sit-reminder/SitReminderWidgetRoutes'
 import ClipboardWidgetRoutes from './clipboard/ClipboardWidgetRoutes'
 import LyricBookWidgetRoutes from '@/widgets/lyric-book/LyricBookWidgetRoutes'
-import MickeyClockWidgetRoutes from '@/widgets/mickey-clock/MickeyClockWidgetRoutes'
 import DynamicIslandWidgetRoutes from '@/widgets/dynamic-island/DynamicIslandWidgetRoutes'
 import BirthdayListWidgetRoutes from '@/widgets/birthday-list/BirthdayListWidgetRoutes'
 import LaborProgressWidgetRoutes from '@/widgets/labor-progress/LaborProgressRoutes'
@@ -24,7 +23,6 @@ const WidgetRouter: RouteRecordRaw[] = [
   ...TimeProgressWidgetRoutes,
   ...BirthdayListWidgetRoutes,
   ...DynamicIslandWidgetRoutes,
-  ...MickeyClockWidgetRoutes,
   ...LyricBookWidgetRoutes,
   ...TodoListWidgetRoutes,
   ...CountdownWidgetRoutes,
