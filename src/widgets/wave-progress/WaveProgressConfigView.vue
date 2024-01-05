@@ -40,7 +40,6 @@ function handleChangeCustomDate() {
 <template>
   <widget-edit-dialog
     v-model="widgetData" :option="widgetConfigOption"
-    ,
     :widget-params="widgetParams"
     @apply="save"
     @confirm="save({ closeWindow: true })"
