@@ -22,6 +22,6 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-
+.eslintcache
 #Electron-builder output
 /dist_electron

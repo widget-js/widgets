@@ -67,7 +67,6 @@
     "raw-loader": "^4.0.2",
     "sass": "^1.56.0",
     "sass-loader": "^12.0.0",
-    "simple-git": "^3.22.0",
     "simple-git-hooks": "^2.9.0",
     "style-loader": "^3.3.1",
     "tailwindcss": "^3.2.7",
@@ -84,7 +83,7 @@
     "webpack-cli": "^4.10.0"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "npm run remote && npx lint-staged"
   },
   "lint-staged": {
     "*.{js,ts,tsx,vue,md}": [
