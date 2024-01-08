@@ -1,40 +1,80 @@
 import { defineStore } from 'pinia'
-import { reactive } from 'vue'
-import { WidgetDataApi } from '@widget-js/core'
+import { computed, reactive } from 'vue'
 import { useWidget } from '@widget-js/vue3'
+import * as localforage from 'localforage'
+import { WidgetDataApi } from '@widget-js/core'
 import {
   Todo,
   TodoListData,
   type TodoUpdate,
 } from '@/widgets/todo-list/model/TodoListData'
+import TodoListWidget from '@/widgets/todo-list/TodoList.widget'
 
 export const useTodoStore = defineStore('todo-store', () => {
   const todos = reactive<Todo[]>([])
   const finishedTodos = reactive<Todo[]>([])
-  const { widgetData } = useWidget<TodoListData>(TodoListData, {
+
+  const todoListStorage = localforage.createInstance({
+    name: `${TodoListWidget.name}`,
+    storeName: 'todo-list',
+  })
+  const dueStorage = localforage.createInstance({
+    name: `${TodoListWidget.name}`,
+    storeName: 'due-list',
+  })
+
+  const sortedTodos = computed(() => {
+    return todos.sort((a, b) => a.order - b.order)
+  })
+
+  const loadTodo = async () => {
+    const keys = await dueStorage.keys()
+    for (const key of keys) {
+      const todo = await dueStorage.getItem<string>(key)
+      if (todo) {
+        finishedTodos.push(Todo.fromJSON(JSON.parse(todo)))
+      }
+    }
+
+    const todoListKeys = await todoListStorage.keys()
+    for (const key of todoListKeys) {
+      const todo = await todoListStorage.getItem<string>(key)
+      if (todo) {
+        todos.push(Todo.fromJSON(JSON.parse(todo)))
+      }
+    }
+
+    todos.sort((a, b) => a.order - b.order)
+  }
+
+  loadTodo()
+
+  const { widgetData } = useWidget(TodoListData, {
     loadDataByWidgetName: true,
     onDataLoaded: () => {
-      todos.splice(0, todos.length, ...widgetData.value.todoList)
-      finishedTodos.splice(0, finishedTodos.length, ...widgetData.value.finishedList)
+      // 迁移旧版本数据
+      if (widgetData.value.todoList) {
+        for (const todo of widgetData.value.todoList) {
+          todos.push(todo)
+          todoListStorage.setItem(`${todo.id}`, JSON.stringify(todo))
+        }
+        widgetData.value.todoList = []
+        WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
+      }
     },
   })
 
-  function save() {
-    widgetData.value.todoList = todos
-    widgetData.value.finishedList = finishedTodos
-    WidgetDataApi.saveByName(widgetData.value, { sendBroadcast: false })
-  }
-
   function deleteTodo(todo: Todo) {
     todos.splice(todos.indexOf(todo), 1)
-    save()
+    todoListStorage.removeItem(`${todo.id}`)
   }
 
   function finishTodo(todo: Todo) {
     todos.splice(todos.indexOf(todo), 1)
     todo.dueDateTime = new Date().toISOString()
     finishedTodos.splice(0, 0, todo)
-    save()
+    dueStorage.setItem(`${todo.id}`, JSON.stringify(todo))
+    todoListStorage.removeItem(`${todo.id}`)
   }
 
   function reTodo(todo: Todo) {
@@ -42,28 +82,40 @@ export const useTodoStore = defineStore('todo-store', () => {
     todo.order = 0
     finishedTodos.splice(finishedTodos.indexOf(todo), 1)
     todos.splice(0, 0, todo)
-    save()
+    const id = todo.id
+    dueStorage.removeItem(`${id}`)
+    todoListStorage.setItem(`${id}`, JSON.stringify(todo))
   }
 
   function saveTodo(data: TodoUpdate) {
-    if (data.todo) {
-      const findIndex = todos.findIndex(it => it.id == data.todo!.id)
+    if (data.todoId) {
+      const findIndex = todos.findIndex(it => it.id == data.todoId)
       if (findIndex > -1) {
-        todos[findIndex].content = data.content
+        const editTodo = todos[findIndex]
+        editTodo.title = data.title
+        todoListStorage.setItem(`${editTodo.id}`, JSON.stringify(editTodo))
       }
     }
     else {
-      todos.splice(0, 0, new Todo(data.content))
+      const todo = new Todo(data.title)
+      todos.splice(0, 0, todo)
+      todoListStorage.setItem(`${todo.id}`, JSON.stringify(todo))
     }
-    save()
+  }
+
+  const save = () => {
+    for (const todo of todos) {
+      todoListStorage.setItem(`${todo.id}`, JSON.stringify(todo))
+    }
   }
 
   return {
-    save,
     deleteTodo,
+    save,
     saveTodo,
     todos,
     reTodo,
+    sortedTodos,
     finishedTodos,
     finishTodo,
   }

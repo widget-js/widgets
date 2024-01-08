@@ -9,7 +9,6 @@ import {
   WidgetData,
   WidgetDataApi,
 } from '@widget-js/core'
-import { reactive } from 'vue'
 
 export default {
   name: '',
@@ -17,7 +16,7 @@ export default {
   setup() {
     BrowserWindowApi.setup({
       width: 600,
-      height: 400,
+      height: 500,
       center: true,
     })
     const {
@@ -26,17 +25,15 @@ export default {
     } = useWidget(WidgetData, { loadDataByWidgetName: true })
 
     // 修改成需要设置组件参数配置
-    const widgetConfigOption = reactive(
-      new WidgetConfigOption({
-        custom: false,
-        theme: {
-          backgroundColor: true,
-          borderRadius: true,
-          color: true,
-          dividerColor: true,
-        },
-      }),
-    )
+    const widgetConfigOption = new WidgetConfigOption({
+      custom: false,
+      theme: {
+        backgroundColor: true,
+        borderRadius: true,
+        color: true,
+        dividerColor: true,
+      },
+    })
 
     return {
       widgetData,

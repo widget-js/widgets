@@ -2,10 +2,11 @@ import { WidgetData } from '@widget-js/core'
 import remove from 'lodash-es/remove'
 import { customAlphabet } from 'nanoid'
 
+/**
+ * @deprecated
+ */
 export class TodoListData extends WidgetData {
-  // new Todo('欢迎使用桌面组件'), new Todo('鼠标右击组件弹出菜单')
   todoList: Todo[] = []
-  finishedList: Todo[] = []
 
   constructor(name: string) {
     super(name, undefined)
@@ -16,10 +17,6 @@ export class TodoListData extends WidgetData {
       return item.id === todo.id
     })
     todo.dueDateTime = new Date().toISOString()
-    // 防止快速点击重复添加
-    if (!this.finishedList.find(item => item.id == todo.id)) {
-      this.finishedList.splice(0, 0, todo)
-    }
   }
 
   sort() {
@@ -30,15 +27,9 @@ export class TodoListData extends WidgetData {
     remove(this.todoList, (item) => {
       return item.id === todo.id
     })
-    remove(this.finishedList, (item) => {
-      return item.id === todo.id
-    })
   }
 
   undoTodo(todo: Todo) {
-    remove(this.finishedList, (item) => {
-      return item.id === todo.id
-    })
     todo.dueDateTime = undefined
     todo.order = 0
     if (!this.todoList.find(item => item.id == todo.id)) {
@@ -56,7 +47,7 @@ export class TodoListData extends WidgetData {
     }
 
     if (!todo.createdDateTime) {
-      todo.createdDateTime = todo.content
+      todo.createdDateTime = todo.createdAt
     }
 
     if (todo.finishedAt && !todo.dueDateTime) {
@@ -75,21 +66,13 @@ export class TodoListData extends WidgetData {
         this.todoList[i] = Object.assign(new Todo(''), todo)
       }
     }
-
-    if (this.finishedList) {
-      for (let i = 0; i < this.finishedList.length; i++) {
-        const todo = this.finishedList[i]
-        this.compactData(todo)
-        this.finishedList[i] = Object.assign(new Todo(''), todo)
-      }
-    }
     this.sort()
   }
 }
 
 export interface TodoUpdate {
-  content: string
-  todo?: Todo
+  title: string
+  todoId?: string
 }
 
 export class Todo {
@@ -144,5 +127,11 @@ export class Todo {
 
   isFinished = (): boolean => {
     return this.dueDateTime != undefined
+  }
+
+  static fromJSON(json: object) {
+    const todo = new Todo('')
+    Object.assign(todo, json)
+    return todo
   }
 }

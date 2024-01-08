@@ -16,7 +16,7 @@ const url = '/widget/todo_list'
 // 配置页路由地址
 const configUrl = '/widget/config/todo_list'
 // 组件关键词
-const TodoListWidgetDefine = new Widget({
+const TodoListWidget = new Widget({
   name,
   title,
   description,
@@ -33,4 +33,4 @@ const TodoListWidgetDefine = new Widget({
   configPagePath: configUrl,
 })
 
-export default TodoListWidgetDefine
+export default TodoListWidget

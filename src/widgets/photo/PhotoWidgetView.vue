@@ -4,6 +4,7 @@ import {
   useWidget,
   useWidgetSize,
 } from '@widget-js/vue3'
+import shuffle from 'lodash-es/shuffle'
 import { ref } from 'vue'
 import {
   FileApi,
@@ -20,7 +21,7 @@ const {
   onDataLoaded: (data) => {
     if (data && data.directory) {
       FileApi.readDirectory(data.directory, { ignoreDir: true, traverseDir: false }).then((rootFile) => {
-        photos.value = rootFile.children?.filter((file) => {
+        const pathArr = rootFile.children?.filter((file) => {
           const ignoreCase = file.absolutePath.toLowerCase()
           return (
             ignoreCase.endsWith('.jpg')
@@ -29,6 +30,7 @@ const {
             || ignoreCase.endsWith('.png')
           )
         }).map(file => file.absolutePath) ?? []
+        photos.value = data.random ? shuffle(pathArr) : pathArr
       })
       showGuide.value = false
     }
@@ -54,7 +56,7 @@ async function showConfig() {
           indicator-position="none"
           :interval="widgetData.duration"
         >
-          <el-carousel-item v-for="item in photos" :key="item">
+          <el-carousel-item v-for="(item, index) in photos" :key="`${item}${index}`">
             <el-image fit="cover" class="photo-item" :src="item" alt="" />
           </el-carousel-item>
           <el-carousel-item v-if="showGuide" @click="showConfig">

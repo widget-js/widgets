@@ -110,38 +110,6 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.time_progress",
-      "title": {
-        "zh-CN": "时间进度"
-      },
-      "description": {
-        "zh-CN": "年、月、周、日进度剩余百分比"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 2,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 2,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/time_progress",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_time_progress.png",
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/time_progress",
-      "routes": []
-    },
-    {
       "name": "cn.widgetjs.widgets.sit_reminder",
       "title": {
         "zh-CN": "久坐提醒"
@@ -171,6 +139,38 @@
       "previewImage": "/images/preview_sit_reminder.png",
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/sit_reminder",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.time_progress",
+      "title": {
+        "zh-CN": "时间进度"
+      },
+      "description": {
+        "zh-CN": "年、月、周、日进度剩余百分比"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 2,
+      "maxWidth": 4,
+      "webviewTag": false,
+      "maxHeight": 2,
+      "minWidth": 2,
+      "minHeight": 2,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/time_progress",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_time_progress.png",
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/time_progress",
       "routes": []
     },
     {

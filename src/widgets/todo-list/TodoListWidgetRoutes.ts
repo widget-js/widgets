@@ -1,10 +1,10 @@
 import type { RouteRecordRaw } from 'vue-router'
-import TodoListWidgetDefine from './TodoList.widget'
+import TodoListWidget from './TodoList.widget'
 
-const url = TodoListWidgetDefine.path
-const name = TodoListWidgetDefine.name
+const url = TodoListWidget.path
+const name = TodoListWidget.name
 
-const configUrl = TodoListWidgetDefine.configPagePath
+const configUrl = TodoListWidget.configPagePath
 
 const TodoListWidgetRoutes: RouteRecordRaw[] = [
   {

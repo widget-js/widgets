@@ -6,6 +6,7 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import ViteWidget from '@widget-js/vite-plugin-widget'
 import checker from 'vite-plugin-checker'
+import UnoCSS from 'unocss/vite'
 
 export default defineConfig({
   base: './',
@@ -19,7 +20,7 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue(), ViteWidget(), checker({ typescript: true }), AutoImport({ resolvers: [ElementPlusResolver()] }), Components({ resolvers: [ElementPlusResolver()] })],
+  plugins: [vue(), UnoCSS(), ViteWidget(), checker({ typescript: true }), AutoImport({ resolvers: [ElementPlusResolver()] }), Components({ resolvers: [ElementPlusResolver()] })],
   resolve: {
     alias: [{
       find: '@',

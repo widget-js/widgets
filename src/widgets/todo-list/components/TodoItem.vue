@@ -39,16 +39,16 @@ function deleteTodo() {
           {{ todo.title }}
         </p>
       </div>
-      <div class="actions flex items-center gap-2">
+      <div class="actions flex items-center">
         <div
           v-if="editable"
-          class="click-spot flex justify-center"
+          class="icon click-spot flex justify-center"
           style="height: 100%; width: 24px"
           @click.stop="edit"
         >
           <Edit class="edit" />
         </div>
-        <div class="delete" @click.stop="deleteTodo">
+        <div class="icon delete" @click.stop="deleteTodo">
           <Delete />
         </div>
       </div>
@@ -70,10 +70,6 @@ p {
   white-space: pre-wrap;
 }
 
-.todo {
-  width: 75%;
-}
-
 .todo-item {
   padding: 4px 8px;
   border-bottom: 1px solid var(--widget-divider-color);
@@ -88,6 +84,15 @@ p {
     cursor: pointer;
     margin-left: auto;
     opacity: 0;
+    gap: 16px;
+    right: 16px;
+    border-radius: 4px;
+    padding: 4px 8px ;
+    position: absolute;
+    background: var(--widget-background-color);
+    .icon:hover {
+      scale: 1.2;
+    }
   }
 }
 </style>

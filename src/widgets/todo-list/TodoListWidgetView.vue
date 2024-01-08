@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useElementSize } from '@vueuse/core'
+import { AddOne, ArrowCircleLeft, History } from '@icon-park/vue-next'
 import type {
   Todo,
   TodoUpdate,
@@ -17,7 +18,7 @@ const todoStore = useTodoStore()
 
 const root = ref<HTMLElement>()
 
-const editBox = ref<typeof EditBox>()
+const editBox = ref<InstanceType<typeof EditBox>>()
 const { height } = useElementSize(root)
 
 function edit(todo: Todo) {
@@ -38,10 +39,10 @@ function saveTodo(data: TodoUpdate) {
         <div class="title">
           {{ viewType === 'history' ? '历史记录' : '待办事项' }}
         </div>
-        <div class="actions">
-          <span v-if="viewType === 'history'" class="icon mgc_back_line" @click="viewType = 'default'" />
-          <span v-else class="icon mgc_history_line" @click="viewType = 'history'" />
-          <span class="icon mgc_add_circle_line" @click="viewType = 'edit'" />
+        <div class="actions flex gap-4">
+          <ArrowCircleLeft v-if="viewType !== 'default'" class="icon" @click="viewType = 'default'" />
+          <History class="icon" @click="viewType = 'history'" />
+          <AddOne class="icon" @click="viewType = 'edit'" />
         </div>
       </div>
       <!-- list-body设置高度，解决todo拖动会导致视图上升，这个不知道是electron bug，还是文档流设置不当导致的      -->
@@ -49,16 +50,12 @@ function saveTodo(data: TodoUpdate) {
         <el-scrollbar :height="height - 48">
           <TodoList
             v-show="viewType === 'default'"
-            :todos="todoStore.todos"
-            :finished-todos="todoStore.finishedTodos"
             @update="todoStore.save"
             @edit="edit"
           />
 
           <FinishedTodoList
             v-show="viewType === 'history'"
-            :finished-todos="todoStore.finishedTodos"
-            :todos="todoStore.todos"
             @update="todoStore.save"
           />
           <EditBox v-show="viewType === 'edit'" ref="editBox" @cancel="viewType = 'default'" @save="saveTodo($event)" />
@@ -91,15 +88,8 @@ function saveTodo(data: TodoUpdate) {
     .actions {
       .icon {
         cursor: pointer;
-
-        &:not(:last-child) {
-          margin-right: 8px;
-        }
-
-        &:before {
-          color: var(--widget-color);
-          font-size: 24px;
-        }
+        color: var(--widget-color);
+        font-size: 24px;
       }
     }
   }

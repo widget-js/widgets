@@ -4,7 +4,7 @@ import type { Todo } from '@/widgets/todo-list/model/TodoListData'
 
 const emits = defineEmits(['cancel', 'save'])
 
-const content = ref('')
+const title = ref('')
 
 function cancel() {
   emits('cancel')
@@ -15,18 +15,18 @@ const todo = ref<Todo | undefined>(undefined)
 
 function setTodo(newTodo: Todo) {
   todo.value = newTodo
-  content.value = newTodo.content
+  title.value = newTodo.title
 }
 
 function reset() {
-  content.value = ''
+  title.value = ''
   todo.value = undefined
 }
 
 function confirm() {
   emits('save', {
-    content: content.value,
-    todo: todo.value,
+    title: `${title.value}`,
+    todoId: todo.value ? `${todo.value.id}` : undefined,
   })
   reset()
 }
@@ -38,7 +38,7 @@ defineExpose({ setTodo })
   <div class="add-body">
     <el-form label-position="top">
       <ElInput
-        v-model="content"
+        v-model="title"
         type="textarea"
         class="todo-input"
         maxlength="120"
