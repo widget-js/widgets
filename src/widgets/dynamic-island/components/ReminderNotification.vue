@@ -6,6 +6,7 @@ import {
   NotificationApi,
   NotificationApiEvent,
 } from '@widget-js/core'
+import { IconPark } from '@icon-park/vue-next/es/all'
 
 const props = defineProps({
   notification: {
@@ -38,7 +39,8 @@ function confirm() {
 <template>
   <div class="message-notification">
     <div class="info">
-      <span v-if="notification.icon" :class="`icon mgc_${notification.icon}`" />
+      <IconPark v-if="notification.icon" class="icon" :type="notification.icon" theme="outline" />
+
       <div class="text">
         <div class="title">
           {{ notification.title }}
@@ -112,6 +114,14 @@ function confirm() {
     padding-left: 16px;
     padding-right: 16px;
 
+    .icon {
+      font-size: 36px;
+      margin-right: 16px;
+      display: flex;
+      justify-items: center;
+      color: #5d8ac8;
+    }
+
     .text {
       .title {
         color: white;
@@ -133,13 +143,5 @@ function confirm() {
     }
   }
 
-  .icon {
-    font-size: 36px;
-    margin-right: 16px;
-
-    &:before {
-      color: #5d8ac8;
-    }
-  }
 }
 </style>

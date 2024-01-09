@@ -1,33 +1,18 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { IconPark } from '@icon-park/vue-next/es/all'
 
-const props = defineProps({
+defineProps({
   type: {
     type: String,
     default: 'info',
   },
   message: { type: String },
 })
-
-const icon = computed(() => {
-  if (props.type == 'error') {
-    return 'close_circle_line'
-  }
-  else if (props.type == 'warning') {
-    return 'warning_line'
-  }
-  else if (props.type == 'success') {
-    return 'check_circle_line'
-  }
-  else {
-    return 'information_line'
-  }
-})
 </script>
 
 <template>
   <div class="message-notification ">
-    <span :class="`icon mgc_${icon} ${type}`" />
+    <IconPark class="icon" :type="type" theme="outline" />
     <div class="message">
       {{ message }}
     </div>

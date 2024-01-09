@@ -1,5 +1,6 @@
 import { WidgetData } from '@widget-js/core'
 import dayjs from 'dayjs'
+import WaterReminderWidget from '@/widgets/water-reminder/WaterReminder.widget'
 
 export class WaterReminderModel extends WidgetData {
   targetCup = 8
@@ -10,6 +11,10 @@ export class WaterReminderModel extends WidgetData {
   history: Record<string, number> = {}
   lastReminderAt: string = dayjs().toISOString()
   enableReminder = true
+
+  constructor(id?: string) {
+    super(WaterReminderWidget.name, id)
+  }
 
   getTodayKey(): string {
     return dayjs().format('YYYY/MM/DD')

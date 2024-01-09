@@ -11,6 +11,7 @@ import {
   WidgetApi,
 } from '@widget-js/core'
 import { ref } from 'vue'
+import { Headset } from '@icon-park/vue-next'
 import type { PhoneReminder } from '@/widgets/phone-reminder/model/PhoneReminder'
 import { PhoneReminderData } from '@/widgets/phone-reminder/model/PhoneReminder'
 import PhoneReminderWidgetDefine from '@/widgets/phone-reminder/PhoneReminder.widget'
@@ -23,6 +24,7 @@ export default {
   components: {
     TimePickerDialog,
     WidgetEditDialog,
+    Headset,
   },
   setup() {
     BrowserWindowApi.setup({
@@ -133,7 +135,7 @@ export default {
           <template #default="scope">
             <el-button type="primary" circle @click="listen(scope.row)">
               <template #icon>
-                <span class="icon mgc_headphone_line" />
+                <Headset />
               </template>
             </el-button>
           </template>

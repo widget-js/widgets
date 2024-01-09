@@ -1,10 +1,10 @@
 import type { RouteRecordRaw } from 'vue-router'
-import WaterReminderWidgetDefine from './WaterReminder.widget'
+import WaterReminderWidget from './WaterReminder.widget'
 
-const url = WaterReminderWidgetDefine.path
-const name = WaterReminderWidgetDefine.name
+const url = WaterReminderWidget.path
+const name = WaterReminderWidget.name
 
-const configUrl = WaterReminderWidgetDefine.configPagePath
+const configUrl = WaterReminderWidget.configPagePath
 
 const WaterReminderWidgetRoutes: RouteRecordRaw[] = [
   {

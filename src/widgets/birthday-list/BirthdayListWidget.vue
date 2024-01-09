@@ -7,6 +7,7 @@ import {
   LunarMonth,
 } from 'lunar-typescript'
 import type { PropType } from 'vue'
+import { AddOne, BirthdayCake } from '@icon-park/vue-next'
 import type { BirthdayPeople } from '@/widgets/birthday-list/model/BirthdayListData'
 import type BirthdayListData from '@/widgets/birthday-list/model/BirthdayListData'
 
@@ -18,6 +19,7 @@ import type BirthdayListData from '@/widgets/birthday-list/model/BirthdayListDat
  */
 export default {
   name: 'BirthdayListWidget',
+  components: { AddOne, BirthdayCake },
   props: { birthdayListData: { type: Object as PropType<BirthdayListData> } },
   emits: ['add'],
   computed: {
@@ -85,7 +87,7 @@ export default {
     <img class="image" src="./images/balloon.png">
     <div class="title">
       <span>{{ birthdayListData.title }}</span>
-      <div class="add mgc_add_circle_line" @click="$emit('add')" />
+      <AddOne class="add cursor-pointer" @click="$emit('add')" />
     </div>
     <div class="people-list" style="flex:1; display:flex; flex-flow:column; overflow: auto;">
       <template v-for="item in peopleList" :key="item.createdAt">
@@ -117,7 +119,7 @@ export default {
           </div>
           <div class="right" :class="{ active: item.qty == 0 }">
             <template v-if="item.qty == 0">
-              <span class="icon mgc_cake_line" />
+              <BirthdayCake class="icon" />
             </template>
             <template v-else>
               <div class="qty">
@@ -174,24 +176,13 @@ body * {
     font-weight: bold;
     align-items: center;
     margin-bottom: 16px;
+    gap: 8px;
 
     .add {
-      width: 30px;
-      height: 30px;
+      width: 24px;
+      height: 24px;
       display: flex;
       align-items: center;
-      background-size: 100% 100%;
-      //background-image: url(../../assets/widget/birthday_list/add.png);
-      margin-left: 6px;
-
-      &:before {
-        font-size: 24px;
-        color: white;
-      }
-
-      &:hover {
-        cursor: pointer
-      }
     }
   }
 
@@ -289,10 +280,7 @@ body * {
         display: flex;
         justify-content: center;
         align-items: center;
-
-        .mgc_cake_line:before {
-          color: white;
-        }
+        color: #FF9716;
       }
 
       .qty {

@@ -16,7 +16,7 @@ const url = '/widget/water_reminder'
 // 配置页路由地址
 const configUrl = '/widget/config/water_reminder'
 // 组件关键词
-const WaterReminderWidgetDefine = new Widget({
+const WaterReminderWidget = new Widget({
   name,
   title,
   description,
@@ -34,4 +34,4 @@ const WaterReminderWidgetDefine = new Widget({
   configPagePath: configUrl,
 })
 
-export default WaterReminderWidgetDefine
+export default WaterReminderWidget

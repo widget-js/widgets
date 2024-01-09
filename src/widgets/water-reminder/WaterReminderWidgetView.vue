@@ -18,14 +18,17 @@ import {
 } from '@widget-js/core'
 import dayjs from 'dayjs'
 import { useIntervalFn } from '@vueuse/core'
-import WaterReminderWidget from './WaterReminderWidget.vue'
+import WaterReminderComponent from './WaterReminderComponent.vue'
 import { WaterReminderModel } from '@/widgets/water-reminder/model/WaterReminderModel'
-import WaterReminderWidgetDefine from '@/widgets/water-reminder/WaterReminder.widget'
+import WaterReminderWidget from '@/widgets/water-reminder/WaterReminder.widget'
 
 let lastReminderAt = dayjs()
 const cup = ref(0)
-
+const defaultData = new WaterReminderModel()
+defaultData.theme.backgroundColor = '#fff'
+defaultData.theme.color = '#092239'
 const { widgetData } = useWidget(WaterReminderModel, {
+  defaultData,
   onDataLoaded: (data) => {
     cup.value = data?.getTodayHistory() ?? 0
     if (data?.lastReminderAt) {
@@ -51,7 +54,7 @@ watch(cup, (newValue) => {
   lastReminderAt = dayjs()
 })
 
-const name = WaterReminderWidgetDefine.name
+const name = WaterReminderWidget.name
 const cancelBroadcast = `${name}.cancel`
 const okBroadcast = `${name}.ok`
 const {
@@ -68,7 +71,7 @@ const {
     NotificationApi.reminder(
       '喝水提醒',
       '起来喝杯水吧！',
-      'drop_line',
+      'tea-drink',
       '关闭',
       '喝一杯',
       cancelBroadcast,
@@ -94,7 +97,7 @@ onMounted(() => {
 
 <template>
   <WidgetWrapper>
-    <WaterReminderWidget v-bind="widgetData.theme" v-model:cup="cup" />
+    <WaterReminderComponent v-bind="widgetData.theme" v-model:cup="cup" />
   </WidgetWrapper>
 </template>
 

@@ -84,8 +84,7 @@
     "webpack-cli": "^4.10.0"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged",
-    "pre-push": "npm run remote"
+    "pre-commit": "npm run remote && npx lint-staged"
   },
   "lint-staged": {
     "*.{js,ts,tsx,vue,md}": [
