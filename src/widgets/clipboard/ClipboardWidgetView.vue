@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { useAppBroadcast } from '@widget-js/vue3'
+import { useAppBroadcast, useShortcutListener } from '@widget-js/vue3'
 import {
   BrowserWindowApi,
   BrowserWindowApiEvent,
   ClipboardApiEvent,
+  ShortcutApi,
 } from '@widget-js/core'
 import {
   ref,
@@ -12,12 +13,12 @@ import {
 import type { Transition } from '@vueuse/motion'
 import { useMotion } from '@vueuse/motion'
 import delay from 'lodash-es/delay'
+import { useLocalStorage } from '@vueuse/core'
 import { ClipboardData } from '@/widgets/clipboard/model/ClipboardData'
+import type { SearchEngine } from '@/widgets/clipboard/model/SearchPlatform'
+import { search, searchPlatformList } from '@/widgets/clipboard/model/SearchPlatform'
+import ClipboardWidget from '@/widgets/clipboard/Clipboard.widget'
 
-type SearchEngine = 'bing' | 'google' | 'baidu'
-// const { widgetData } = useWidget(ClipboardListData, {
-//   loadDataByWidgetName: true
-// })
 const showing = ref(false)
 const data = ref<ClipboardData | undefined>()
 
@@ -76,20 +77,6 @@ function startHideTimer() {
   }, 3000)
 }
 
-function search(se: SearchEngine) {
-  switch (se) {
-    case 'bing':
-      BrowserWindowApi.openUrl(`https://cn.bing.com/search?q=${data.value?.content}`, { external: true })
-      break
-    case 'google':
-      BrowserWindowApi.openUrl(`https://www.google.com/search?q=${data.value?.content}`, { external: true })
-      break
-    case 'baidu':
-      BrowserWindowApi.openUrl(`https://www.baidu.com/s?wd=${data.value?.content}`, { external: true })
-      break
-  }
-}
-
 watch(
   () => motionProperties.y,
   (newY) => {
@@ -111,6 +98,7 @@ async function initWindow() {
 }
 
 initWindow()
+
 useAppBroadcast([ClipboardApiEvent.CHANGED, BrowserWindowApiEvent.FOCUS], async (broadcast) => {
   if (broadcast.event == ClipboardApiEvent.CHANGED) {
     const text = broadcast.payload.content as string
@@ -122,6 +110,21 @@ useAppBroadcast([ClipboardApiEvent.CHANGED, BrowserWindowApiEvent.FOCUS], async 
     startHideTimer()
   }
 })
+
+const shortcut = useLocalStorage(`${ClipboardWidget.name}.shortcut`, 'Meta+Alt+S', { listenToStorageChanges: true })
+const searchPlatform = useLocalStorage<SearchEngine>(`${ClipboardWidget.name}.platform`, 'google', { listenToStorageChanges: true })
+watch(shortcut, (newShortcut, oldValue) => {
+  ShortcutApi.unregister(oldValue)
+  ShortcutApi.register(newShortcut)
+})
+
+ShortcutApi.register(shortcut.value)
+
+useShortcutListener(() => {
+  if (data.value) {
+    search(searchPlatform.value, data.value!.content)
+  }
+})
 </script>
 
 <template>
@@ -130,14 +133,8 @@ useAppBroadcast([ClipboardApiEvent.CHANGED, BrowserWindowApiEvent.FOCUS], async 
       {{ data?.content }}
     </div>
     <div class="actions">
-      <div class="search-engine" @click="search('bing')">
-        <img src="./assets/bing.png" alt="Bing" @click="search('bing')">
-      </div>
-      <div class="search-engine">
-        <img src="./assets/google.png" alt="Google" @click="search('google')">
-      </div>
-      <div class="search-engine">
-        <img src="./assets/baidu.png" alt="BaiDu" @click="search('baidu')">
+      <div v-for="platform in searchPlatformList" :key="platform.value" class="search-engine" @click="search(platform.value)">
+        <img :src="platform.icon" :alt="platform.title">
       </div>
     </div>
   </div>

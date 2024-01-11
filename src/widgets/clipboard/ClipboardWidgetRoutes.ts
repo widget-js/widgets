@@ -1,22 +1,22 @@
 import type { RouteRecordRaw } from 'vue-router'
-import ClipboardWidgetDefine from './Clipboard.widget'
+import ClipboardWidget from './Clipboard.widget'
 
-const path = ClipboardWidgetDefine.path
-const name = ClipboardWidgetDefine.name
+const path = ClipboardWidget.path
+const name = ClipboardWidget.name
 
-// const configUrl = ClipboardWidgetDefine.getConfigRoute()!.path;
+const configUrl = ClipboardWidget.configPagePath!
 
 const ClipboardWidgetRoutes: RouteRecordRaw[] = [
   {
     path,
     name: `${name}`,
-    component: () => import(/* webpackChunkName: "com.wisdom.widgets.clipboard" */ './ClipboardWidget.vue'),
+    component: () => import(/* webpackChunkName: "com.wisdom.widgets.clipboard" */ './ClipboardWidgetView.vue'),
   },
-  // {
-  //     path: configUrl,
-  //     name: `${name}.config`,
-  //     component: () => import(/* webpackChunkName: "com.wisdom.widgets.clipboard.config" */ './ClipboardConfigView.vue')
-  // }
+  {
+    path: configUrl,
+    name: `${name}.config`,
+    component: () => import(/* webpackChunkName: "com.wisdom.widgets.clipboard.config" */ './ClipboardConfigView.vue'),
+  },
 ]
 
 export default ClipboardWidgetRoutes
