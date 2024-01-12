@@ -8,8 +8,7 @@
   "license": "MIT",
   "scripts": {
     "serve": "vite",
-    "build:vite": "vite build",
-    "build": "vue-cli-service build",
+    "build": "vite build",
     "preview": "vite preview",
     "remote": "widget dependencies -t remote",
     "local": "widget dependencies -t local",

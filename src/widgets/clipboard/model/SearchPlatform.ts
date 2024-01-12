@@ -14,19 +14,19 @@ export const searchPlatformList: SearchPlatform[] = [
     title: 'Google',
     url: 'https://www.google.com/search?q=%s',
     value: 'google',
-    icon: '/images/logo/google.png',
+    icon: './images/logo/google.png',
   },
   {
     title: 'Bing',
     url: 'https://cn.bing.com/search?q=%s',
     value: 'bing',
-    icon: '/images/logo/bing.png',
+    icon: './images/logo/bing.png',
   },
   {
     title: '百度',
     url: 'https://www.baidu.com/s?wd=%s',
     value: 'baidu',
-    icon: '/images/logo/baidu.png',
+    icon: './images/logo/baidu.png',
   },
 ]
 

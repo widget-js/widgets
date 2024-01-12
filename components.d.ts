@@ -11,7 +11,6 @@ declare module '@vue/runtime-core' {
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElCard: typeof import('element-plus/es')['ElCard']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
     ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
@@ -38,6 +37,5 @@ declare module '@vue/runtime-core' {
     SolarDatePicker: typeof import('./src/components/SolarDatePicker.vue')['default']
     TimePicker: typeof import('./src/components/TimePicker.vue')['default']
     TimePickerDialog: typeof import('./src/components/TimePickerDialog.vue')['default']
-    WidgetEditDialog: typeof import('@widget-js')['WidgetEditDialog']
   }
 }

@@ -12,6 +12,7 @@ import {
   useIntervalFn,
   useStorage,
 } from '@vueuse/core'
+import { onMounted } from 'vue'
 import { SitReminder } from '@/widgets/sit-reminder/model/SitReminder'
 
 dayjs.extend(duration)
@@ -51,6 +52,11 @@ function useSitReminder() {
     x: 0,
     y: 0,
   }
+
+  onMounted(() => {
+    BrowserWindowApi.hide()
+  })
+
   useIntervalFn(async () => {
     if (!sitReminderData.value.enable) {
       return

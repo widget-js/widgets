@@ -270,6 +270,38 @@
       "routes": []
     },
     {
+      "name": "cn.widgetjs.widgets.dynamic_island",
+      "title": {
+        "zh-CN": "久坐提醒"
+      },
+      "description": {
+        "zh-CN": "设置间隔，定时提醒，适合长期久坐的人群"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 6,
+      "height": 4,
+      "maxWidth": 6,
+      "webviewTag": false,
+      "maxHeight": 4,
+      "minWidth": 6,
+      "minHeight": 4,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/dynamic_island",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_sit_reminder.png",
+      "supportDeployMode": 65536,
+      "configPagePath": "/widget/config/dynamic_island",
+      "routes": []
+    },
+    {
       "name": "cn.widgetjs.widgets.key_stroke",
       "title": {
         "zh-CN": "键盘演示"
@@ -300,38 +332,6 @@
       "backgroundThrottling": false,
       "previewImage": "/images/preview_keystroke.png",
       "supportDeployMode": 65536,
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.dynamic_island",
-      "title": {
-        "zh-CN": "久坐提醒"
-      },
-      "description": {
-        "zh-CN": "设置间隔，定时提醒，适合长期久坐的人群"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 6,
-      "height": 4,
-      "maxWidth": 6,
-      "webviewTag": false,
-      "maxHeight": 4,
-      "minWidth": 6,
-      "minHeight": 4,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/dynamic_island",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_sit_reminder.png",
-      "supportDeployMode": 65536,
-      "configPagePath": "/widget/config/dynamic_island",
       "routes": []
     },
     {
@@ -367,6 +367,38 @@
       "routes": []
     },
     {
+      "name": "cn.widgetjs.widgets.countdown",
+      "title": {
+        "zh-CN": "倒计时"
+      },
+      "description": {
+        "zh-CN": "简单的倒计时组件，支持农历"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 2,
+      "height": 2,
+      "maxWidth": 4,
+      "webviewTag": false,
+      "maxHeight": 4,
+      "minWidth": 2,
+      "minHeight": 2,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/countdown",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_countdown.png",
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/countdown",
+      "routes": []
+    },
+    {
       "name": "cn.widgetjs.widgets.clipboard",
       "title": {
         "zh-CN": "剪切板搜索"
@@ -398,38 +430,6 @@
       "previewImage": "/images/preview_clipboard.png",
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/clipboard",
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.countdown",
-      "title": {
-        "zh-CN": "倒计时"
-      },
-      "description": {
-        "zh-CN": "简单的倒计时组件，支持农历"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 2,
-      "height": 2,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 4,
-      "minWidth": 2,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/countdown",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_countdown.png",
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/countdown",
       "routes": []
     },
     {
