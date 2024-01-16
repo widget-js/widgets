@@ -238,35 +238,36 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.labor_progress",
+      "name": "cn.widgetjs.widgets.key_stroke",
       "title": {
-        "zh-CN": "打工进度"
+        "zh-CN": "键盘演示"
       },
       "description": {
-        "zh-CN": "打工人，打工魂"
+        "zh-CN": "在屏幕显示每一次快捷键敲击"
       },
       "keywords": [
         "recommend"
       ],
       "security": false,
-      "permissions": [],
+      "permissions": [
+        "keyboard"
+      ],
       "lang": "zh-CN",
       "width": 4,
-      "height": 1,
-      "maxWidth": 6,
+      "height": 3,
+      "maxWidth": 4,
       "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 3,
-      "minHeight": 1,
-      "movable": true,
+      "maxHeight": 3,
+      "minWidth": 4,
+      "minHeight": 3,
+      "movable": false,
       "singleton": false,
       "resizable": true,
-      "path": "/widget/labor_progress",
+      "path": "/widget/key_stroke",
       "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_labor_progress.png",
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/labor_progress",
+      "backgroundThrottling": false,
+      "previewImage": "/images/preview_keystroke.png",
+      "supportDeployMode": 65536,
       "routes": []
     },
     {
@@ -299,39 +300,6 @@
       "previewImage": "/images/preview_sit_reminder.png",
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/dynamic_island",
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.key_stroke",
-      "title": {
-        "zh-CN": "键盘演示"
-      },
-      "description": {
-        "zh-CN": "在屏幕显示每一次快捷键敲击"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [
-        "keyboard"
-      ],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 3,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 3,
-      "minWidth": 4,
-      "minHeight": 3,
-      "movable": false,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/key_stroke",
-      "meta": {},
-      "backgroundThrottling": false,
-      "previewImage": "/images/preview_keystroke.png",
-      "supportDeployMode": 65536,
       "routes": []
     },
     {
@@ -396,6 +364,38 @@
       "previewImage": "/images/preview_countdown.png",
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/countdown",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.labor_progress",
+      "title": {
+        "zh-CN": "打工进度"
+      },
+      "description": {
+        "zh-CN": "打工人，打工魂"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 1,
+      "maxWidth": 6,
+      "webviewTag": false,
+      "maxHeight": 2,
+      "minWidth": 3,
+      "minHeight": 1,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/labor_progress",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_labor_progress.png",
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/labor_progress",
       "routes": []
     },
     {

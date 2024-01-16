@@ -10,6 +10,7 @@ import { Lunar } from 'lunar-typescript'
 import {
   BrowserWindowApi,
   WidgetDataApi,
+  WidgetParams,
 } from '@widget-js/core'
 import { CountdownModel } from '@/widgets/countdown/model/CountdownModel'
 import DatePickerDialog from '@/components/DatePickerDialog.vue'
@@ -23,16 +24,16 @@ export default {
     WidgetEditDialog,
   },
   setup() {
-    BrowserWindowApi.setSize(600, 400)
+    BrowserWindowApi.setSize(600, 500)
     BrowserWindowApi.center()
     const showDatePicker = ref(false)
     const date = ref(CountdownModel.DEFAULT_DATE)
     const isLunar = ref(false)
+    const widgetParams = WidgetParams.fromCurrentLocation()
     const defaultData = new CountdownModel(CountdownWidgetDefine.name)
     defaultData.theme.backgroundColor = '#FFC455'
     const {
       widgetData,
-      widgetParams,
     } = useWidget(CountdownModel, {
       defaultData,
       onDataLoaded: (data) => {
@@ -84,6 +85,10 @@ export default {
       this.widgetData.dateType = this.isLunar ? DateType.LUNAR : DateType.SOLAR
       await WidgetDataApi.save(this.widgetData)
     },
+    onDateConfirm(date: Date, isLunar: boolean) {
+      this.date = date
+      this.isLunar = isLunar
+    },
     async onSaveClick() {
       await this.onApplyClick()
       window.close()
@@ -105,7 +110,7 @@ export default {
         <el-input v-model="widgetData.title" />
       </el-form-item>
       <el-form-item label="事项日期">
-        <DatePickerDialog v-model:visible="showDatePicker" v-model="date" v-model:is-lunar="isLunar" />
+        <DatePickerDialog v-model="showDatePicker" :date="date" :is-lunar="isLunar" @confirm="onDateConfirm" />
         <el-button @click="showDatePicker = !showDatePicker">
           {{ dateStr }}
         </el-button>

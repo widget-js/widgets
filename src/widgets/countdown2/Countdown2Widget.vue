@@ -22,14 +22,6 @@ export default {
       type: String,
       default: 'rgba(255,255,255,0.2)',
     },
-    fontSize: {
-      type: Number,
-      default: 54,
-    },
-    borderRadius: {
-      type: String,
-      default: '22px',
-    },
   },
   setup(props) {
     const days = computed(() => {
@@ -55,20 +47,12 @@ export default {
       const color = new Color(props.primaryColor)
       return color.lighten(0.2).alpha(0.5).toString()
     })
-    const fontSizePx = computed(() => {
-      return `${props.fontSize}px`
-    })
-    const titleFontSizePx = computed(() => {
-      return `${props.fontSize / 2.8}px`
-    })
 
     return {
       days,
       titleBgColor,
       dateStr,
-      titleFontSizePx,
       shadowColor,
-      fontSizePx,
     }
   },
 }
@@ -91,9 +75,10 @@ export default {
 </template>
 
 <style scoped lang="scss">
+$border-radius: var(--widget-border-radius);
 .countdown-widget {
   width: 100%;
-  border-radius: v-bind(borderRadius);
+  border-radius: $border-radius;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -119,7 +104,7 @@ export default {
 
     .card {
       color: white;
-      border-radius: 0 0 v-bind(borderRadius) v-bind(borderRadius);
+      border-radius: 0 0 $border-radius $border-radius;
       width: 100%;
       position: absolute;
       height: 100%;
@@ -140,7 +125,7 @@ export default {
 
     .info {
       position: absolute;
-      padding: 8px 16px 8px 16px;
+      padding: 8px;
       width: 100%;
       height: 100%;
       justify-content: center;
@@ -151,7 +136,7 @@ export default {
       align-items: center;
 
       .days {
-        font-size: v-bind(fontSizePx);
+        font-size: var(--widget-font-size);
         color: #222222;
         display: flex;
         align-items: center;
@@ -163,8 +148,9 @@ export default {
 
       .date {
         color: #5d626c;
-        font-size: 16px;
+        font-size: 14px;
         margin-bottom: 0.8rem;
+        text-align: center;
       }
     }
   }

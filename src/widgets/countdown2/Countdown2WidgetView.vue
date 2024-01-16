@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
 import {
   WidgetWrapper,
   useWidget,
@@ -11,20 +10,20 @@ import { DateType } from '@/countdown/Event'
 
 const defaultData = new CountdownModel(Countdown2WidgetDefine.name)
 defaultData.theme.primaryColor = 'rgb(0,149,255)'
+defaultData.theme.fontSize = '72px'
 const {
   widgetData,
-  widgetParams,
 } = useWidget(CountdownModel, { defaultData })
-const fontSize = ref(72)
-if (widgetParams.widthPx && widgetParams.widthPx <= 150) {
-  fontSize.value = 54
-}
 </script>
 
 <template>
   <WidgetWrapper>
     <Countdown2Widget
-      v-bind="widgetData.theme" :is-lunar="widgetData.dateType === DateType.LUNAR"
+      :date="widgetData.date"
+      :title="widgetData.title"
+      :primary-color="widgetData.theme.primaryColor"
+      :background-color="widgetData.theme.backgroundColor"
+      :is-lunar="widgetData.dateType === DateType.LUNAR"
       :font-size="fontSize"
     />
   </WidgetWrapper>

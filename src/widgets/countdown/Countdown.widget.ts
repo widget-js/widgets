@@ -3,7 +3,6 @@ import {
   WidgetKeyword,
 } from '@widget-js/core'
 
-// TODO 修改组件信息，标题，描述，关键词
 const name = 'cn.widgetjs.widgets.countdown'
 // 组件标题
 const title = { 'zh-CN': '倒计时' }

@@ -8,7 +8,6 @@ import {
 } from 'vue'
 import { VueScrollPicker } from 'vue-scroll-picker'
 import 'vue-scroll-picker/lib/style.css'
-import dayjs from 'dayjs'
 
 const props = defineProps({
   height: {
@@ -42,11 +41,7 @@ const solarDates = computed(() => {
 })
 
 function emitDateUpdate() {
-  emits('update:modelValue', dayjs({
-    year: selectedYear.value,
-    month: selectedMonth.value - 1,
-    date: selectedDate.value,
-  }).toDate())
+  emits('update:modelValue', new Date(selectedYear.value, selectedMonth.value - 1, selectedDate.value))
 }
 
 watch(selectedYear, () => {
