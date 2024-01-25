@@ -21,12 +21,12 @@
     "@vueuse/integrations": "^10.5.0",
     "@vueuse/motion": "2.0.0-beta.12",
     "@vueuse/router": "^9.9.0",
-    "@widget-js/core": "^0.11.22-beta.2",
+    "@widget-js/core": "^0.11.22-beta.3",
     "@widget-js/vue3": "^0.11.21-rc.6",
     "animate.css": "^4.1.1",
     "axios": "^1.6.0",
     "color": "^4.2.3",
-    "consola": "^2.15.3",
+    "consola": "^3.2.3",
     "core-js": "^3.26.1",
     "dayjs": "^1.11.6",
     "driver.js": "^0.9.8",
@@ -83,7 +83,7 @@
     "webpack-cli": "^4.10.0"
   },
   "simple-git-hooks": {
-    "pre-commit": "npm run remote && npx lint-staged"
+    "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
     "*.{js,ts,tsx,vue,md}": [

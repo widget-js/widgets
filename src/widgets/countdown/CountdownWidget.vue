@@ -3,6 +3,8 @@ import { computed } from 'vue'
 import dayjs from 'dayjs'
 import '@/common/dayjs-extend'
 import Color from 'color'
+import { useAppBroadcast } from '@widget-js/vue3'
+import { SystemApiEvent } from '@widget-js/core'
 
 export default {
   name: 'CountdownWidget',
@@ -27,7 +29,9 @@ export default {
       const now = dayjs()
       return dayjs(props.date).diff(now, 'day')
     })
-
+    useAppBroadcast([SystemApiEvent.DATE_CHANGED], () => {
+      days.effect.run()
+    })
     const daysColor = computed(() => {
       const color = new Color(props.backgroundColor)
       return color.alpha(1).darken(0.7).toString()
@@ -128,7 +132,6 @@ export default {
       justify-items: center;
       display: flex;
       flex-direction: column;
-      align-items: center;
 
       .still {
         color: #878D9C;

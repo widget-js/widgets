@@ -24,7 +24,6 @@ const {
       :primary-color="widgetData.theme.primaryColor"
       :background-color="widgetData.theme.backgroundColor"
       :is-lunar="widgetData.dateType === DateType.LUNAR"
-      :font-size="fontSize"
     />
   </WidgetWrapper>
 </template>

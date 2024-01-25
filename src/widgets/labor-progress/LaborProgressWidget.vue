@@ -207,13 +207,13 @@ $progressHeight: 56px;
     .outline {
       box-sizing: border-box;
       height: calc($progressHeight / 2);
-      border: 4px solid #422e26;
+      border: 2px solid #422e26;
       border-radius: 39px;
       position: absolute;
       width: 100%;
 
       .progress {
-        height: calc($progressHeight / 2 - 6px);
+        height: calc($progressHeight / 2 - 2.2px);
         left: 0;
         width: 0;
         transition-property: width;
@@ -225,7 +225,7 @@ $progressHeight: 56px;
 
       .percent {
         position: absolute;
-        top: 0px;
+        top: 0;
         color: #453840;
         font-weight: bold;
       }

@@ -4,7 +4,6 @@ import {
   useWidget,
 } from '@widget-js/vue3'
 import {
-  BrowserWindowApi,
   WidgetApi,
 } from '@widget-js/core'
 import BirthdayListWidget from './BirthdayListWidget.vue'
@@ -16,10 +15,7 @@ const {
 } = useWidget(BirthdayListData, { loadDataByWidgetName: true })
 
 async function add() {
-  const url = await WidgetApi.getWidgetConfigUrl(widgetData.value.name, widgetParams)
-  if (url) {
-    await BrowserWindowApi.openUrl(url)
-  }
+  await WidgetApi.openConfigPage(widgetParams.id!)
 }
 </script>
 

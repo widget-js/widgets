@@ -4,6 +4,8 @@ import dayjs from 'dayjs'
 import '@/common/dayjs-extend'
 import Color from 'color'
 import { Lunar } from 'lunar-typescript'
+import { useAppBroadcast } from '@widget-js/vue3'
+import { SystemApiEvent } from '@widget-js/core'
 
 export default {
   name: 'Countdown2Widget',
@@ -28,7 +30,9 @@ export default {
       const now = dayjs()
       return dayjs(props.date).diff(now, 'day')
     })
-
+    useAppBroadcast([SystemApiEvent.DATE_CHANGED], () => {
+      days.effect.run()
+    })
     const titleBgColor = computed(() => {
       const color = new Color(props.primaryColor)
       return `linear-gradient(180deg,${color.toString()} 0%, ${color.darken(0.2).toString()} 100%)`
@@ -133,7 +137,6 @@ $border-radius: var(--widget-border-radius);
       justify-items: center;
       display: flex;
       flex-direction: column;
-      align-items: center;
 
       .days {
         font-size: var(--widget-font-size);

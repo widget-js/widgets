@@ -2,13 +2,14 @@
 import {
   BrowserWindowApi,
   NotificationApi,
+  SystemApiEvent,
 } from '@widget-js/core'
 import {
   computed,
   ref,
 } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
-import { useWidget } from '@widget-js/vue3'
+import { useAppBroadcast, useWidget } from '@widget-js/vue3'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import { PhoneReminderData } from '@/widgets/phone-reminder/model/PhoneReminder'
@@ -38,6 +39,10 @@ useIntervalFn(async () => {
     }
   }
 }, 1000)
+
+useAppBroadcast([SystemApiEvent.DATE_CHANGED], () => {
+  enableReminders.effect.run()
+})
 </script>
 
 <template>

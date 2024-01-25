@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import {
   WidgetWrapper,
+  useAppBroadcast,
   useWidget,
 } from '@widget-js/vue3'
 import { ref } from 'vue'
+import { SystemApiEvent } from '@widget-js/core'
 import LaborProgressWidget from './LaborProgressWidget.vue'
 import LaborProgressData from '@/widgets/labor-progress/model/LaborProgressData'
 
@@ -16,6 +18,11 @@ const { widgetData } = useWidget(LaborProgressData, {
       endTime.value = data.getEndTime()
     }
   },
+})
+
+useAppBroadcast([SystemApiEvent.DATE_CHANGED], () => {
+  startTime.value = widgetData.value.getStartTime()
+  endTime.value = widgetData.value.getEndTime()
 })
 </script>
 

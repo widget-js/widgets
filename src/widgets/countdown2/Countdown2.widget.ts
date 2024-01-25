@@ -7,7 +7,7 @@ const name = 'cn.widgetjs.widgets.countdown2'
 // 组件标题
 const title = { 'zh-CN': '倒计时' }
 // 组件描述
-const description = { 'zh-CN': '简单的倒计时组件，支持农历' }
+const description = { 'zh-CN': '日历样式的倒计时组件' }
 // 组件关键词
 const keywords = [WidgetKeyword.RECOMMEND]
 // 组件路由地址

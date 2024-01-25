@@ -46,38 +46,6 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.water_reminder",
-      "title": {
-        "zh-CN": "喝水提醒"
-      },
-      "description": {
-        "zh-CN": "每天N杯水，养成好习惯"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 2,
-      "height": 2,
-      "maxWidth": 2,
-      "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 2,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/water_reminder",
-      "meta": {},
-      "backgroundThrottling": false,
-      "previewImage": "/images/preview_water_reminder.png",
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/water_reminder",
-      "routes": []
-    },
-    {
       "name": "cn.widgetjs.widgets.todo_list",
       "title": {
         "zh-CN": "待办事项"
@@ -107,6 +75,38 @@
       "previewImage": "/images/preview_todo_list.png",
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/todo_list",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.water_reminder",
+      "title": {
+        "zh-CN": "喝水提醒"
+      },
+      "description": {
+        "zh-CN": "每天N杯水，养成好习惯"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 2,
+      "height": 2,
+      "maxWidth": 2,
+      "webviewTag": false,
+      "maxHeight": 2,
+      "minWidth": 2,
+      "minHeight": 2,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/water_reminder",
+      "meta": {},
+      "backgroundThrottling": false,
+      "previewImage": "/images/preview_water_reminder.png",
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/water_reminder",
       "routes": []
     },
     {
@@ -238,6 +238,38 @@
       "routes": []
     },
     {
+      "name": "cn.widgetjs.widgets.labor_progress",
+      "title": {
+        "zh-CN": "打工进度"
+      },
+      "description": {
+        "zh-CN": "打工人，打工魂"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 1,
+      "maxWidth": 6,
+      "webviewTag": false,
+      "maxHeight": 2,
+      "minWidth": 3,
+      "minHeight": 1,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/labor_progress",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_labor_progress.png",
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/labor_progress",
+      "routes": []
+    },
+    {
       "name": "cn.widgetjs.widgets.key_stroke",
       "title": {
         "zh-CN": "键盘演示"
@@ -364,38 +396,6 @@
       "previewImage": "/images/preview_countdown.png",
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/countdown",
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.labor_progress",
-      "title": {
-        "zh-CN": "打工进度"
-      },
-      "description": {
-        "zh-CN": "打工人，打工魂"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 1,
-      "maxWidth": 6,
-      "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 3,
-      "minHeight": 1,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/labor_progress",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_labor_progress.png",
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/labor_progress",
       "routes": []
     },
     {

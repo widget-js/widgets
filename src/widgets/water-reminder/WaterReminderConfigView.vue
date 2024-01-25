@@ -15,12 +15,16 @@ BrowserWindowApi.setup({
 })
 
 const cup = ref(0)
-
+const defaultData = new WaterReminderModel()
+defaultData.theme.backgroundColor = '#fff'
+defaultData.theme.color = '#092239'
+defaultData.theme.primaryColor = '#2596FF'
 const {
   widgetData,
   widgetParams,
   save,
 } = useWidget(WaterReminderModel, {
+  defaultData,
   loadDataByWidgetName: true,
   onDataLoaded: (data) => {
     cup.value = data?.getTodayHistory() ?? 0
