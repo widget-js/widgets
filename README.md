@@ -83,6 +83,14 @@ widget create
 
 ### 组件列表
 
+### AI组件包
+
+https://github.com/rtugeek/ai
+
+#### 一键呼出ChatGPT
+
+![png](https://raw.githubusercontent.com/rtugeek/ai/master/screenshot.png)
+
 #### 键盘演示(src/widgets/keystroke)
 
 ![png](./public/images/preview_keystroke.png)
