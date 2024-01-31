@@ -24,7 +24,7 @@ const opened = ref(false)
 
 function confirm() {
   visible.value = false
-  emits('confirm')
+  emits('confirm', modelValue.value)
 }
 </script>
 

@@ -47,10 +47,6 @@ useAppBroadcast([SystemApiEvent.DATE_CHANGED], () => {
 
 <template>
   <div />
-  <!--  <dynamic-island-widget -->
-  <!--    ref="dynamicIslandWidget" -->
-  <!--    v-model:state="state" -->
-  <!--    :notification="notification" /> -->
 </template>
 
 <style scoped></style>

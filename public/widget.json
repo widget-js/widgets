@@ -238,6 +238,38 @@
       "routes": []
     },
     {
+      "name": "cn.widgetjs.widgets.labor_progress",
+      "title": {
+        "zh-CN": "打工进度"
+      },
+      "description": {
+        "zh-CN": "打工人，打工魂"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 1,
+      "maxWidth": 6,
+      "webviewTag": false,
+      "maxHeight": 2,
+      "minWidth": 3,
+      "minHeight": 1,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/labor_progress",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_labor_progress.png",
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/labor_progress",
+      "routes": []
+    },
+    {
       "name": "cn.widgetjs.widgets.key_stroke",
       "title": {
         "zh-CN": "键盘演示"
@@ -271,12 +303,12 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.labor_progress",
+      "name": "cn.widgetjs.widgets.countdown2",
       "title": {
-        "zh-CN": "打工进度"
+        "zh-CN": "倒计时"
       },
       "description": {
-        "zh-CN": "打工人，打工魂"
+        "zh-CN": "日历样式的倒计时组件"
       },
       "keywords": [
         "recommend"
@@ -284,22 +316,22 @@
       "security": false,
       "permissions": [],
       "lang": "zh-CN",
-      "width": 4,
-      "height": 1,
-      "maxWidth": 6,
+      "width": 2,
+      "height": 2,
+      "maxWidth": 4,
       "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 3,
-      "minHeight": 1,
+      "maxHeight": 4,
+      "minWidth": 2,
+      "minHeight": 2,
       "movable": true,
       "singleton": false,
       "resizable": true,
-      "path": "/widget/labor_progress",
+      "path": "/widget/countdown2",
       "meta": {},
       "backgroundThrottling": true,
-      "previewImage": "/images/preview_labor_progress.png",
+      "previewImage": "/images/preview_countdown2.png",
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/labor_progress",
+      "configPagePath": "/widget/config/countdown2",
       "routes": []
     },
     {
@@ -332,38 +364,6 @@
       "previewImage": "/images/preview_sit_reminder.png",
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/dynamic_island",
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.countdown2",
-      "title": {
-        "zh-CN": "倒计时"
-      },
-      "description": {
-        "zh-CN": "日历样式的倒计时组件"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 2,
-      "height": 2,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 4,
-      "minWidth": 2,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/countdown2",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_countdown2.png",
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/countdown2",
       "routes": []
     },
     {

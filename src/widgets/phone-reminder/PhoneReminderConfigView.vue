@@ -1,17 +1,10 @@
 <script lang="ts">
 import dayjs from 'dayjs'
-import {
-  WidgetConfigOption,
-  WidgetEditDialog,
-  useWidget,
-} from '@widget-js/vue3'
-import {
-  BrowserWindowApi,
-  NotificationApi,
-  WidgetApi,
-} from '@widget-js/core'
+import { WidgetConfigOption, WidgetEditDialog, useWidget } from '@widget-js/vue3'
+import { BrowserWindowApi, NotificationApi, WidgetApi } from '@widget-js/core'
 import { ref } from 'vue'
 import { Headset } from '@icon-park/vue-next'
+import consola from 'consola'
 import type { PhoneReminder } from '@/widgets/phone-reminder/model/PhoneReminder'
 import { PhoneReminderData } from '@/widgets/phone-reminder/model/PhoneReminder'
 import PhoneReminderWidgetDefine from '@/widgets/phone-reminder/PhoneReminder.widget'
@@ -42,10 +35,11 @@ export default {
       widgetName: PhoneReminderWidgetDefine.name,
       loadDataByWidgetName: true,
     })
-    // 修改成需要设置组件参数配置
+
     const widgetConfigOption = new WidgetConfigOption({
       custom: true,
     })
+
     const showTimePicker = ref(false)
     const widgetUrl = ref('')
     const time = ref(new Date())
@@ -68,13 +62,13 @@ export default {
     },
   },
   methods: {
-    onPickTimeConfirm() {
-      phoneReminder.timeSet[0] = dayjs(this.time).format('HH:mm')
+    onPickTimeConfirm(time: Date) {
+      consola.info('onPickTimeConfirm', time)
+      phoneReminder.timeSet[0] = dayjs(time).format('HH:mm')
     },
     pickTime(reminder: PhoneReminder) {
       phoneReminder = reminder
-      const date = reminder.getTimes()[0]
-      this.time = date
+      this.time = reminder.getTimes()[0]
       this.showTimePicker = true
     },
     async listen(reminder: PhoneReminder) {

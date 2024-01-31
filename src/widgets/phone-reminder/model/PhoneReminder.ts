@@ -31,7 +31,16 @@ export class PhoneReminder {
   }
 
   getTimes(): Date[] {
-    return this.timeSet.map(it => dayjs(it, 'HH:mm').toDate())
+    const now = dayjs()
+    return this.timeSet.map((it) => {
+      const time = dayjs(`${now.format('YYYY-DD-MM')} ${it}`, 'YYYY-DD-MM HH:mm')
+      if (time.isValid()) {
+        return time.toDate()
+      }
+      else {
+        return new Date()
+      }
+    })
   }
 
   async toNotification(): Promise<AppNotification> {
