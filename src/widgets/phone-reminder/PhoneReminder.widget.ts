@@ -29,6 +29,7 @@ const PhoneReminderWidgetDefine = new Widget({
   maxWidth: 2,
   minHeight: 2,
   maxHeight: 2,
+  backgroundThrottling: false,
   previewImage: '/images/preview_phone_reminder.png',
   path: url,
   configPagePath: configUrl,

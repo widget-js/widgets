@@ -31,7 +31,8 @@ function confirm() {
 <template>
   <div class="picker-group">
     <el-dialog
-      v-model="visible" title="选择时间" :show-close="false" @opened="opened = true"
+      v-model="visible"
+      :modal="false" title="选择时间" :show-close="false" @opened="opened = true"
       @closed="opened = false"
     >
       <TimePicker v-if="opened" v-model="modelValue" />

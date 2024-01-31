@@ -45,10 +45,6 @@ export default {
     // 修改成需要设置组件参数配置
     const widgetConfigOption = new WidgetConfigOption({
       custom: true,
-      theme: {
-        backgroundColor: false,
-        borderRadius: false,
-      },
     })
     const showTimePicker = ref(false)
     const widgetUrl = ref('')
@@ -91,6 +87,7 @@ export default {
 
 <template>
   <WidgetEditDialog
+    id="test"
     v-model="widgetData"
     :widget-params="widgetParams"
     :option="widgetConfigOption"
