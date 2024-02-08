@@ -7,7 +7,6 @@ import WaterReminderWidgetRoutes from './water-reminder/WaterReminderWidgetRoute
 import KeyStrokeWidgetRoutes from './key-stroke/KeyStrokeWidgetRoutes'
 import PhotoWidgetRoutes from './photo/PhotoWidgetRoutes'
 import SitReminderWidgetRoutes from './sit-reminder/SitReminderWidgetRoutes'
-import ClipboardWidgetRoutes from './clipboard/ClipboardWidgetRoutes'
 import LyricBookWidgetRoutes from '@/widgets/lyric-book/LyricBookWidgetRoutes'
 import DynamicIslandWidgetRoutes from '@/widgets/dynamic-island/DynamicIslandWidgetRoutes'
 import BirthdayListWidgetRoutes from '@/widgets/birthday-list/BirthdayListWidgetRoutes'
@@ -33,7 +32,6 @@ const WidgetRouter: RouteRecordRaw[] = [
   // ...CollectionWidgetRoutes,
   ...PhotoWidgetRoutes,
   ...SitReminderWidgetRoutes,
-  ...ClipboardWidgetRoutes,
   // FBI WANING! ROUTE PLACE, DONT DELETE THIS LINE
 ]
 export default WidgetRouter

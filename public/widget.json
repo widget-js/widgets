@@ -303,38 +303,6 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.countdown2",
-      "title": {
-        "zh-CN": "倒计时"
-      },
-      "description": {
-        "zh-CN": "日历样式的倒计时组件"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 2,
-      "height": 2,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 4,
-      "minWidth": 2,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/countdown2",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_countdown2.png",
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/countdown2",
-      "routes": []
-    },
-    {
       "name": "cn.widgetjs.widgets.dynamic_island",
       "title": {
         "zh-CN": "久坐提醒"
@@ -364,6 +332,38 @@
       "previewImage": "/images/preview_sit_reminder.png",
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/dynamic_island",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.countdown2",
+      "title": {
+        "zh-CN": "倒计时"
+      },
+      "description": {
+        "zh-CN": "日历样式的倒计时组件"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 2,
+      "height": 2,
+      "maxWidth": 4,
+      "webviewTag": false,
+      "maxHeight": 4,
+      "minWidth": 2,
+      "minHeight": 2,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/countdown2",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_countdown2.png",
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/countdown2",
       "routes": []
     },
     {
