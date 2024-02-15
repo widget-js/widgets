@@ -399,40 +399,6 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.clipboard",
-      "title": {
-        "zh-CN": "剪切板搜索"
-      },
-      "description": {
-        "zh-CN": "在屏幕上方显示剪切板快捷搜索"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [
-        "clipboard"
-      ],
-      "lang": "zh-CN",
-      "width": 6,
-      "height": 1,
-      "maxWidth": 6,
-      "webviewTag": false,
-      "maxHeight": 1,
-      "minWidth": 6,
-      "minHeight": 1,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/clipboard",
-      "meta": {},
-      "backgroundThrottling": false,
-      "previewImage": "/images/preview_clipboard.png",
-      "supportDeployMode": 65536,
-      "configPagePath": "/widget/config/clipboard",
-      "routes": []
-    },
-    {
       "name": "cn.widgetjs.widgets.birthday_list",
       "title": {
         "zh-CN": "生日列表"
