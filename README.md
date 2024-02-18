@@ -116,8 +116,8 @@ https://github.com/rtugeek/ai
 
 |                                                        时钟组件包                                                         |                                          https://github.com/rtugeek/clock                                          |
 |:--------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------:| 
-|![Flip Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_flip_clock.png) 翻页时钟    |     ![Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_clock.png)  <br/>时钟      |
-| ![Glitch Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_glitch_clock.png)  故障时钟 | ![Micky Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_micky_clock.png)  <br/>米奇时钟 |
+|![Flip Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_flip_clock.png) <br/>翻页时钟    |     ![Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_clock.png)  <br/>时钟      |
+| ![Glitch Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_glitch_clock.png)  <br/>故障时钟 | ![Micky Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_micky_clock.png)  <br/>米奇时钟 |
 
 
 
