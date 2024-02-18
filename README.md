@@ -74,53 +74,20 @@ pnpm serve
 
 ### 组件列表
 
-1. 键盘演示(src/widgets/keystroke)
+### 默认组件包
 
-![png](./public/images/preview_keystroke.png)
-
-2. 喝水提醒
-
-<img style="border-radius: 12px;box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" src="public/images/preview_water_reminder.png"/>
-
-3. 待办事项
-
-![image](public/images/preview_todo_list.png)
-
-4. 轮播相册(src/widgets/photo)
-
-![image](screenshot/photo.png)
-
-5. 生日列表
-
-![gif](public/images/preview_birthday_list.png)
-6. 倒计时
-
-![gif](public/images/preview_countdown.png)
-
-7. 倒计时2
-
-![gif](public/images/preview_countdown2.png)
-
-8. 灵动通知
-
-![gif](screenshot/dynamic_island.gif)
-
-9. 打工进度
-
-![labor_progress.gif](screenshot%2Flabor_progress.gif)
-
-10. 时间进度
-
-<img style="border-radius: 12px;box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" src="public/images/preview_time_progress.png"/>
-
-
-### 剪切板组件包 
-1. 剪切板
-![png](https://raw.githubusercontent.com/rtugeek/clipboard/master/public/images/preview_clipboard.png)
-
-2. 剪切板搜索
-
-<img style="border: 3px solid #c3c3c3;border-radius: 12px" src="public/images/preview_clipboard.png"/>
+| 默认组件包 |                                     https://github.com/widget-js/widgets                                      |
+|:-----:|:-------------------------------------------------------------------------------------------------------------:| 
+| 键盘演示  |                                 ![png](./public/images/preview_keystroke.png)                                 |
+| 喝水提醒  | <img style="border: 3px solid #c3c3c31f;border-radius: 12px" src="public/images/preview_water_reminder.png"/> |
+| 待办事项  |                                 ![image](public/images/preview_todo_list.png)                                 |
+| 轮播相册  |                                        ![image](screenshot/photo.png)                                         |
+| 生日列表  |                                ![gif](public/images/preview_birthday_list.png)                                |
+| 倒计时1  |                                  ![gif](public/images/preview_countdown.png)                                  |
+| 倒计时2  |                                 ![gif](public/images/preview_countdown2.png)                                  |
+| 灵动通知  |                                     ![gif](screenshot/dynamic_island.gif)                                     |
+| 打工进度  |                            ![labor_progress.gif](screenshot%2Flabor_progress.gif)                             |
+| 时间进度  | <img style="border: 3px solid #c3c3c31f;border-radius: 12px" src="public/images/preview_time_progress.png"/>  |
 
 
 ### AI组件包
@@ -131,39 +98,28 @@ https://github.com/rtugeek/ai
 
 ![png](https://raw.githubusercontent.com/rtugeek/ai/master/screenshot.png)
 
+### 剪切板组件包
+
+| 剪切板组件包 |                                     https://github.com/rtugeek/clipboard                                     |
+|:------:|:------------------------------------------------------------------------------------------------------------:| 
+|  剪切板   | ![Clipboard](https://raw.githubusercontent.com/rtugeek/clipboard/master/public/images/preview_clipboard.png) | 
+|  快捷搜索  |   <img style="border: 3px solid #c3c3c31f;border-radius: 12px" src="public/images/preview_clipboard.png"/>   |
+
+
 ### 热点组件包
-https://github.com/widget-js/hotspot
-1. 抖音热榜
-
-![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_douyin.png)
-
-2. 知乎热榜
-![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_zhihu.png)
-3. bilibili热榜
-
-![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/bilibili_hot_search.png)
-
-4. 微博热榜
-
-![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/weibo_hot_search.png)
-
+|热点组件包|https://github.com/widget-js/hotspot|
+|-------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------| 
+| ![bilibili](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/bilibili_hot_search.png) | ![weibo.png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/weibo_hot_search.png)  |
+| ![douyin](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_douyin.png) | ![zhihu.png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_zhihu.png)  |
 
 ### 时钟组件包
 
-https://github.com/rtugeek/clock
+|                                                        时钟组件包                                                         |                                          https://github.com/rtugeek/clock                                          |
+|:--------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------:| 
+|![Flip Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_flip_clock.png) 翻页时钟    |     ![Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_clock.png)  <br/>时钟      |
+| ![Glitch Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_glitch_clock.png)  故障时钟 | ![Micky Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_micky_clock.png)  <br/>米奇时钟 |
 
-1. 翻页时钟
 
-![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_flip_clock.png)
 
-2. 时钟
 
-![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_clock.png)
 
-3. 故障时钟
-
-![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_glitch_clock.png)
-
-4. 米奇时钟
-
-![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_micky_clock.png)
