@@ -72,16 +72,56 @@ pnpm install
 pnpm serve
 ```
 
-### 创建自己的组件
-
-```shell
-// 安装组件脚手架
-npm install -g @widget-js/cli
-// 在项目根目录运行 创建组件命令
-widget create
-```
-
 ### 组件列表
+
+1. 键盘演示(src/widgets/keystroke)
+
+![png](./public/images/preview_keystroke.png)
+
+2. 喝水提醒
+
+<img style="border-radius: 12px;box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" src="public/images/preview_water_reminder.png"/>
+
+3. 待办事项
+
+![image](public/images/preview_todo_list.png)
+
+4. 轮播相册(src/widgets/photo)
+
+![image](screenshot/photo.png)
+
+5. 生日列表
+
+![gif](public/images/preview_birthday_list.png)
+6. 倒计时
+
+![gif](public/images/preview_countdown.png)
+
+7. 倒计时2
+
+![gif](public/images/preview_countdown2.png)
+
+8. 灵动通知
+
+![gif](screenshot/dynamic_island.gif)
+
+9. 打工进度
+
+![labor_progress.gif](screenshot%2Flabor_progress.gif)
+
+10. 时间进度
+
+<img style="border-radius: 12px;box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" src="public/images/preview_time_progress.png"/>
+
+
+### 剪切板组件包 
+1. 剪切板
+![png](https://raw.githubusercontent.com/rtugeek/clipboard/master/public/images/preview_clipboard.png)
+
+2. 剪切板搜索
+
+<img style="border: 3px solid #c3c3c3;border-radius: 12px" src="public/images/preview_clipboard.png"/>
+
 
 ### AI组件包
 
@@ -91,125 +131,39 @@ https://github.com/rtugeek/ai
 
 ![png](https://raw.githubusercontent.com/rtugeek/ai/master/screenshot.png)
 
-#### 键盘演示(src/widgets/keystroke)
-
-![png](./public/images/preview_keystroke.png)
-
-#### 抖音热榜（热点组件包：https://github.com/widget-js/hotspot）
+### 热点组件包
+https://github.com/widget-js/hotspot
+1. 抖音热榜
 
 ![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_douyin.png)
 
-#### 剪切板搜索(src/widgets/clipboard)
-
-<img style="border: 3px solid #c3c3c3;border-radius: 12px" src="public/images/preview_clipboard.png"/>
-
-#### 喝水提醒
-
-![gif](public/images/preview_water_reminder.png)
-
-- 代码路径：/widgets/water-reminder
-- 组件路由：/widget/water_reminder
-- 配置路由：/widget/config/water_reminder
-
-#### 待办事项
-
-![image](public/images/preview_todo_list.png)
-
-- 代码路径：/widgets/todo-list
-- 组件路由：/widget/todo-list
-- 配置路由：/widget/config/todo-list
-
-#### 轮播相册(src/widgets/photo)
-
-![image](screenshot/photo.png)
-
-#### 生日列表
-
-![gif](public/images/preview_birthday_list.png)
-
-- 代码路径：/widgets/birthday_list
-- 组件路由：/widget/birthday_list
-- 配置路由：/widget/config/birthday_list
-
-#### 倒计时
-
-![gif](public/images/preview_countdown.png)
-
-- 代码路径：/widgets/countdown
-- 组件路由：/widget/countdown
-- 配置路由：/widget/config/countdown
-
-#### 倒计时2
-
-![gif](public/images/preview_countdown2.png)
-
-- 代码路径：/widgets/countdown2
-- 组件路由：/widget/countdown2
-- 配置路由：/widget/config/countdown2
-
-#### 灵动通知
-
-![gif](screenshot/dynamic_island.gif)
-
-- 代码路径：/widgets/dynamic_island
-- 组件路由：/widget/dynamic_island
-- 配置路由：/widget/config/dynamic_island
-
-#### 打工进度
-
-![labor_progress.gif](screenshot%2Flabor_progress.gif)
-
-- 代码路径：/widgets/labor_progress
-- 组件路由：/widget/labor_progress
-- 配置路由：/widget/config/labor_progress
-
-#### 时间进度
-
-![time_progress.png](public/images/preview_time_progress.png)
-
-- 代码路径：/widgets/time_progress
-- 组件路由：/widget/time_progress
-
-#### 知乎热榜
-
+2. 知乎热榜
 ![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_zhihu.png)
-
-见热点组件包：https://github.com/widget-js/hotspot
-
-#### bilibili热榜
+3. bilibili热榜
 
 ![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/bilibili_hot_search.png)
 
-见热点组件包：https://github.com/widget-js/hotspot
-
-#### 微博热榜
+4. 微博热榜
 
 ![png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/weibo_hot_search.png)
 
-见热点组件包：https://github.com/widget-js/hotspot
 
 ### 时钟组件包
 
 https://github.com/rtugeek/clock
 
-#### 翻页时钟
+1. 翻页时钟
 
 ![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_flip_clock.png)
 
-#### 时钟
+2. 时钟
 
 ![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_clock.png)
 
-#### 故障时钟
+3. 故障时钟
 
 ![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_glitch_clock.png)
 
-#### 米奇时钟
+4. 米奇时钟
 
 ![png](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_micky_clock.png)
-#### 歌词小说
-
-![歌词小说](public/images/preview_lyric_book.png)
-
-- 代码路径：/widgets/lyric_book
-- 组件路由：/widget/lyric_book
