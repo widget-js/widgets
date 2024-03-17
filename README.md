@@ -105,6 +105,14 @@ https://github.com/rtugeek/ai
 |  剪切板   | ![Clipboard](https://raw.githubusercontent.com/rtugeek/clipboard/master/public/images/preview_clipboard.png) | 
 |  快捷搜索  |   <img style="border: 3px solid #c3c3c31f;border-radius: 12px" src="public/images/preview_clipboard.png"/>   |
 
+### 天气组件包
+
+| 天气组件包 |                            https://github.com/rtugeek/weather                             |
+|:-----:|:-----------------------------------------------------------------------------------------:| 
+|  2x2  | ![2x2](https://raw.githubusercontent.com/rtugeek/weather/master/public/preview_small.png) | 
+|  4x4  | ![4x4](https://raw.githubusercontent.com/rtugeek/weather/master/public/preview_large.png) |
+
+
 
 ### 热点组件包
 |热点组件包|https://github.com/widget-js/hotspot|
