@@ -133,12 +133,12 @@ export default {
         </el-table-column>
         <el-table-column label="月" prop="month" align="center">
           <template #default="scope">
-            <el-input-number v-model="scope.month" :min="1" :max="12" />
+            <el-input-number v-model="scope.row.month" :min="1" :max="12" />
           </template>
         </el-table-column>
         <el-table-column label="日" prop="day" align="center">
           <template #default="scope">
-            <el-input-number v-model="scope.day" :min="1" :max="31" />
+            <el-input-number v-model="scope.row.day" :min="1" :max="31" />
           </template>
         </el-table-column>
         <el-table-column align="center" width="100">
