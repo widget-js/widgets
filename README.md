@@ -107,10 +107,11 @@ https://github.com/rtugeek/ai
 
 ### 天气组件包
 
-| 天气组件包 |                            https://github.com/rtugeek/weather                             |
-|:-----:|:-----------------------------------------------------------------------------------------:| 
-|  2x2  | ![2x2](https://raw.githubusercontent.com/rtugeek/weather/master/public/preview_small.png) | 
-|  4x4  | ![4x4](https://raw.githubusercontent.com/rtugeek/weather/master/public/preview_large.png) |
+| 天气组件包 |                             https://github.com/rtugeek/weather                             |
+|:-----:|:------------------------------------------------------------------------------------------:| 
+|  2x2  | ![2x2](https://raw.githubusercontent.com/rtugeek/weather/master/public/preview_small.png)  | 
+|  4x2  | ![4x2](https://raw.githubusercontent.com/rtugeek/weather/master/public/preview_medium.png) | 
+|  4x4  | ![4x4](https://raw.githubusercontent.com/rtugeek/weather/master/public/preview_large.png)  |
 
 
 
