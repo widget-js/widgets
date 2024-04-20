@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { computed, reactive } from 'vue'
 import { useWidget } from '@widget-js/vue3'
-import * as localforage from 'localforage'
+import localforage from 'localforage'
 import { WidgetDataApi } from '@widget-js/core'
 import {
   Todo,

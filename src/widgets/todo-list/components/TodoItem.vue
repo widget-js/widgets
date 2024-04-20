@@ -35,7 +35,7 @@ function deleteTodo() {
         <span />
       </ElCheckbox>
       <div class="todo" style="line-height: 1.2">
-        <p :style=" { 'text-decoration': todo.isFinished() ? 'line-through' : 'none' }">
+        <p class="w-75" :style=" { 'text-decoration': todo.isFinished() ? 'line-through' : 'none' }">
           {{ todo.title }}
         </p>
       </div>
