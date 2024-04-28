@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { IconPark } from '@icon-park/vue-next/es/all'
 
-defineProps({
+const props = defineProps({
   type: {
     type: String,
     default: 'info',
@@ -12,7 +12,7 @@ defineProps({
 
 <template>
   <div class="message-notification ">
-    <IconPark class="icon" :type="type" theme="outline" />
+    <IconPark :class="`icon ${props.type}`" :type="type" theme="outline" />
     <div class="message">
       {{ message }}
     </div>
@@ -43,19 +43,19 @@ defineProps({
     font-size: 1.5rem;
     margin-right: 0.5rem;
 
-    &.success:before {
+    &.success {
       color: #67C23A;
     }
 
-    &.error:before {
+    &.error {
       color: #F56C6C;
     }
 
-    &.warning:before {
+    &.warning {
       color: #E6A23C;
     }
 
-    &.info:before {
+    &.info {
       color: #909399;
     }
 

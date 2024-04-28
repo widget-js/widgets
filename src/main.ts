@@ -12,6 +12,7 @@ import router from './router'
 import 'dayjs/locale/zh-cn.js'
 import App from './App.vue'
 import 'virtual:uno.css'
+import '@icon-park/vue-next/styles/index.css'
 
 dayjs.locale('cn')
 

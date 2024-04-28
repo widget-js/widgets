@@ -78,38 +78,6 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.time_progress",
-      "title": {
-        "zh-CN": "时间进度"
-      },
-      "description": {
-        "zh-CN": "年、月、周、日进度剩余百分比"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 2,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 2,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/time_progress",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_time_progress.png",
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/time_progress",
-      "routes": []
-    },
-    {
       "name": "cn.widgetjs.widgets.todo_list",
       "title": {
         "zh-CN": "待办事项"
@@ -139,6 +107,38 @@
       "previewImage": "/images/preview_todo_list.png",
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/todo_list",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.time_progress",
+      "title": {
+        "zh-CN": "时间进度"
+      },
+      "description": {
+        "zh-CN": "年、月、周、日进度剩余百分比"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 2,
+      "maxWidth": 4,
+      "webviewTag": false,
+      "maxHeight": 2,
+      "minWidth": 2,
+      "minHeight": 2,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/time_progress",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_time_progress.png",
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/time_progress",
       "routes": []
     },
     {
@@ -238,6 +238,38 @@
       "routes": []
     },
     {
+      "name": "cn.widgetjs.widgets.labor_progress",
+      "title": {
+        "zh-CN": "打工进度"
+      },
+      "description": {
+        "zh-CN": "打工人，打工魂"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 1,
+      "maxWidth": 6,
+      "webviewTag": false,
+      "maxHeight": 2,
+      "minWidth": 3,
+      "minHeight": 1,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/labor_progress",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_labor_progress.png",
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/labor_progress",
+      "routes": []
+    },
+    {
       "name": "cn.widgetjs.widgets.key_stroke",
       "title": {
         "zh-CN": "键盘演示"
@@ -268,38 +300,6 @@
       "backgroundThrottling": false,
       "previewImage": "/images/preview_keystroke.png",
       "supportDeployMode": 65536,
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.labor_progress",
-      "title": {
-        "zh-CN": "打工进度"
-      },
-      "description": {
-        "zh-CN": "打工人，打工魂"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 1,
-      "maxWidth": 6,
-      "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 3,
-      "minHeight": 1,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/labor_progress",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_labor_progress.png",
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/labor_progress",
       "routes": []
     },
     {
