@@ -27,6 +27,7 @@ import {
   getCountdownDemo,
 } from '@/widgets/dynamic-island/model/Demo'
 import '@/common/dayjs-extend'
+import consola from "consola";
 
 export default {
   name: 'DynamicIslandWidgetView',

@@ -93,9 +93,9 @@
       "lang": "zh-CN",
       "width": 4,
       "height": 4,
-      "maxWidth": 6,
+      "maxWidth": 8,
       "webviewTag": false,
-      "maxHeight": 6,
+      "maxHeight": 10,
       "minWidth": 3,
       "minHeight": 3,
       "movable": true,
@@ -303,38 +303,6 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.dynamic_island",
-      "title": {
-        "zh-CN": "久坐提醒"
-      },
-      "description": {
-        "zh-CN": "设置间隔，定时提醒，适合长期久坐的人群"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 6,
-      "height": 4,
-      "maxWidth": 6,
-      "webviewTag": false,
-      "maxHeight": 4,
-      "minWidth": 6,
-      "minHeight": 4,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/dynamic_island",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_sit_reminder.png",
-      "supportDeployMode": 65536,
-      "configPagePath": "/widget/config/dynamic_island",
-      "routes": []
-    },
-    {
       "name": "cn.widgetjs.widgets.countdown2",
       "title": {
         "zh-CN": "倒计时"
@@ -364,6 +332,38 @@
       "previewImage": "/images/preview_countdown2.png",
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/countdown2",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.dynamic_island",
+      "title": {
+        "zh-CN": "久坐提醒"
+      },
+      "description": {
+        "zh-CN": "设置间隔，定时提醒，适合长期久坐的人群"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 6,
+      "height": 4,
+      "maxWidth": 6,
+      "webviewTag": false,
+      "maxHeight": 4,
+      "minWidth": 6,
+      "minHeight": 4,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/dynamic_island",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_sit_reminder.png",
+      "supportDeployMode": 65536,
+      "configPagePath": "/widget/config/dynamic_island",
       "routes": []
     },
     {
