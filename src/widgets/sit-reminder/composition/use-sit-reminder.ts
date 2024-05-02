@@ -5,8 +5,7 @@ import {
   BrowserWindowApi,
   DeviceApi,
   NotificationApi,
-  WidgetApi,
-  WidgetApiEvent,
+  WidgetApiEvent, WidgetPackageApi,
 } from '@widget-js/core'
 import {
   useIntervalFn,
@@ -26,7 +25,7 @@ function useSitReminder() {
   const confirmBroadcast = `${sitReminder.name}.confirm`
   let breakUrl = ''
   const loadBreakUrl = async (minute: number) => {
-    const url = await WidgetApi.getWidgetPackageUrl('cn.widgetjs.widgets')
+    const url = await WidgetPackageApi.getEntryUrl('cn.widgetjs.widgets')
     breakUrl = `${url}#/widget/sit_reminder/break?win_fullscreen=true&win_always_on_top=true&duration=${minute * 60}`
   }
   const { widgetData: sitReminderData } = useWidget<SitReminder>(SitReminder, {
