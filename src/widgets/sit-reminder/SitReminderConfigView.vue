@@ -30,7 +30,6 @@ const widgetConfigOption = new WidgetConfigOption({
     @confirm="save({ closeWindow: true })"
   >
     <template #custom>
-      <widget-checkbox-field v-model="widgetData.enable" label="启用久坐提醒" />
       <widget-slider-field v-model="widgetData.sitInterval" label="久坐时长（分钟）" :min="1" :max="120" />
       <widget-slider-field v-model="widgetData.breakInterval" label="休息时长（分钟）" :min="1" :max="60" />
       <widget-slider-field v-model="widgetData.mouseCheckInterval" label="检测阈值（分钟）" :min="1" :max="120" />

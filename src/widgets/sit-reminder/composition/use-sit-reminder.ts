@@ -26,8 +26,8 @@ function useSitReminder() {
   const confirmBroadcast = `${sitReminder.name}.confirm`
   let breakUrl = ''
   const loadBreakUrl = async (minute: number) => {
-    const widgetPackage = await WidgetApi.getWidgetPackage('cn.widgetjs.widgets')
-    breakUrl = widgetPackage.getUrl(`widget/sit_reminder/break?win_fullscreen=true&win_always_on_top=true&duration=${minute * 60}`)
+    const url = await WidgetApi.getWidgetPackageUrl('cn.widgetjs.widgets')
+    breakUrl = `${url}#/widget/sit_reminder/break?win_fullscreen=true&win_always_on_top=true&duration=${minute * 60}`
   }
   const { widgetData: sitReminderData } = useWidget<SitReminder>(SitReminder, {
     defaultData: sitReminder,
@@ -58,10 +58,6 @@ function useSitReminder() {
   })
 
   useIntervalFn(async () => {
-    if (!sitReminderData.value.enable) {
-      return
-    }
-
     const now = dayjs()
 
     const duration = dayjs.duration(now.diff(lastUsedAt))
