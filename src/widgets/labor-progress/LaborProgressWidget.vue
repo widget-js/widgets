@@ -45,7 +45,12 @@ export default {
     })
 
     const workEndTime = computed(() => {
-      return dayjs(props.endTime)
+      let endTime = dayjs(props.endTime)
+      // 如果下班时间在上班时间之前，说明是第二天下班，可能上夜班的酷毙打工人
+      if (endTime.isBefore(workStartTime.value)) {
+        endTime = endTime.add(1, 'day')
+      }
+      return endTime
     })
 
     const totalSeconds = computed(() => {

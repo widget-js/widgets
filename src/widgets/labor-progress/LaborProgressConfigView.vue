@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import {
   WidgetConfigOption,
   WidgetEditDialog,
-  WidgetTimeRangeField,
   useWidget,
 } from '@widget-js/vue3'
 import { BrowserWindowApi } from '@widget-js/core'
@@ -12,7 +11,6 @@ import LaborProgressData from '@/widgets/labor-progress/model/LaborProgressData'
 export default {
   name: 'LaborProgressConfigView',
   components: {
-    WidgetTimeRangeField,
     WidgetEditDialog,
   },
   setup() {
@@ -25,8 +23,8 @@ export default {
       },
     })
 
-    const startTime = ref<Date>()
-    const endTime = ref<Date>()
+    const startTime = ref<Date>(new Date())
+    const endTime = ref<Date>(new Date())
 
     const {
       widgetData,
@@ -71,14 +69,12 @@ export default {
   >
     <template #custom>
       <el-form>
-        <WidgetTimeRangeField
-          v-model:start-time="startTime"
-
-          v-model:end-time="endTime"
-          title="工作时间"
-          start-placeholder="开始时间"
-          end-placeholder="结束时间"
-        />
+        <el-form-item label="上班时间">
+          <ElTimePicker v-model="startTime" format="HH:mm" :clearable="false" title="上班时间" />
+        </el-form-item>
+        <el-form-item label="上班时间">
+          <ElTimePicker v-model="endTime" format="HH:mm" :clearable="false" title="下班时间" />
+        </el-form-item>
       </el-form>
     </template>
   </WidgetEditDialog>

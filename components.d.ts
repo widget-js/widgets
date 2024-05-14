@@ -30,6 +30,8 @@ declare module '@vue/runtime-core' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElTime: typeof import('element-plus/es')['ElTime']
+    ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     LunarDatePicker: typeof import('./src/components/LunarDatePicker.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
