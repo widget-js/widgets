@@ -24,7 +24,7 @@ const PhotoWidgetDefine = new Widget({
   keywords,
   lang: 'zh-CN',
   width: 2,
-  categories: ['fun'],
+  categories: ['photo'],
   height: 2,
   minWidth: 1,
   maxWidth: 6,
