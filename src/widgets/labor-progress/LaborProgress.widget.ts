@@ -21,6 +21,7 @@ const LaborProgressWidgetDefine = new Widget({
   keywords,
   lang: 'zh-CN',
   width: 4,
+  categories: ['fun'],
   height: 1,
   previewImage: '/images/preview_labor_progress.png',
   minWidth: 3,

@@ -14,6 +14,7 @@ const TodoListWidget = new Widget({
   height: 4,
   minWidth: 3,
   maxWidth: 8,
+  categories: ['productivity'],
   minHeight: 3,
   maxHeight: 10,
   path: '/widget/todo_list',

@@ -82,9 +82,7 @@ export default {
 
 <style scoped lang="scss">
 .countdown-widget {
-  width: 100%;
   border-radius: var(--widget-border-radius);
-  height: 100%;
   display: flex;
   flex-direction: column;
   padding: 8px 16px;

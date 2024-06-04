@@ -148,9 +148,7 @@ body * {
   overflow: hidden;
   background-color: #FB604B;
   border-radius: 20px;
-  height: 100%;
   position: relative;
-  width: 100%;
   display: flex;
   flex-flow: column;
   aspect-ratio: 1/1;

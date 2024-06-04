@@ -23,6 +23,7 @@ const TimeProgressWidgetDefine = new Widget({
   title,
   description,
   keywords,
+  categories: ['time'],
   lang,
   width,
   height,

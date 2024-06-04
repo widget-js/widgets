@@ -41,6 +41,9 @@
       "meta": {},
       "backgroundThrottling": true,
       "previewImage": "/images/preview_wave_progress.png",
+      "categories": [
+        "time"
+      ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/wave_progress",
       "routes": []
@@ -73,6 +76,9 @@
       "meta": {},
       "backgroundThrottling": false,
       "previewImage": "/images/preview_water_reminder.png",
+      "categories": [
+        "utilities"
+      ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/water_reminder",
       "routes": []
@@ -105,6 +111,9 @@
       "meta": {},
       "backgroundThrottling": true,
       "previewImage": "/images/preview_todo_list.png",
+      "categories": [
+        "productivity"
+      ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/todo_list",
       "routes": []
@@ -137,6 +146,9 @@
       "meta": {},
       "backgroundThrottling": true,
       "previewImage": "/images/preview_time_progress.png",
+      "categories": [
+        "time"
+      ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/time_progress",
       "routes": []
@@ -169,6 +181,9 @@
       "meta": {},
       "backgroundThrottling": false,
       "previewImage": "/images/preview_sit_reminder.png",
+      "categories": [
+        "utilities"
+      ],
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/sit_reminder",
       "routes": []
@@ -201,6 +216,9 @@
       "meta": {},
       "backgroundThrottling": true,
       "previewImage": "/images/preview_photo.png",
+      "categories": [
+        "fun"
+      ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/photo",
       "routes": []
@@ -233,6 +251,9 @@
       "meta": {},
       "backgroundThrottling": false,
       "previewImage": "/images/preview_phone_reminder.png",
+      "categories": [
+        "fun"
+      ],
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/phone_reminder",
       "routes": []
@@ -265,6 +286,9 @@
       "meta": {},
       "backgroundThrottling": true,
       "previewImage": "/images/preview_labor_progress.png",
+      "categories": [
+        "fun"
+      ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/labor_progress",
       "routes": []
@@ -299,6 +323,9 @@
       "meta": {},
       "backgroundThrottling": false,
       "previewImage": "/images/preview_keystroke.png",
+      "categories": [
+        "productivity"
+      ],
       "supportDeployMode": 65536,
       "routes": []
     },
@@ -330,6 +357,9 @@
       "meta": {},
       "backgroundThrottling": true,
       "previewImage": "/images/preview_sit_reminder.png",
+      "categories": [
+        "utilities"
+      ],
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/dynamic_island",
       "routes": []
@@ -362,6 +392,9 @@
       "meta": {},
       "backgroundThrottling": true,
       "previewImage": "/images/preview_countdown2.png",
+      "categories": [
+        "countdown"
+      ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/countdown2",
       "routes": []
@@ -394,6 +427,9 @@
       "meta": {},
       "backgroundThrottling": true,
       "previewImage": "/images/preview_countdown.png",
+      "categories": [
+        "countdown"
+      ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/countdown",
       "routes": []
@@ -426,6 +462,9 @@
       "meta": {},
       "backgroundThrottling": true,
       "previewImage": "/images/preview_birthday_list.png",
+      "categories": [
+        "countdown"
+      ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/birthday_list",
       "routes": []

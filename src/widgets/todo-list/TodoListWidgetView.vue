@@ -70,8 +70,6 @@ function saveTodo(data: TodoUpdate) {
   background-color: var(--widget-background-color);
   border-radius: var(--widget-border-radius);
   font-weight: bold;
-  width: 100%;
-  height: 100%;
 
   .header {
     align-items: center;

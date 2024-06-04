@@ -23,6 +23,7 @@ const DynamicIslandWidgetDefine = new Widget({
   title,
   description,
   keywords,
+  categories: ['utilities'],
   lang: 'zh-CN',
   width: 6,
   height: 4,

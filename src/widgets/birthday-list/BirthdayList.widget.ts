@@ -21,6 +21,7 @@ const BirthdayListWidgetDefine = new Widget({
   minWidth: 3,
   maxWidth: 4,
   minHeight: 3,
+  categories: ['countdown'],
   maxHeight: 6,
   path,
   configPagePath,

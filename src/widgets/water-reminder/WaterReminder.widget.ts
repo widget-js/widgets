@@ -24,6 +24,7 @@ const WaterReminderWidget = new Widget({
   lang: 'zh-CN',
   previewImage: '/images/preview_water_reminder.png',
   width: 2,
+  categories: ['utilities'],
   height: 2,
   backgroundThrottling: false,
   minWidth: 2,

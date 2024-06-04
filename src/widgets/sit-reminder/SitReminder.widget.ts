@@ -26,6 +26,7 @@ const SitReminderWidgetDefine = new Widget({
   height: 2,
   minWidth: 4,
   maxWidth: 4,
+  categories: ['utilities'],
   minHeight: 2,
   previewImage: '/images/preview_sit_reminder.png',
   maxHeight: 2,

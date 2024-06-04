@@ -25,6 +25,7 @@ const WaveProgressWidgetDefine = new Widget({
   configPagePath,
   name,
   title,
+  categories: ['time'],
   description,
   keywords,
   lang,

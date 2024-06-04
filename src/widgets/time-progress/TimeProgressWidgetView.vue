@@ -214,8 +214,6 @@ $transition-duration: 125ms;
   overflow: hidden;
   font-size: 21px;
   position: relative;
-  width: inherit;
-  height: inherit;
   padding: 0 0.38em 0.5em;
   border-radius: var(--widget-border-radius);
   color: var(--widget-color);

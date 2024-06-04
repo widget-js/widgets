@@ -32,6 +32,7 @@ const KeyStrokeWidgetDefine = new Widget({
   backgroundThrottling: false,
   permissions: ['keyboard'],
   movable: false,
+  categories: ['productivity'],
   previewImage: '/images/preview_keystroke.png',
   path: url,
   configPagePath: configUrl,

@@ -27,6 +27,7 @@ const PhoneReminderWidgetDefine = new Widget({
   minWidth: 1,
   supportDeployMode: DeployMode.BACKGROUND,
   maxWidth: 2,
+  categories: ['fun'],
   minHeight: 2,
   maxHeight: 2,
   backgroundThrottling: false,

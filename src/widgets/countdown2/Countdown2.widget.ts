@@ -21,6 +21,7 @@ const Countdown2WidgetDefine = new Widget({
   name,
   title,
   description,
+  categories: ['countdown'],
   keywords,
   previewImage: '/images/preview_countdown2.png',
   lang: 'zh-CN',

@@ -81,9 +81,7 @@ export default {
 <style scoped lang="scss">
 $border-radius: var(--widget-border-radius);
 .countdown-widget {
-  width: 100%;
   border-radius: $border-radius;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
