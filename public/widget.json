@@ -217,7 +217,7 @@
       "backgroundThrottling": true,
       "previewImage": "/images/preview_photo.png",
       "categories": [
-        "fun"
+        "photo"
       ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/photo",
