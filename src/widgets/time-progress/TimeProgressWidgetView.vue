@@ -219,7 +219,6 @@ $transition-duration: 125ms;
   color: var(--widget-color);
   background-color: var(--widget-background-color);
   text-align: left;
-  font-family: OPPOSans-Bold;
 
   .header {
     position: relative;

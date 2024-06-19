@@ -49,41 +49,6 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.water_reminder",
-      "title": {
-        "zh-CN": "喝水提醒"
-      },
-      "description": {
-        "zh-CN": "每天N杯水，养成好习惯"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 2,
-      "height": 2,
-      "maxWidth": 2,
-      "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 2,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/water_reminder",
-      "meta": {},
-      "backgroundThrottling": false,
-      "previewImage": "/images/preview_water_reminder.png",
-      "categories": [
-        "utilities"
-      ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/water_reminder",
-      "routes": []
-    },
-    {
       "name": "cn.widgetjs.widgets.todo_list",
       "title": {
         "zh-CN": "待办事项"
@@ -291,42 +256,6 @@
       ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/labor_progress",
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.key_stroke",
-      "title": {
-        "zh-CN": "键盘演示"
-      },
-      "description": {
-        "zh-CN": "在屏幕显示每一次快捷键敲击"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [
-        "keyboard"
-      ],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 3,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 3,
-      "minWidth": 4,
-      "minHeight": 3,
-      "movable": false,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/key_stroke",
-      "meta": {},
-      "backgroundThrottling": false,
-      "previewImage": "/images/preview_keystroke.png",
-      "categories": [
-        "productivity"
-      ],
-      "supportDeployMode": 65536,
       "routes": []
     },
     {

@@ -3,6 +3,7 @@ import {
   WidgetConfigOption,
   WidgetEditDialog,
   useWidget,
+  useWidgetTheme,
 } from '@widget-js/vue3'
 import { ref } from 'vue'
 import dayjs from 'dayjs'
@@ -31,7 +32,8 @@ export default {
     const isLunar = ref(false)
     const widgetParams = WidgetParams.fromCurrentLocation()
     const defaultData = new CountdownModel(CountdownWidgetDefine.name)
-    defaultData.theme.backgroundColor = '#FFC455'
+    const { widgetTheme } = useWidgetTheme()
+    widgetTheme.theme.backgroundColor = '#FFC455'
     const {
       widgetData,
     } = useWidget(CountdownModel, {

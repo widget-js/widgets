@@ -68,12 +68,13 @@ p {
   margin: 0;
   word-wrap: break-word;
   white-space: pre-wrap;
+  width: 70vw;
+  line-height: 1.5;
 }
 
 .todo-item {
   padding: 4px 8px;
   border-bottom: 1px solid var(--widget-divider-color);
-
   &:hover {
     .actions {
       opacity: 1;

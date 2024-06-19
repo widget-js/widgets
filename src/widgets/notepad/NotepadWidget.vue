@@ -69,7 +69,6 @@ body * {
     height: 60%;
     text-align: left;
     font-size: 1.6em;
-    font-family: OPPOSans-Bold, OPPOSans;
     font-weight: bold;
     color: #FFFFFF;
     line-height: 60%;

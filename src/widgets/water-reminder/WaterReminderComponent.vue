@@ -167,7 +167,6 @@ const circleBorderColor = computed(() => {
     }
 
     .text {
-      font-family: 'OPPOSans', 'Microsoft YaHei', Monospace, serif;
       font-style: normal;
       font-weight: 500;
       font-size: 2rem;

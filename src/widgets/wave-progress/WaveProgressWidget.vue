@@ -319,7 +319,6 @@ body {
   border-radius: 0.5em;
   background-color: #ffffff;
   text-align: left;
-  font-family: Roboto-Medium, "Microsoft YaHei", serif;
   color: #494644;
 
   .tips {
