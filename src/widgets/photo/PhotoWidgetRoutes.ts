@@ -4,7 +4,7 @@ import PhotoWidgetDefine from './Photo.widget'
 const url = PhotoWidgetDefine.path
 const name = PhotoWidgetDefine.name
 
-const configUrl = PhotoWidgetDefine.configPagePath
+const configUrl = PhotoWidgetDefine.configPagePath!.split('?')[0]
 
 const PhotoWidgetRoutes: RouteRecordRaw[] = [
   {

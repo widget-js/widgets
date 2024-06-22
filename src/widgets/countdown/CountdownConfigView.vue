@@ -3,13 +3,13 @@ import {
   WidgetConfigOption,
   WidgetEditDialog,
   useWidget,
-  useWidgetTheme,
 } from '@widget-js/vue3'
 import { ref } from 'vue'
 import dayjs from 'dayjs'
 import { Lunar } from 'lunar-typescript'
 import {
   BrowserWindowApi,
+  DefaultWidgetTheme,
   WidgetDataApi,
   WidgetParams,
 } from '@widget-js/core'
@@ -25,19 +25,19 @@ export default {
     WidgetEditDialog,
   },
   setup() {
-    BrowserWindowApi.setSize(600, 500)
     BrowserWindowApi.center()
     const showDatePicker = ref(false)
     const date = ref(CountdownModel.DEFAULT_DATE)
     const isLunar = ref(false)
     const widgetParams = WidgetParams.fromCurrentLocation()
     const defaultData = new CountdownModel(CountdownWidgetDefine.name)
-    const { widgetTheme } = useWidgetTheme()
-    widgetTheme.theme.backgroundColor = '#FFC455'
     const {
       widgetData,
     } = useWidget(CountdownModel, {
       defaultData,
+      defaultTheme: DefaultWidgetTheme.copy({
+        backgroundColor: '#FFC455',
+      }),
       onDataLoaded: (data) => {
         if (data) {
           date.value = dayjs(data.date).toDate()

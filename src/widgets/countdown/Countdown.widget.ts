@@ -13,11 +13,10 @@ const keywords = [WidgetKeyword.RECOMMEND]
 // 组件路由地址
 const url = '/widget/countdown'
 // 配置页路由地址
-const configUrl = '/widget/config/countdown'
 // 组件关键词
 const CountdownWidgetDefine = new Widget({
   path: url,
-  configPagePath: configUrl,
+  configPagePath: '/widget/config/countdown?frame=true&transparent=false&width=600&height=500',
   name,
   title,
   description,

@@ -45,7 +45,7 @@
         "time"
       ],
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/wave_progress",
+      "configPagePath": "/widget/config/wave_progress?frame=true&transparent=false",
       "routes": []
     },
     {
@@ -80,7 +80,7 @@
         "productivity"
       ],
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/todo_list",
+      "configPagePath": "/widget/config/todo_list?frame=true&transparent=false",
       "routes": []
     },
     {
@@ -115,7 +115,7 @@
         "time"
       ],
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/time_progress",
+      "configPagePath": "/widget/config/time_progress?frame=true&transparent=false",
       "routes": []
     },
     {
@@ -132,13 +132,13 @@
       "security": false,
       "permissions": [],
       "lang": "zh-CN",
-      "width": 4,
-      "height": 2,
-      "maxWidth": 4,
+      "width": 1,
+      "height": 1,
+      "maxWidth": 1,
       "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 4,
-      "minHeight": 2,
+      "maxHeight": 1,
+      "minWidth": 1,
+      "minHeight": 1,
       "movable": true,
       "singleton": false,
       "resizable": true,
@@ -150,7 +150,7 @@
         "utilities"
       ],
       "supportDeployMode": 65536,
-      "configPagePath": "/widget/config/sit_reminder",
+      "configPagePath": "/widget/config/sit_reminder?frame=true&transparent=false",
       "routes": []
     },
     {
@@ -185,7 +185,7 @@
         "photo"
       ],
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/photo",
+      "configPagePath": "/widget/config/photo?frame=true&transparent=false",
       "routes": []
     },
     {
@@ -202,13 +202,13 @@
       "security": false,
       "permissions": [],
       "lang": "zh-CN",
-      "width": 6,
-      "height": 4,
-      "maxWidth": 2,
+      "width": 1,
+      "height": 1,
+      "maxWidth": 1,
       "webviewTag": false,
-      "maxHeight": 2,
+      "maxHeight": 1,
       "minWidth": 1,
-      "minHeight": 2,
+      "minHeight": 1,
       "movable": true,
       "singleton": false,
       "resizable": true,
@@ -220,7 +220,7 @@
         "fun"
       ],
       "supportDeployMode": 65536,
-      "configPagePath": "/widget/config/phone_reminder",
+      "configPagePath": "/widget/config/phone_reminder?frame=true&transparent=false",
       "routes": []
     },
     {
@@ -255,7 +255,7 @@
         "fun"
       ],
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/labor_progress",
+      "configPagePath": "/widget/config/labor_progress?frame=true&transparent=false",
       "routes": []
     },
     {
@@ -290,7 +290,7 @@
         "utilities"
       ],
       "supportDeployMode": 65536,
-      "configPagePath": "/widget/config/dynamic_island",
+      "configPagePath": "/widget/config/dynamic_island?frame=true&transparent=false",
       "routes": []
     },
     {
@@ -325,42 +325,7 @@
         "countdown"
       ],
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/countdown2",
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.countdown",
-      "title": {
-        "zh-CN": "倒计时"
-      },
-      "description": {
-        "zh-CN": "简单的倒计时组件，支持农历"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 2,
-      "height": 2,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 4,
-      "minWidth": 2,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/countdown",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_countdown.png",
-      "categories": [
-        "countdown"
-      ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/countdown",
+      "configPagePath": "/widget/config/countdown2?frame=true&transparent=false",
       "routes": []
     },
     {
@@ -395,7 +360,42 @@
         "countdown"
       ],
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/birthday_list",
+      "configPagePath": "/widget/config/birthday_list?frame=true&transparent=false",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.countdown",
+      "title": {
+        "zh-CN": "倒计时"
+      },
+      "description": {
+        "zh-CN": "简单的倒计时组件，支持农历"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 2,
+      "height": 2,
+      "maxWidth": 4,
+      "webviewTag": false,
+      "maxHeight": 4,
+      "minWidth": 2,
+      "minHeight": 2,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/countdown",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_countdown.png",
+      "categories": [
+        "countdown"
+      ],
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/countdown?frame=true&transparent=false&width=600&height=500",
       "routes": []
     }
   ],

@@ -13,7 +13,6 @@ const keywords = [WidgetKeyword.RECOMMEND]
 // 组件路由地址
 const path = '/widget/photo'
 // 配置页路由地址
-const configUrl = '/widget/config/photo'
 // 组件关键词
 const PhotoWidgetDefine = new Widget({
   previewImage: '/images/preview_photo.png',
@@ -30,7 +29,7 @@ const PhotoWidgetDefine = new Widget({
   maxWidth: 6,
   minHeight: 1,
   maxHeight: 6,
-  configPagePath: configUrl,
+  configPagePath: '/widget/config/photo?frame=true&transparent=false',
 })
 
 export default PhotoWidgetDefine

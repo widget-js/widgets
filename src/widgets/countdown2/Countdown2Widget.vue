@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import dayjs from 'dayjs'
 import '@/common/dayjs-extend'
-import Color from 'color'
 import { Lunar } from 'lunar-typescript'
 import { useAppBroadcast } from '@widget-js/vue3'
 import { SystemApiEvent } from '@widget-js/core'
@@ -16,14 +15,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    primaryColor: {
-      type: String,
-      default: 'rgb(0,149,255)',
-    },
-    backgroundColor: {
-      type: String,
-      default: 'rgba(255,255,255,0.2)',
-    },
   },
   setup(props) {
     const days = computed(() => {
@@ -33,10 +24,10 @@ export default {
     useAppBroadcast([SystemApiEvent.DATE_CHANGED], () => {
       days.effect.run()
     })
-    const titleBgColor = computed(() => {
-      const color = new Color(props.primaryColor)
-      return `linear-gradient(180deg,${color.toString()} 0%, ${color.darken(0.2).toString()} 100%)`
-    })
+    // const titleBgColor = computed(() => {
+    //   const color = new Color(props.primaryColor)
+    //   return `linear-gradient(180deg,${color.toString()} 0%, ${color.darken(0.2).toString()} 100%)`
+    // })
 
     const dateStr = computed(() => {
       const targetDate = dayjs(props.date)
@@ -47,16 +38,14 @@ export default {
       return targetDate.format('YYYY/MM/DD')
     })
 
-    const shadowColor = computed(() => {
-      const color = new Color(props.primaryColor)
-      return color.lighten(0.2).alpha(0.5).toString()
-    })
+    // const shadowColor = computed(() => {
+    //   const color = new Color(props.primaryColor)
+    //   return color.lighten(0.2).alpha(0.5).toString()
+    // })
 
     return {
       days,
-      titleBgColor,
       dateStr,
-      shadowColor,
     }
   },
 }
@@ -79,23 +68,23 @@ export default {
 </template>
 
 <style scoped lang="scss">
-$border-radius: var(--widget-border-radius);
 .countdown-widget {
-  border-radius: $border-radius;
+  border-radius: var(--widget-border-radius);
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
 
   .title {
+    --widget-primary-color-end: color-mix(in srgb, var(--widget-primary-color) 100%, #000 20%);
     width: 100%;
     padding: 10px 0;
-    background: v-bind(titleBgColor);
+    background: linear-gradient(180deg,var(--widget-primary-color) 0%, var(--widget-primary-color-end) 100%);
     font-size: 16px;
     color: white;
     font-weight: bold;
     z-index: 2;
-    box-shadow: 0 1px 5px v-bind(shadowColor);
+    //box-shadow: 0 1px 5px v-bind(shadowColor);
     text-align: center;
   }
 
@@ -106,11 +95,11 @@ $border-radius: var(--widget-border-radius);
 
     .card {
       color: white;
-      border-radius: 0 0 $border-radius $border-radius;
+      //border-radius: 0 0 $border-radius $border-radius;
       width: 100%;
       position: absolute;
       height: 100%;
-      background-color: v-bind(backgroundColor);
+      background-color: var(--widget-background-color);
 
       &:nth-child(2) {
         z-index: 0;

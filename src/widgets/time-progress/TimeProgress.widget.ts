@@ -15,7 +15,6 @@ const height = 2
 const minWidth = 2
 const maxWidth = 4
 const minHeight = 2
-const configUrl = '/widget/config/time_progress'
 
 const maxHeight = 2
 const TimeProgressWidgetDefine = new Widget({
@@ -31,7 +30,7 @@ const TimeProgressWidgetDefine = new Widget({
   maxHeight,
   minWidth,
   minHeight,
-  configPagePath: configUrl,
+  configPagePath: '/widget/config/time_progress?frame=true&transparent=false',
   previewImage: '/images/preview_time_progress.png',
   path: url,
 })

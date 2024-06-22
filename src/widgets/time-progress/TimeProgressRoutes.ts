@@ -4,7 +4,7 @@ import TimeProgressWidgetDefine from '@/widgets/time-progress/TimeProgress.widge
 const url = TimeProgressWidgetDefine.path
 const name = TimeProgressWidgetDefine.name
 
-const configUrl = TimeProgressWidgetDefine.configPagePath
+const configUrl = TimeProgressWidgetDefine.configPagePath!.split('?')[0]
 
 const TimeProgressWidgetDefineRoutes: RouteRecordRaw[] = [
   {

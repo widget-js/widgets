@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import dayjs from 'dayjs'
 import '@/common/dayjs-extend'
-import Color from 'color'
 import { useAppBroadcast } from '@widget-js/vue3'
 import { SystemApiEvent } from '@widget-js/core'
 
@@ -14,10 +13,6 @@ export default {
     isLunar: {
       type: Boolean,
       default: false,
-    },
-    backgroundColor: {
-      type: String,
-      default: '#FFC455',
     },
     fontSize: {
       type: Number,
@@ -32,15 +27,6 @@ export default {
     useAppBroadcast([SystemApiEvent.DATE_CHANGED], () => {
       days.effect.run()
     })
-    const daysColor = computed(() => {
-      const color = new Color(props.backgroundColor)
-      return color.alpha(1).darken(0.7).toString()
-    })
-
-    const shadowColor = computed(() => {
-      const color = new Color(props.backgroundColor)
-      return color.lighten(0.2).alpha(0.5).toString()
-    })
     const fontSizePx = computed(() => {
       return `${props.fontSize}px`
     })
@@ -51,13 +37,10 @@ export default {
     const descFontSizePx = computed(() => {
       return `${props.fontSize / 3}px`
     })
-
     return {
       days,
-      daysColor,
       titleFontSizePx,
       descFontSizePx,
-      shadowColor,
       fontSizePx,
     }
   },
@@ -88,7 +71,8 @@ export default {
   padding: 8px 16px;
   align-items: center;
   background-color: var(--widget-background-color);
-
+  --days-color: color-mix(in srgb, var(--widget-background-color) 10%, black 70%);
+  --card-shadow-color: color-mix(in srgb, var(--widget-background-color) 100%, white 80%);
   .title {
     font-size: v-bind(titleFontSizePx);
     color: white;
@@ -108,7 +92,7 @@ export default {
       position: absolute;
       height: 100%;
       background-color: white;
-      box-shadow: 0 3px 5px v-bind(shadowColor);
+      box-shadow: 0 3px 5px var(--card-shadow-color);
 
       &:nth-child(1) {
         top: 8px;
@@ -140,7 +124,7 @@ export default {
 
       .days {
         font-size: v-bind(fontSizePx);
-        color: v-bind(daysColor);
+        color: var(--days-color);
         display: flex;
         align-items: center;
         font-weight: bold;

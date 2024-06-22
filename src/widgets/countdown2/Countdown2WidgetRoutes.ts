@@ -4,7 +4,7 @@ import Countdown2WidgetDefine from './Countdown2.widget'
 const url = Countdown2WidgetDefine.path
 const name = Countdown2WidgetDefine.name
 
-const configUrl = Countdown2WidgetDefine.configPagePath
+const configUrl = Countdown2WidgetDefine.configPagePath!.split('?')[0]
 
 const Countdown2WidgetRoutes: RouteRecordRaw[] = [
   {

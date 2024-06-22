@@ -13,7 +13,6 @@ const description = { 'zh-CN': '用波浪显示事件进度' }
 const keywords = [WidgetKeyword.RECOMMEND]
 const lang = 'zh-CN'
 const path = '/widget/wave_progress'
-const configPagePath = '/widget/config/wave_progress'
 const width = 1
 const height = 2
 const minWidth = 1
@@ -22,7 +21,7 @@ const minHeight = 2
 const maxHeight = 7
 const WaveProgressWidgetDefine = new Widget({
   path,
-  configPagePath,
+  configPagePath: '/widget/config/wave_progress?frame=true&transparent=false',
   name,
   title,
   categories: ['time'],

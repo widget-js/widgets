@@ -12,12 +12,10 @@ const description = { 'zh-CN': '日历样式的倒计时组件' }
 const keywords = [WidgetKeyword.RECOMMEND]
 // 组件路由地址
 const url = '/widget/countdown2'
-// 配置页路由地址
-const configUrl = '/widget/config/countdown2'
 // 组件关键词
 const Countdown2WidgetDefine = new Widget({
   path: url,
-  configPagePath: configUrl,
+  configPagePath: '/widget/config/countdown2?frame=true&transparent=false',
   name,
   title,
   description,

@@ -29,8 +29,6 @@ export default {
     const date = ref(new Date())
     const isLunar = ref(false)
     const defaultData = new CountdownModel(Countdown2WidgetDefine.name)
-    defaultData.theme.primaryColor = 'rgb(0,149,255)'
-    defaultData.theme.fontSize = '72px'
     const {
       widgetData,
       widgetParams,

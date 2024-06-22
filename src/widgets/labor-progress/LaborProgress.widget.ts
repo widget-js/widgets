@@ -11,7 +11,6 @@ const description = { 'zh-CN': '打工人，打工魂' }
 // 组件关键词
 const keywords = [WidgetKeyword.RECOMMEND]
 const url = '/widget/labor_progress'
-const configUrl = '/widget/config/labor_progress'
 
 // 组件关键词
 const LaborProgressWidgetDefine = new Widget({
@@ -29,7 +28,7 @@ const LaborProgressWidgetDefine = new Widget({
   minHeight: 1,
   maxHeight: 2,
   path: url,
-  configPagePath: configUrl,
+  configPagePath: '/widget/config/labor_progress?frame=true&transparent=false',
 })
 
 export default LaborProgressWidgetDefine

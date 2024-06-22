@@ -13,8 +13,6 @@ const description = { 'zh-CN': '在屏幕显示每一次快捷键敲击' }
 const keywords = [WidgetKeyword.RECOMMEND]
 // 组件路由地址
 const url = '/widget/key_stroke'
-// 配置页路由地址
-const configUrl = undefined
 // 组件关键词
 const KeyStrokeWidgetDefine = new Widget({
   name,
@@ -36,7 +34,6 @@ const KeyStrokeWidgetDefine = new Widget({
   categories: ['utilities'],
   previewImage: '/images/preview_keystroke.png',
   path: url,
-  configPagePath: configUrl,
 })
 
 export default KeyStrokeWidgetDefine

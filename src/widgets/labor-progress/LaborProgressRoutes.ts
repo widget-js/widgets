@@ -8,7 +8,7 @@ const LaborProgressWidgetRoutes: RouteRecordRaw[] = [
     component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.labor_progress" */ './LaborProgressWidgetView.vue'),
   },
   {
-    path: LaborProgressWidgetDefine.configPagePath!,
+    path: LaborProgressWidgetDefine.configPagePath!.split('?')[0],
     name: `${LaborProgressWidgetDefine.name}.config`,
     component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.labor_progress.config" */ './LaborProgressConfigView.vue'),
   },

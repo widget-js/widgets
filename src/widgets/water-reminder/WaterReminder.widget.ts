@@ -13,8 +13,6 @@ const description = { 'zh-CN': '每天N杯水，养成好习惯' }
 const keywords = [WidgetKeyword.RECOMMEND]
 // 组件路由地址
 const url = '/widget/water_reminder'
-// 配置页路由地址
-const configUrl = '/widget/config/water_reminder'
 // 组件关键词
 const WaterReminderWidget = new Widget({
   name,
@@ -33,7 +31,7 @@ const WaterReminderWidget = new Widget({
   minHeight: 2,
   maxHeight: 2,
   path: url,
-  configPagePath: configUrl,
+  configPagePath: '/widget/config/water_reminder?frame=true&transparent=false',
 })
 
 export default WaterReminderWidget

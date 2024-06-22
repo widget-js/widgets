@@ -1,6 +1,6 @@
 import {
+  BackgroundWidget,
   DeployMode,
-  Widget,
   WidgetKeyword,
 } from '@widget-js/core'
 
@@ -13,27 +13,18 @@ const description = { 'zh-CN': '用灵动通知加语音，提醒重要事项' }
 const keywords = [WidgetKeyword.RECOMMEND]
 // 组件路由地址
 const url = '/widget/phone_reminder'
-// 配置页路由地址
-const configUrl = '/widget/config/phone_reminder'
 // 组件关键词
-const PhoneReminderWidgetDefine = new Widget({
+const PhoneReminderWidgetDefine = new BackgroundWidget({
   name,
   title,
   description,
   keywords,
   lang: 'zh-CN',
-  width: 6,
-  height: 4,
-  minWidth: 1,
   supportDeployMode: DeployMode.BACKGROUND,
-  maxWidth: 2,
   categories: ['fun'],
-  minHeight: 2,
-  maxHeight: 2,
-  backgroundThrottling: false,
   previewImage: '/images/preview_phone_reminder.png',
   path: url,
-  configPagePath: configUrl,
+  configPagePath: '/widget/config/phone_reminder?frame=true&transparent=false',
 })
 
 export default PhoneReminderWidgetDefine

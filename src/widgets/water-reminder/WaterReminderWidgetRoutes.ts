@@ -4,7 +4,7 @@ import WaterReminderWidget from './WaterReminder.widget'
 const url = WaterReminderWidget.path
 const name = WaterReminderWidget.name
 
-const configUrl = WaterReminderWidget.configPagePath
+const configUrl = WaterReminderWidget.configPagePath!.split('?')[0]
 
 const WaterReminderWidgetRoutes: RouteRecordRaw[] = [
   {

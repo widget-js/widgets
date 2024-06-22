@@ -4,16 +4,19 @@ import {
   useWidget,
 } from '@widget-js/vue3'
 import { ref } from 'vue'
+import { DefaultWidgetTheme, WidgetTheme } from '@widget-js/core'
 import CountdownWidgetDefine from './Countdown.widget'
 import { CountdownModel } from '@/widgets/countdown/model/CountdownModel'
 import CountdownWidget from '@/widgets/countdown/CountdownWidget.vue'
 
 const defaultData = new CountdownModel(CountdownWidgetDefine.name)
-defaultData.theme.backgroundColor = '#FFC455'
 const {
   widgetData,
   widgetParams,
-} = useWidget(CountdownModel, { defaultData })
+} = useWidget(CountdownModel, { defaultData, defaultTheme: new WidgetTheme({
+  ...DefaultWidgetTheme,
+  backgroundColor: '#FFC455',
+}) })
 const fontSize = ref(54)
 const widthPx = widgetParams.widthPx ?? 0
 const heightPx = widgetParams.heightPx ?? 0

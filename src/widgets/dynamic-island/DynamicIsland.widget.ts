@@ -13,12 +13,10 @@ const description = { 'zh-CN': '设置间隔，定时提醒，适合长期久坐
 const keywords = [WidgetKeyword.RECOMMEND]
 // 组件路由地址
 const url = '/widget/dynamic_island'
-// 配置页路由地址
-const configUrl = '/widget/config/dynamic_island'
 // 组件关键词
 const DynamicIslandWidgetDefine = new Widget({
   path: url,
-  configPagePath: configUrl,
+  configPagePath: '/widget/config/dynamic_island?frame=true&transparent=false',
   name,
   title,
   description,

@@ -4,7 +4,7 @@ import TodoListWidget from './TodoList.widget'
 const url = TodoListWidget.path
 const name = TodoListWidget.name
 
-const configUrl = TodoListWidget.configPagePath
+const configUrl = TodoListWidget.configPagePath!.split('?')[0]
 
 const TodoListWidgetRoutes: RouteRecordRaw[] = [
   {

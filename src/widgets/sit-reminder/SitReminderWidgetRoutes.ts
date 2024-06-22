@@ -4,7 +4,7 @@ import SitReminderWidgetDefine from './SitReminder.widget'
 const url = SitReminderWidgetDefine.path
 const name = SitReminderWidgetDefine.name
 
-const configUrl = SitReminderWidgetDefine.configPagePath
+const configUrl = SitReminderWidgetDefine.configPagePath!.split('?')[0]
 
 const SitReminderWidgetRoutes: RouteRecordRaw[] = [
   {
