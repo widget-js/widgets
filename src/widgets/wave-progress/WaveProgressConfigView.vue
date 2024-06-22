@@ -3,17 +3,11 @@ import {
   WidgetConfigOption,
   useWidget,
 } from '@widget-js/vue3'
-import { BrowserWindowApi } from '@widget-js/core'
 import {
   ProgressType,
   WaveProgressData,
 } from '@/widgets/wave-progress/model/WaveProgressData'
 
-BrowserWindowApi.setup({
-  width: 600,
-  height: 390,
-  center: true,
-})
 const {
   widgetData,
   widgetParams,

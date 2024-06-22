@@ -76,16 +76,16 @@ pnpm serve
 
 ### 默认组件包
 
-| 默认组件包 |                                     https://github.com/widget-js/widgets                                      |
-|:-----:|:-------------------------------------------------------------------------------------------------------------:| 
-| 待办事项  |                                 ![image](public/images/preview_todo_list.png)                                 |
-| 轮播相册  |                                        ![image](screenshot/photo.png)                                         |
-| 生日列表  |                                ![gif](public/images/preview_birthday_list.png)                                |
-| 倒计时1  |                                  ![gif](public/images/preview_countdown.png)                                  |
-| 倒计时2  |                                 ![gif](public/images/preview_countdown2.png)                                  |
-| 灵动通知  |                                     ![gif](screenshot/dynamic_island.gif)                                     |
-| 打工进度  |                            ![labor_progress.gif](screenshot%2Flabor_progress.gif)                             |
-| 时间进度  | <img style="border: 3px solid #c3c3c31f;border-radius: 12px" src="public/images/preview_time_progress.png"/>  |
+| 默认组件包 |                                     https://github.com/widget-js/widgets                                     |
+|:-----:|:------------------------------------------------------------------------------------------------------------:| 
+| 待办事项  |                                ![image](public/images/preview_todo_list.png)                                 |
+| 轮播相册  |                                        ![image](screenshot/photo.png)                                        |
+| 生日列表  |                               ![gif](public/images/preview_birthday_list.png)                                |
+| 倒计时1  |                                 ![gif](public/images/preview_countdown.png)                                  |
+| 倒计时2  |                                 ![gif](public/images/preview_countdown2.png)                                 |
+| 灵动通知  |                                    ![gif](screenshot/dynamic_island.gif)                                     |
+| 打工进度  |                       ![screenshot/labor_progress.gif](screenshot/labor_progress.gif)                        |
+| 时间进度  | <img style="border: 3px solid #c3c3c31f;border-radius: 12px" src="public/images/preview_time_progress.png"/> |
 
 
 ### AI组件包

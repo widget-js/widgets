@@ -329,41 +329,6 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.birthday_list",
-      "title": {
-        "zh-CN": "生日列表"
-      },
-      "description": {
-        "zh-CN": "自动倒计时的生日列表"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 4,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 6,
-      "minWidth": 3,
-      "minHeight": 3,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/birthday_list",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_birthday_list.png",
-      "categories": [
-        "countdown"
-      ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/birthday_list?frame=true&transparent=false",
-      "routes": []
-    },
-    {
       "name": "cn.widgetjs.widgets.countdown",
       "title": {
         "zh-CN": "倒计时"
@@ -396,6 +361,41 @@
       ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/countdown?frame=true&transparent=false&width=600&height=500",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.birthday_list",
+      "title": {
+        "zh-CN": "生日列表"
+      },
+      "description": {
+        "zh-CN": "自动倒计时的生日列表"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 4,
+      "maxWidth": 4,
+      "webviewTag": false,
+      "maxHeight": 6,
+      "minWidth": 3,
+      "minHeight": 3,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/birthday_list",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_birthday_list.png",
+      "categories": [
+        "countdown"
+      ],
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/birthday_list?frame=true&transparent=false",
       "routes": []
     }
   ],

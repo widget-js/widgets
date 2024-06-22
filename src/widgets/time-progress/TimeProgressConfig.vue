@@ -1,24 +1,12 @@
 <script lang="ts" setup>
-import {
-  WidgetConfigOption,
-  WidgetEditDialog,
-  useWidget,
-} from '@widget-js/vue3'
-import {
-  BrowserWindowApi,
-  WidgetData,
-} from '@widget-js/core'
+import { WidgetConfigOption, WidgetEditDialog, useWidget } from '@widget-js/vue3'
+import { WidgetData } from '@widget-js/core'
 
 const {
   widgetData,
   widgetParams,
   save,
 } = useWidget(WidgetData, { loadDataByWidgetName: true })
-BrowserWindowApi.setup({
-  width: 600,
-  height: 400,
-  center: true,
-})
 
 const widgetConfigOption = new WidgetConfigOption({
   custom: false,

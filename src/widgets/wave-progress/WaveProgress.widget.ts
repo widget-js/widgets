@@ -3,7 +3,6 @@ import {
   WidgetKeyword,
 } from '@widget-js/core'
 
-// TODO 修改组件信息，标题，描述，关键词
 const name = 'cn.widgetjs.widgets.wave_progress'
 const title = { 'zh-CN': '波浪进度' }
 // 组件标题
@@ -21,7 +20,7 @@ const minHeight = 2
 const maxHeight = 7
 const WaveProgressWidgetDefine = new Widget({
   path,
-  configPagePath: '/widget/config/wave_progress?frame=true&transparent=false',
+  configPagePath: '/widget/config/wave_progress?frame=true&transparent=false&width=600&height=390',
   name,
   title,
   categories: ['time'],

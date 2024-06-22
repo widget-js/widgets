@@ -1,27 +1,15 @@
 <script lang="ts" setup>
-import {
-  computed,
-  nextTick,
-  onMounted,
-  ref,
-  watch,
-} from 'vue'
-import type { Dayjs } from 'dayjs'
+import {computed, nextTick, onMounted, ref, watch,} from 'vue'
+import type {Dayjs} from 'dayjs'
 import dayjs from 'dayjs'
-import {
-  TransitionPresets,
-  useInterval,
-  useTransition,
-} from '@vueuse/core'
-import {
-  Lunar,
-  LunarMonth,
-} from 'lunar-typescript'
+import {TransitionPresets, useInterval, useTransition,} from '@vueuse/core'
+import {Lunar, LunarMonth,} from 'lunar-typescript'
 import Color from 'color'
 import delay from 'lodash-es/delay'
 import floor from 'lodash-es/floor'
-import { useWidgetSize } from '@widget-js/vue3'
-import { ProgressType } from './model/WaveProgressData'
+import {useWidgetSize} from '@widget-js/vue3'
+import {ProgressType} from './model/WaveProgressData'
+import {LunarUtils} from '@/util/LunarUtils'
 
 const props = defineProps({
   locale: {
@@ -72,8 +60,7 @@ watch(() => props.progressType, () => {
   refresh()
 })
 const backgroundColors = computed(() => {
-  const hex = props.backgroundColor
-  let color = hex
+  let color = props.backgroundColor
   if (!color) {
     switch (props.progressType) {
       case ProgressType.today:
@@ -218,8 +205,8 @@ function getRatioValue(now: Dayjs, progressType: ProgressType): number {
         const monthDay = LunarMonth.fromYm(nowLunar.getYear(), nowLunar.getMonth())
         const firstDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), 1).getSolar()
         const endDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), monthDay!.getDayCount()).getSolar()
-        start = dayjs(firstDay.getCalendar())
-        end = dayjs(endDay.getCalendar()).endOf('day')
+        start = dayjs(LunarUtils.solarToDate(firstDay))
+        end = dayjs(LunarUtils.solarToDate(endDay)).endOf('day')
       }
       else {
         start = now.startOf('month')
@@ -232,8 +219,8 @@ function getRatioValue(now: Dayjs, progressType: ProgressType): number {
         const nowLunar = Lunar.fromDate(now.toDate())
         const firstDay = Lunar.fromYmd(nowLunar.getYear(), 1, 1).getSolar()
         const endDay = Lunar.fromYmd(nowLunar.getYear() + 1, 1, 1).getSolar()
-        end = dayjs(endDay.getCalendar())
-        start = dayjs(firstDay.getCalendar())
+        end = dayjs(LunarUtils.solarToDate(firstDay))
+        start = dayjs(LunarUtils.solarToDate(endDay))
       }
       else {
         start = now.startOf('year')
@@ -316,7 +303,7 @@ body {
   height: 100%;
   min-height: 5em;
   // padding: 0 0.38em 0.5em;
-  border-radius: 0.5em;
+  border-radius: var(--widget-border-radius);
   background-color: #ffffff;
   text-align: left;
   color: #494644;

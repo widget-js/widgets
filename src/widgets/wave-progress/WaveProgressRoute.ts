@@ -8,7 +8,7 @@ const WaveProgressRoute: RouteRecordRaw[] = [
     component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.wave_progress" */ './WaveProgressWidgetView.vue'),
   },
   {
-    path: WaveProgressWidgetDefine.configPagePath!,
+    path: WaveProgressWidgetDefine.configPagePath!.split('?')[0],
     name: `${WaveProgressWidgetDefine.name}.config`,
     component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.wave_progress.config" */ './WaveProgressConfigView.vue'),
   },

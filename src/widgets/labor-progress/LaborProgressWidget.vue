@@ -148,7 +148,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
-$progressHeight: 70px;
+$progressHeight: 30px;
 .container {
   user-select: none;
   display: flex;
@@ -162,7 +162,7 @@ $progressHeight: 70px;
   .progress-bar {
     position: relative;
     width: 80%;
-    max-height: 54px;
+    max-height: $progressHeight;
     display: flex;
     align-items: center;
 
@@ -204,14 +204,14 @@ $progressHeight: 70px;
 
     .progress-outline {
       box-sizing: border-box;
-      height: calc($progressHeight / 2);
-      border: 4px solid #422e26;
+      height: $progressHeight;
+      outline: 4px solid #422e26;
       border-radius: 39px;
       position: absolute;
       width: 100%;
 
       .progress {
-        height: calc($progressHeight / 2 - 6px);
+        height: $progressHeight;
         left: 0;
         width: 0;
         transition-property: width;

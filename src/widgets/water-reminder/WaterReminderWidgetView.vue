@@ -70,14 +70,16 @@ const {
   if (second >= widgetData.value.interval * 60) {
     lastReminderAt = dayjs()
     NotificationApi.reminder(
-      '喝水提醒',
-      '起来喝杯水吧！',
-      'tea-drink',
-      '关闭',
-      '喝一杯',
-      cancelBroadcast,
-      okBroadcast,
-      5000,
+      {
+        title: '喝水提醒',
+        message: '起来喝杯水吧！',
+        icon: 'tea-drink',
+        cancelButtonText: '关闭',
+        confirmButtonText: '喝一杯',
+        cancelBroadcast,
+        confirmBroadcast: okBroadcast,
+        duration: 5000,
+      },
     )
   }
 }, 10000)
@@ -102,4 +104,9 @@ onMounted(() => {
   </WidgetWrapper>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+*{
+  user-select: none;
+  -webkit-user-drag: none;
+}
+</style>
