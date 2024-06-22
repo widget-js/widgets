@@ -24,14 +24,6 @@ import '@/common/dayjs-extend'
 export default {
   name: 'LaborProgressWidget',
   props: {
-    backgroundColor: {
-      type: String,
-      default: 'white',
-    },
-    borderRadius: {
-      type: Number,
-      default: 22,
-    },
     startTime: { type: Date },
     endTime: { type: Date },
     enablePhoneReminder: {
@@ -130,11 +122,10 @@ export default {
 <template>
   <div
     class="container"
-    :style="{ backgroundColor, borderRadius: `${borderRadius}px` }"
     @mouseenter="mouseEnter"
   >
     <div class="progress-bar">
-      <div class="outline">
+      <div class="progress-outline">
         <div class="progress" :style="{ width: `${percent}%` }" />
         <div class="percent" :style="percentPosition">
           {{ percent }}%
@@ -157,11 +148,12 @@ export default {
 </template>
 
 <style scoped lang="scss">
-$progressHeight: 56px;
+$progressHeight: 70px;
 .container {
   user-select: none;
   display: flex;
-  background-color: black;
+  background-color: var(--widget-background-color);
+  border-radius: var(--widget-border-radius);
   justify-content: center;
   align-content: center;
   backdrop-filter: blur(10px);
@@ -205,20 +197,21 @@ $progressHeight: 56px;
       .second {
         left: 50px;
         top: 16px;
+        color: black;
         position: absolute;
       }
     }
 
-    .outline {
+    .progress-outline {
       box-sizing: border-box;
       height: calc($progressHeight / 2);
-      border: 2px solid #422e26;
+      border: 4px solid #422e26;
       border-radius: 39px;
       position: absolute;
       width: 100%;
 
       .progress {
-        height: calc($progressHeight / 2 - 2.2px);
+        height: calc($progressHeight / 2 - 6px);
         left: 0;
         width: 0;
         transition-property: width;
@@ -230,7 +223,7 @@ $progressHeight: 56px;
 
       .percent {
         position: absolute;
-        top: 0;
+        top: 3px;
         color: #453840;
         font-weight: bold;
       }

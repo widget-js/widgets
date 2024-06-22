@@ -84,41 +84,6 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.todo_list",
-      "title": {
-        "zh-CN": "待办事项"
-      },
-      "description": {
-        "zh-CN": "TODO待办事项"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 4,
-      "maxWidth": 8,
-      "webviewTag": false,
-      "maxHeight": 10,
-      "minWidth": 3,
-      "minHeight": 3,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/todo_list",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_todo_list.png",
-      "categories": [
-        "productivity"
-      ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/todo_list",
-      "routes": []
-    },
-    {
       "name": "cn.widgetjs.widgets.time_progress",
       "title": {
         "zh-CN": "时间进度"
@@ -151,6 +116,41 @@
       ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/time_progress",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.todo_list",
+      "title": {
+        "zh-CN": "待办事项"
+      },
+      "description": {
+        "zh-CN": "TODO待办事项"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 4,
+      "maxWidth": 8,
+      "webviewTag": false,
+      "maxHeight": 10,
+      "minWidth": 3,
+      "minHeight": 3,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/todo_list",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_todo_list.png",
+      "categories": [
+        "productivity"
+      ],
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/todo_list",
       "routes": []
     },
     {
@@ -217,7 +217,7 @@
       "backgroundThrottling": true,
       "previewImage": "/images/preview_photo.png",
       "categories": [
-        "fun"
+        "photo"
       ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/photo",
