@@ -78,8 +78,6 @@ pnpm serve
 
 | 默认组件包 |                                     https://github.com/widget-js/widgets                                      |
 |:-----:|:-------------------------------------------------------------------------------------------------------------:| 
-| 键盘演示  |                                 ![png](./public/images/preview_keystroke.png)                                 |
-| 喝水提醒  | <img style="border: 3px solid #c3c3c31f;border-radius: 12px" src="public/images/preview_water_reminder.png"/> |
 | 待办事项  |                                 ![image](public/images/preview_todo_list.png)                                 |
 | 轮播相册  |                                        ![image](screenshot/photo.png)                                         |
 | 生日列表  |                                ![gif](public/images/preview_birthday_list.png)                                |
@@ -112,6 +110,13 @@ https://github.com/rtugeek/ai
 |  2x2  | ![2x2](https://raw.githubusercontent.com/rtugeek/weather/master/public/preview_small.png)  | 
 |  4x2  | ![4x2](https://raw.githubusercontent.com/rtugeek/weather/master/public/preview_medium.png) | 
 |  4x4  | ![4x4](https://raw.githubusercontent.com/rtugeek/weather/master/public/preview_large.png)  |
+
+
+### 工具类组件包
+| 工具类组件包                                                                                                        | https://github.com/rtugeek/utilities                                                                          |
+|---------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------| 
+| 键盘演示  | ![png](./public/images/preview_keystroke.png)                                                                 |
+| 喝水提醒  | <img style="border: 3px solid #c3c3c31f;border-radius: 12px" src="public/images/preview_water_reminder.png"/> |
 
 
 

@@ -21,6 +21,7 @@ const WaterReminderWidget = new Widget({
   title,
   description,
   keywords,
+  disabled: true,
   lang: 'zh-CN',
   previewImage: '/images/preview_water_reminder.png',
   width: 2,

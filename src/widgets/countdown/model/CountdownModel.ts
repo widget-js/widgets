@@ -10,7 +10,5 @@ export class CountdownModel extends WidgetData {
 
   constructor(name: string, id?: string) {
     super(name, id)
-    this.theme.backgroundColor = '#FFF'
-    this.theme.primaryColor = '#FFC455'
   }
 }
