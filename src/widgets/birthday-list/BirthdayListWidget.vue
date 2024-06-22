@@ -80,9 +80,7 @@ export default {
 
 <template>
   <div
-    class="birthday-list-container" :style="{
-      backgroundColor: birthdayListData?.theme.backgroundColor,
-    }"
+    class="birthday-list-container"
   >
     <img class="image" src="./images/balloon.png">
     <div class="title">
@@ -146,7 +144,7 @@ body * {
 .birthday-list-container {
   padding: 24px;
   overflow: hidden;
-  background-color: #FB604B;
+  background-color: var(--widget-background-color);
   border-radius: 20px;
   position: relative;
   display: flex;
@@ -290,6 +288,7 @@ body * {
 
       .unit {
         display: block;
+        color: #47310A;
         background-color: #FADC98;
         font-size: 12px;
         height: 20px;

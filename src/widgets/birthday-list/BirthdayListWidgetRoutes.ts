@@ -8,7 +8,7 @@ const BirthdayListWidgetRoutes: RouteRecordRaw[] = [
     component: () => import(/* webpackChunkName: "cn.widgetjs.widgets.birthday_list" */ './BirthdayListWidgetView.vue'),
   },
   {
-    path: BirthdayListWidgetDefine.configPagePath!,
+    path: BirthdayListWidgetDefine.configPagePath!.split('?')[0],
     name: `${BirthdayListWidgetDefine.name}.config`,
     component: () =>
       import(/* webpackChunkName: "cn.widgetjs.widgets.birthday_list.config" */ './BirthdayListConfigView.vue'),

@@ -19,6 +19,5 @@ export default class BirthdayListData extends WidgetData {
 
   constructor() {
     super(BirthdayListWidgetDefine.name)
-    this.theme.backgroundColor = '#FB604B'
   }
 }
