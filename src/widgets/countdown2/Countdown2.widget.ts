@@ -25,6 +25,7 @@ const Countdown2WidgetDefine = new Widget({
   lang: 'zh-CN',
   width: 2,
   height: 2,
+  disabled: true,
   minWidth: 2,
   maxWidth: 4,
   minHeight: 2,

@@ -45,7 +45,42 @@
         "time"
       ],
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/wave_progress?frame=true&transparent=false",
+      "configPagePath": "/widget/config/wave_progress?frame=true&transparent=false&width=600&height=390",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.time_progress",
+      "title": {
+        "zh-CN": "时间进度"
+      },
+      "description": {
+        "zh-CN": "年、月、周、日进度剩余百分比"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 2,
+      "maxWidth": 4,
+      "webviewTag": false,
+      "maxHeight": 2,
+      "minWidth": 4,
+      "minHeight": 2,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/time_progress",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_time_progress.png",
+      "categories": [
+        "time"
+      ],
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/time_progress?frame=true&transparent=false&width=600&height=400",
       "routes": []
     },
     {
@@ -80,77 +115,7 @@
         "productivity"
       ],
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/todo_list?frame=true&transparent=false",
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.time_progress",
-      "title": {
-        "zh-CN": "时间进度"
-      },
-      "description": {
-        "zh-CN": "年、月、周、日进度剩余百分比"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 2,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 2,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/time_progress",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_time_progress.png",
-      "categories": [
-        "time"
-      ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/time_progress?frame=true&transparent=false",
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.sit_reminder",
-      "title": {
-        "zh-CN": "久坐提醒"
-      },
-      "description": {
-        "zh-CN": "设置间隔，定时提醒，适合长期久坐的人群"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 1,
-      "height": 1,
-      "maxWidth": 1,
-      "webviewTag": false,
-      "maxHeight": 1,
-      "minWidth": 1,
-      "minHeight": 1,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/sit_reminder",
-      "meta": {},
-      "backgroundThrottling": false,
-      "previewImage": "/images/preview_sit_reminder.png",
-      "categories": [
-        "utilities"
-      ],
-      "supportDeployMode": 65536,
-      "configPagePath": "/widget/config/sit_reminder?frame=true&transparent=false",
+      "configPagePath": "/widget/config/todo_list?frame=true&transparent=false&width=600&height=500",
       "routes": []
     },
     {
@@ -186,6 +151,41 @@
       ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/photo?frame=true&transparent=false",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.sit_reminder",
+      "title": {
+        "zh-CN": "久坐提醒"
+      },
+      "description": {
+        "zh-CN": "设置间隔，定时提醒，适合长期久坐的人群"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 1,
+      "height": 1,
+      "maxWidth": 1,
+      "webviewTag": false,
+      "maxHeight": 1,
+      "minWidth": 1,
+      "minHeight": 1,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/sit_reminder",
+      "meta": {},
+      "backgroundThrottling": false,
+      "previewImage": "/images/preview_sit_reminder.png",
+      "categories": [
+        "utilities"
+      ],
+      "supportDeployMode": 65536,
+      "configPagePath": "/widget/config/sit_reminder?frame=true&transparent=false",
       "routes": []
     },
     {
