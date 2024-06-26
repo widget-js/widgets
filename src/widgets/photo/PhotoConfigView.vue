@@ -2,7 +2,7 @@
 import {
   WidgetConfigOption,
   WidgetEditDialog,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import {
   BrowserWindowApi,
@@ -22,7 +22,7 @@ const {
   widgetData,
   widgetParams,
   save,
-} = useWidget(PhotoData, {
+} = useWidgetData(PhotoData, {
   defaultData,
   onDataLoaded: () => {
     directory.value = widgetData.value.directory

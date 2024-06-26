@@ -1,4 +1,4 @@
-import { useWidget } from '@widget-js/vue3'
+import { useWidgetData } from '@widget-js/vue3'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import {
@@ -29,7 +29,7 @@ function useSitReminder() {
     const url = await WidgetPackageApi.getEntryUrl('cn.widgetjs.widgets')
     breakUrl = `${url}#/widget/sit_reminder/break?win_fullscreen=true&win_always_on_top=true&duration=${minute * 60}`
   }
-  const { widgetData: sitReminderData } = useWidget<SitReminder>(SitReminder, {
+  const { widgetData: sitReminderData } = useWidgetData<SitReminder>(SitReminder, {
     defaultData: sitReminder,
     loadDataByWidgetName: true,
     widgetName: sitReminder.name,

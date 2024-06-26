@@ -17,7 +17,7 @@ import {
 import floor from 'lodash-es/floor'
 import {
   WidgetWrapper,
-  useWidget,
+  useWidgetData,
   useWidgetSize,
 } from '@widget-js/vue3'
 import { WidgetData } from '@widget-js/core'
@@ -35,7 +35,7 @@ const props = defineProps({
     required: false,
   },
 })
-const { widgetData } = useWidget(WidgetData, { loadDataByWidgetName: true })
+const { widgetData } = useWidgetData(WidgetData, { loadDataByWidgetName: true })
 dayjs.locale('zh-cn')
 const progressBackground = computed(() => {
   return new Color(widgetData.value.theme.color).alpha(0.8).hexa()

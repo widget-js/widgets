@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { computed, reactive } from 'vue'
-import { useWidget } from '@widget-js/vue3'
+import { useWidgetData } from '@widget-js/vue3'
 import localforage from 'localforage'
 import { WidgetDataApi } from '@widget-js/core'
 import {
@@ -49,7 +49,7 @@ export const useTodoStore = defineStore('todo-store', () => {
 
   loadTodo()
 
-  const { widgetData } = useWidget(TodoListData, {
+  const { widgetData } = useWidgetData(TodoListData, {
     loadDataByWidgetName: true,
     onDataLoaded: () => {
       // 迁移旧版本数据

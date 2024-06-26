@@ -1,6 +1,6 @@
 <script lang="ts">
 import dayjs from 'dayjs'
-import { WidgetConfigOption, WidgetEditDialog, useWidget } from '@widget-js/vue3'
+import { WidgetConfigOption, WidgetEditDialog, useWidgetData } from '@widget-js/vue3'
 import { BrowserWindowApi, NotificationApi, WidgetApi } from '@widget-js/core'
 import { ref } from 'vue'
 import { Headset } from '@icon-park/vue-next'
@@ -30,7 +30,7 @@ export default {
       widgetData,
       widgetParams,
       save,
-    } = useWidget(PhoneReminderData, {
+    } = useWidgetData(PhoneReminderData, {
       defaultData: phoneReminderData,
       widgetName: PhoneReminderWidgetDefine.name,
       loadDataByWidgetName: true,

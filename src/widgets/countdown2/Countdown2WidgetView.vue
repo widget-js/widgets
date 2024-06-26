@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {
   WidgetWrapper,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import { DefaultWidgetTheme, WidgetTheme } from '@widget-js/core'
 import Countdown2WidgetDefine from './Countdown2.widget'
@@ -12,7 +12,7 @@ import { DateType } from '@/countdown/Event'
 const defaultData = new CountdownModel(Countdown2WidgetDefine.name)
 const {
   widgetData,
-} = useWidget(CountdownModel, { defaultData, defaultTheme: new WidgetTheme({
+} = useWidgetData(CountdownModel, { defaultData, defaultTheme: new WidgetTheme({
   ...DefaultWidgetTheme,
   fontSize: '72px',
   primaryColor: 'rgb(0,149,255)',

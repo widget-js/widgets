@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {
   WidgetWrapper,
-  useWidget,
+  useWidgetData,
   useWidgetSize,
 } from '@widget-js/vue3'
 import shuffle from 'lodash-es/shuffle'
@@ -17,7 +17,7 @@ const showGuide = ref(false)
 const {
   widgetData,
   widgetParams,
-} = useWidget(PhotoData, {
+} = useWidgetData(PhotoData, {
   onDataLoaded: (data) => {
     if (data && data.directory) {
       FileApi.readDirectory(data.directory, { ignoreDir: true, traverseDir: false }).then((rootFile) => {

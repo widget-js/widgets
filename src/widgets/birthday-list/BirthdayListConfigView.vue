@@ -7,7 +7,7 @@ import {
 import {
   WidgetConfigOption,
   WidgetEditDialog,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import type { BirthdayPeople } from '@/widgets/birthday-list/model/BirthdayListData'
 import BirthdayListData from '@/widgets/birthday-list/model/BirthdayListData'
@@ -27,7 +27,7 @@ export default {
     const {
       widgetData,
       widgetParams,
-    } = useWidget(BirthdayListData, { loadDataByWidgetName: true })
+    } = useWidgetData(BirthdayListData, { loadDataByWidgetName: true })
     return {
       widgetData,
       widgetParams,

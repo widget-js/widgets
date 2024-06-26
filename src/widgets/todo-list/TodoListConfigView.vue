@@ -2,7 +2,7 @@
 import {
   WidgetConfigOption,
   WidgetEditDialog,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import {
   WidgetData,
@@ -16,7 +16,7 @@ export default {
     const {
       widgetData,
       widgetParams,
-    } = useWidget(WidgetData, { loadDataByWidgetName: true })
+    } = useWidgetData(WidgetData, { loadDataByWidgetName: true })
 
     // 修改成需要设置组件参数配置
     const widgetConfigOption = new WidgetConfigOption({

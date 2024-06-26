@@ -2,7 +2,7 @@
 import {
   WidgetConfigOption,
   WidgetEditDialog,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import { ref } from 'vue'
 import dayjs from 'dayjs'
@@ -32,7 +32,7 @@ export default {
     const {
       widgetData,
       widgetParams,
-    } = useWidget(CountdownModel, {
+    } = useWidgetData(CountdownModel, {
       defaultData,
       onDataLoaded: (data) => {
         if (data) {

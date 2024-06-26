@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {
   WidgetWrapper,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import { ref } from 'vue'
 import { DefaultWidgetTheme, WidgetTheme } from '@widget-js/core'
@@ -13,7 +13,7 @@ const defaultData = new CountdownModel(CountdownWidgetDefine.name)
 const {
   widgetData,
   widgetParams,
-} = useWidget(CountdownModel, { defaultData, defaultTheme: new WidgetTheme({
+} = useWidgetData(CountdownModel, { defaultData, defaultTheme: new WidgetTheme({
   ...DefaultWidgetTheme,
   backgroundColor: '#FFC455',
 }) })

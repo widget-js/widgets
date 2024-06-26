@@ -4,7 +4,6 @@ import {
   BrowserWindowApi,
   ElectronUtils,
   WidgetApi,
-  WidgetData,
 } from '@widget-js/core'
 import {
   useNotification,
@@ -32,7 +31,7 @@ export default {
   name: 'DynamicIslandWidgetView',
   components: { DynamicIslandWidget },
   setup() {
-    const { widgetParams } = useWidget(WidgetData)
+    const { widgetParams } = useWidget()
     const dynamicIslandWidget = ref()
     const state = ref(NotificationState.HIDE)
     const defaultNotification = new AppNotification({

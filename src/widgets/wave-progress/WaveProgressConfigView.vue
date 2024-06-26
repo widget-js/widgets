@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {
   WidgetConfigOption,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import {
   ProgressType,
@@ -12,7 +12,7 @@ const {
   widgetData,
   widgetParams,
   save,
-} = useWidget(WaveProgressData)
+} = useWidgetData(WaveProgressData)
 const widgetConfigOption = new WidgetConfigOption({
   custom: true,
   theme: {

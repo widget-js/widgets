@@ -2,7 +2,7 @@
 import {
   WidgetConfigOption,
   WidgetEditDialog,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import { BrowserWindowApi } from '@widget-js/core'
 import { ref } from 'vue'
@@ -23,7 +23,7 @@ const {
   widgetData,
   widgetParams,
   save,
-} = useWidget(WaterReminderModel, {
+} = useWidgetData(WaterReminderModel, {
   defaultData,
   loadDataByWidgetName: true,
   onDataLoaded: (data) => {

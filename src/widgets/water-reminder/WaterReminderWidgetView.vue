@@ -2,7 +2,7 @@
 import {
   WidgetWrapper,
   useAppBroadcast,
-  useWidget,
+  useWidgetData,
   useWidgetSize,
 } from '@widget-js/vue3'
 import {
@@ -28,7 +28,7 @@ const defaultData = new WaterReminderModel()
 defaultData.theme.backgroundColor = '#fff'
 defaultData.theme.color = '#092239'
 defaultData.theme.primaryColor = '#2596FF'
-const { widgetData } = useWidget(WaterReminderModel, {
+const { widgetData } = useWidgetData(WaterReminderModel, {
   defaultData,
   onDataLoaded: (data) => {
     cup.value = data?.getTodayHistory() ?? 0

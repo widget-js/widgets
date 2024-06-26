@@ -9,14 +9,14 @@ import {
   ref,
 } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
-import { useAppBroadcast, useWidget } from '@widget-js/vue3'
+import { useAppBroadcast, useWidgetData } from '@widget-js/vue3'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import { PhoneReminderData } from '@/widgets/phone-reminder/model/PhoneReminder'
 
 BrowserWindowApi.hide()
 dayjs.extend(duration)
-const { widgetData } = useWidget(PhoneReminderData, { loadDataByWidgetName: true })
+const { widgetData } = useWidgetData(PhoneReminderData, { loadDataByWidgetName: true })
 const now = ref(dayjs())
 const enableReminders = computed(() => {
   const weekday = now.value.day()

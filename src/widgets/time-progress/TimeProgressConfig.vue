@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { WidgetConfigOption, WidgetEditDialog, useWidget } from '@widget-js/vue3'
+import { WidgetConfigOption, WidgetEditDialog, useWidgetData } from '@widget-js/vue3'
 import { WidgetData } from '@widget-js/core'
 
 const {
   widgetData,
   widgetParams,
   save,
-} = useWidget(WidgetData, { loadDataByWidgetName: true })
+} = useWidgetData(WidgetData, { loadDataByWidgetName: true })
 
 const widgetConfigOption = new WidgetConfigOption({
   custom: false,

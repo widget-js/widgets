@@ -2,7 +2,7 @@
 import {
   WidgetWrapper,
   useAppBroadcast,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import { ref } from 'vue'
 import { SystemApiEvent } from '@widget-js/core'
@@ -11,7 +11,7 @@ import LaborProgressData from '@/widgets/labor-progress/model/LaborProgressData'
 
 const startTime = ref<Date>()
 const endTime = ref<Date>()
-const { widgetData } = useWidget(LaborProgressData, {
+const { widgetData } = useWidgetData(LaborProgressData, {
   onDataLoaded: (data) => {
     if (data) {
       startTime.value = data.getStartTime()

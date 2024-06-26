@@ -2,7 +2,7 @@
 import {
   WidgetConfigOption,
   WidgetEditDialog,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import { SitReminder } from '@/widgets/sit-reminder/model/SitReminder'
 
@@ -10,7 +10,7 @@ const {
   widgetData,
   widgetParams,
   save,
-} = useWidget(SitReminder, { loadDataByWidgetName: true })
+} = useWidgetData(SitReminder, { loadDataByWidgetName: true })
 
 const widgetConfigOption = new WidgetConfigOption({
   custom: true,

@@ -2,7 +2,7 @@
 import {
   WidgetConfigOption,
   WidgetEditDialog,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import { ref } from 'vue'
 import dayjs from 'dayjs'
@@ -33,7 +33,7 @@ export default {
     const defaultData = new CountdownModel(CountdownWidgetDefine.name)
     const {
       widgetData,
-    } = useWidget(CountdownModel, {
+    } = useWidgetData(CountdownModel, {
       defaultData,
       defaultTheme: DefaultWidgetTheme.copy({
         backgroundColor: '#FFC455',

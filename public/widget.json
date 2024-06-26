@@ -49,41 +49,6 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.time_progress",
-      "title": {
-        "zh-CN": "时间进度"
-      },
-      "description": {
-        "zh-CN": "年、月、周、日进度剩余百分比"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 2,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 4,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/time_progress",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_time_progress.png",
-      "categories": [
-        "time"
-      ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/time_progress?frame=true&transparent=false&width=600&height=400",
-      "routes": []
-    },
-    {
       "name": "cn.widgetjs.widgets.todo_list",
       "title": {
         "zh-CN": "待办事项"
@@ -119,12 +84,12 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.photo",
+      "name": "cn.widgetjs.widgets.time_progress",
       "title": {
-        "zh-CN": "轮播相册"
+        "zh-CN": "时间进度"
       },
       "description": {
-        "zh-CN": "轮播文件夹内的图片"
+        "zh-CN": "年、月、周、日进度剩余百分比"
       },
       "keywords": [
         "recommend"
@@ -132,25 +97,25 @@
       "security": false,
       "permissions": [],
       "lang": "zh-CN",
-      "width": 2,
+      "width": 4,
       "height": 2,
-      "maxWidth": 6,
+      "maxWidth": 4,
       "webviewTag": false,
-      "maxHeight": 6,
-      "minWidth": 1,
-      "minHeight": 1,
+      "maxHeight": 2,
+      "minWidth": 4,
+      "minHeight": 2,
       "movable": true,
       "singleton": false,
       "resizable": true,
-      "path": "/widget/photo",
+      "path": "/widget/time_progress",
       "meta": {},
       "backgroundThrottling": true,
-      "previewImage": "/images/preview_photo.png",
+      "previewImage": "/images/preview_time_progress.png",
       "categories": [
-        "photo"
+        "time"
       ],
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/photo?frame=true&transparent=false",
+      "configPagePath": "/widget/config/time_progress?frame=true&transparent=false&width=600&height=400",
       "routes": []
     },
     {
@@ -186,6 +151,41 @@
       ],
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/sit_reminder?frame=true&transparent=false",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.photo",
+      "title": {
+        "zh-CN": "轮播相册"
+      },
+      "description": {
+        "zh-CN": "轮播文件夹内的图片"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 2,
+      "height": 2,
+      "maxWidth": 6,
+      "webviewTag": false,
+      "maxHeight": 6,
+      "minWidth": 1,
+      "minHeight": 1,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/photo",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_photo.png",
+      "categories": [
+        "photo"
+      ],
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/photo?frame=true&transparent=false",
       "routes": []
     },
     {
@@ -291,41 +291,6 @@
       ],
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/dynamic_island?frame=true&transparent=false",
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.countdown2",
-      "title": {
-        "zh-CN": "倒计时"
-      },
-      "description": {
-        "zh-CN": "日历样式的倒计时组件"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 2,
-      "height": 2,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 4,
-      "minWidth": 2,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/countdown2",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_countdown2.png",
-      "categories": [
-        "countdown"
-      ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/countdown2?frame=true&transparent=false",
       "routes": []
     },
     {

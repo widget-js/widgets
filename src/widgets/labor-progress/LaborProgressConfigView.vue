@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import {
   WidgetConfigOption,
   WidgetEditDialog,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import { BrowserWindowApi } from '@widget-js/core'
 import LaborProgressData from '@/widgets/labor-progress/model/LaborProgressData'
@@ -30,7 +30,7 @@ export default {
       widgetData,
       widgetParams,
       save,
-    } = useWidget(LaborProgressData, {
+    } = useWidgetData(LaborProgressData, {
       onDataLoaded: (data) => {
         if (data) {
           startTime.value = data.getStartTime()

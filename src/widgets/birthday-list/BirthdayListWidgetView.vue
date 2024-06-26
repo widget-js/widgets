@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {
   WidgetWrapper,
-  useWidget,
+  useWidgetData,
 } from '@widget-js/vue3'
 import {
   DefaultWidgetTheme,
@@ -14,7 +14,7 @@ import BirthdayListData from '@/widgets/birthday-list/model/BirthdayListData'
 const {
   widgetData,
   widgetParams,
-} = useWidget(BirthdayListData, { loadDataByWidgetName: true, defaultTheme: new WidgetTheme({
+} = useWidgetData(BirthdayListData, { loadDataByWidgetName: true, defaultTheme: new WidgetTheme({
   ...DefaultWidgetTheme,
   backgroundColor: '#FB604B',
 }) })
