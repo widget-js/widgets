@@ -6,7 +6,6 @@ import {
 import {
   DefaultWidgetTheme,
   WidgetApi,
-  WidgetTheme,
 } from '@widget-js/core'
 import BirthdayListWidget from './BirthdayListWidget.vue'
 import BirthdayListData from '@/widgets/birthday-list/model/BirthdayListData'
@@ -14,8 +13,8 @@ import BirthdayListData from '@/widgets/birthday-list/model/BirthdayListData'
 const {
   widgetData,
   widgetParams,
-} = useWidgetData(BirthdayListData, { loadDataByWidgetName: true, defaultTheme: new WidgetTheme({
-  ...DefaultWidgetTheme,
+} = useWidgetData(BirthdayListData, { loadDataByWidgetName: true, defaultTheme: DefaultWidgetTheme.copy({
+  useGlobalTheme: false,
   backgroundColor: '#FB604B',
 }) })
 
