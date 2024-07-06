@@ -79,7 +79,6 @@ pnpm serve
 | 默认组件包 |                                     https://github.com/widget-js/widgets                                     |
 |:-----:|:------------------------------------------------------------------------------------------------------------:| 
 | 待办事项  |                                ![image](public/images/preview_todo_list.png)                                 |
-| 轮播相册  |                                        ![image](screenshot/photo.png)                                        |
 | 生日列表  |                               ![gif](public/images/preview_birthday_list.png)                                |
 | 倒计时1  |                                 ![gif](public/images/preview_countdown.png)                                  |
 | 倒计时2  |                                 ![gif](public/images/preview_countdown2.png)                                 |
@@ -121,10 +120,11 @@ https://github.com/rtugeek/ai
 
 
 ### 热点组件包
-|热点组件包|https://github.com/widget-js/hotspot|
-|-------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------| 
-| ![bilibili](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/bilibili_hot_search.png) | ![weibo.png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/weibo_hot_search.png)  |
-| ![douyin](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_douyin.png) | ![zhihu.png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_zhihu.png)  |
+|                                                        热点组件包                                                         |https://github.com/widget-js/hotspot|
+|:--------------------------------------------------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------------| 
+|    ![bilibili](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/bilibili_hot_search.png)     | ![weibo.png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/weibo_hot_search.png)  |
+|        ![douyin](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_douyin.png)        | ![zhihu.png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_zhihu.png)  |
+|  ![douyin](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_bangumi.png)  <br/>追番助手  |   |
 
 ### 时钟组件包
 
@@ -134,6 +134,18 @@ https://github.com/rtugeek/ai
 | ![Glitch Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_glitch_clock.png)  <br/>故障时钟 | ![Micky Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_micky_clock.png)  <br/>米奇时钟 |
 
 
+### 相册组件包
 
+|                                                   相册组件包                                                    |                                            https://github.com/rtugeek/photo                                             |
+|:----------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------:| 
+| ![大头贴](https://raw.githubusercontent.com/rtugeek/photo/master/public/images/preview_sticker.png) <br/>大头贴 |       ![Clock](https://raw.githubusercontent.com/rtugeek/photo/master/public/images/preview_photo.png)  <br/>轮播相册       |
+
+
+
+### 趣味组件包
+
+|                                                    趣味组件包                                                     |                                       https://github.com/rtugeek/fun                                        |
+|:------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------:| 
+| ![电子木鱼](https://raw.githubusercontent.com/rtugeek/fun/master/public/images/preview_wooden_fish.png) <br/>电子木鱼 ||
 
 

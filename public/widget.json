@@ -49,41 +49,6 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.time_progress",
-      "title": {
-        "zh-CN": "时间进度"
-      },
-      "description": {
-        "zh-CN": "年、月、周、日进度剩余百分比"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 2,
-      "maxWidth": 4,
-      "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 4,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/time_progress",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_time_progress.png",
-      "categories": [
-        "time"
-      ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/time_progress?frame=true&transparent=false&width=600&height=400",
-      "routes": []
-    },
-    {
       "name": "cn.widgetjs.widgets.todo_list",
       "title": {
         "zh-CN": "待办事项"
@@ -119,6 +84,41 @@
       "routes": []
     },
     {
+      "name": "cn.widgetjs.widgets.time_progress",
+      "title": {
+        "zh-CN": "时间进度"
+      },
+      "description": {
+        "zh-CN": "年、月、周、日进度剩余百分比"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 2,
+      "maxWidth": 4,
+      "webviewTag": false,
+      "maxHeight": 2,
+      "minWidth": 4,
+      "minHeight": 2,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/time_progress",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_time_progress.png",
+      "categories": [
+        "time"
+      ],
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/time_progress?frame=true&transparent=false&width=600&height=400",
+      "routes": []
+    },
+    {
       "name": "cn.widgetjs.widgets.sit_reminder",
       "title": {
         "zh-CN": "久坐提醒"
@@ -151,41 +151,6 @@
       ],
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/sit_reminder?frame=true&transparent=false",
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.photo",
-      "title": {
-        "zh-CN": "轮播相册"
-      },
-      "description": {
-        "zh-CN": "轮播文件夹内的图片"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 2,
-      "height": 2,
-      "maxWidth": 6,
-      "webviewTag": false,
-      "maxHeight": 6,
-      "minWidth": 1,
-      "minHeight": 1,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/photo",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_photo.png",
-      "categories": [
-        "photo"
-      ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/photo?frame=true&transparent=false",
       "routes": []
     },
     {

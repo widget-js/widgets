@@ -19,6 +19,7 @@ const PhotoWidgetDefine = new Widget({
   path,
   name,
   title,
+  disabled: true,
   description,
   keywords,
   lang: 'zh-CN',
