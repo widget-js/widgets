@@ -15,7 +15,7 @@ const {
   widgetParams,
 } = useWidgetData(CountdownModel, { defaultData, defaultTheme: DefaultWidgetTheme.copy({
   useGlobalTheme: false,
-  backgroundColor: '#FFC455',
+  backgroundColor: 'rgba(255,196,85,0.29)',
 }) })
 const fontSize = ref(54)
 const widthPx = widgetParams.widthPx ?? 0

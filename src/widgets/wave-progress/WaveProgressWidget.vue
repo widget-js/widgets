@@ -263,7 +263,7 @@ defineExpose({ refresh })
   <div
     ref="containerRef"
     class="wave-progress-container"
-    :style="{ fontSize, backgroundColor: backgroundColors[0], height: `${height}px`, width: `${width}px`, borderRadius: `${$props.extra?.borderRadius}px` }"
+    :style="{ fontSize, height: `${height}px`, width: `${width}px`, borderRadius: `${$props.extra?.borderRadius}px` }"
   >
     <div class="tips">
       <div class="title">
@@ -304,7 +304,6 @@ body {
   min-height: 5em;
   // padding: 0 0.38em 0.5em;
   border-radius: var(--widget-border-radius);
-  background-color: #ffffff;
   text-align: left;
   color: #494644;
 

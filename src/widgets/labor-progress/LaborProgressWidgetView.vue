@@ -8,6 +8,7 @@ import { ref } from 'vue'
 import { SystemApiEvent } from '@widget-js/core'
 import LaborProgressWidget from './LaborProgressWidget.vue'
 import LaborProgressData from '@/widgets/labor-progress/model/LaborProgressData'
+import WidgetBackground from '@/widgets/todo-list/WidgetBackground.vue'
 
 const startTime = ref<Date>()
 const endTime = ref<Date>()

@@ -14,41 +14,6 @@
   "url": "",
   "widgets": [
     {
-      "name": "cn.widgetjs.widgets.wave_progress",
-      "title": {
-        "zh-CN": "波浪进度"
-      },
-      "description": {
-        "zh-CN": "用波浪显示事件进度"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 1,
-      "height": 2,
-      "maxWidth": 3,
-      "webviewTag": false,
-      "maxHeight": 7,
-      "minWidth": 1,
-      "minHeight": 2,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/wave_progress",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_wave_progress.png",
-      "categories": [
-        "time"
-      ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/wave_progress?frame=true&transparent=false&width=600&height=390",
-      "routes": []
-    },
-    {
       "name": "cn.widgetjs.widgets.todo_list",
       "title": {
         "zh-CN": "待办事项"
@@ -151,6 +116,41 @@
       ],
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/sit_reminder?frame=true&transparent=false",
+      "routes": []
+    },
+    {
+      "name": "cn.widgetjs.widgets.wave_progress",
+      "title": {
+        "zh-CN": "波浪进度"
+      },
+      "description": {
+        "zh-CN": "用波浪显示事件进度"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 1,
+      "height": 2,
+      "maxWidth": 3,
+      "webviewTag": false,
+      "maxHeight": 7,
+      "minWidth": 1,
+      "minHeight": 2,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/wave_progress",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_wave_progress.png",
+      "categories": [
+        "time"
+      ],
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/wave_progress?frame=true&transparent=false&width=600&height=390",
       "routes": []
     },
     {

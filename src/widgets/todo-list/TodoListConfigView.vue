@@ -23,6 +23,7 @@ export default {
       custom: false,
       theme: {
         backgroundColor: true,
+        backgroundBorderColor: true,
         borderRadius: true,
         color: true,
         dividerColor: true,

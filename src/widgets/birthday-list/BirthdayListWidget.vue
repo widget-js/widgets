@@ -144,8 +144,6 @@ body * {
 .birthday-list-container {
   padding: 24px;
   overflow: hidden;
-  background-color: var(--widget-background-color);
-  border-radius: 20px;
   position: relative;
   display: flex;
   flex-flow: column;

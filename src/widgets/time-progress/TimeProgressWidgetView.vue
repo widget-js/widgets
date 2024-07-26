@@ -22,6 +22,7 @@ import {
 } from '@widget-js/vue3'
 import { WidgetData } from '@widget-js/core'
 import Color from 'color'
+import WidgetBackground from '@/widgets/todo-list/WidgetBackground.vue'
 
 const props = defineProps({
   locale: {
@@ -215,11 +216,9 @@ $transition-duration: 125ms;
   font-size: 21px;
   position: relative;
   padding: 0 0.38em 0.5em;
-  border-radius: var(--widget-border-radius);
   color: var(--widget-color);
-  background-color: var(--widget-background-color);
   text-align: left;
-
+  box-sizing: border-box;
   .header {
     position: relative;
     height: 1.71em;

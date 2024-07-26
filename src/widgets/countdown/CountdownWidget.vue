@@ -105,7 +105,7 @@ export default {
     }
 
     .info {
-      position: absolute;
+      position: relative;
       padding: 8px;
       width: 100%;
       height: 100%;

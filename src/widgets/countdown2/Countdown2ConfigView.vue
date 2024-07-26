@@ -47,8 +47,6 @@ export default {
       custom: true,
       theme: {
         primaryColor: true,
-        backgroundColor: true,
-        borderRadius: true,
         fontSize: [14, 100],
       },
     })
