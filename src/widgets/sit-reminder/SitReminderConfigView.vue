@@ -14,6 +14,7 @@ const {
 
 const widgetConfigOption = new WidgetConfigOption({
   custom: true,
+  showFooter: true,
   theme: {
     backgroundColor: false,
     borderRadius: false,

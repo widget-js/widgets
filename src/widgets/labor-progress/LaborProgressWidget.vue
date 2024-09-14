@@ -152,8 +152,7 @@ $progressHeight: 30px;
 .container {
   user-select: none;
   display: flex;
-  background-color: var(--widget-background-color);
-  border-radius: var(--widget-border-radius);
+  height: 100%;
   justify-content: center;
   align-content: center;
   backdrop-filter: blur(10px);

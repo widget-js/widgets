@@ -19,6 +19,7 @@ export default {
     BrowserWindowApi.setSize(1100, 500)
     BrowserWindowApi.center()
     const widgetConfigOption = new WidgetConfigOption({
+      showFooter: true,
       theme: {
         backgroundColor: true,
         borderRadius: false,

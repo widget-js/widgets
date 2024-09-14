@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { useElementSize } from '@vueuse/core'
 import { AddOne, ArrowCircleLeft, History } from '@icon-park/vue-next'
+import { useWidgetSize } from '@widget-js/vue3'
 import type {
   Todo,
   TodoUpdate,
@@ -19,7 +19,7 @@ const todoStore = useTodoStore()
 const root = ref<HTMLElement>()
 
 const editBox = ref<InstanceType<typeof EditBox>>()
-const { height } = useElementSize(root)
+const { height } = useWidgetSize()
 
 function edit(todo: Todo) {
   editBox.value!.setTodo(todo)
@@ -67,8 +67,6 @@ function saveTodo(data: TodoUpdate) {
 
 <style scoped lang="scss">
 .todo-list-widget {
-  background-color: var(--widget-background-color);
-  border-radius: var(--widget-border-radius);
   font-weight: bold;
 
   .header {

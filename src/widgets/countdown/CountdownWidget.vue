@@ -70,6 +70,7 @@ export default {
   flex-direction: column;
   padding: 8px 16px;
   align-items: center;
+  height: 100%;
   background-color: var(--widget-background-color);
   --days-color: color-mix(in srgb, var(--widget-background-color) 10%, black 70%);
   --card-shadow-color: color-mix(in srgb, var(--widget-background-color) 100%, white 80%);

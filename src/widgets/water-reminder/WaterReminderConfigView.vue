@@ -34,6 +34,7 @@ const {
 // 修改成需要设置组件参数配置
 const widgetConfigOption = new WidgetConfigOption({
   custom: true,
+  showFooter: true,
   theme: {
     backgroundColor: true,
     borderRadius: false,

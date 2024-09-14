@@ -44,6 +44,7 @@ export default {
 
     // 修改成需要设置组件参数配置
     const widgetConfigOption = new WidgetConfigOption({
+      showFooter: true,
       custom: true,
       theme: {
         primaryColor: true,

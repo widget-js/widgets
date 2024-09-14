@@ -2,7 +2,7 @@
 import dayjs from 'dayjs'
 import { WidgetConfigOption, WidgetEditDialog, useWidgetData } from '@widget-js/vue3'
 import { BrowserWindowApi, NotificationApi, WidgetApi } from '@widget-js/core'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { Headset } from '@icon-park/vue-next'
 import consola from 'consola'
 import type { PhoneReminder } from '@/widgets/phone-reminder/model/PhoneReminder'
@@ -36,10 +36,11 @@ export default {
       loadDataByWidgetName: true,
     })
 
-    const widgetConfigOption = new WidgetConfigOption({
+    const widgetConfigOption = reactive(new WidgetConfigOption({
       custom: true,
-    })
-
+      showFooter: true,
+    }),
+    )
     const showTimePicker = ref(false)
     const widgetUrl = ref('')
     const time = ref(new Date())
@@ -81,7 +82,6 @@ export default {
 
 <template>
   <WidgetEditDialog
-    id="test"
     v-model="widgetData"
     :widget-params="widgetParams"
     :option="widgetConfigOption"

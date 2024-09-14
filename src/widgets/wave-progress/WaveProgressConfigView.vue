@@ -15,6 +15,7 @@ const {
 } = useWidgetData(WaveProgressData)
 const widgetConfigOption = new WidgetConfigOption({
   custom: true,
+  showFooter: true,
   theme: {
     backgroundColor: true,
     borderRadius: true,

@@ -10,6 +10,7 @@ const {
 
 const widgetConfigOption = new WidgetConfigOption({
   custom: false,
+  showFooter: true,
   theme: {
     backgroundColor: true,
     color: true,
