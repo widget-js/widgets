@@ -155,7 +155,6 @@ $progressHeight: 30px;
   height: 100%;
   justify-content: center;
   align-content: center;
-  backdrop-filter: blur(10px);
   align-items: center;
 
   .progress-bar {

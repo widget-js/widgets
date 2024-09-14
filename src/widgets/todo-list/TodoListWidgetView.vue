@@ -67,8 +67,8 @@ function saveTodo(data: TodoUpdate) {
 
 <style scoped lang="scss">
 .todo-list-widget {
+  box-sizing: border-box;
   font-weight: bold;
-
   .header {
     align-items: center;
     padding: 8px 16px;

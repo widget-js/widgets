@@ -24,6 +24,7 @@ export default {
       showFooter: true,
       theme: {
         backgroundColor: true,
+        backgroundBorderColor: true,
         borderRadius: true,
         color: true,
         dividerColor: true,

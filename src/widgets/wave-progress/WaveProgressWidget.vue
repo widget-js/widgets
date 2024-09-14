@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import {computed, nextTick, onMounted, ref, watch,} from 'vue'
-import type {Dayjs} from 'dayjs'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import type { Dayjs } from 'dayjs'
 import dayjs from 'dayjs'
-import {TransitionPresets, useInterval, useTransition,} from '@vueuse/core'
-import {Lunar, LunarMonth,} from 'lunar-typescript'
+import { TransitionPresets, useInterval, useTransition } from '@vueuse/core'
+import { Lunar, LunarMonth } from 'lunar-typescript'
 import Color from 'color'
 import delay from 'lodash-es/delay'
 import floor from 'lodash-es/floor'
-import {useWidgetSize} from '@widget-js/vue3'
-import {ProgressType} from './model/WaveProgressData'
-import {LunarUtils} from '@/util/LunarUtils'
+import { useWidgetSize } from '@widget-js/vue3'
+import { ProgressType } from './model/WaveProgressData'
+import { LunarUtils } from '@/util/LunarUtils'
 
 const props = defineProps({
   locale: {
@@ -263,7 +263,7 @@ defineExpose({ refresh })
   <div
     ref="containerRef"
     class="wave-progress-container"
-    :style="{ fontSize, backgroundColor: backgroundColors[0], height: `${height}px`, width: `${width}px`, borderRadius: `${$props.extra?.borderRadius}px` }"
+    :style="{ fontSize, height: `${height}px`, width: `${width}px`, borderRadius: `${$props.extra?.borderRadius}px` }"
   >
     <div class="tips">
       <div class="title">
@@ -304,7 +304,6 @@ body {
   min-height: 5em;
   // padding: 0 0.38em 0.5em;
   border-radius: var(--widget-border-radius);
-  background-color: #ffffff;
   text-align: left;
   color: #494644;
 

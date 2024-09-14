@@ -24,6 +24,7 @@ export default {
         backgroundColor: true,
         borderRadius: false,
       },
+      showFooter: true,
     })
     const {
       widgetData,

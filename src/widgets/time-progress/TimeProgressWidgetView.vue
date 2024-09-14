@@ -215,11 +215,9 @@ $transition-duration: 125ms;
   font-size: 21px;
   position: relative;
   padding: 0 0.38em 0.5em;
-  border-radius: var(--widget-border-radius);
   color: var(--widget-color);
-  background-color: var(--widget-background-color);
   text-align: left;
-
+  box-sizing: border-box;
   .header {
     position: relative;
     height: 1.71em;
