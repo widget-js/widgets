@@ -14,12 +14,12 @@
   "url": "",
   "widgets": [
     {
-      "name": "cn.widgetjs.widgets.todo_list",
+      "name": "cn.widgetjs.widgets.wave_progress",
       "title": {
-        "zh-CN": "待办事项"
+        "zh-CN": "波浪进度"
       },
       "description": {
-        "zh-CN": "TODO待办事项"
+        "zh-CN": "用波浪显示事件进度"
       },
       "keywords": [
         "recommend"
@@ -27,25 +27,25 @@
       "security": false,
       "permissions": [],
       "lang": "zh-CN",
-      "width": 4,
-      "height": 4,
-      "maxWidth": 8,
+      "width": 1,
+      "height": 2,
+      "maxWidth": 3,
       "webviewTag": false,
-      "maxHeight": 10,
-      "minWidth": 3,
-      "minHeight": 3,
+      "maxHeight": 7,
+      "minWidth": 1,
+      "minHeight": 2,
       "movable": true,
       "singleton": false,
       "resizable": true,
-      "path": "/widget/todo_list",
+      "path": "/widget/wave_progress",
       "meta": {},
       "backgroundThrottling": true,
-      "previewImage": "/images/preview_todo_list.png",
+      "previewImage": "/images/preview_wave_progress.png",
       "categories": [
-        "productivity"
+        "time"
       ],
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/todo_list?frame=true&transparent=false&width=600&height=500",
+      "configPagePath": "/widget/config/wave_progress?frame=true&transparent=false&width=600&height=390",
       "routes": []
     },
     {
@@ -84,6 +84,41 @@
       "routes": []
     },
     {
+      "name": "cn.widgetjs.widgets.todo_list",
+      "title": {
+        "zh-CN": "待办事项"
+      },
+      "description": {
+        "zh-CN": "TODO待办事项"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 4,
+      "maxWidth": 8,
+      "webviewTag": false,
+      "maxHeight": 10,
+      "minWidth": 3,
+      "minHeight": 3,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/todo_list",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_todo_list.png",
+      "categories": [
+        "productivity"
+      ],
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/todo_list?frame=true&transparent=false&width=600&height=500",
+      "routes": []
+    },
+    {
       "name": "cn.widgetjs.widgets.sit_reminder",
       "title": {
         "zh-CN": "久坐提醒"
@@ -119,12 +154,12 @@
       "routes": []
     },
     {
-      "name": "cn.widgetjs.widgets.wave_progress",
+      "name": "cn.widgetjs.widgets.labor_progress",
       "title": {
-        "zh-CN": "波浪进度"
+        "zh-CN": "打工进度"
       },
       "description": {
-        "zh-CN": "用波浪显示事件进度"
+        "zh-CN": "打工人，打工魂"
       },
       "keywords": [
         "recommend"
@@ -132,25 +167,25 @@
       "security": false,
       "permissions": [],
       "lang": "zh-CN",
-      "width": 1,
-      "height": 2,
-      "maxWidth": 3,
+      "width": 4,
+      "height": 1,
+      "maxWidth": 6,
       "webviewTag": false,
-      "maxHeight": 7,
-      "minWidth": 1,
-      "minHeight": 2,
+      "maxHeight": 2,
+      "minWidth": 3,
+      "minHeight": 1,
       "movable": true,
       "singleton": false,
       "resizable": true,
-      "path": "/widget/wave_progress",
+      "path": "/widget/labor_progress",
       "meta": {},
       "backgroundThrottling": true,
-      "previewImage": "/images/preview_wave_progress.png",
+      "previewImage": "/images/preview_labor_progress.png",
       "categories": [
-        "time"
+        "fun"
       ],
       "supportDeployMode": 17,
-      "configPagePath": "/widget/config/wave_progress?frame=true&transparent=false&width=600&height=390",
+      "configPagePath": "/widget/config/labor_progress?frame=true&transparent=false",
       "routes": []
     },
     {
@@ -186,41 +221,6 @@
       ],
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/phone_reminder?frame=true&transparent=false",
-      "routes": []
-    },
-    {
-      "name": "cn.widgetjs.widgets.labor_progress",
-      "title": {
-        "zh-CN": "打工进度"
-      },
-      "description": {
-        "zh-CN": "打工人，打工魂"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 1,
-      "maxWidth": 6,
-      "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 3,
-      "minHeight": 1,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/labor_progress",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_labor_progress.png",
-      "categories": [
-        "fun"
-      ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/labor_progress?frame=true&transparent=false",
       "routes": []
     },
     {
