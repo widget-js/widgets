@@ -144,8 +144,8 @@ https://github.com/rtugeek/ai
 
 ### 趣味组件包
 
-|                                                    趣味组件包                                                     |                                       https://github.com/rtugeek/fun                                        |
-|:------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------:| 
-| ![电子木鱼](https://raw.githubusercontent.com/rtugeek/fun/master/public/images/preview_wooden_fish.png) <br/>电子木鱼 ||
+|                                                    趣味组件包                                                     |                                                  https://github.com/rtugeek/fun                                                  |
+|:------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------:| 
+| ![电子木鱼](https://raw.githubusercontent.com/rtugeek/fun/master/public/images/preview_wooden_fish.png) <br/>电子木鱼 | ![preview_hitler.png](https://raw.githubusercontent.com/rtugeek/fun/refs/heads/master/public/images/preview_hitler.png) <br/>仪表盘 |
 
 
