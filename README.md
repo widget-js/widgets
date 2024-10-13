@@ -74,6 +74,13 @@ pnpm serve
 
 ### 组件列表
 
+### 监控组件包
+
+|                                                     监控组件包                                                     |                                                                                                 
+|:-------------------------------------------------------------------------------------------------------------:|
+| ![监控面板](https://github.com/rtugeek/monitor/blob/master/public/image/preview_base_panel.png?raw=true) <br/>监控面板 |
+
+
 ### 默认组件包
 
 | 默认组件包 |                                     https://github.com/widget-js/widgets                                     |
