@@ -27,6 +27,9 @@ const WaterReminderWidget = new Widget({
   height: 2,
   backgroundThrottling: false,
   minWidth: 2,
+  socialLinks: [
+    { name: 'github', link: 'https://github.com/widget-js/widgets' },
+  ],
   maxWidth: 2,
   minHeight: 2,
   maxHeight: 2,

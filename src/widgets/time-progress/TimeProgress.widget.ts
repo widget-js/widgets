@@ -17,6 +17,9 @@ const TimeProgressWidgetDefine = new Widget({
   categories: ['time'],
   lang,
   width: 4,
+  socialLinks: [
+    { name: 'github', link: 'https://github.com/widget-js/widgets' },
+  ],
   height: 2,
   configPagePath: '/widget/config/time_progress?frame=true&transparent=false&width=600&height=400',
   previewImage: '/images/preview_time_progress.png',

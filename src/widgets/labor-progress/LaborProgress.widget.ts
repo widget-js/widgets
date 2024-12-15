@@ -25,6 +25,9 @@ const LaborProgressWidgetDefine = new Widget({
   previewImage: '/images/preview_labor_progress.png',
   minWidth: 3,
   maxWidth: 6,
+  socialLinks: [
+    { name: 'github', link: 'https://github.com/widget-js/widgets' },
+  ],
   minHeight: 1,
   maxHeight: 2,
   path: url,

@@ -18,6 +18,9 @@ const SitReminderWidgetDefine = new BackgroundWidget({
   name,
   title,
   description,
+  socialLinks: [
+    { name: 'github', link: 'https://github.com/widget-js/widgets' },
+  ],
   keywords,
   lang: 'zh-CN',
   categories: ['utilities'],

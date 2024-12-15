@@ -25,6 +25,9 @@ const PhotoWidgetDefine = new Widget({
   lang: 'zh-CN',
   width: 2,
   categories: ['photo'],
+  socialLinks: [
+    { name: 'github', link: 'https://github.com/widget-js/widgets' },
+  ],
   height: 2,
   minWidth: 1,
   maxWidth: 6,

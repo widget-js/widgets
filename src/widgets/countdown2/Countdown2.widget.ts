@@ -30,6 +30,9 @@ const Countdown2WidgetDefine = new Widget({
   maxWidth: 4,
   minHeight: 2,
   maxHeight: 4,
+  socialLinks: [
+    { name: 'github', link: 'https://github.com/widget-js/widgets' },
+  ],
 })
 
 export default Countdown2WidgetDefine

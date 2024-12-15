@@ -24,6 +24,9 @@ const PhoneReminderWidgetDefine = new BackgroundWidget({
   categories: ['fun'],
   previewImage: '/images/preview_phone_reminder.png',
   path: url,
+  socialLinks: [
+    { name: 'github', link: 'https://github.com/widget-js/widgets' },
+  ],
   configPagePath: '/widget/config/phone_reminder?frame=true&transparent=false',
 })
 

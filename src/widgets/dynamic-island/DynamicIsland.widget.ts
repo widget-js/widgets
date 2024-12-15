@@ -31,6 +31,9 @@ const DynamicIslandWidgetDefine = new Widget({
   maxHeight: 4,
   previewImage: '/images/preview_sit_reminder.png',
   supportDeployMode: DeployMode.BACKGROUND,
+  socialLinks: [
+    { name: 'github', link: 'https://github.com/widget-js/widgets' },
+  ],
 })
 
 export default DynamicIslandWidgetDefine

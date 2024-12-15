@@ -14,8 +14,12 @@ const TodoListWidget = new Widget({
   height: 4,
   minWidth: 3,
   maxWidth: 8,
+  disabled: true,
   categories: ['productivity'],
   minHeight: 3,
+  socialLinks: [
+    { name: 'github', link: 'https://github.com/widget-js/widgets' },
+  ],
   maxHeight: 10,
   path: '/widget/todo_list',
   configPagePath: '/widget/config/todo_list?frame=true&transparent=false&width=600&height=500',

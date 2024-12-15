@@ -33,6 +33,9 @@ const KeyStrokeWidgetDefine = new Widget({
   movable: false,
   categories: ['utilities'],
   previewImage: '/images/preview_keystroke.png',
+  socialLinks: [
+    { name: 'github', link: 'https://github.com/widget-js/widgets' },
+  ],
   path: url,
 })
 

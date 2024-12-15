@@ -22,6 +22,10 @@ const BirthdayListWidgetDefine = new Widget({
   minHeight: 3,
   categories: ['countdown'],
   maxHeight: 6,
+  disabled: true,
+  socialLinks: [
+    { name: 'github', link: 'https://github.com/widget-js/widgets' },
+  ],
   path,
   configPagePath: '/widget/config/birthday_list?frame=true&transparent=false',
 })
