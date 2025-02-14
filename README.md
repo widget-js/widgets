@@ -76,31 +76,37 @@ pnpm serve
 
 ### 监控组件包
 
-|                                                     监控组件包                                                     |                                                                                                 
-|:-------------------------------------------------------------------------------------------------------------:|
+|                                                     监控组件包                                                      |                                                                                                 
+|:--------------------------------------------------------------------------------------------------------------:|
 | ![监控面板](https://github.com/rtugeek/monitor/blob/master/public/image/preview_base_panel.png?raw=true) <br/>监控面板 |
-
 
 ### 默认组件包
 
 | 默认组件包 |                                     https://github.com/widget-js/widgets                                     |
 |:-----:|:------------------------------------------------------------------------------------------------------------:| 
-| 待办事项  |                                ![image](public/images/preview_todo_list.png)                                 |
-| 生日列表  |                               ![gif](public/images/preview_birthday_list.png)                                |
-| 倒计时1  |                                 ![gif](public/images/preview_countdown.png)                                  |
-| 倒计时2  |                                 ![gif](public/images/preview_countdown2.png)                                 |
+|  倒计时  |                                 ![gif](public/images/preview_countdown.png)                                  |
 | 灵动通知  |                                    ![gif](screenshot/dynamic_island.gif)                                     |
 | 打工进度  |                       ![screenshot/labor_progress.gif](screenshot/labor_progress.gif)                        |
 | 时间进度  | <img style="border: 3px solid #c3c3c31f;border-radius: 12px" src="public/images/preview_time_progress.png"/> |
-
 
 ### AI组件包
 
 https://github.com/rtugeek/ai
 
-#### 一键呼出ChatGPT
+#### 一键呼出AI DeepSeek/ChatGPT/Gemini
 
 ![png](https://raw.githubusercontent.com/rtugeek/ai/master/screenshot.png)
+
+### iTime组件包
+
+| iTime组件包 |                                        https://github.com/rtugeek/itime-web                                         |
+|:--------:|:-------------------------------------------------------------------------------------------------------------------:| 
+|   待办事项   | ![image](https://raw.githubusercontent.com/rtugeek/itime-web/refs/heads/master/public/images/preview_todo_list.png) | 
+|   生日列表   |                                   ![gif](public/images/preview_birthday_list.png)                                   | 
+|   倒计时    |                                    ![gif](public/images/preview_countdown2.png)                                     | 
+| Deadline |  ![gif](https://raw.githubusercontent.com/rtugeek/itime-web/refs/heads/master/public/images/preview_deadline.png)   | 
+|   番茄钟    |  ![gif](https://raw.githubusercontent.com/rtugeek/itime-web/refs/heads/master/public/images/preview_pomodoro.png)   | 
+|    日历    |  ![gif](https://raw.githubusercontent.com/rtugeek/itime-web/refs/heads/master/public/images/preview_calendar.png)   | 
 
 ### 剪切板组件包
 
@@ -117,42 +123,38 @@ https://github.com/rtugeek/ai
 |  4x2  | ![4x2](https://raw.githubusercontent.com/rtugeek/weather/master/public/preview_medium.png) | 
 |  4x4  | ![4x4](https://raw.githubusercontent.com/rtugeek/weather/master/public/preview_large.png)  |
 
-
 ### 工具类组件包
-| 工具类组件包                                                                                                        | https://github.com/rtugeek/utilities                                                                          |
-|---------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------| 
-| 键盘演示  | ![png](./public/images/preview_keystroke.png)                                                                 |
-| 喝水提醒  | <img style="border: 3px solid #c3c3c31f;border-radius: 12px" src="public/images/preview_water_reminder.png"/> |
 
-
+| 工具类组件包 | https://github.com/rtugeek/utilities                                                                          |
+|--------|---------------------------------------------------------------------------------------------------------------| 
+| 键盘演示   | ![png](./public/images/preview_keystroke.png)                                                                 |
+| 喝水提醒   | <img style="border: 3px solid #c3c3c31f;border-radius: 12px" src="public/images/preview_water_reminder.png"/> |
 
 ### 热点组件包
-|                                                        热点组件包                                                         |https://github.com/widget-js/hotspot|
-|:--------------------------------------------------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------------| 
-|    ![bilibili](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/bilibili_hot_search.png)     | ![weibo.png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/weibo_hot_search.png)  |
-|        ![douyin](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_douyin.png)        | ![zhihu.png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_zhihu.png)  |
-|  ![douyin](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_bangumi.png)  <br/>追番助手  |   |
+
+|                                                       热点组件包                                                        | https://github.com/widget-js/hotspot                                                                        |
+|:------------------------------------------------------------------------------------------------------------------:|-------------------------------------------------------------------------------------------------------------| 
+|   ![bilibili](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/bilibili_hot_search.png)    | ![weibo.png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/weibo_hot_search.png) |
+|       ![douyin](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_douyin.png)       | ![zhihu.png](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_zhihu.png)    |
+| ![douyin](https://raw.githubusercontent.com/widget-js/hotspot/master/public/images/preview_bangumi.png)  <br/>追番助手 |                                                                                                             |
 
 ### 时钟组件包
 
-|                                                        时钟组件包                                                         |                                          https://github.com/rtugeek/clock                                          |
-|:--------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------:| 
-|![Flip Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_flip_clock.png) <br/>翻页时钟    |     ![Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_clock.png)  <br/>时钟      |
+|                                                           时钟组件包                                                           |                                            https://github.com/rtugeek/clock                                             |
+|:-------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------:| 
+|   ![Flip Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_flip_clock.png) <br/>翻页时钟    |        ![Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_clock.png)  <br/>时钟        |
 | ![Glitch Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_glitch_clock.png)  <br/>故障时钟 | ![Micky Clock](https://raw.githubusercontent.com/rtugeek/clock/master/public/images/preview_micky_clock.png)  <br/>米奇时钟 |
-
 
 ### 相册组件包
 
-|                                                   相册组件包                                                    |                                            https://github.com/rtugeek/photo                                             |
-|:----------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------:| 
-| ![大头贴](https://raw.githubusercontent.com/rtugeek/photo/master/public/images/preview_sticker.png) <br/>大头贴 |       ![Clock](https://raw.githubusercontent.com/rtugeek/photo/master/public/images/preview_photo.png)  <br/>轮播相册       |
-
-
+|                                                   相册组件包                                                   |                                      https://github.com/rtugeek/photo                                       |
+|:---------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------:| 
+| ![大头贴](https://raw.githubusercontent.com/rtugeek/photo/master/public/images/preview_sticker.png) <br/>大头贴 | ![Clock](https://raw.githubusercontent.com/rtugeek/photo/master/public/images/preview_photo.png)  <br/>轮播相册 |
 
 ### 趣味组件包
 
-|                                                    趣味组件包                                                     |                                                  https://github.com/rtugeek/fun                                                  |
-|:------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------:| 
+|                                                     趣味组件包                                                     |                                                  https://github.com/rtugeek/fun                                                  |
+|:-------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------:| 
 | ![电子木鱼](https://raw.githubusercontent.com/rtugeek/fun/master/public/images/preview_wooden_fish.png) <br/>电子木鱼 | ![preview_hitler.png](https://raw.githubusercontent.com/rtugeek/fun/refs/heads/master/public/images/preview_hitler.png) <br/>仪表盘 |
 
 
