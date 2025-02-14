@@ -73,7 +73,7 @@ export default {
         <el-form-item label="上班时间">
           <ElTimePicker v-model="startTime" format="HH:mm" :clearable="false" title="上班时间" />
         </el-form-item>
-        <el-form-item label="上班时间">
+        <el-form-item label="下班时间">
           <ElTimePicker v-model="endTime" format="HH:mm" :clearable="false" title="下班时间" />
         </el-form-item>
       </el-form>

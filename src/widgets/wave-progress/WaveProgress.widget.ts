@@ -33,6 +33,9 @@ const WaveProgressWidgetDefine = new Widget({
   maxHeight,
   minWidth,
   minHeight,
+  socialLinks: [
+    { name: 'github', link: 'https://github.com/widget-js/widgets' },
+  ],
   previewImage: '/images/preview_wave_progress.png',
 })
 export default WaveProgressWidgetDefine

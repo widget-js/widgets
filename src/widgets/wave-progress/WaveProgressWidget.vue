@@ -3,20 +3,18 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import type { Dayjs } from 'dayjs'
 import dayjs from 'dayjs'
 import { TransitionPresets, useInterval, useTransition } from '@vueuse/core'
-import { Lunar, LunarMonth } from 'lunar-typescript'
 import Color from 'color'
 import delay from 'lodash-es/delay'
 import floor from 'lodash-es/floor'
 import { useWidgetSize } from '@widget-js/vue3'
 import { ProgressType } from './model/WaveProgressData'
-import { LunarUtils } from '@/util/LunarUtils'
 
 const props = defineProps({
-  locale: {
-    type: String,
-    default: 'zh-cn',
-    required: false,
-  },
+  // locale: {
+  //   type: String,
+  //   default: 'zh-cn',
+  //   required: false,
+  // },
   progressType: {
     type: Number,
     default: 0,
@@ -27,10 +25,10 @@ const props = defineProps({
   },
   startDate: { type: Date },
   endDate: { type: Date },
-  isLunar: {
-    type: Boolean,
-    default: false,
-  },
+  // isLunar: {
+  //   type: Boolean,
+  //   default: false,
+  // },
   backgroundColor: { type: String },
 })
 
@@ -138,7 +136,7 @@ function onInitCanvas() {
 
 async function refresh() {
   await nextTick()
-  dayjs.locale(props.locale)
+  // dayjs.locale(props.locale)
   const now = dayjs()
   initRenderView(now)
 
@@ -200,40 +198,41 @@ function getRatioValue(now: Dayjs, progressType: ProgressType): number {
       end = now.endOf('week')
       break
     case ProgressType.toMonth:
-      if (props.isLunar) {
-        const nowLunar = Lunar.fromDate(now.toDate())
-        const monthDay = LunarMonth.fromYm(nowLunar.getYear(), nowLunar.getMonth())
-        const firstDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), 1).getSolar()
-        const endDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), monthDay!.getDayCount()).getSolar()
-        start = dayjs(LunarUtils.solarToDate(firstDay))
-        end = dayjs(LunarUtils.solarToDate(endDay)).endOf('day')
-      }
-      else {
-        start = now.startOf('month')
-        end = now.endOf('month')
-      }
+      // if (props.isLunar) {
+      //   const nowLunar = Lunar.fromDate(now.toDate())
+      //   const monthDay = LunarMonth.fromYm(nowLunar.getYear(), nowLunar.getMonth())
+      //   const firstDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), 1).getSolar()
+      //   const endDay = Lunar.fromYmd(nowLunar.getYear(), nowLunar.getMonth(), monthDay!.getDayCount()).getSolar()
+      //   start = dayjs(LunarUtils.solarToDate(firstDay))
+      //   end = dayjs(LunarUtils.solarToDate(endDay)).endOf('day')
+      // }
+      // else {
+      start = now.startOf('month')
+      end = now.endOf('month')
+      // }
 
       break
     case ProgressType.toYear:
-      if (props.isLunar) {
-        const nowLunar = Lunar.fromDate(now.toDate())
-        const firstDay = Lunar.fromYmd(nowLunar.getYear(), 1, 1).getSolar()
-        const endDay = Lunar.fromYmd(nowLunar.getYear() + 1, 1, 1).getSolar()
-        end = dayjs(LunarUtils.solarToDate(firstDay))
-        start = dayjs(LunarUtils.solarToDate(endDay))
-      }
-      else {
-        start = now.startOf('year')
-        end = now.endOf('year')
-      }
+      // if (props.isLunar) {
+      //   const nowLunar = Lunar.fromDate(now.toDate())
+      //   const firstDay = Lunar.fromYmd(nowLunar.getYear(), 1, 1).getSolar()
+      //   const endDay = Lunar.fromYmd(nowLunar.getYear() + 1, 1, 1).getSolar()
+      //   end = dayjs(LunarUtils.solarToDate(firstDay))
+      //   start = dayjs(LunarUtils.solarToDate(endDay))
+      // }
+      // else {
+      start = now.startOf('year')
+      end = now.endOf('year')
+      // }
       break
     case ProgressType.custom:
-      start = startDate.value
-      end = endDate.value
+      start = dayjs(startDate.value)
+      end = dayjs(endDate.value)
       break
     default:
       start = now.startOf('day')
       end = now.endOf('day')
+      break
   }
   if (start.isAfter(now) || start.isAfter(end)) {
     return 0
@@ -263,7 +262,7 @@ defineExpose({ refresh })
   <div
     ref="containerRef"
     class="wave-progress-container"
-    :style="{ fontSize, height: `${height}px`, width: `${width}px`, borderRadius: `${$props.extra?.borderRadius}px` }"
+    :style="{ fontSize, height: `${height}px`, width: `${width}px` }"
   >
     <div class="tips">
       <div class="title">

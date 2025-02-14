@@ -2,9 +2,16 @@
 import {
   WidgetConfigOption,
   useWidgetData,
+  useWidgetStorage,
 } from '@widget-js/vue3'
+import { WidgetData } from '@widget-js/core'
+import { onMounted, ref } from 'vue'
+import dayjs from 'dayjs'
 import {
+  DefaultWaveProgressData,
   ProgressType,
+} from '@/widgets/wave-progress/model/WaveProgressData'
+import type {
   WaveProgressData,
 } from '@/widgets/wave-progress/model/WaveProgressData'
 
@@ -12,7 +19,9 @@ const {
   widgetData,
   widgetParams,
   save,
-} = useWidgetData(WaveProgressData)
+} = useWidgetData(WidgetData)
+const configData = useWidgetStorage<WaveProgressData>('WaveProgressConfig', DefaultWaveProgressData)
+
 const widgetConfigOption = new WidgetConfigOption({
   custom: true,
   showFooter: true,
@@ -22,14 +31,25 @@ const widgetConfigOption = new WidgetConfigOption({
   },
 })
 
+const now = dayjs()
+const startDate = ref(now.toDate())
+const endDate = ref(now.add(1, 'days').toDate())
+
 function handleChangeCustomDate() {
-  const now = new Date()
-  if ((widgetData.value.startDate ?? now) > (widgetData.value.endDate ?? now)) {
-    const start: Date = widgetData.value.startDate ?? now
-    widgetData.value.startDate = widgetData.value.endDate
-    widgetData.value.endDate = start
+  if (startDate.value < endDate.value) {
+    configData.value.startDate = startDate.value.toISOString()
+    configData.value.endDate = endDate.value.toISOString()
+  }
+  else {
+    configData.value.startDate = endDate.value.toISOString()
+    configData.value.endDate = startDate.value.toISOString()
   }
 }
+
+onMounted(() => {
+  startDate.value = dayjs(configData.value.startDate).toDate()
+  endDate.value = dayjs(configData.value.endDate).toDate()
+})
 </script>
 
 <template>
@@ -40,9 +60,9 @@ function handleChangeCustomDate() {
     @confirm="save({ closeWindow: true })"
   >
     <template #custom>
-      <el-form :model="widgetData">
+      <el-form>
         <el-form-item label="进度类型">
-          <el-radio-group v-model="widgetData.progressType">
+          <el-radio-group v-model="configData.progressType">
             <el-radio :label="ProgressType.today">
               今天
             </el-radio>
@@ -61,13 +81,13 @@ function handleChangeCustomDate() {
           </el-radio-group>
         </el-form-item>
 
-        <template v-if="widgetData.progressType === ProgressType.custom">
+        <template v-if="configData.progressType === ProgressType.custom">
           <el-form-item label="事项名称">
-            <el-input v-model="widgetData.eventName" placeholder="请输入" />
+            <el-input v-model="configData.eventName" placeholder="请输入" />
           </el-form-item>
           <el-form-item label="开始时间">
             <el-date-picker
-              v-model="widgetData.startDate"
+              v-model="startDate"
               type="datetime"
               placeholder="开始时间"
               @change="handleChangeCustomDate"
@@ -75,7 +95,7 @@ function handleChangeCustomDate() {
           </el-form-item>
           <el-form-item label="结束时间">
             <el-date-picker
-              v-model="widgetData.endDate"
+              v-model="endDate"
               type="datetime"
               placeholder="结束时间"
               @change="handleChangeCustomDate"

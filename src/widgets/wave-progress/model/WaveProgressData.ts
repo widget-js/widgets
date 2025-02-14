@@ -1,5 +1,3 @@
-import { WidgetData } from '@widget-js/core'
-
 export enum ProgressType {
   today = 0,
   toWeek = 1,
@@ -8,16 +6,21 @@ export enum ProgressType {
   custom = 4,
 }
 
-export class WaveProgressData extends WidgetData {
+export interface WaveProgressData {
   // 类型
-  progressType: ProgressType = ProgressType.today
+  progressType: ProgressType
 
   // 事件名称
-  eventName = '今天'
+  eventName: string
 
-  startDate?: Date
+  startDate?: string
 
-  endDate?: Date
+  endDate?: string
+}
 
-  isLunar?: boolean
+export const DefaultWaveProgressData: WaveProgressData = {
+  progressType: ProgressType.today,
+  eventName: '今天',
+  startDate: new Date().toISOString(),
+  endDate: new Date().toISOString(),
 }
