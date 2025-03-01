@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: '18.x'
       - name: Setup pnpm
-        uses: actions/setup-pnpm@v4
+        uses: pnpm/action-setup@v4
         with:
           version: 8
       - name: Build static files
