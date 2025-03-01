@@ -23,7 +23,7 @@
     "@vueuse/router": "^9.9.0",
     "@widget-js/core": "^24.1.1-beta.34",
     "@widget-js/vue3": "^24.1.1-beta.33",
-    "@widget-js/web-api": "workspace:*",
+    "@widget-js/web-api": "24.1.1-beta.42",
     "animate.css": "^4.1.1",
     "axios": "^1.6.0",
     "color": "^4.2.3",
