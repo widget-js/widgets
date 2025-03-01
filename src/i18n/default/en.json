@@ -1,0 +1,65 @@
+{
+  "social": "Follow",
+  "proxy": "Proxy",
+  "infoCopied": "Info Copied",
+  "appInfo": "App Info",
+  "loading": "Loading",
+  "fullDetail": "Full Detail",
+  "copyAndReport": "Copy & Report",
+  "copy": "Copy",
+  "add": "Add",
+  "network": {
+    "offline": "Network is offline",
+    "failed": "Page failed to load: {msg}"
+  },
+  "search": {
+    "title": "Search Widget",
+    "placeholder": "Enter keyword",
+    "developerTip": "Develop your own desktop widget",
+    "devDoc": "Documentation",
+    "enable": "Enable",
+    "upgrade": "Upgrade",
+    "add": "Add",
+    "disable": "Disable",
+    "desktop": "Desktop",
+    "overlap": "Overlap"
+  },
+  "tags": {
+    "all": "All",
+    "ai": "AI",
+    "tools": "Tools",
+    "productivity": "Productivity",
+    "news": "News",
+    "weather": "Weather",
+    "fun": "Fun",
+    "calendar": "Calendar",
+    "time": "Time",
+    "countdown": "Countdown",
+    "photo": "Photo",
+    "debug": "Dev",
+    "finance": "Finance"
+  },
+  "manager": {
+    "remove": "Remove",
+    "refresh": "Refresh",
+    "title": "Widget Title",
+    "name": "Widget Name",
+    "windowTitle": "Widget Manager",
+    "confirmRemove": "Are you sure to remove this widget?"
+  },
+  "theme": {
+    "translucent": "Translucent",
+    "dark": "Dark",
+    "light": "Light",
+    "custom": "Custom"
+  },
+  "update": {
+    "windowTitle": "Check for Updates",
+    "alreadyLatestVersion": "Already the latest version",
+    "newVersionDetect": "New version detected:",
+    "upgradeToNew": "Please upgrade App to the latest version"
+  },
+  "notification": {
+    "enableDevMode": "Developer mode enabled"
+  }
+}

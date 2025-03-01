@@ -1,0 +1,19 @@
+{
+  "title": "Settings",
+  "language": "Language",
+  "common": "Common",
+  "theme": "Global Theme",
+  "desktop": "Desktop",
+  "app": "App",
+  "gridSize": "Grid Size",
+  "launchAtStartup": "Startup",
+  "developerMode": "Dev mode",
+  "proxy": {
+    "title": "Proxy",
+    "tips": "If the proxy does not take effect, please try to refresh the widget",
+    "port": "Port",
+    "protocol": "Protocol",
+    "server": "Server",
+    "clear": "Clear"
+  }
+}

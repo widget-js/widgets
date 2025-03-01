@@ -1,0 +1,63 @@
+{
+  "social": "交个朋友",
+  "appInfo": "应用信息",
+  "copy": "应用信息",
+  "fullDetail": "详细信息",
+  "infoCopied": "已复制信息",
+  "copyAndReport": "复制并提交BUG",
+  "loading": "加载中",
+  "tags": {
+    "all": "全部",
+    "ai": "AI",
+    "tools": "工具",
+    "productivity": "效率",
+    "news": "资讯",
+    "weather": "天气",
+    "fun": "趣味",
+    "calendar": "日历",
+    "time": "时间",
+    "countdown": "倒计时",
+    "finance": "金融",
+    "photo": "照片",
+    "debug": "开发组件"
+  },
+  "search": {
+    "title": "搜索组件",
+    "placeholder": "请输入关键词",
+    "developerTip": "开发属于自己的桌面组件",
+    "devDoc": "开发文档",
+    "desktop": "桌面",
+    "overlap": "悬浮窗",
+    "add": "添加",
+    "upgrade": "升级",
+    "enable": "启用",
+    "disable": "禁用"
+  },
+  "manager": {
+    "remove": "移除",
+    "refresh": "刷新",
+    "title": "组件标题",
+    "name": "组件名",
+    "windowTitle": "组件管理",
+    "confirmRemove": "确定移除该组件"
+  },
+  "theme": {
+    "translucent": "半透明",
+    "dark": "深色",
+    "light": "浅色",
+    "custom": "自定义"
+  },
+  "network": {
+    "offline": "村里还没通网，等待网络接通中",
+    "failed": "组件加载失败：{msg}"
+  },
+  "update": {
+    "windowTitle": "检测更新",
+    "alreadyLatestVersion": "已经是最新版本",
+    "newVersionDetect": "检测到新版本：",
+    "upgradeToNew": "请先升级应用到最新版"
+  },
+  "notification": {
+    "enableDevMode": "启用开发者模式"
+  }
+}

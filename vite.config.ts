@@ -10,7 +10,7 @@ import UnoCSS from 'unocss/vite'
 
 export default defineConfig({
   base: './',
-  server: { port: 5174 },
+  server: { port: 8085 },
   build: {
     rollupOptions: {
       output: {

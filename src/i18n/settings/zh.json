@@ -1,0 +1,19 @@
+{
+  "title": "设置",
+  "app": "应用设置",
+  "language": "语言",
+  "launchAtStartup": "开机启动",
+  "theme": "全局主题",
+  "common": "常用设置",
+  "gridSize": "网格大小",
+  "developerMode": "开发者模式",
+  "desktop": "桌面设置",
+  "proxy": {
+    "title": "代理设置",
+    "tips": "如果代理没有生效，请尝试刷新组件",
+    "port": "代理端口",
+    "protocol": "代理协议",
+    "server": "代理服务器",
+    "clear": "清除代理"
+  }
+}

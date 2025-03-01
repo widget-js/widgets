@@ -1,0 +1,32 @@
+@use "sass:map";
+@import "element-plus/theme-chalk/src/common/var.scss";
+
+$text-color-primary: map.get($text-color, "primary");
+$border-radius-base: map.get($border-radius, "base");
+$fill-color-default: map.get($fill-color, '');
+$box-shadow-default: map.get($box-shadow, '');
+
+$weight-regular: 400;
+$weight-bold: 700;
+
+@mixin electron-dialog{
+  background-color: $fill-color-default;
+  border-radius: $border-radius-base;
+  box-shadow: $box-shadow-default;
+  margin: 32px;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.11);
+  border-style: solid;
+}
+
+@mixin title-medium {
+  font-weight: $weight-regular;
+  font-size: 16px;
+  color: $text-color-primary;
+}
+
+@mixin title-medium-bold {
+  font-weight: $weight-bold;
+  font-size: 16px;
+  color: $text-color-primary;
+}
