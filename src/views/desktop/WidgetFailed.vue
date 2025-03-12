@@ -2,9 +2,10 @@
 import { FileFailed } from '@icon-park/vue-next'
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
-import { useEventListener } from '@vueuse/core'
+import { useIntervalFn } from '@vueuse/core'
 import { WidgetApi } from '@widget-js/core'
 import { useI18n } from 'vue-i18n'
+import axios from 'axios'
 
 const route = useRoute()
 const { t } = useI18n()
@@ -21,10 +22,18 @@ const desc = computed(() => {
   }
   return route.query.errorDescription
 })
-
-useEventListener('online', () => {
-  WidgetApi.reload()
+//
+// useEventListener('online', () => {
+//   WidgetApi.reload()
+// })
+const axiosIns = axios.create({
+  timeout: 3000,
 })
+useIntervalFn(() => {
+  axiosIns.get('https://baidu.com').then(() => {
+    WidgetApi.reload()
+  })
+}, 3000)
 </script>
 
 <template>
