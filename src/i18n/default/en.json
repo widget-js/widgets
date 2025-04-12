@@ -4,7 +4,7 @@
   "infoCopied": "Info Copied",
   "appInfo": "App Info",
   "loading": "Loading",
-  "fullDetail": "Full Detail",
+  "fullDetail": "Detail",
   "copyAndReport": "Copy & Report",
   "copy": "Copy",
   "add": "Add",
@@ -61,5 +61,6 @@
   },
   "notification": {
     "enableDevMode": "Developer mode enabled"
-  }
+  },
+  "exit": "Exit"
 }

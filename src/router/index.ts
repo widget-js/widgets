@@ -28,6 +28,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/settings/SettingView.vue'),
   },
   {
+    path: '/setting/app/runtime',
+    name: 'AppRunTime',
+    component: () => import('@/views/settings/AppRuntimeView.vue'),
+  },
+  {
     path: '/manager',
     name: 'manager',
     component: () => import('@/views/manager/ManagerView.vue'),
@@ -56,6 +61,11 @@ const routes: RouteRecordRaw[] = [
     path: '/desktop/tray',
     name: 'tray',
     component: () => import('../views/desktop/TrayGuide.vue'),
+  },
+  {
+    path: '/tray/menu',
+    name: 'TrayMenu',
+    component: () => import('../views/tray/TrayMenuView.vue'),
   },
   {
     path: '/check-update',

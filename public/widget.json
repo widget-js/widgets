@@ -137,47 +137,6 @@
       ]
     },
     {
-      "name": "cn.widgetjs.widgets.phone_reminder",
-      "title": {
-        "zh-CN": "来电提醒"
-      },
-      "description": {
-        "zh-CN": "用灵动通知加语音，提醒重要事项"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 1,
-      "height": 1,
-      "maxWidth": 1,
-      "webviewTag": false,
-      "maxHeight": 1,
-      "minWidth": 1,
-      "minHeight": 1,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/phone_reminder",
-      "meta": {},
-      "backgroundThrottling": false,
-      "previewImage": "/images/preview_phone_reminder.png",
-      "categories": [
-        "fun"
-      ],
-      "supportDeployMode": 65536,
-      "configPagePath": "/widget/config/phone_reminder?frame=true&transparent=false",
-      "routes": [],
-      "socialLinks": [
-        {
-          "name": "github",
-          "link": "https://github.com/widget-js/widgets"
-        }
-      ]
-    },
-    {
       "name": "cn.widgetjs.widgets.labor_progress",
       "title": {
         "zh-CN": "打工进度"
@@ -210,6 +169,47 @@
       ],
       "supportDeployMode": 17,
       "configPagePath": "/widget/config/labor_progress?frame=true&transparent=false",
+      "routes": [],
+      "socialLinks": [
+        {
+          "name": "github",
+          "link": "https://github.com/widget-js/widgets"
+        }
+      ]
+    },
+    {
+      "name": "cn.widgetjs.widgets.phone_reminder",
+      "title": {
+        "zh-CN": "来电提醒"
+      },
+      "description": {
+        "zh-CN": "用灵动通知加语音，提醒重要事项"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 1,
+      "height": 1,
+      "maxWidth": 1,
+      "webviewTag": false,
+      "maxHeight": 1,
+      "minWidth": 1,
+      "minHeight": 1,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/phone_reminder",
+      "meta": {},
+      "backgroundThrottling": false,
+      "previewImage": "/images/preview_phone_reminder.png",
+      "categories": [
+        "fun"
+      ],
+      "supportDeployMode": 65536,
+      "configPagePath": "/widget/config/phone_reminder?frame=true&transparent=false",
       "routes": [],
       "socialLinks": [
         {

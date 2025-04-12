@@ -30,9 +30,11 @@ const axiosIns = axios.create({
   timeout: 3000,
 })
 useIntervalFn(() => {
-  axiosIns.get('https://baidu.com').then(() => {
-    WidgetApi.reload()
-  })
+  if (!hasNetwork.value) {
+    axiosIns.get('https://baidu.com').then(() => {
+      WidgetApi.reload()
+    })
+  }
 }, 3000)
 </script>
 

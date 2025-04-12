@@ -4,16 +4,14 @@ import {
   ApiConstants,
   AppApi,
   BrowserWindowApi,
-  NotificationApi,
 } from '@widget-js/core'
 import { WidgetBaseDialog } from '@widget-js/vue3'
-import { onLongPress } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 import SettingSection from './SettingSection.vue'
 import { useCellSizeConfig, useDebugConfig, useLanguageConfig } from '@/composition/useAppConfig'
 import ThemeSettingPanel from '@/views/settings/theme/ThemeSettingPanel.vue'
 import ProxySettingPanel from '@/views/settings/ProxySettingPanel.vue'
-import AppInfo from '@/views/settings/AppInfo.vue'
+import SocialLinks from '@/views/tray/SocialLinks.vue'
 
 const { t } = useI18n()
 BrowserWindowApi.setSize(600, 800)
@@ -28,16 +26,6 @@ AppApi.getConfig(ApiConstants.CONFIG_LAUNCH_AT_STARTUP, true).then((value) => {
 })
 const debugMode = useDebugConfig()
 const gridSize = useCellSizeConfig()
-const github = ref()
-
-onLongPress(
-  github,
-  () => {
-    NotificationApi.info(t('notification.enableDevMode'))
-    debugMode.value = true
-  },
-  { delay: 3000 },
-)
 
 onMounted(() => {
   document.title = t('settings.title')
@@ -97,22 +85,7 @@ const languages: Language[] = [
           </SettingSection>
 
           <SettingSection :title="t('social')">
-            <div class="social">
-              <a target="_blank" href="https://v.douyin.com/YhuNAb8/">
-                <img src="../../assets/images/douyin.png" alt="TikTok"></a>
-
-              <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=TgO2mUQe">
-                <img src="../../assets/images/qq.png" alt="QQ"></a>
-
-              <a target="_blank" href="https://space.bilibili.com/207395767">
-                <img src="../../assets/images/bilibili_logo_blue.png" alt="Bilibili"></a>
-
-              <a ref="github" target="_blank" href="https://github.com/widget-js">
-                <img src="../../assets/images/github-mark.png" alt="GitHub"></a>
-            </div>
-          </SettingSection>
-          <SettingSection :title="t('appInfo')">
-            <AppInfo />
+            <SocialLinks :icon-size="32" />
           </SettingSection>
         </el-tab-pane>
         <el-tab-pane :label="t('settings.theme')" name="theme">
@@ -121,9 +94,6 @@ const languages: Language[] = [
         <el-tab-pane :label="t('settings.proxy.title')" name="proxy">
           <ProxySettingPanel />
         </el-tab-pane>
-        <!--        <el-tab-pane label="AI" name="ai"> -->
-        <!--          <AiSettingPanel /> -->
-        <!--        </el-tab-pane> -->
       </el-tabs>
     </template>
   </WidgetBaseDialog>
@@ -140,23 +110,5 @@ const languages: Language[] = [
 
 .setting-section:nth-child(n + 2) {
   margin-top: 12px;
-}
-
-.social {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: start;
-
-  a {
-    text-decoration: none;
-    margin-right: 16px;
-    color: $color-primary;
-
-    img {
-      width: 32px;
-    }
-  }
 }
 </style>

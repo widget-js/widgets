@@ -2,8 +2,8 @@ import type { LanguageCode } from '@widget-js/core'
 import { AppApi } from '@widget-js/core'
 import { onMounted, ref, watch } from 'vue'
 
+const debugMode = ref(false)
 export function useDebugConfig(onLoad?: (debug: boolean) => void) {
-  const debugMode = ref(false)
   onMounted(async () => {
     debugMode.value = await AppApi.getDevMode()
     onLoad?.(debugMode.value)

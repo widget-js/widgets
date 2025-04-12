@@ -1,0 +1,16 @@
+{
+  "appVersion": "Version",
+  "systemVersion": "System",
+  "fullDetail": "Detail",
+  "runningWidgets": "Running Widgets",
+  "addWidget": "Widgets",
+  "settings": {
+    "title": "Settings"
+  },
+  "checkUpdates": "Update",
+  "shareApp": "Share App",
+  "exit": "Exit",
+  "suggestions": "Suggestions & Feedback",
+  "infoCopied": "Info Copied",
+  "downloadLinkCopied": "Download link copied to clipboard"
+}

@@ -1,0 +1,16 @@
+{
+  "appVersion": "应用版本",
+  "systemVersion": "系统版本",
+  "fullDetail": "详细信息",
+  "runningWidgets": "运行中的组件",
+  "addWidget": "添加组件",
+  "settings": {
+    "title": "设置"
+  },
+  "checkUpdates": "检测更新",
+  "shareApp": "分享应用",
+  "exit": "退出",
+  "suggestions": "建议与反馈",
+  "infoCopied": "已复制信息",
+  "downloadLinkCopied": "已复制下载链接到剪贴板"
+}
