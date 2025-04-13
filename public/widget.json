@@ -137,47 +137,6 @@
       ]
     },
     {
-      "name": "cn.widgetjs.widgets.labor_progress",
-      "title": {
-        "zh-CN": "打工进度"
-      },
-      "description": {
-        "zh-CN": "打工人，打工魂"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 4,
-      "height": 1,
-      "maxWidth": 6,
-      "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 3,
-      "minHeight": 1,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/labor_progress",
-      "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_labor_progress.png",
-      "categories": [
-        "fun"
-      ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/labor_progress?frame=true&transparent=false",
-      "routes": [],
-      "socialLinks": [
-        {
-          "name": "github",
-          "link": "https://github.com/widget-js/widgets"
-        }
-      ]
-    },
-    {
       "name": "cn.widgetjs.widgets.phone_reminder",
       "title": {
         "zh-CN": "来电提醒"
@@ -210,6 +169,47 @@
       ],
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/phone_reminder?frame=true&transparent=false",
+      "routes": [],
+      "socialLinks": [
+        {
+          "name": "github",
+          "link": "https://github.com/widget-js/widgets"
+        }
+      ]
+    },
+    {
+      "name": "cn.widgetjs.widgets.labor_progress",
+      "title": {
+        "zh-CN": "打工进度"
+      },
+      "description": {
+        "zh-CN": "打工人，打工魂"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 1,
+      "maxWidth": 6,
+      "webviewTag": false,
+      "maxHeight": 2,
+      "minWidth": 3,
+      "minHeight": 1,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/labor_progress",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_labor_progress.png",
+      "categories": [
+        "fun"
+      ],
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/labor_progress?frame=true&transparent=false",
       "routes": [],
       "socialLinks": [
         {

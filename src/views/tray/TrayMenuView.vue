@@ -46,14 +46,14 @@ function copyAndReport() {
       <div class="title">
         {{ t('tray.runningWidgets') }}
       </div>
-      <el-scrollbar height="400">
+      <el-scrollbar height="390">
         <DeployedWidgetList />
       </el-scrollbar>
     </div>
     <div class="menus flex flex-col gap-2 my-2">
       <div class="menu-item" @click="AppApi.openAddWidgetWindow()">
         <Plus />
-        {{ t('tray.addWidget') }}
+        <div>{{ t('tray.addWidget') }}</div>
       </div>
       <div class="menu-item" @click="AppApi.openSettingWindow()">
         <Setting />
@@ -81,7 +81,7 @@ function copyAndReport() {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .header, .footer {
   background: #f8f9fa;
   color: #303030;
@@ -101,10 +101,17 @@ function copyAndReport() {
     cursor: pointer;
     border-radius: 4px;
     background-color: rgba(0, 0, 0, 0.04);
+    .i-icon {
+      cursor: pointer;
+    }
     &:hover {
       background-color: rgba(0, 0, 0, 0.08);
     }
   }
+}
+
+.el-scrollbar{
+  height: 390px;
 }
 
 .widgets {

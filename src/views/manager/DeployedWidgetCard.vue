@@ -4,6 +4,7 @@ import { DeployedWidgetApi, WidgetApi } from '@widget-js/core'
 import type { PropType } from 'vue'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { Code, Delete, Refresh } from '@icon-park/vue-next'
 import { useDebugConfig } from '@/composition/useAppConfig'
 
 const props = defineProps({
@@ -16,6 +17,7 @@ const props = defineProps({
 const emits = defineEmits(['remove'])
 const widget = ref<Widget>()
 const { t, locale } = useI18n()
+const ignoreMouseEvents = ref<boolean>(props.deployedWidget.isIgnoreMouseEvents ?? false)
 WidgetApi.getWidget(props.deployedWidget.name).then((value) => {
   widget.value = value
 })
@@ -32,6 +34,10 @@ function openDevTools() {
 
 function refresh() {
   WidgetApi.reload(props.deployedWidget.id)
+}
+
+function onIgnoreMouseEventChange() {
+  WidgetApi.setIgnoreMouseEvents(props.deployedWidget.id, ignoreMouseEvents.value)
 }
 </script>
 
@@ -50,17 +56,21 @@ function refresh() {
         <!--          <span><AutoWidth class="mr-2" />W: {{ deployedWidget.width }} H: {{ deployedWidget.height }}</span> -->
         <!--        </div> -->
       </div>
-      <div class="flex">
+      <div class="flex items-center">
+        <el-checkbox v-model="ignoreMouseEvents" class="mr-auto" @change="onIgnoreMouseEventChange">
+          鼠标穿透
+        </el-checkbox>
+        <span class="ml-auto" />
         <el-button v-if="debugMode" size="small" type="primary" @click="openDevTools">
-          DevTools
+          <Code />
         </el-button>
         <el-button size="small" type="primary" @click="refresh">
-          {{ t('manager.refresh') }}
+          <Refresh />
         </el-button>
         <el-popconfirm :title="t('manager.confirmRemove')" width="200" @confirm="removeWidget">
           <template #reference>
             <el-button size="small" type="danger">
-              {{ t('manager.remove') }}
+              <Delete />
             </el-button>
           </template>
         </el-popconfirm>
