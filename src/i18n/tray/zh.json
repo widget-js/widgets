@@ -12,5 +12,9 @@
   "exit": "退出",
   "suggestions": "建议与反馈",
   "infoCopied": "已复制信息",
-  "downloadLinkCopied": "已复制下载链接到剪贴板"
+  "downloadLinkCopied": "已复制下载链接到剪贴板",
+  "restartWidgets": "重启组件",
+  "restartWidgetsConfirm": "是否重启所有组件？",
+  "yes": "是",
+  "no": "否"
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { Logout, Plus, Refresh, Setting, ShareOne } from '@icon-park/vue-next'
-import { AppApi, BrowserWindowApi, NotificationApi } from '@widget-js/core'
+import { LoadingOne, Logout, Plus, Refresh, Setting, ShareOne } from '@icon-park/vue-next'
+import { AppApi, BrowserWindowApi, NotificationApi, WidgetApi } from '@widget-js/core'
 import { ref } from 'vue'
 import SocialLinks from '@/views/tray/SocialLinks.vue'
 import { useAppRuntimeInfo } from '@/composition/useAppRuntimeInfo'
@@ -24,6 +24,9 @@ function copyAndReport() {
   navigator.clipboard.writeText(text)
   NotificationApi.success(t('tray.infoCopied'))
   BrowserWindowApi.openUrl('https://support.qq.com/product/450189', { external: true })
+}
+function restartWidgets() {
+  WidgetApi.restartWidgets()
 }
 </script>
 
@@ -67,6 +70,20 @@ function copyAndReport() {
         <ShareOne />
         {{ t('tray.shareApp') }}
       </div>
+      <el-popconfirm
+        width="200"
+        :cancel-button-text="t('tray.no')"
+        :confirm-button-text="t('tray.yes')"
+        :title="t('tray.restartWidgetsConfirm')"
+        @confirm="restartWidgets"
+      >
+        <template #reference>
+          <div class="menu-item">
+            <LoadingOne />
+            {{ t('tray.restartWidgets') }}
+          </div>
+        </template>
+      </el-popconfirm>
       <div class="menu-item" @click="AppApi.exit">
         <Logout />
         {{ t('tray.exit') }}

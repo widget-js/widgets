@@ -12,5 +12,9 @@
   "exit": "Exit",
   "suggestions": "Suggestions & Feedback",
   "infoCopied": "Info Copied",
-  "downloadLinkCopied": "Download link copied to clipboard"
+  "downloadLinkCopied": "Download link copied to clipboard",
+  "restartWidgets": "Restart",
+  "restartWidgetsConfirm": "Restart all widgets?",
+  "yes": "Yes",
+  "no": "No"
 }
