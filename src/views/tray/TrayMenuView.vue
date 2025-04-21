@@ -23,7 +23,7 @@ function copyAndReport() {
   const text = JSON.stringify(simpleInfo.value, null, 2)
   navigator.clipboard.writeText(text)
   NotificationApi.success(t('tray.infoCopied'))
-  BrowserWindowApi.openUrl('https://pd.qq.com/s/g1o0pr0dj?businessType=9', { external: true })
+  BrowserWindowApi.openUrl('https://faq.widgetjs.cn', { external: true })
 }
 function restartWidgets() {
   WidgetApi.restartWidgets()
