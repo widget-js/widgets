@@ -19,7 +19,8 @@
     "countdown": "倒计时",
     "finance": "金融",
     "photo": "照片",
-    "debug": "开发组件"
+    "debug": "开发组件",
+    "wish": "需求墙"
   },
   "search": {
     "title": "搜索组件",

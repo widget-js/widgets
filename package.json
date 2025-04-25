@@ -31,7 +31,7 @@
     "core-js": "^3.26.1",
     "dayjs": "^1.11.6",
     "driver.js": "^0.9.8",
-    "element-plus": "^2.4.3",
+    "element-plus": "2.9.8",
     "localforage": "^1.10.0",
     "lodash-es": "^4.17.21",
     "lunar-typescript": "^1.7.0",

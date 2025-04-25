@@ -37,7 +37,8 @@
     "countdown": "Countdown",
     "photo": "Photo",
     "debug": "Dev",
-    "finance": "Finance"
+    "finance": "Finance",
+    "wish": "Wish"
   },
   "manager": {
     "remove": "Remove",

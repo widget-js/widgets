@@ -19,6 +19,7 @@ const items = reactive([
   { icon: 'time', labelKey: 'tags.time', value: 'time' },
   { icon: 'finance', labelKey: 'tags.finance', value: 'finance' },
   { icon: 'pic', labelKey: 'tags.photo', value: 'photo' },
+  { icon: 'star', labelKey: 'tags.wish', value: 'wish' },
   { icon: 'code', labelKey: 'tags.debug', value: 'debug' },
 ],
 )

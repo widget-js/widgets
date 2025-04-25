@@ -11,6 +11,7 @@ import { useI18n } from 'vue-i18n'
 import SearchItem from '@/views/add/SearchItem.vue'
 import { WebWidgetApi } from '@/api/WebWidgetApi'
 import WidgetTags from '@/views/add/WidgetTags.vue'
+import FeatureWallList from '@/views/add/feature/FeatureWallList.vue'
 
 const { t } = useI18n()
 const keyword = ref('')
@@ -101,20 +102,26 @@ function goDevPage() {
           <WidgetTags v-model="selectedCategory" class="px-4 pt-2" @change="search" />
           <el-scrollbar :height="height - 150">
             <el-row v-loading="loading" justify="start" class="px-4">
-              <template v-if="widgets.length == 0 && selectedCategory == 'debug'">
-                <div class="flex flex-col gap-4 items-center justify-center w-full" style="height: 70vh">
-                  <Code size="48" />
-                  <div>{{ t('search.developerTip') }}</div>
-                  <el-button type="primary" @click="goDevPage">
-                    {{ t('search.devDoc') }}
-                  </el-button>
-                </div>
+              <template v-if="selectedCategory == 'wish'">
+                <FeatureWallList />
               </template>
-              <template v-for="item in widgets" :key="item.name">
-                <el-col :span="12">
-                  <div class="grid-content ep-bg-purple" />
-                  <SearchItem :key="item.name" :widget="item as WebWidget" />
-                </el-col>
+              <template v-else>
+                <template v-if="widgets.length == 0 && selectedCategory == 'debug'">
+                  <div class="flex flex-col gap-4 items-center justify-center w-full" style="height: 70vh">
+                    <Code size="48" />
+                    <div>{{ t('search.developerTip') }}</div>
+                    <el-button type="primary" @click="goDevPage">
+                      {{ t('search.devDoc') }}
+                    </el-button>
+                  </div>
+                </template>
+
+                <template v-for="item in widgets" :key="item.name">
+                  <el-col :span="12">
+                    <div class="grid-content ep-bg-purple" />
+                    <SearchItem :key="item.name" :widget="item as WebWidget" />
+                  </el-col>
+                </template>
               </template>
             </el-row>
           </el-scrollbar>
