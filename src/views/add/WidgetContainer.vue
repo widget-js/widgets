@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { WidgetApi } from '@widget-js/core'
 import { WebWidget } from '@widget-js/web-api'
-import { nextTick, onMounted } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 import { FileFailed, PictureOne } from '@icon-park/vue-next'
 import { computedAsync } from '@vueuse/core'
 
@@ -12,6 +12,10 @@ const props = defineProps({
   },
 })
 
+const cellSize = 72
+const containerHeight = cellSize * 2
+const showPreview = ref(false)
+
 const previewImage = computedAsync(async () => {
   if (props.widget.package && props.widget.package.remote) {
     return `https://${props.widget.package.remote.hostname}${props.widget.package.remote.base}${props.widget.previewImage}`
@@ -21,8 +25,7 @@ const previewImage = computedAsync(async () => {
     return url + props.widget.previewImage!
   }
 }, null)
-const cellSize = 72
-const containerHeight = cellSize * 2
+
 onMounted(async () => {
   await nextTick()
 })
@@ -35,12 +38,19 @@ onMounted(async () => {
     }"
     class="widget-container"
   >
+    <el-image-viewer
+      v-if="showPreview"
+      :url-list="[previewImage]"
+      show-progress
+      @close="showPreview = false"
+    />
     <el-image
       v-if="!!widget.previewImage"
-      class="preview-image"
+      class="preview-image cursor-pointer"
       :src="previewImage"
       alt=""
       fit="contain"
+      @click="showPreview = true"
     >
       <template #error>
         <FileFailed />
@@ -58,7 +68,6 @@ onMounted(async () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
 .title {
@@ -72,61 +81,5 @@ onMounted(async () => {
   width: 100%;
   height: auto;
   max-height: 128px;
-}
-
-iframe {
-  transform: scale(1);
-  transition-timing-function: ease-out;
-  transition-duration: 0.2s;
-  filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.2));
-
-  &.editing {
-    transform: scale(0.9);
-  }
-}
-
-.toolbox {
-  position: absolute;
-  right: 0;
-  top: 0;
-
-  .el-button.is-circle {
-    border-radius: 50%;
-    padding: 8px;
-    border-color: white;
-    border-width: 2px;
-    width: 32px;
-    height: 32px;
-  }
-
-  .mgc_delete_line {
-    &::before {
-      color: white;
-    }
-  }
-
-  .mgc_edit_2_fill {
-    &::before {
-      color: white;
-    }
-  }
-
-  .mgc_edit_2_line {
-    &::before {
-      color: white;
-    }
-  }
-
-  .mgc_delete_fill {
-    &::before {
-      color: white;
-    }
-  }
-
-  .mgc_close_line {
-    &::before {
-      color: white;
-    }
-  }
 }
 </style>

@@ -38,7 +38,7 @@ const iconSizePx = computed(() => `${props.iconSize}px`)
 
     <a target="_blank" href="https://space.bilibili.com/207395767">
       <img src="../../assets/images/bilibili_logo_red.png" alt="Bilibili"></a>
-    <a ref="github" target="_blank" href="https://github.com/widget-js">
+    <a ref="github" target="_blank" href="https://github.com/widget-js/widgets">
       <img src="../../assets/images/github-mark.png" alt="GitHub"></a>
   </div>
 </template>
