@@ -22,7 +22,8 @@
     "add": "Add",
     "disable": "Disable",
     "desktop": "Desktop",
-    "overlap": "Overlap"
+    "overlap": "Overlap",
+    "tray": "Tray"
   },
   "tags": {
     "all": "All",

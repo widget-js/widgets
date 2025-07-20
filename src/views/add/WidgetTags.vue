@@ -33,8 +33,8 @@ useDebugConfig((_) => {
 </script>
 
 <template>
-  <el-scrollbar always height="50">
-    <div class="flex gap-2">
+  <el-scrollbar always :height="50" style="height: 50px">
+    <div class="flex gap-2" style="height: 50px">
       <el-tag v-for="item in items" :key="item.labelKey" class="cursor-pointer" :effect="modelValue == item.value ? 'dark' : 'plain'" round size="large" :type="modelValue == item.value ? 'primary' : 'info'" @click="onChange(item.value)">
         <IconPark :type="item.icon" /> {{ t(item.labelKey) }}
       </el-tag>

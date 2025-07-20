@@ -169,11 +169,14 @@ export default {
           </el-button>
         </template>
         <template v-else>
-          <el-button type="primary" round @click="onClickAddNormal">
+          <el-button v-if="widget.isSupportNormal()" type="primary" round @click="onClickAddNormal">
             {{ i18n.t("search.desktop") }}
           </el-button>
-          <el-button type="primary" round @click="addWidget(DeployMode.OVERLAP)">
+          <el-button v-if="widget.isSupportOverlap()" type="primary" round @click="addWidget(DeployMode.OVERLAP)">
             {{ i18n.t("search.overlap") }}
+          </el-button>
+          <el-button v-if="widget.isSupportTray()" type="primary" round @click="addWidget(DeployMode.TRAY)">
+            {{ i18n.t("search.tray") }}
           </el-button>
         </template>
       </div>

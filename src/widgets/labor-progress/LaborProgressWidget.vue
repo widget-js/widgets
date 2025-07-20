@@ -35,7 +35,6 @@ export default {
     const workStartTime = computed(() => {
       return dayjs(props.startTime)
     })
-
     const workEndTime = computed(() => {
       let endTime = dayjs(props.endTime)
       // 如果下班时间在上班时间之前，说明是第二天下班，可能上夜班的酷毙打工人
@@ -121,7 +120,7 @@ export default {
 
 <template>
   <div
-    class="container"
+    class="container overlap-drag-region"
     @mouseenter="mouseEnter"
   >
     <div class="progress-bar">
@@ -149,6 +148,7 @@ export default {
 
 <style scoped lang="scss">
 $progressHeight: 30px;
+
 .container {
   user-select: none;
   display: flex;

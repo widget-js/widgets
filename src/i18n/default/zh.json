@@ -32,7 +32,8 @@
     "add": "添加",
     "upgrade": "升级",
     "enable": "启用",
-    "disable": "禁用"
+    "disable": "禁用",
+    "tray": "托盘"
   },
   "manager": {
     "remove": "移除",
