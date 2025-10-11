@@ -35,7 +35,7 @@ export function useLanguageConfig() {
   })
 
   watch(languageCode, async (newValue) => {
-    if (inited) {
+    if (inited && newValue) {
       await AppApi.setLanguageCode(newValue as LanguageCode)
     }
   })
