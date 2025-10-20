@@ -38,6 +38,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/manager/ManagerView.vue'),
   },
   {
+    path: '/package/manager',
+    name: 'package-manager',
+    component: () => import('@/views/manager/WidgetPackageManagerView.vue'),
+  },
+  {
     path: '/add',
     name: 'add',
     component: () => import('../views/add/AddWidgetView.vue'),

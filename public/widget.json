@@ -96,12 +96,12 @@
       ]
     },
     {
-      "name": "cn.widgetjs.widgets.labor_progress",
+      "name": "cn.widgetjs.widgets.sit_reminder",
       "title": {
-        "zh-CN": "打工进度"
+        "zh-CN": "久坐提醒"
       },
       "description": {
-        "zh-CN": "打工人，打工魂"
+        "zh-CN": "设置间隔，定时提醒，适合长期久坐的人群"
       },
       "keywords": [
         "recommend"
@@ -109,25 +109,25 @@
       "security": false,
       "permissions": [],
       "lang": "zh-CN",
-      "width": 4,
+      "width": 1,
       "height": 1,
-      "maxWidth": 6,
+      "maxWidth": 1,
       "webviewTag": false,
-      "maxHeight": 2,
-      "minWidth": 3,
+      "maxHeight": 1,
+      "minWidth": 1,
       "minHeight": 1,
       "movable": true,
       "singleton": false,
       "resizable": true,
-      "path": "/widget/labor_progress",
+      "path": "/widget/sit_reminder",
       "meta": {},
-      "backgroundThrottling": true,
-      "previewImage": "/images/preview_labor_progress.png",
+      "backgroundThrottling": false,
+      "previewImage": "/images/preview_sit_reminder.png",
       "categories": [
-        "fun"
+        "utilities"
       ],
-      "supportDeployMode": 17,
-      "configPagePath": "/widget/config/labor_progress?frame=true&transparent=false",
+      "supportDeployMode": 65536,
+      "configPagePath": "/widget/config/sit_reminder?frame=true&transparent=false",
       "routes": [],
       "socialLinks": [
         {
@@ -178,6 +178,47 @@
       ]
     },
     {
+      "name": "cn.widgetjs.widgets.labor_progress",
+      "title": {
+        "zh-CN": "打工进度"
+      },
+      "description": {
+        "zh-CN": "打工人，打工魂"
+      },
+      "keywords": [
+        "recommend"
+      ],
+      "security": false,
+      "permissions": [],
+      "lang": "zh-CN",
+      "width": 4,
+      "height": 1,
+      "maxWidth": 6,
+      "webviewTag": false,
+      "maxHeight": 2,
+      "minWidth": 3,
+      "minHeight": 1,
+      "movable": true,
+      "singleton": false,
+      "resizable": true,
+      "path": "/widget/labor_progress",
+      "meta": {},
+      "backgroundThrottling": true,
+      "previewImage": "/images/preview_labor_progress.png",
+      "categories": [
+        "fun"
+      ],
+      "supportDeployMode": 17,
+      "configPagePath": "/widget/config/labor_progress?frame=true&transparent=false",
+      "routes": [],
+      "socialLinks": [
+        {
+          "name": "github",
+          "link": "https://github.com/widget-js/widgets"
+        }
+      ]
+    },
+    {
       "name": "cn.widgetjs.widgets.dynamic_island",
       "title": {
         "zh-CN": "久坐提醒"
@@ -210,47 +251,6 @@
       ],
       "supportDeployMode": 65536,
       "configPagePath": "/widget/config/dynamic_island?frame=true&transparent=false",
-      "routes": [],
-      "socialLinks": [
-        {
-          "name": "github",
-          "link": "https://github.com/widget-js/widgets"
-        }
-      ]
-    },
-    {
-      "name": "cn.widgetjs.widgets.sit_reminder",
-      "title": {
-        "zh-CN": "久坐提醒"
-      },
-      "description": {
-        "zh-CN": "设置间隔，定时提醒，适合长期久坐的人群"
-      },
-      "keywords": [
-        "recommend"
-      ],
-      "security": false,
-      "permissions": [],
-      "lang": "zh-CN",
-      "width": 1,
-      "height": 1,
-      "maxWidth": 1,
-      "webviewTag": false,
-      "maxHeight": 1,
-      "minWidth": 1,
-      "minHeight": 1,
-      "movable": true,
-      "singleton": false,
-      "resizable": true,
-      "path": "/widget/sit_reminder",
-      "meta": {},
-      "backgroundThrottling": false,
-      "previewImage": "/images/preview_sit_reminder.png",
-      "categories": [
-        "utilities"
-      ],
-      "supportDeployMode": 65536,
-      "configPagePath": "/widget/config/sit_reminder?frame=true&transparent=false",
       "routes": [],
       "socialLinks": [
         {

@@ -11,6 +11,7 @@ const { t } = useI18n()
 
 const { simpleInfo } = useAppRuntimeInfo()
 const appVersion = ref<string>()
+
 AppApi.getVersion('app').then((it) => {
   appVersion.value = it
 })
@@ -19,12 +20,14 @@ function shareApp() {
   navigator.clipboard.writeText('https://widgetjs.cn')
   NotificationApi.success(t('tray.downloadLinkCopied')) // 使用国际化
 }
+
 function copyAndReport() {
   const text = JSON.stringify(simpleInfo.value, null, 2)
   navigator.clipboard.writeText(text)
   NotificationApi.success(t('tray.infoCopied'))
   BrowserWindowApi.openUrl('https://faq.widgetjs.cn', { external: true })
 }
+
 function restartWidgets() {
   WidgetApi.restartWidgets()
 }

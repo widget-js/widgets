@@ -7,7 +7,6 @@ import trayEn from '@/i18n/tray/en.json'
 import trayZh from '@/i18n/tray/zh.json'
 
 export const i18n = createI18n({
-  legacy: false,
   locale: 'zh',
   messages: {
     'zh': {

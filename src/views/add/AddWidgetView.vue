@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
-import { Code, Search } from '@icon-park/vue-next'
+import { Code, Install, Search } from '@icon-park/vue-next'
 import type { Category, Widget } from '@widget-js/core'
 import { AppApi, BrowserWindowApi, ElectronUtils, NotificationApi, WidgetApi, WidgetPackageApi } from '@widget-js/core'
 
@@ -151,6 +151,11 @@ const isShowMask = computed(() => {
                 <Search />
               </template>
             </el-input>
+            <el-button size="large" @click="AppApi.openWidgetPackageManagerWindow()">
+              <template #icon>
+                <Install />
+              </template>已安装管理
+            </el-button>
           </div>
           <WidgetTags v-model="selectedCategory" class="px-4 pt-2" @change="search" />
           <el-scrollbar :height="height - 140">
