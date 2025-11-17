@@ -55,7 +55,7 @@ const languages: Language[] = [
               </el-form-item>
               <el-form-item :label="t('settings.language')">
                 <el-select v-model="languageCode">
-                  <el-option v-for="lang in languages" :key="lang.baseName" :value="lang.baseName" :label="lang.nativeName" />
+                  <el-option v-for="lang in languages" :key="lang.baseName" :value="lang.language" :label="lang.nativeName" />
                 </el-select>
               </el-form-item>
               <el-form-item v-if="debugMode" :label="t('settings.developerMode')">

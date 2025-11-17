@@ -9,12 +9,12 @@ import trayZh from '@/i18n/tray/zh.json'
 export const i18n = createI18n({
   locale: 'zh',
   messages: {
-    'zh': {
+    zh: {
       ...defaultZh,
       settings: settingsZh,
       tray: trayZh,
     },
-    'en-US': {
+    en: {
       ...defaultEn,
       settings: settingsEn,
       tray: trayEn,
