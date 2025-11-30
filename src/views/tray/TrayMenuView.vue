@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import { LoadingOne, Logout, Plus, Refresh, Setting, ShareOne } from '@icon-park/vue-next'
+import { useStorage } from '@vueuse/core'
 import { AppApi, BrowserWindowApi, NotificationApi, WidgetApi } from '@widget-js/core'
+import consola from 'consola'
+import { nanoid } from 'nanoid'
 import { ref } from 'vue'
-import SocialLinks from '@/views/tray/SocialLinks.vue'
+import { useI18n } from 'vue-i18n'
+import { supabase } from '@/api/supabase'
+import UserAvatar from '@/components/UserAvatar.vue'
 import { useAppRuntimeInfo } from '@/composition/useAppRuntimeInfo'
+import { useSupabaseChannel } from '@/composition/useSupabaseChannel'
+import { useUser } from '@/composition/useUser'
 import DeployedWidgetList from '@/views/manager/DeployedWidgetList.vue'
+import SocialLinks from '@/views/tray/SocialLinks.vue'
 
 const { t } = useI18n()
 
@@ -31,22 +38,64 @@ function copyAndReport() {
 function restartWidgets() {
   WidgetApi.restartWidgets()
 }
+const state = useStorage('wechat_login_state', '')
+const { loading, user, nickname } = useUser()
+function loginPage() {
+  if (user.value) {
+    AppApi.showAppWindow('/user/profile', {
+      width: 400,
+      height: 500,
+    })
+  }
+  else {
+    state.value = nanoid(32)
+    consola.info(state.value)
+    useSupabaseChannel(`wechat-login-${state.value}`, async (payload) => {
+      consola.info(payload)
+      const currentSession = payload.payload.session
+      const loginRes = await supabase.auth.setSession(currentSession)
+      if (loginRes.error) {
+        NotificationApi.error(loginRes.error.message)
+      }
+      else {
+        AppApi.showAppWindow('/user/profile', {
+          width: 400,
+          height: 500,
+        })
+      }
+    })
+    BrowserWindowApi.openUrl(`https://open.weixin.qq.com/connect/qrconnect?appid=wxf91b19da281f23a9&redirect_uri=https%3A%2F%2Fwidgetjs.cn%2Fapi%2Fv1%2Fuser%2Flogin%2Fwechat%2Fcallback&response_type=code&scope=snsapi_login&state=${state.value}#wechat_redirect`, {
+      width: 800,
+      height: 600,
+      frame: true,
+      transparent: false,
+      titleBarStyle: 'default',
+    })
+  }
+}
 </script>
 
 <template>
   <div class="flex flex-col h-100vh ">
     <div class="header flex items-center w-full p-4">
-      <div class="flex flex-col ">
-        <div>
-          {{ t('tray.appVersion') }}: {{ appVersion }}
+      <div class="flex w-full gap-2">
+        <div v-loading="loading" class="user-info flex gap-2 cursor-pointer items-center" @click="loginPage">
+          <UserAvatar />
+          <div class="w-100px">
+            <el-text truncated>
+              {{ nickname }}
+            </el-text>
+          </div>
         </div>
-        <div>
-          {{ t('tray.systemVersion') }}: {{ simpleInfo?.systemName }}
+        <div class="ml-auto flex flex-col cursor-pointer" @click="AppApi.openRuntimeInfoWindow()">
+          <div>
+            {{ t('tray.appVersion') }}: {{ appVersion }}
+          </div>
+          <div>
+            {{ t('tray.systemVersion') }}: {{ simpleInfo?.systemName?.replaceAll('Windows', 'Win') }}
+          </div>
         </div>
       </div>
-      <el-button size="small" class="ml-auto" @click="AppApi.openRuntimeInfoWindow()">
-        {{ t('tray.fullDetail') }}
-      </el-button>
     </div>
     <div class="widgets flex flex-col gap-2">
       <div class="title">

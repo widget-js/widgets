@@ -48,6 +48,26 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../views/add/AddWidgetView.vue'),
   },
   {
+    path: '/auth/login',
+    name: 'login',
+    component: () => import('../views/auth/LoginView.vue'),
+  },
+  {
+    path: '/auth/register',
+    name: 'register',
+    component: () => import('../views/auth/RegisterView.vue'),
+  },
+  {
+    path: '/auth/reset',
+    name: 'reset_password',
+    component: () => import('../views/auth/ResetPasswordView.vue'),
+  },
+  {
+    path: '/user/profile',
+    name: 'profile',
+    component: () => import('../views/user/ProfileView.vue'),
+  },
+  {
     path: '/failed',
     name: 'failed',
     component: () => import('../views/desktop/WidgetFailed.vue'),

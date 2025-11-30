@@ -9,6 +9,7 @@ body, *, view {
 
 body {
     margin: 0;
+  overflow: hidden;
 }
 
 button {
@@ -22,4 +23,5 @@ button {
 button:active {
     opacity: 0.6;
 }
+
 

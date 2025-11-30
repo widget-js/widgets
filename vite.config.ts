@@ -1,12 +1,12 @@
 import path from 'node:path'
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import widget from '@widget-js/vite-plugin-widget'
-import checker from 'vite-plugin-checker'
 import UnoCSS from 'unocss/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+import { defineConfig } from 'vite'
+import checker from 'vite-plugin-checker'
 
 export default defineConfig({
   base: './',
@@ -20,7 +20,14 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue(), UnoCSS(), widget(), checker({ typescript: true }), AutoImport({ resolvers: [ElementPlusResolver()] }), Components({ resolvers: [ElementPlusResolver()] })],
+  plugins: [
+    vue(),
+    UnoCSS(),
+    widget({ generateZip: false }),
+    checker({ typescript: true }),
+    AutoImport({ resolvers: [ElementPlusResolver()] }),
+    Components({ resolvers: [ElementPlusResolver()] }),
+  ],
   resolve: {
     alias: [{
       find: '@',

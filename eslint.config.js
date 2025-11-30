@@ -20,11 +20,16 @@ export default antfu({
     'vue/space-unary-ops': 'off',
     'vue/comma-dangle': ['error', 'only-multiline'],
     'node/no-callback-literal': 'off',
+    'ts/no-wrapper-object-types': 'off',
     'import/namespace': 'off',
+    'ts/no-empty-object-type': 'off',
     'eqeqeq': 'off',
     'import/default': 'off',
     'import/no-named-as-default': 'off',
     'import/no-named-as-default-member': 'off',
+    'style/max-statements-per-line': ['error', {
+      max: 1,
+    }],
     'curly': ['error', 'multi-line'],
     'max-statements-per-line': ['error', {
       max: 1,

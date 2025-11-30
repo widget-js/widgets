@@ -32,6 +32,7 @@ declare module '@vue/runtime-core' {
     ElRadio: typeof import('element-plus/es')['ElRadio']
     ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
+    ElResult: typeof import('element-plus/es')['ElResult']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSelect: typeof import('element-plus/es')['ElSelect']
@@ -41,6 +42,7 @@ declare module '@vue/runtime-core' {
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTag: typeof import('element-plus/es')['ElTag']
+    ElText: typeof import('element-plus/es')['ElText']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     FontSelector: typeof import('./src/components/FontSelector.vue')['default']
@@ -50,6 +52,7 @@ declare module '@vue/runtime-core' {
     SolarDatePicker: typeof import('./src/components/SolarDatePicker.vue')['default']
     TimePicker: typeof import('./src/components/TimePicker.vue')['default']
     TimePickerDialog: typeof import('./src/components/TimePickerDialog.vue')['default']
+    UserAvatar: typeof import('./src/components/UserAvatar.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']
