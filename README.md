@@ -15,6 +15,7 @@
 </p>
 
 ![png](public/screenshot.jpg)
+![png](https://github.com/rtugeek/stock/raw/master/public/screenshot.png)
 
 ### 说明
 

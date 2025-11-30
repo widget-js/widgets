@@ -17,6 +17,7 @@
   "dependencies": {
     "@icon-park/vue-next": "^1.4.2",
     "@lobehub/icons": "^1.76.0",
+    "@supabase/supabase-js": "^2.84.0",
     "@vueuse/core": "^13.5.0",
     "@vueuse/integrations": "^10.5.0",
     "@vueuse/motion": "2.0.0-beta.12",
