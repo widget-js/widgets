@@ -15,5 +15,14 @@
     "protocol": "Protocol",
     "server": "Server",
     "clear": "Clear"
+  },
+  "widgetPackage": {
+    "title": "Package Title:",
+    "name": "Package Name:",
+    "installPath": "Path:",
+    "uninstall": "Uninstall",
+    "uninstallConfirm": "Uninstall this widget package?",
+    "cancel": "Cancel",
+    "confirm": "Ok"
   }
 }

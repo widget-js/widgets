@@ -4,6 +4,7 @@ import { Check, Logout } from '@icon-park/vue-next'
 import { NotificationApi, WidgetApi } from '@widget-js/core'
 import { ElLoading } from 'element-plus'
 import { ref } from 'vue'
+import consola from 'consola'
 import { getStorageLink, supabase } from '@/api/supabase'
 import UserAvatar from '@/components/UserAvatar.vue'
 import { useUser } from '@/composition/useUser'
@@ -109,6 +110,7 @@ function saveNickName() {
 const widgets = ref<Widget[]>([])
 WidgetApi.getWidgets().then((arr) => {
   widgets.value = arr.filter(it => it.synchronizable)
+  consola.info(widgets.value)
 })
 </script>
 

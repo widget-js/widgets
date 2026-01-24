@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import type { WidgetPackage } from '@widget-js/core'
+import { useI18n } from 'vue-i18n'
 
-defineProps(
-  {
-    widgetPackage: {
-      type: Object as PropType<WidgetPackage>,
-      required: true,
-    },
+defineProps({
+  widgetPackage: {
+    type: Object as PropType<WidgetPackage>,
+    required: true,
   },
-)
+})
 
 const emits = defineEmits(['uninstall'])
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -20,18 +21,28 @@ const emits = defineEmits(['uninstall'])
       <div class="flex flex-col gap-2">
         <div class="flex flex-col text-start">
           <div v-if="widgetPackage">
-            <b>组件包标题：</b>{{ widgetPackage.getTitle() }}
+            <b>{{ t('settings.widgetPackage.title') }}</b>{{ widgetPackage.getTitle() }}
           </div>
           <div class="flex gap-6">
-            <span><b>组件包名：</b>{{ widgetPackage.name }}</span>
+            <span><b>{{ t('settings.widgetPackage.name') }}</b>{{ widgetPackage.name }}</span>
+          </div>
+          <div class="flex">
+            <div><b>{{ t('settings.widgetPackage.installPath') }}</b></div><el-text truncated style="max-width: 600px">
+              {{ widgetPackage.url }}
+            </el-text>
           </div>
         </div>
       </div>
       <div class="ml-auto flex items-center">
-        <el-popconfirm cancel-button-text="取消" width="200" confirm-button-text="确认" title="确认卸载该组件包吗？" @confirm="emits('uninstall', widgetPackage)">
+        <el-popconfirm
+          :cancel-button-text="t('settings.widgetPackage.cancel')"
+          width="200"
+          :confirm-button-text="t('settings.widgetPackage.confirm')"
+          :title="t('settings.widgetPackage.uninstallConfirm')" @confirm="emits('uninstall', widgetPackage)"
+        >
           <template #reference>
             <el-button type="danger" size="small">
-              卸载
+              {{ t('settings.widgetPackage.uninstall') }}
             </el-button>
           </template>
         </el-popconfirm>

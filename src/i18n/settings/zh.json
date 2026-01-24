@@ -15,5 +15,14 @@
     "protocol": "代理协议",
     "server": "代理服务器",
     "clear": "清除代理"
+  },
+  "widgetPackage": {
+    "title": "组件包标题：",
+    "name": "组件包名：",
+    "installPath": "安装路径：",
+    "uninstall": "卸载",
+    "uninstallConfirm": "确认卸载该组件包吗？",
+    "cancel": "取消",
+    "confirm": "确认"
   }
 }

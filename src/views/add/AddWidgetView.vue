@@ -30,8 +30,8 @@ onMounted(async () => {
 
 async function search() {
   loading.value = true
+  widgets.splice(0, widgets.length)
   if (selectedCategory.value == 'debug') {
-    widgets.splice(0, widgets.length)
     WidgetPackageApi.getPackages().then(async (widgetPackages) => {
       for (const widgetPackage of widgetPackages.filter(it => it.development)) {
         const localWidgets = await WidgetApi.getWidgets()
@@ -45,6 +45,20 @@ async function search() {
       loading.value = false
     })
     return
+  }
+  else if (selectedCategory.value == '') {
+    WidgetPackageApi.getPackages().then(async (widgetPackages) => {
+      for (const widgetPackage of widgetPackages.filter(it => !it.url.startsWith('http'))) {
+        const localWidgets = await WidgetApi.getWidgets()
+        widgets.push(
+          ...localWidgets
+            .map(it => WebWidget.fromObject(it))
+            .filter(it => it.packageName == widgetPackage.name),
+        )
+      }
+    }).finally(() => {
+      loading.value = false
+    })
   }
 
   const version = await AppApi.getVersion()
@@ -70,7 +84,6 @@ async function search() {
   }
   WebWidgetApi.search(options)
     .then((res) => {
-      widgets.splice(0, widgets.length)
       widgets.push(
         ...res.data
           .map(it => WebWidget.fromObject(it))
@@ -154,7 +167,7 @@ const isShowMask = computed(() => {
             <el-button size="large" @click="AppApi.openWidgetPackageManagerWindow()">
               <template #icon>
                 <Install />
-              </template>已安装管理
+              </template>{{ t('search.installedManagement') }}
             </el-button>
           </div>
           <WidgetTags v-model="selectedCategory" class="px-4 pt-2" @change="search" />

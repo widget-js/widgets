@@ -33,7 +33,8 @@
     "upgrade": "升级",
     "enable": "启用",
     "disable": "禁用",
-    "tray": "托盘"
+    "tray": "托盘",
+    "installedManagement": "已安装管理"
   },
   "manager": {
     "remove": "移除",
@@ -57,7 +58,7 @@
     "windowTitle": "检测更新",
     "alreadyLatestVersion": "已经是最新版本",
     "newVersionDetect": "检测到新版本：",
-    "upgradeToNew": "请先升级应用到最新版"
+    "upgradeToNew": "请先升级应用到最新版本"
   },
   "notification": {
     "enableDevMode": "启用开发者模式"

@@ -23,7 +23,8 @@
     "disable": "Disable",
     "desktop": "Desktop",
     "overlap": "Overlap",
-    "tray": "Tray"
+    "tray": "Tray",
+    "installedManagement": "Installed"
   },
   "tags": {
     "all": "All",
