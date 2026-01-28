@@ -19,7 +19,7 @@ const items = reactive([
   { icon: 'time', labelKey: 'tags.time', value: 'time' },
   { icon: 'finance', labelKey: 'tags.finance', value: 'finance' },
   { icon: 'pic', labelKey: 'tags.photo', value: 'photo' },
-  { icon: 'star', labelKey: 'tags.wish', value: 'wish' },
+  { icon: 'install', labelKey: 'tags.installed', value: 'installed' },
   { icon: 'code', labelKey: 'tags.debug', value: 'debug' },
 ],
 )
@@ -36,7 +36,7 @@ useDebugConfig((_) => {
   <el-scrollbar always :height="50" style="height: 50px">
     <div class="flex gap-2" style="height: 50px">
       <el-tag v-for="item in items" :key="item.labelKey" class="cursor-pointer" :effect="modelValue == item.value ? 'dark' : 'plain'" round size="large" :type="modelValue == item.value ? 'primary' : 'info'" @click="onChange(item.value)">
-        <IconPark :type="item.icon" /> {{ t(item.labelKey) }}
+        <IconPark :type="item.icon" style="font-size: 14px" /> {{ t(item.labelKey) }}
       </el-tag>
     </div>
   </el-scrollbar>

@@ -46,7 +46,7 @@ async function search() {
     })
     return
   }
-  else if (selectedCategory.value == '') {
+  else if (selectedCategory.value == 'installed') {
     WidgetPackageApi.getPackages().then(async (widgetPackages) => {
       for (const widgetPackage of widgetPackages.filter(it => !it.url.startsWith('http'))) {
         const localWidgets = await WidgetApi.getWidgets()
@@ -59,6 +59,7 @@ async function search() {
     }).finally(() => {
       loading.value = false
     })
+    return
   }
 
   const version = await AppApi.getVersion()
@@ -181,9 +182,11 @@ const isShowMask = computed(() => {
                   <div class="flex flex-col gap-4 items-center justify-center w-full" style="height: 70vh">
                     <Code size="48" />
                     <div>{{ t('search.developerTip') }}</div>
-                    <el-button type="primary" @click="goDevPage">
-                      {{ t('search.devDoc') }}
-                    </el-button>
+                    <div class="flex gap-2">
+                      <el-button round type="primary" @click="goDevPage">
+                        {{ t('search.devDoc') }}
+                      </el-button>
+                    </div>
                   </div>
                 </template>
 
