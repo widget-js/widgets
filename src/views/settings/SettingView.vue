@@ -1,17 +1,19 @@
 <script lang="ts" setup>
-import { onMounted, ref, watch } from 'vue'
 import {
   ApiConstants,
   AppApi,
   BrowserWindowApi,
 } from '@widget-js/core'
 import { WidgetBaseDialog } from '@widget-js/vue3'
+import { onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import SettingSection from './SettingSection.vue'
+import { useRoute } from 'vue-router'
 import { useCellSizeConfig, useDebugConfig, useLanguageConfig } from '@/composition/useAppConfig'
-import ThemeSettingPanel from '@/views/settings/theme/ThemeSettingPanel.vue'
+import AiSettingPanel from '@/views/settings/AiSettingPanel.vue'
 import ProxySettingPanel from '@/views/settings/ProxySettingPanel.vue'
+import ThemeSettingPanel from '@/views/settings/theme/ThemeSettingPanel.vue'
 import SocialLinks from '@/views/tray/SocialLinks.vue'
+import SettingSection from './SettingSection.vue'
 
 const { t } = useI18n()
 BrowserWindowApi.setSize(600, 800)
@@ -31,7 +33,8 @@ onMounted(() => {
   document.title = t('settings.title')
 })
 
-const activeName = ref('settings')
+const route = useRoute()
+const activeName = ref(route.query.tab as string || 'settings')
 const appVersion = ref<string>()
 AppApi.getVersion('app').then((value) => {
   appVersion.value = value
@@ -93,6 +96,9 @@ const languages: Language[] = [
         </el-tab-pane>
         <el-tab-pane :label="t('settings.proxy.title')" name="proxy">
           <ProxySettingPanel />
+        </el-tab-pane>
+        <el-tab-pane label="AI设置" name="ai">
+          <AiSettingPanel />
         </el-tab-pane>
       </el-tabs>
     </template>

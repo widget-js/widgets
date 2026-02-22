@@ -25,3 +25,4 @@ pnpm-debug.log*
 .eslintcache
 #Electron-builder output
 /dist_electron
+vite.config.ts.timestamp-*.mjs

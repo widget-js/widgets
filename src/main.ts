@@ -16,7 +16,6 @@ import '@/assets/css/common.css'
 import '@icon-park/vue-next/styles/index.css'
 import 'element-plus/theme-chalk/src/message-box.scss'
 import 'element-plus/theme-chalk/src/message.scss'
-
 import 'element-plus/theme-chalk/src/loading.scss'
 
 dayjs.locale('cn')
