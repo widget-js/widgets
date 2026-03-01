@@ -1,57 +1,13 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "jsx": "preserve",
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ],
-    "useDefineForClassFields": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "baseUrl": ".",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
-    "resolveJsonModule": true,
-    "types": [
-      "element-plus/global",
-      "vue"
-    ],
-    "strict": true,
-    "noImplicitAny": false,
-    "noImplicitThis": false,
-    "noEmit": true,
-    "removeComments": true,
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "skipLibCheck": true
-  },
+  "files": [],
   "references": [
-    {
-      "path": "./tsconfig.node.json"
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
     }
-  ],
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "src/**/*.widget.ts",
-    "src/**/*.stories.ts",
-    "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "auto-imports.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  }
 }

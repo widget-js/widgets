@@ -1,0 +1,170 @@
+{
+  "network": {
+    "failed": "加载失败: {{msg}}",
+    "offline": "网络已断开"
+  },
+  "loading": "加载中...",
+  "manager": {
+    "title": "标题",
+    "name": "名称",
+    "remove": "移除",
+    "removeDesc": "确定要移除 {{name}} 吗？",
+    "confirmRemove": "确定要删除吗？"
+  },
+  "settings": {
+    "title": "设置",
+    "widgetPackage": {
+      "managerTitle": "已安装管理",
+      "title": "标题：",
+      "name": "名称：",
+      "installPath": "安装路径：",
+      "uninstall": "卸载",
+      "uninstallConfirm": "确定要卸载吗？",
+      "uninstallDesc": "卸载 {{name}} 将无法恢复。",
+      "cancel": "取消",
+      "confirm": "确定"
+    }
+  },
+  "sidebar": {
+    "addWidget": "添加组件",
+    "packageManagement": "组件包管理",
+    "generalSettings": "常用设置",
+    "globalTheme": "全局主题",
+    "proxySettings": "代理设置",
+    "ai": "AI",
+    "widgetManagement": "组件管理",
+    "settings": "设置",
+    "loading": "加载中...",
+    "widgetHub": "桌面组件"
+  },
+  "general": {
+    "title": "常用设置",
+    "appSettings": "应用设置",
+    "launchAtStartup": "开机自启动",
+    "language": "语言",
+    "selectLanguage": "选择语言",
+    "developerMode": "开发者模式",
+    "currentVersion": "当前版本",
+    "desktopSettings": "桌面设置",
+    "gridSize": "网格大小",
+    "socialAccounts": "社交账号"
+  },
+  "proxy": {
+    "title": "代理设置",
+    "warning": "配置代理服务器可能会导致网络连接中断，请谨慎操作。",
+    "protocol": "协议",
+    "server": "服务器",
+    "port": "端口",
+    "clearProxy": "清除代理"
+  },
+  "theme": {
+    "title": "全局主题",
+    "presets": "预设",
+    "customization": "自定义",
+    "fontSize": "字体大小",
+    "borderRadius": "圆角大小",
+    "fontFamily": "字体系列",
+    "systemDefault": "系统默认",
+    "primaryColor": "主色调",
+    "textColor": "文本颜色",
+    "backgroundColor": "背景颜色",
+    "borderColor": "边框颜色",
+    "shadowColor": "阴影颜色",
+    "dividerColor": "分割线颜色",
+    "translucent": "半透明",
+    "dark": "暗色",
+    "light": "亮色"
+  },
+  "dashboard": {
+    "home": "首页",
+    "dashboard": "仪表盘"
+  },
+  "appInfo": {
+    "title": "应用信息",
+    "loading": "加载中..."
+  },
+  "user": {
+    "account": "账号",
+    "logout": "退出登录"
+  },
+  "tray": {
+    "appVersion": "版本",
+    "systemVersion": "系统",
+    "runningWidgets": "运行中组件",
+    "addWidget": "添加组件",
+    "settings": {
+      "title": "设置"
+    },
+    "checkUpdates": "检查更新",
+    "shareApp": "分享应用",
+    "restartWidgets": "重启组件",
+    "exit": "退出",
+    "suggestions": "反馈建议",
+    "downloadLinkCopied": "下载链接已复制",
+    "infoCopied": "信息已复制",
+    "restartWidgetsConfirm": "确定要重启所有组件吗？",
+    "yes": "是",
+    "no": "否"
+  },
+  "notification": {
+    "enableDevMode": "开发者模式已开启"
+  },
+  "drop": {
+    "title": "安装本地组件包",
+    "desc": "将组件包.zip拖放到此处即可安装",
+    "dismiss": "知道了"
+  },
+  "update": {
+    "upgradeToNew": "请升级应用以使用此组件",
+    "success": "更新成功",
+    "packageNotConfigured": "未配置组件包信息",
+    "packageSuccess": "组件包升级成功",
+    "failed": "更新失败",
+    "windowTitle": "检查更新",
+    "alreadyLatestVersion": "当前已是最新版本",
+    "newVersionDetect": "发现新版本",
+    "ignore": "忽略",
+    "storePage": "商店页面",
+    "update": "更新",
+    "check": "检查更新"
+  },
+  "search": {
+    "title": "添加组件",
+    "placeholder": "搜索组件",
+    "installedManagement": "已安装",
+    "developerTip": "开发模式已开启",
+    "devDoc": "开发文档",
+    "enable": "启用",
+    "disable": "禁用",
+    "desktop": "桌面",
+    "overlap": "悬浮窗",
+    "tray": "托盘",
+    "upgrade": "升级",
+    "installOffline": "安装离线组件"
+  },
+  "tags": {
+    "all": "全部",
+    "ai": "AI",
+    "tools": "工具",
+    "productivity": "效率",
+    "news": "新闻",
+    "weather": "天气",
+    "fun": "娱乐",
+    "calendar": "日历",
+    "time": "时间",
+    "finance": "财经",
+    "photo": "照片",
+    "installed": "已安装",
+    "debug": "调试"
+  },
+  "feature": {
+    "wishlist": "心愿单",
+    "wishlistDesc": "投票选出你希望在下一个版本中看到的功能！"
+  },
+  "install": {
+    "success": "安装成功",
+    "failed": "安装失败",
+    "noUrl": "未找到下载链接",
+    "action": "安装"
+  }
+}

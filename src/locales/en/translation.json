@@ -1,0 +1,170 @@
+{
+  "network": {
+    "failed": "Load failed: {{msg}}",
+    "offline": "Network offline"
+  },
+  "loading": "Loading...",
+  "manager": {
+    "title": "Title",
+    "name": "Name",
+    "remove": "Remove",
+    "removeDesc": "Are you sure to remove {{name}}?",
+    "confirmRemove": "Are you sure to remove?"
+  },
+  "settings": {
+    "title": "Settings",
+    "widgetPackage": {
+      "managerTitle": "Installed Management",
+      "title": "Title:",
+      "name": "Name:",
+      "installPath": "Install Path:",
+      "uninstall": "Uninstall",
+      "uninstallConfirm": "Are you sure you want to uninstall?",
+      "uninstallDesc": "Uninstalling {{name}} cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    }
+  },
+  "sidebar": {
+    "addWidget": "Add Widget",
+    "packageManagement": "Widget Package",
+    "generalSettings": "General Settings",
+    "globalTheme": "Global Theme",
+    "proxySettings": "Proxy",
+    "ai": "AI",
+    "widgetManagement": "Widget Management",
+    "settings": "Settings",
+    "loading": "Loading...",
+    "widgetHub": "Widget Hub"
+  },
+  "general": {
+    "title": "General Settings",
+    "appSettings": "App Settings",
+    "launchAtStartup": "Launch at Startup",
+    "language": "Language",
+    "selectLanguage": "Select Language",
+    "developerMode": "Developer Mode",
+    "currentVersion": "Current Version",
+    "desktopSettings": "Desktop Settings",
+    "gridSize": "Grid Size",
+    "socialAccounts": "Social Accounts"
+  },
+  "proxy": {
+    "title": "Proxy Settings",
+    "warning": "Configuring a proxy server may cause network connection interruptions, please proceed with caution.",
+    "protocol": "Protocol",
+    "server": "Server",
+    "port": "Port",
+    "clearProxy": "Clear Proxy"
+  },
+  "theme": {
+    "title": "Global Theme",
+    "presets": "Presets",
+    "customization": "Customization",
+    "fontSize": "Font Size",
+    "borderRadius": "Border Radius",
+    "fontFamily": "Font Family",
+    "systemDefault": "System Default",
+    "primaryColor": "Primary Color",
+    "textColor": "Text Color",
+    "backgroundColor": "Background Color",
+    "borderColor": "Border Color",
+    "shadowColor": "Shadow Color",
+    "dividerColor": "Divider Color",
+    "translucent": "Translucent",
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "dashboard": {
+    "home": "Home",
+    "dashboard": "Dashboard"
+  },
+  "appInfo": {
+    "title": "App Info",
+    "loading": "Loading..."
+  },
+  "user": {
+    "account": "Account",
+    "logout": "Log out"
+  },
+  "tray": {
+    "appVersion": "Version",
+    "systemVersion": "System",
+    "runningWidgets": "Running Widgets",
+    "addWidget": "Add Widget",
+    "settings": {
+      "title": "Settings"
+    },
+    "checkUpdates": "Check Updates",
+    "shareApp": "Share",
+    "restartWidgets": "Restart",
+    "exit": "Exit",
+    "suggestions": "Suggestions",
+    "downloadLinkCopied": "Download link copied",
+    "infoCopied": "Info copied",
+    "restartWidgetsConfirm": "Are you sure to restart all widgets?",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "notification": {
+    "enableDevMode": "Developer mode enabled"
+  },
+  "drop": {
+    "title": "Install Local Widget Package",
+    "desc": "Drag and drop .zip widget package here to install",
+    "dismiss": "Got it"
+  },
+  "update": {
+    "upgradeToNew": "Please upgrade app to use this widget",
+    "success": "Update successful",
+    "packageNotConfigured": "Widget package info not configured",
+    "packageSuccess": "Widget package upgraded successfully",
+    "failed": "Update failed",
+    "windowTitle": "Check for Updates",
+    "alreadyLatestVersion": "Already latest version",
+    "newVersionDetect": "New version detected",
+    "ignore": "Ignore",
+    "storePage": "Store Page",
+    "update": "Update",
+    "check": "Check for Updates"
+  },
+  "search": {
+    "title": "Add Widget",
+    "placeholder": "Search widgets",
+    "installedManagement": "Installed",
+    "developerTip": "Developer mode enabled",
+    "devDoc": "Developer Docs",
+    "enable": "Enable",
+    "disable": "Disable",
+    "desktop": "Desktop",
+    "overlap": "Overlap",
+    "tray": "Tray",
+    "upgrade": "Upgrade",
+    "installOffline": "Install Offline Widget"
+  },
+  "tags": {
+    "all": "All",
+    "ai": "AI",
+    "tools": "Tools",
+    "productivity": "Productivity",
+    "news": "News",
+    "weather": "Weather",
+    "fun": "Fun",
+    "calendar": "Calendar",
+    "time": "Time",
+    "finance": "Finance",
+    "photo": "Photo",
+    "installed": "Installed",
+    "debug": "Debug"
+  },
+  "feature": {
+    "wishlist": "Wishlist",
+    "wishlistDesc": "Vote for features you want to see in the next version!"
+  },
+  "install": {
+    "success": "Install successful",
+    "failed": "Install failed",
+    "noUrl": "Download URL not found",
+    "action": "Install"
+  }
+}

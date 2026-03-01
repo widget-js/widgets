@@ -7,15 +7,25 @@ export default antfu({
     quotes: 'single', // or 'double'
   },
   typescript: true,
-  vue: true,
+  react: true,
+  jsx: true,
+  vue: false,
   jsonc: false,
   yaml: false,
+  markdown: false,
+  ignores: [
+    '**/fixtures',
+    'src/components/ui/**',
+  ],
   rules: {
     'curly': ['error', 'multi-line'],
-    'ts/no-use-before-define': 'off',
-    'ts/explicit-function-return-type': 'off',
+    'no-use-before-define': 'off',
     'eqeqeq': 'off',
-    'unused-imports/no-unused-vars': ['error', { caughtErrors: 'none' }],
+    'unused-imports/no-unused-vars': ['error', {
+      caughtErrors: 'none',
+      argsIgnorePattern: '^_',
+    }],
+    'ts/explicit-function-return-type': 'off',
     'style/max-statements-per-line': ['error', {
       max: 2,
     }],

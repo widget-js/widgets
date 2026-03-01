@@ -1,0 +1,24 @@
+/* App.css cleared for Tailwind compatibility */
+*{
+  /*user-select: none;*/
+}
+/* Global Scrollbar Styling matching src/components/ui/scroll-area.tsx */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
