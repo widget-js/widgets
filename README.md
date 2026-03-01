@@ -19,7 +19,8 @@
 
 ## 🔗预览所有组件
 
-https://widget-js.github.io/widgets/#/add
+https://widget-js.github.io/widgets/#/  
+
 ![png](screenshot/react.png)
 
 
