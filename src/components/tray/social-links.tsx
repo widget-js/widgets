@@ -12,10 +12,10 @@ interface SocialLinksProps {
 }
 
 function useLongPress(callback: () => void, delay: number = 3000) {
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const timeoutRef = useRef<number | null>(null)
 
   const start = useCallback(() => {
-    timeoutRef.current = setTimeout(() => {
+    timeoutRef.current = window.setTimeout(() => {
       callback()
     }, delay)
   }, [callback, delay])
