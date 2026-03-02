@@ -166,5 +166,11 @@
     "failed": "Install failed",
     "noUrl": "Download URL not found",
     "action": "Install"
+  },
+  "error": {
+    "oops": "Oops!",
+    "unexpected": "Sorry, an unexpected error has occurred.",
+    "unknown": "Unknown error",
+    "backToHome": "Back to Home"
   }
 }

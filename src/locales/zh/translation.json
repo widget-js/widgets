@@ -166,5 +166,11 @@
     "failed": "安装失败",
     "noUrl": "未找到下载链接",
     "action": "安装"
+  },
+  "error": {
+    "oops": "哎呀！",
+    "unexpected": "抱歉，发生了意外错误。",
+    "unknown": "未知错误",
+    "backToHome": "返回首页"
   }
 }

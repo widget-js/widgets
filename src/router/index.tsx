@@ -11,6 +11,7 @@ import { createHashRouter, Navigate } from 'react-router-dom'
 import { DashboardLayout } from '@/components/dashboard-layout'
 import AddWidgetPage from '@/pages/add/add-widget-page'
 import AiPage from '@/pages/ai/ai-page'
+import ErrorPage from '@/pages/error-page'
 import WidgetPackageManagerPage from '@/pages/packages/widget-package-manager-page'
 import AppInfoPage from '@/pages/settings/app-info-page'
 import GeneralPage from '@/pages/settings/general-page'
@@ -23,6 +24,7 @@ export const routes: RouteObject[] = [
   {
     path: '/',
     element: <DashboardLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -119,6 +121,10 @@ export const routes: RouteObject[] = [
   {
     path: '/tray/menu',
     element: <TrayPage />,
+  },
+  {
+    path: '*',
+    element: <ErrorPage />,
   },
 ]
 
