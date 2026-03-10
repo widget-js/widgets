@@ -28,8 +28,8 @@ https://widget-js.github.io/widgets/#/
 这是桌面组件前端开源组件，项目还在持续完善中
 
 Windows 10/11 客户端下载地址：
-1️⃣ https://www.microsoft.com/store/productId/9NPR50GQ7T53
-2️⃣ https://widgetjs.cn
+- https://www.microsoft.com/store/productId/9NPR50GQ7T53
+- https://widgetjs.cn
 
 ## ▶️运行项目
 
