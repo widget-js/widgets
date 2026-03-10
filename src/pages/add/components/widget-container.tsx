@@ -2,9 +2,8 @@ import type { WebWidget } from '@widget-js/web-api'
 import { WidgetApi } from '@widget-js/core'
 import { Image as ImageIcon, ImageOff } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import Zoom from 'react-medium-image-zoom'
 import { cn } from '@/lib/utils'
-import 'react-medium-image-zoom/dist/styles.css'
+import { ZoomImage } from './zoom-image'
 
 interface WidgetContainerProps {
   widget: WebWidget
@@ -59,15 +58,13 @@ export default function WidgetContainer({ widget, className }: WidgetContainerPr
     >
       {previewImage
         ? (
-            <Zoom>
-              <img
-                src={previewImage}
-                alt="Widget Preview"
-                className="w-full h-auto max-h-[128px] object-contain drop-shadow-md cursor-pointer hover:opacity-90 transition-opacity"
-                onError={() => setError(true)}
-                style={{ display: error ? 'none' : 'block' }}
-              />
-            </Zoom>
+            <ZoomImage
+              src={previewImage}
+              alt="Widget Preview"
+              className="w-full h-auto max-h-[128px] object-contain drop-shadow-md cursor-pointer hover:opacity-90 transition-opacity"
+              onError={() => setError(true)}
+              style={{ display: error ? 'none' : 'block' }}
+            />
           )
         : null}
 

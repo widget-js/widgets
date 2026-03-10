@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { RouterProvider } from 'react-router-dom'
 import { useAppLanguage } from './hooks/use-app-language'
 import { router } from './router'
+import '@widget-js/react/style.css'
 import './app.css'
 
 function App() {

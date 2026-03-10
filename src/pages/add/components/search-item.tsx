@@ -29,9 +29,6 @@ export function SearchItem({ widget }: SearchItemProps) {
   const [isWidgetHosted, setIsWidgetHosted] = useState(false)
   const [adding, setAdding] = useState(false)
 
-  // Assuming useBroadcastChannel is not critical for now or can be replaced later
-  // const { post } = useBroadcastChannel({ name: 'CHANNEL_MAIN' })
-
   const updateWidgetAdd = useCallback(async () => {
     if (widget.isSupportBackground()) {
       const widgets = await DeployedWidgetApi.getDeployedWidgets(widget.name)

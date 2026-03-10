@@ -7,7 +7,6 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/license/widget-js/widgets" alt="">
   <img src="https://img.shields.io/badge/Q%E7%BE%A4-701784679-EB1923?logo=tencentqq&logoColor=white&sanitize=true" alt="Chat">
   <a href="https://space.bilibili.com/207395767"><img src="https://img.shields.io/badge/-Bilibili-00A1D6?logo=bilibili&logoColor=white" alt="bilibili"></a>
   <a href="https://faq.widgetjs.cn"><img src="https://img.shields.io/badge/-功能建议-2378ff?logo=vowpalwabbit&logoColor=white&sanitize=true" alt="Feedback"></a>
@@ -19,7 +18,7 @@
 
 ## 🔗预览所有组件
 
-https://widget-js.github.io/widgets/#/  
+https://widget-js.github.io/widgets/#/
 
 ![png](screenshot/react.png)
 
@@ -31,26 +30,6 @@ https://widget-js.github.io/widgets/#/
 Windows 10/11 客户端下载地址：
 1️⃣ https://www.microsoft.com/store/productId/9NPR50GQ7T53
 2️⃣ https://widgetjs.cn
-
-## 🗂️项目目录结构
-
-```
-widgets
-├── src
-│   ├── components                // 常用Vue组件
-│   ├── views                     // 页面文件
-│   ├── widgets                   // 桌面组件文件
-│   │   ├── countdown             // 每个桌面组件一个文件夹
-│   │   │   ├── XXWidget.vue      // 桌面小组件
-│   │   │   ├── XXConfig.vue      // 小组件配置页面
-│   │   │   └── XXView.vue        // 小组件页面
-│   │   └── ...
-│   └── index.ts
-├── .gitignore
-├── package.json
-├── README.md
-└── tsconfig.json
-```
 
 ## ▶️运行项目
 
@@ -73,9 +52,6 @@ pnpm run install
 pnpm run dev
 ```
 ## 📋组件列表
-
-
-> 🔗全部组件预览地址：https://widget-js.github.io/widgets/#/add
 
 ### AI组件包
 

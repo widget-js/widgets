@@ -1,3 +1,4 @@
+import { WindowControls } from '@widget-js/react'
 import { useTranslation } from 'react-i18next'
 import { Outlet, useMatches } from 'react-router-dom'
 import { AppSidebar } from '@/components/app-sidebar'
@@ -11,7 +12,6 @@ import {
   SidebarInset,
   SidebarProvider,
 } from '@/components/ui/sidebar'
-import { WindowControls } from '@/components/window-controls'
 
 export function DashboardLayout() {
   const { t } = useTranslation()

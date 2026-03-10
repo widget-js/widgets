@@ -1,6 +1,7 @@
 import type { RouteObject } from 'react-router-dom'
 import {
   Bot,
+  Code2,
   Globe,
   Package,
   Palette,
@@ -11,6 +12,7 @@ import { createHashRouter, Navigate } from 'react-router-dom'
 import { DashboardLayout } from '@/components/dashboard-layout'
 import AddWidgetPage from '@/pages/add/add-widget-page'
 import AiPage from '@/pages/ai/ai-page'
+import DevPage from '@/pages/dev/dev-page'
 import ErrorPage from '@/pages/error-page'
 import WidgetPackageManagerPage from '@/pages/packages/widget-package-manager-page'
 import AppInfoPage from '@/pages/settings/app-info-page'
@@ -53,6 +55,15 @@ export const routes: RouteObject[] = [
             handle: {
               title: 'sidebar.packageManagement',
               icon: Package,
+              sidebarMenu: true,
+            },
+          },
+          {
+            path: 'dev',
+            element: <DevPage />,
+            handle: {
+              title: 'sidebar.dev',
+              icon: Code2,
               sidebarMenu: true,
             },
           },

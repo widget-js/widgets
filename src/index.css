@@ -144,3 +144,7 @@
 .draggable-region a {
   -webkit-app-region: no-drag;
 }
+
+[data-rmiz-modal-overlay="visible"] {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}

@@ -20,6 +20,7 @@
     "@tailwindcss/vite": "^4.2.0",
     "@uiw/react-color": "^2.9.5",
     "@widget-js/core": "latest",
+    "@widget-js/react": "workspace:^",
     "@widget-js/web-api": "24.1.1-beta.70",
     "axios": "^1.13.5",
     "baseline-browser-mapping": "^2.10.0",

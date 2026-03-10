@@ -35,7 +35,12 @@
     "widgetManagement": "组件管理",
     "settings": "设置",
     "loading": "加载中...",
-    "widgetHub": "桌面组件"
+    "widgetHub": "桌面组件",
+    "dev": "开发组件"
+  },
+  "dev": {
+    "emptyTitle": "开发属于自己的桌面组件",
+    "viewDocs": "查看文档"
   },
   "general": {
     "title": "常用设置",

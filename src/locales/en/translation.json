@@ -35,7 +35,12 @@
     "widgetManagement": "Widget Management",
     "settings": "Settings",
     "loading": "Loading...",
-    "widgetHub": "Widget Hub"
+    "widgetHub": "Widget Hub",
+    "dev": "Widget Dev"
+  },
+  "dev": {
+    "emptyTitle": "Develop Your Own Desktop Widget",
+    "viewDocs": "View Documentation"
   },
   "general": {
     "title": "General Settings",

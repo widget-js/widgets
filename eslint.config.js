@@ -24,6 +24,7 @@ export default antfu({
     'unused-imports/no-unused-vars': ['error', {
       caughtErrors: 'none',
       argsIgnorePattern: '^_',
+      varsIgnorePattern: '^_',
     }],
     'ts/explicit-function-return-type': 'off',
     'style/max-statements-per-line': ['error', {
