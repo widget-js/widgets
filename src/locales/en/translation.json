@@ -65,6 +65,17 @@
   "theme": {
     "title": "Global Theme",
     "presets": "Presets",
+    "createPreset": {
+      "button": "Create preset",
+      "title": "Create theme preset",
+      "description": "Save the current theme as a reusable preset.",
+      "namePlaceholder": "Enter a theme name",
+      "cancel": "Cancel",
+      "confirm": "Create",
+      "emptyName": "Please enter a theme name",
+      "duplicateName": "A preset with the same name already exists",
+      "success": "Theme preset created"
+    },
     "customization": "Customization",
     "fontSize": "Font Size",
     "borderRadius": "Border Radius",
@@ -78,7 +89,72 @@
     "dividerColor": "Divider Color",
     "translucent": "Translucent",
     "dark": "Dark",
-    "light": "Light"
+    "light": "Light",
+    "searchFont": "Search font...",
+    "fontNotFound": "No font found",
+    "colors": {
+      "title": "Colors",
+      "base": "Base",
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "muted": "Muted",
+      "accent": "Accent",
+      "destructive": "Destructive",
+      "cardPopover": "Card & Popover",
+      "bordersInputs": "Borders & Inputs",
+      "background": "Background",
+      "foreground": "Foreground",
+      "card": "Card",
+      "cardForeground": "Card Foreground",
+      "popover": "Popover",
+      "popoverForeground": "Popover Foreground",
+      "primaryForeground": "Primary Foreground",
+      "secondaryForeground": "Secondary Foreground",
+      "mutedForeground": "Muted Foreground",
+      "accentForeground": "Accent Foreground",
+      "destructiveForeground": "Destructive Foreground",
+      "border": "Border",
+      "input": "Input",
+      "ring": "Ring",
+      "shadow": "Shadow",
+      "innerShadow": "Inner Shadow"
+    },
+    "typography": {
+      "title": "Typography"
+    },
+    "radius": {
+      "title": "Radius",
+      "sm": "Small Radius (sm)",
+      "md": "Medium Radius (md)",
+      "lg": "Large Radius (lg/Widget Usage)",
+      "full": "Full Radius"
+    },
+    "shadow": {
+      "title": "Shadow",
+      "sm": "Small Shadow (sm)",
+      "md": "Medium Shadow (md)",
+      "lg": "Large Shadow (lg)"
+    },
+    "preview": {
+      "title": "Theme Preview",
+      "description": "This is how your widgets and app components will look with the current theme settings.",
+      "cardTitle": "Example Component",
+      "cardDesc": "A descriptive subtitle for the card.",
+      "email": "Email Address",
+      "emailPlaceholder": "name@example.com",
+      "enableNotifications": "Enable notifications",
+      "cancel": "Cancel",
+      "save": "Save Changes",
+      "buttons": "Buttons",
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "destructive": "Destructive",
+      "outline": "Outline",
+      "ghost": "Ghost",
+      "inputRing": "Input & Focus Ring",
+      "inputPlaceholder": "Focus me to see the ring color...",
+      "slider": "Slider"
+    }
   },
   "dashboard": {
     "home": "Home",

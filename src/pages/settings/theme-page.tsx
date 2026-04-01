@@ -1,25 +1,69 @@
+import type { IAppTheme } from '@widget-js/core'
 import type { ThemeTag } from '@/pages/settings/components/theme-tags'
-import { AppApi, WidgetTheme } from '@widget-js/core'
+import { AppApi, AppTheme } from '@widget-js/core'
 import consola from 'consola'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SettingSection } from '@/components/setting-section'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { toast } from 'sonner'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useDebounce } from '@/hooks/use-debounce'
+import { AppThemeForm } from '@/pages/settings/components/app-theme-form'
+import { ThemePreview } from '@/pages/settings/components/theme-preview'
 import { ThemeTags } from '@/pages/settings/components/theme-tags'
-import { WidgetThemeForm } from '@/pages/settings/components/widget-theme-form'
+
+interface StoredThemeTag {
+  name: string
+  value: string
+  theme: IAppTheme
+}
+
+const SELECT_THEME_STORAGE_KEY = 'selectTheme'
+const THEME_PRESETS_STORAGE_KEY = 'widget.theme.presets'
+
+function loadStoredThemeTags() {
+  try {
+    const storedValue = localStorage.getItem(THEME_PRESETS_STORAGE_KEY)
+    if (!storedValue) {
+      return []
+    }
+
+    const parsed = JSON.parse(storedValue) as StoredThemeTag[]
+
+    if (!Array.isArray(parsed)) {
+      return []
+    }
+
+    return parsed.map(item => ({
+      name: item.name,
+      value: item.value,
+      theme: new AppTheme(item.theme),
+    }))
+  }
+  catch (error) {
+    consola.error('Failed to load theme presets:', error)
+    return []
+  }
+}
+
+function saveStoredThemeTags(tags: ThemeTag[]) {
+  const payload: StoredThemeTag[] = tags.map(tag => ({
+    name: tag.name,
+    value: tag.value,
+    theme: JSON.parse(JSON.stringify(tag.theme)) as IAppTheme,
+  }))
+
+  localStorage.setItem(THEME_PRESETS_STORAGE_KEY, JSON.stringify(payload))
+}
 
 export default function ThemePage() {
   const { t } = useTranslation()
-  const [widgetTheme, setWidgetTheme] = useState<WidgetTheme>(new WidgetTheme({
-    fontSize: '16px',
-    borderRadius: '8px',
-  }))
-  const [selectedThemeTag, setSelectedThemeTag] = useState('translucent')
+  const [appTheme, setAppTheme] = useState<AppTheme>(new AppTheme())
+  const [customThemeTags, setCustomThemeTags] = useState<ThemeTag[]>([])
+  const [selectedThemeTag, setSelectedThemeTag] = useState('dark')
   const isFirstRun = useRef(true)
 
   // Use debounced theme for saving to avoid excessive API calls
-  const debouncedTheme = useDebounce(widgetTheme, 500)
+  const debouncedTheme = useDebounce(appTheme, 500)
 
   // Load initial theme
   useEffect(() => {
@@ -27,13 +71,15 @@ export default function ThemePage() {
       try {
         const css = await AppApi.getThemeCSS()
         if (css) {
-          const loadedTheme = WidgetTheme.fromCSS(css)
-          setWidgetTheme(loadedTheme)
-          consola.info('Loaded widget theme:', loadedTheme)
+          const loadedTheme = AppTheme.fromCSS(css)
+          setAppTheme(loadedTheme)
+          consola.info('Loaded app theme:', loadedTheme)
         }
 
-        // Load selected theme tag preference if stored (optional implementation)
-        const storedTag = localStorage.getItem('selectTheme')
+        const storedThemeTags = loadStoredThemeTags()
+        setCustomThemeTags(storedThemeTags)
+
+        const storedTag = localStorage.getItem(SELECT_THEME_STORAGE_KEY)
         if (storedTag) {
           setSelectedThemeTag(storedTag)
         }
@@ -67,39 +113,93 @@ export default function ThemePage() {
 
   const handleThemeTagChange = (tag: ThemeTag) => {
     setSelectedThemeTag(tag.value)
-    localStorage.setItem('selectTheme', tag.value)
+    localStorage.setItem(SELECT_THEME_STORAGE_KEY, tag.value)
 
-    // Merge the tag's theme into current theme
-    // We need to create a new object to trigger React updates
-    // Using Object.assign on the current instance might not trigger re-render if reference doesn't change
-    // But WidgetTheme is a class, so we should be careful.
-    // The safest way with class instances in React state is to clone.
-    const newTheme = widgetTheme.copy(tag.theme)
-    setWidgetTheme(newTheme)
+    const newTheme = appTheme.copy(tag.theme)
+    setAppTheme(newTheme)
+  }
+
+  const handleThemeChange = (newTheme: AppTheme) => {
+    setAppTheme(newTheme)
+
+    setCustomThemeTags((prevTags) => {
+      const isCustomPreset = prevTags.some(tag => tag.value === selectedThemeTag)
+      if (isCustomPreset) {
+        const nextTags = prevTags.map(tag =>
+          tag.value === selectedThemeTag ? { ...tag, theme: newTheme.copy() } : tag,
+        )
+        saveStoredThemeTags(nextTags)
+        return nextTags
+      }
+      return prevTags
+    })
+  }
+
+  const handleCreateThemePreset = (name: string) => {
+    const presetName = name.trim()
+
+    if (!presetName) {
+      toast.error(t('theme.createPreset.emptyName'))
+      return false
+    }
+
+    const hasSameName = customThemeTags.some(tag => tag.name.toLocaleLowerCase() === presetName.toLocaleLowerCase())
+    if (hasSameName) {
+      toast.error(t('theme.createPreset.duplicateName'))
+      return false
+    }
+
+    const newPreset: ThemeTag = {
+      name: presetName,
+      value: `preset-${Date.now()}`,
+      theme: appTheme.copy(),
+    }
+
+    const nextThemeTags = [...customThemeTags, newPreset]
+    setCustomThemeTags(nextThemeTags)
+    saveStoredThemeTags(nextThemeTags)
+    setSelectedThemeTag(newPreset.value)
+    localStorage.setItem(SELECT_THEME_STORAGE_KEY, newPreset.value)
+    toast.success(t('theme.createPreset.success'))
+    return true
   }
 
   return (
-    <div className="flex flex-col gap-6 max-w-2xl mx-auto w-full">
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('theme.title')}</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-8">
-          <SettingSection title={t('theme.presets')}>
+    <div className="h-full overflow-y-auto">
+      <div className="flex flex-col gap-6 max-w-5xl mx-auto min-h-full pb-4 w-[700px]">
+        <Card className="w-full shrink-0">
+          <CardHeader className="shrink-0">
+            <CardTitle>{t('theme.preview.title')}</CardTitle>
+            <CardDescription>
+              {t('theme.preview.description')}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ThemePreview theme={appTheme} />
+          </CardContent>
+        </Card>
+        <Card className="flex-1 flex flex-col">
+          <CardHeader className="shrink-0">
+            <CardTitle className="mb-2">{t('theme.presets')}</CardTitle>
             <ThemeTags
               value={selectedThemeTag}
+              presets={customThemeTags}
               onChange={handleThemeTagChange}
+              onCreatePreset={handleCreateThemePreset}
             />
-          </SettingSection>
-
-          <SettingSection title={t('theme.customization')}>
-            <WidgetThemeForm
-              value={widgetTheme}
-              onChange={setWidgetTheme}
-            />
-          </SettingSection>
-        </CardContent>
-      </Card>
+          </CardHeader>
+          <CardContent className="space-y-8 flex-1">
+            <div className="flex flex-col gap-8">
+              <div className="w-full space-y-8">
+                <AppThemeForm
+                  value={appTheme}
+                  onChange={handleThemeChange}
+                />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }
