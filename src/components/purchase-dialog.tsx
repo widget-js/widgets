@@ -1,11 +1,12 @@
-import type { PayVirtualProduct, WxOrderResult } from '@/api/pay'
-import { SiWechat } from '@icons-pack/react-simple-icons'
+import type { AlipayOrderResult, PayVirtualProduct } from '@/api/pay'
+import { SiAlipay } from '@icons-pack/react-simple-icons'
+import { BrowserWindowApi } from '@widget-js/core'
 import consola from 'consola'
-import { QRCodeSVG } from 'qrcode.react'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { PayApi } from '@/api/pay'
 import { supabase } from '@/api/supabase'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -21,10 +22,11 @@ interface PurchaseDialogProps {
   onSuccess?: () => void
 }
 
-export function PurchaseDialog({ open, onOpenChange, productId = 1, onSuccess }: PurchaseDialogProps) {
+export function PurchaseDialog({ open, onOpenChange, productId = 2, onSuccess }: PurchaseDialogProps) {
   const [loading, setLoading] = useState(false)
   const [product, setProduct] = useState<PayVirtualProduct | null>(null)
-  const [order, setOrder] = useState<WxOrderResult | null>(null)
+  const [order, setOrder] = useState<AlipayOrderResult | null>(null)
+  const [payUrl, setPayUrl] = useState<string>('')
 
   useEffect(() => {
     if (!order) { return }
@@ -58,6 +60,7 @@ export function PurchaseDialog({ open, onOpenChange, productId = 1, onSuccess }:
       setLoading(true)
       setProduct(null)
       setOrder(null)
+      setPayUrl('')
 
       // 1. Get Product Info
       const products = await PayApi.getProducts('ai')
@@ -71,8 +74,10 @@ export function PurchaseDialog({ open, onOpenChange, productId = 1, onSuccess }:
       setProduct(targetProduct)
 
       // 2. Create Order
-      const orderRes = await PayApi.createWxOrder(targetProduct.id)
+      const orderRes = await PayApi.createAlipayOrder(targetProduct.id, window.location.href)
       setOrder(orderRes)
+      const url = await PayApi.getAlipayUrl(orderRes.orderId)
+      setPayUrl(url)
     }
     catch (error) {
       console.error(error)
@@ -121,16 +126,17 @@ export function PurchaseDialog({ open, onOpenChange, productId = 1, onSuccess }:
                       )}
                     </div>
 
-                    <div className="p-4 bg-white rounded-lg border shadow-sm">
-                      <QRCodeSVG
-                        value={order.codeUrl}
-                        size={180}
-                      />
-                    </div>
-
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <SiWechat className="h-4 w-4 text-[#07C160]" />
-                      请使用微信扫码支付
+                    <div className="flex flex-col items-center gap-4 pt-4 w-full">
+                      <Button
+                        onClick={() => BrowserWindowApi.openUrl(payUrl, { external: true })}
+                        className="w-full bg-[#1677FF] hover:bg-[#1677FF]/90 text-white"
+                      >
+                        <SiAlipay className="mr-2 h-4 w-4" />
+                        前往支付宝支付
+                      </Button>
+                      <div className="text-sm text-muted-foreground">
+                        支付完成后，本窗口会自动刷新
+                      </div>
                     </div>
                   </>
                 )

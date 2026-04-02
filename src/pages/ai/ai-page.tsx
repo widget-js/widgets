@@ -163,6 +163,7 @@ export default function AiPage() {
                     <TableHead>模型</TableHead>
                     <TableHead>类型</TableHead>
                     <TableHead>Token数</TableHead>
+                    <TableHead>备注</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -182,6 +183,7 @@ export default function AiPage() {
                               <TableCell>{item.model || '-'}</TableCell>
                               <TableCell>{item.request_type || '-'}</TableCell>
                               <TableCell>{item.total_tokens?.toLocaleString() || 0}</TableCell>
+                              <TableCell>{item.remark || '-'}</TableCell>
                             </TableRow>
                           ))
                         )

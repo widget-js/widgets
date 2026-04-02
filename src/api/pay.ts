@@ -19,6 +19,12 @@ export interface WxOrderResult {
   orderId: string
 }
 
+export interface AlipayOrderResult {
+  orderId: string
+  product: PayVirtualProduct
+  form: string
+}
+
 export const PayApi = {
   async getProducts(category: string = 'ai'): Promise<PayVirtualProduct[]> {
     return request.get('https://widgetjs.cn/pay/products', {
@@ -30,5 +36,15 @@ export const PayApi = {
     return request.get('https://widgetjs.cn/pay/wx/order', {
       params: { productId },
     })
+  },
+
+  async createAlipayOrder(productId: number, returnUrl: string = 'https://widgetjs.cn'): Promise<AlipayOrderResult> {
+    return request.post('https://widgetjs.cn/pay/alipay/order/page', null, {
+      params: { productId, returnUrl },
+    })
+  },
+
+  async getAlipayUrl(orderId: string): Promise<string> {
+    return `https://widgetjs.cn/pay/alipay/order/page?orderId=${orderId}`
   },
 }
