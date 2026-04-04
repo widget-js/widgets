@@ -221,7 +221,8 @@
     "overlap": "Overlap",
     "tray": "Tray",
     "upgrade": "Upgrade",
-    "installOffline": "Install Offline Widget"
+    "installOffline": "Install Offline Widget",
+    "desktopShortcut": "Shortcut"
   },
   "tags": {
     "all": "All",
@@ -253,5 +254,24 @@
     "unexpected": "Sorry, an unexpected error has occurred.",
     "unknown": "Unknown error",
     "backToHome": "Back to Home"
+  },
+  "aiPage": {
+    "loadPackagesFailed": "Failed to load packages",
+    "loadHistoryFailed": "Failed to load history",
+    "tokenPackages": "Token Packages",
+    "purchasePackage": "Purchase Package",
+    "expirationDate": "Expiration Date:",
+    "lifetime": "Lifetime",
+    "used": "Used:",
+    "total": "Total:",
+    "noPackages": "No packages available",
+    "usageHistory": "Usage History",
+    "time": "Time",
+    "model": "Model",
+    "type": "Type",
+    "tokens": "Tokens",
+    "remark": "Remark",
+    "loading": "Loading...",
+    "noHistory": "No history records"
   }
 }

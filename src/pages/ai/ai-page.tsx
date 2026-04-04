@@ -2,6 +2,7 @@ import type { AiTokenHistory, AiTokenPackage } from '@/api/ai'
 import { History, Package, ShoppingCart } from 'lucide-react'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { AiApi } from '@/api/ai'
 import { LoginCheck } from '@/components/login-check'
@@ -32,6 +33,7 @@ import {
 import { useUser } from '@/hooks/use-user'
 
 export default function AiPage() {
+  const { t } = useTranslation()
   const { user } = useUser()
   const [packages, setPackages] = useState<AiTokenPackage[]>([])
   const [history, setHistory] = useState<AiTokenHistory[]>([])
@@ -50,7 +52,7 @@ export default function AiPage() {
     }
     catch (error) {
       console.error(error)
-      toast.error('加载套餐失败')
+      toast.error(t('aiPage.loadPackagesFailed', '加载套餐失败'))
     }
   }
 
@@ -69,7 +71,7 @@ export default function AiPage() {
     }
     catch (error) {
       console.error(error)
-      toast.error('加载历史记录失败')
+      toast.error(t('aiPage.loadHistoryFailed', '加载历史记录失败'))
     }
     finally {
       setLoading(false)
@@ -91,7 +93,7 @@ export default function AiPage() {
         <section>
           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
             <Package className="h-6 w-6" />
-            Token套餐
+            {t('aiPage.tokenPackages', 'Token套餐')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <Card
@@ -100,7 +102,7 @@ export default function AiPage() {
             >
               <div className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary">
                 <ShoppingCart className="h-8 w-8" />
-                <span className="font-medium">购买套餐</span>
+                <span className="font-medium">{t('aiPage.purchasePackage', '购买套餐')}</span>
               </div>
             </Card>
 
@@ -109,19 +111,19 @@ export default function AiPage() {
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg">{pkg.name}</CardTitle>
                   <CardDescription>
-                    过期时间:
+                    {t('aiPage.expirationDate', '过期时间:')}
                     {' '}
-                    {pkg.expireTime ? new Date(pkg.expireTime).toLocaleDateString() : '永久有效'}
+                    {pkg.expireTime ? new Date(pkg.expireTime).toLocaleDateString() : t('aiPage.lifetime', '永久有效')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-col gap-1">
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">已用:</span>
+                      <span className="text-muted-foreground">{t('aiPage.used', '已用:')}</span>
                       <span>{pkg.usedToken.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">总量:</span>
+                      <span className="text-muted-foreground">{t('aiPage.total', '总量:')}</span>
                       <span>{pkg.maxToken.toLocaleString()}</span>
                     </div>
                     <div className="w-full bg-secondary h-2 rounded-full mt-2 overflow-hidden">
@@ -136,7 +138,7 @@ export default function AiPage() {
             ))}
             {packages.length === 0 && (
               <div className="col-span-3 flex text-center justify-center items-center text-muted-foreground py-8 border rounded-lg border-dashed">
-                暂无可用套餐
+                {t('aiPage.noPackages', '暂无可用套餐')}
               </div>
             )}
           </div>
@@ -152,18 +154,18 @@ export default function AiPage() {
         <section>
           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
             <History className="h-6 w-6" />
-            使用记录
+            {t('aiPage.usageHistory', '使用记录')}
           </h2>
           <Card>
             <CardContent className="p-0">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>时间</TableHead>
-                    <TableHead>模型</TableHead>
-                    <TableHead>类型</TableHead>
-                    <TableHead>Token数</TableHead>
-                    <TableHead>备注</TableHead>
+                    <TableHead>{t('aiPage.time', '时间')}</TableHead>
+                    <TableHead>{t('aiPage.model', '模型')}</TableHead>
+                    <TableHead>{t('aiPage.type', '类型')}</TableHead>
+                    <TableHead>{t('aiPage.tokens', 'Token数')}</TableHead>
+                    <TableHead>{t('aiPage.remark', '备注')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -171,7 +173,7 @@ export default function AiPage() {
                     ? (
                         <TableRow>
                           <TableCell colSpan={5} className="text-center py-8">
-                            加载中...
+                            {t('aiPage.loading', '加载中...')}
                           </TableCell>
                         </TableRow>
                       )
@@ -190,7 +192,7 @@ export default function AiPage() {
                       : (
                           <TableRow>
                             <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
-                              暂无历史记录
+                              {t('aiPage.noHistory', '暂无历史记录')}
                             </TableCell>
                           </TableRow>
                         )}

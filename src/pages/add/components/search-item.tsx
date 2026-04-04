@@ -177,6 +177,9 @@ export function SearchItem({ widget }: SearchItemProps) {
                       DevTools
                     </Button>
                   )}
+                  <Button variant="outline" onClick={() => DeployedWidgetApi.createDesktopShortcut(widget.name)} className="rounded-full">
+                    {t('search.desktopShortcut', '桌面图标')}
+                  </Button>
                 </>
               )
             : (
