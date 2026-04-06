@@ -19,6 +19,7 @@ import AppInfoPage from '@/pages/settings/app-info-page'
 import GeneralPage from '@/pages/settings/general-page'
 import ProxyPage from '@/pages/settings/proxy-page'
 import ThemePage from '@/pages/settings/theme-page'
+import SizePage from '@/pages/size/size-page'
 import TrayPage from '@/pages/tray/tray-page'
 import ProfilePage from '@/pages/user/profile-page'
 
@@ -132,6 +133,10 @@ export const routes: RouteObject[] = [
   {
     path: '/tray/menu',
     element: <TrayPage />,
+  },
+  {
+    path: '/size',
+    element: <SizePage />,
   },
   {
     path: '*',

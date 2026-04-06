@@ -273,5 +273,12 @@
     "remark": "Remark",
     "loading": "Loading...",
     "noHistory": "No history records"
+  },
+  "sizePage": {
+    "title": "Widget Size Settings",
+    "width": "Width",
+    "height": "Height",
+    "widthDesc": "Set the width of the widget ({{value}} px), range {{min}} - {{max}} px.",
+    "heightDesc": "Set the height of the widget ({{value}} px), range {{min}} - {{max}} px."
   }
 }

@@ -273,5 +273,12 @@
     "remark": "备注",
     "loading": "加载中...",
     "noHistory": "暂无历史记录"
+  },
+  "sizePage": {
+    "title": "组件大小设置",
+    "width": "宽度 (Width)",
+    "height": "高度 (Height)",
+    "widthDesc": "设置组件的宽度 ({{value}} px)，取值范围 {{min}} - {{max}} px。",
+    "heightDesc": "设置组件的高度 ({{value}} px)，取值范围 {{min}} - {{max}} px。"
   }
 }
