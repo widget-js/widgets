@@ -1,9 +1,9 @@
 import type { WidgetSearchOptions } from '@widget-js/web-api'
-import { AppApi, NotificationApi, WidgetApi, WidgetPackageApi } from '@widget-js/core'
+import { AppApi, DialogApi, NotificationApi, WidgetApi, WidgetPackageApi } from '@widget-js/core'
 import { WebWidget } from '@widget-js/web-api'
 import consola from 'consola'
 import { FolderDown, Search } from 'lucide-react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { WebWidgetApi } from '@/api/web-widget-api'
@@ -21,10 +21,24 @@ export default function AddWidgetPage() {
   const [selectedCategory, setSelectedCategory] = useState('')
   const [widgets, setWidgets] = useState<WebWidget[]>([])
   const [_loading, setLoading] = useState(true)
-  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const debouncedKeyword = useDebounce(keyword, 1000)
-
+  const pickFile = () => {
+    DialogApi.pickFile(['zip']).then(async (file) => {
+      consola.log('Widget package file', file)
+      if (file) {
+        try {
+          consola.info(`开始安装组件包: `, file)
+          await WidgetPackageApi.install(file)
+          await NotificationApi.success('安装成功')
+          window.location.reload()
+        }
+        catch (e: any) {
+          toast.error(`安装失败: ${e.message}`)
+        }
+      }
+    })
+  }
   const search = useCallback(async () => {
     setLoading(true)
     setWidgets([])
@@ -106,23 +120,6 @@ export default function AddWidgetPage() {
   useEffect(() => {
     document.title = t('search.title')
   }, [t])
-
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (!file) { return }
-
-    try {
-      consola.info(`开始安装组件包: `, file)
-      await WidgetPackageApi.install((file as any).path)
-      await NotificationApi.success('安装成功')
-      window.location.reload()
-    }
-    catch (e: any) {
-      toast.error(`安装失败: ${e.message}`)
-    }
-    event.target.value = ''
-  }
-
   return (
     <div className="h-full bg-background flex flex-col relative overflow-hidden">
       {/* Header */}
@@ -137,20 +134,13 @@ export default function AddWidgetPage() {
             onKeyDown={e => e.key === 'Enter' && search()}
           />
         </div>
-        <input
-          type="file"
-          ref={fileInputRef}
-          className="hidden"
-          accept=".zip"
-          onChange={handleFileChange}
-        />
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
                 variant="outline"
                 size="icon"
-                onClick={() => fileInputRef.current?.click()}
+                onClick={pickFile}
               >
                 <FolderDown className="h-4 w-4" />
               </Button>
