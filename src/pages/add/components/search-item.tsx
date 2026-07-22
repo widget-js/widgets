@@ -31,7 +31,7 @@ export function SearchItem({ widget }: SearchItemProps) {
 
   const updateWidgetAdd = useCallback(async () => {
     if (widget.isSupportBackground()) {
-      const widgets = await DeployedWidgetApi.getDeployedWidgets(widget.name)
+      const widgets = await DeployedWidgetApi.getDeployedWidgets()
       if (widgets) {
         setIsWidgetHosted(widgets.length > 0)
       }

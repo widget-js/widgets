@@ -1,5 +1,6 @@
 import type { BroadcastEvent } from '@widget-js/core'
-import { DeployedWidgetApi, WidgetApiEvent } from '@widget-js/core'
+import { DeployedWidgetApi, WidgetApi } from '@widget-js/core'
+
 import { useAppBroadcast, WindowControls } from '@widget-js/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -13,8 +14,8 @@ export default function SizePage() {
   const [searchParams] = useSearchParams()
   const widgetId = searchParams.get('widgetId')
 
-  useAppBroadcast([WidgetApiEvent.WIDGET_REMOVED], (event: BroadcastEvent) => {
-    if (event.event === WidgetApiEvent.WIDGET_REMOVED && event.payload?.widgetId === widgetId) {
+  useAppBroadcast([WidgetApi.EVENT_WIDGET_REMOVED], (event: BroadcastEvent) => {
+    if (event.event === WidgetApi.EVENT_WIDGET_REMOVED && event.payload?.widgetId === widgetId) {
       window.close()
     }
   })

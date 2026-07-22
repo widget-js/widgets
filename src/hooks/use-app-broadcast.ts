@@ -1,10 +1,10 @@
-import type { BroadcastEvent, BroadcastEventType } from '@widget-js/core'
+import type { BroadcastEvent } from '@widget-js/core'
 import { BroadcastApi, Channel } from '@widget-js/core'
 import { useEffect, useRef } from 'react'
 import { useIpcListener } from './use-ipc-listener'
 
 export function useAppBroadcast(
-  events: BroadcastEventType[],
+  events: string[],
   callback: (event: BroadcastEvent) => void,
 ) {
   const callbackRef = useRef(callback)

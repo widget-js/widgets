@@ -1,5 +1,5 @@
 import type { BroadcastEvent, LanguageCode } from '@widget-js/core'
-import { AppApi, AppApiEvent } from '@widget-js/core'
+import { AppApi } from '@widget-js/core'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useAppBroadcast } from './use-app-broadcast'
 
@@ -21,7 +21,7 @@ export function useAppLanguage(options?: UseAppLanguageOption) {
   }, []) // Empty dependency array means this runs once on mount
 
   const handleBroadcast = useCallback((event: BroadcastEvent) => {
-    if (event.event === AppApiEvent.LANGUAGE_CHANGED) {
+    if (event.event === AppApi.EVENT_LANGUAGE_CHANGED) {
       if (languageCode !== event.payload && typeof event.payload === 'string') {
         setLanguageCode(event.payload)
         options?.onChange?.(event.payload)
@@ -29,7 +29,7 @@ export function useAppLanguage(options?: UseAppLanguageOption) {
     }
   }, [languageCode, options])
 
-  useAppBroadcast([AppApiEvent.LANGUAGE_CHANGED], handleBroadcast)
+  useAppBroadcast([AppApi.EVENT_LANGUAGE_CHANGED], handleBroadcast)
 
   const updateLanguageCode = async (newCode: string) => {
     setLanguageCode(newCode)
