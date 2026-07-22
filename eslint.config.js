@@ -21,6 +21,7 @@ export default antfu({
     'curly': ['error', 'multi-line'],
     'no-use-before-define': 'off',
     'eqeqeq': 'off',
+    'ts/ban-ts-comment': 'off',
     'unused-imports/no-unused-vars': ['error', {
       caughtErrors: 'none',
       argsIgnorePattern: '^_',
