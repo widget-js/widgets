@@ -20,7 +20,7 @@
     "@supabase/supabase-js": "^2.84.0",
     "@tailwindcss/vite": "^4.2.0",
     "@uiw/react-color": "^2.9.5",
-    "@widget-js/core": "workspace:*",
+    "@widget-js/core": "^26.8.20",
     "@widget-js/react": "^26.7.21",
     "@widget-js/web-api": "^24.1.1-beta.70",
     "axios": "^1.13.5",
@@ -73,7 +73,7 @@
     "vite": "^7.3.1"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "pnpm exec esno ./scripts/pre-commit-update-local-version.ts && pnpm exec lint-staged"
   },
   "lint-staged": {
     "*.{js,ts,tsx,vue,md}": [
