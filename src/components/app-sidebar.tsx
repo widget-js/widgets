@@ -17,7 +17,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
 } from '@/components/ui/sidebar'
 import { useAppRuntimeInfo } from '@/hooks/use-app-runtime-info'
 import { useUser } from '@/hooks/use-user'
@@ -105,7 +104,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarFooter>
           <NavUser user={userData} />
         </SidebarFooter>
-        <SidebarRail />
       </Sidebar>
     </>
   )

@@ -4,9 +4,9 @@ import consola from 'consola'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { supabase } from '@/api/supabase'
 
-// Global state to mimic Vue's global ref behavior
 let globalUser: User | null = null
 const listeners = new Set<(user: User | null) => void>()
+let authListenerInitialized = false
 
 function notifyListeners() {
   listeners.forEach(listener => listener(globalUser))
@@ -17,52 +17,73 @@ function setGlobalUser(user: User | null) {
   notifyListeners()
 }
 
-// Initialize the auth listener once (outside the hook)
-supabase.auth.onAuthStateChange((event, session) => {
-  consola.info('onAuthStateChange', event, session)
-  if (event === 'SIGNED_OUT') {
-    setGlobalUser(null)
-    UserApi.logout()
+function initAuthListener() {
+  if (authListenerInitialized) {
+    return
   }
-  else if (event === 'USER_UPDATED') {
-    setGlobalUser(session?.user ?? null)
-    if (session?.user) {
-      UserApi.updateUser(session.user)
+  authListenerInitialized = true
+
+  supabase.auth.onAuthStateChange((event, session) => {
+    consola.info('onAuthStateChange', event, session)
+    if (event === 'SIGNED_OUT') {
+      setGlobalUser(null)
+      UserApi.logout()
+    }
+    else if (event === 'USER_UPDATED') {
+      setGlobalUser(session?.user ?? null)
+      if (session?.user) {
+        UserApi.updateUser(session.user)
+      }
+    }
+    else if (event === 'SIGNED_IN') {
+      setGlobalUser(session?.user ?? null)
+      supabase.auth.startAutoRefresh()
+      if (session) {
+        UserApi.login(session)
+      }
+    }
+    else if (event === 'TOKEN_REFRESHED') {
+      if (session) {
+        UserApi.updateSession(session)
+      }
+    }
+  })
+}
+
+async function hydrateFromLocalSession() {
+  try {
+    const { data } = await supabase.auth.getSession()
+    if (data.session?.user) {
+      globalUser = data.session.user
     }
   }
-  else if (event === 'SIGNED_IN') {
-    setGlobalUser(session?.user ?? null)
-    supabase.auth.startAutoRefresh()
-    if (session) {
-      UserApi.login(session)
-    }
+  catch (e) {
+    consola.warn('hydrate session failed', e)
   }
-  else if (event === 'TOKEN_REFRESHED') {
-    if (session) {
-      UserApi.updateSession(session)
-    }
+  finally {
+    notifyListeners()
   }
-})
+}
+
+initAuthListener()
+hydrateFromLocalSession()
 
 export function useUser(onload?: (user?: User) => void) {
   const [user, setUser] = useState<User | null>(globalUser)
   const [loading, setLoading] = useState(false)
 
-  // Use a ref for the callback to avoid re-triggering effects if the callback is unstable
   const onloadRef = useRef(onload)
 
   useEffect(() => {
     onloadRef.current = onload
   }, [onload])
 
-  // Sync local state with global state
   useEffect(() => {
     const listener = (newUser: User | null) => {
       setUser(newUser)
     }
     listeners.add(listener)
 
-    // Check if global state changed while we were setting up
     if (globalUser !== user) {
       setUser(globalUser)
     }
@@ -82,9 +103,18 @@ export function useUser(onload?: (user?: User) => void) {
     })
   }, [])
 
-  // Initial refresh on mount
   useEffect(() => {
-    refreshUser()
+    const run = () => {
+      if ('requestIdleCallback' in window) {
+        const handle = window.requestIdleCallback(() => refreshUser(), { timeout: 3000 })
+        return () => window.cancelIdleCallback(handle)
+      }
+      else {
+        const timer = setTimeout(refreshUser, 600)
+        return () => clearTimeout(timer)
+      }
+    }
+    return run()
   }, [refreshUser])
 
   const nickname = useMemo(() => {

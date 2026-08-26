@@ -40,7 +40,18 @@
   },
   "dev": {
     "emptyTitle": "Develop Your Own Desktop Widget",
-    "viewDocs": "View Documentation"
+    "viewDocs": "View Documentation",
+    "suggestions": [
+      "/widget Generate a gold price widget to view international gold prices",
+      "/widget Generate a stock watchlist widget to add stocks you follow",
+      "/widget Generate a Pomodoro timer with customizable focus and break times",
+      "/widget Generate a memo widget with customizable title and content",
+      "/widget Generate a todo widget to add, complete, and delete tasks",
+      "/widget Create a countdown widget",
+      "/widget Generate an exchange rate widget with customizable currencies",
+      "/widget Generate a crypto funding rate widget to view funding rates across major exchanges",
+      "/widget Generate an investment profit/loss calculator"
+    ]
   },
   "general": {
     "title": "General Settings",

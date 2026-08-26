@@ -8,26 +8,33 @@ import {
   Plus,
   Settings,
 } from 'lucide-react'
+import { lazy, Suspense } from 'react'
 import { createHashRouter, Navigate } from 'react-router-dom'
 import { DashboardLayout } from '@/components/dashboard-layout'
 import AddWidgetPage from '@/pages/add/add-widget-page'
-import AiPage from '@/pages/ai/ai-page'
-import DevPage from '@/pages/dev/dev-page'
-import ErrorPage from '@/pages/error-page'
-import WidgetPackageManagerPage from '@/pages/packages/widget-package-manager-page'
-import AppInfoPage from '@/pages/settings/app-info-page'
-import GeneralPage from '@/pages/settings/general-page'
-import ProxyPage from '@/pages/settings/proxy-page'
-import ThemePage from '@/pages/settings/theme-page'
-import SizePage from '@/pages/size/size-page'
-import TrayPage from '@/pages/tray/tray-page'
-import ProfilePage from '@/pages/user/profile-page'
+
+const AiPage = lazy(() => import('@/pages/ai/ai-page'))
+const AlertDialogPage = lazy(() => import('@/pages/dialog/alert-dialog-page'))
+const DevPage = lazy(() => import('@/pages/dev/dev-page'))
+const ErrorPage = lazy(() => import('@/pages/error-page'))
+const WidgetPackageManagerPage = lazy(() => import('@/pages/packages/widget-package-manager-page'))
+const AppInfoPage = lazy(() => import('@/pages/settings/app-info-page'))
+const GeneralPage = lazy(() => import('@/pages/settings/general-page'))
+const ProxyPage = lazy(() => import('@/pages/settings/proxy-page'))
+const ThemePage = lazy(() => import('@/pages/settings/theme-page'))
+const SizePage = lazy(() => import('@/pages/size/size-page'))
+const TrayPage = lazy(() => import('@/pages/tray/tray-page'))
+const ProfilePage = lazy(() => import('@/pages/user/profile-page'))
+
+function withSuspense(element: React.ReactNode) {
+  return <Suspense fallback={null}>{element}</Suspense>
+}
 
 export const routes: RouteObject[] = [
   {
     path: '/',
     element: <DashboardLayout />,
-    errorElement: <ErrorPage />,
+    errorElement: withSuspense(<ErrorPage />),
     children: [
       {
         index: true,
@@ -52,7 +59,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'package',
-            element: <WidgetPackageManagerPage />,
+            element: withSuspense(<WidgetPackageManagerPage />),
             handle: {
               title: 'sidebar.packageManagement',
               icon: Package,
@@ -61,7 +68,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'dev',
-            element: <DevPage />,
+            element: withSuspense(<DevPage />),
             handle: {
               title: 'sidebar.dev',
               icon: Code2,
@@ -79,7 +86,7 @@ export const routes: RouteObject[] = [
         children: [
           {
             path: 'common',
-            element: <GeneralPage />,
+            element: withSuspense(<GeneralPage />),
             handle: {
               title: 'sidebar.generalSettings',
               icon: Settings,
@@ -88,7 +95,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'theme',
-            element: <ThemePage />,
+            element: withSuspense(<ThemePage />),
             handle: {
               title: 'sidebar.globalTheme',
               icon: Palette,
@@ -97,7 +104,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'ai',
-            element: <AiPage />,
+            element: withSuspense(<AiPage />),
             handle: {
               title: 'sidebar.ai',
               icon: Bot,
@@ -106,7 +113,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'proxy',
-            element: <ProxyPage />,
+            element: withSuspense(<ProxyPage />),
             handle: {
               title: 'sidebar.proxySettings',
               icon: Globe,
@@ -116,7 +123,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'info',
-            element: <AppInfoPage />,
+            element: withSuspense(<AppInfoPage />),
             handle: {
               title: 'appInfo.title',
             },
@@ -125,22 +132,26 @@ export const routes: RouteObject[] = [
       },
       {
         path: 'user/profile',
-        element: <ProfilePage />,
+        element: withSuspense(<ProfilePage />),
         handle: { title: 'user.account' },
       },
     ],
   },
   {
     path: '/tray/menu',
-    element: <TrayPage />,
+    element: withSuspense(<TrayPage />),
   },
   {
     path: '/size',
-    element: <SizePage />,
+    element: withSuspense(<SizePage />),
+  },
+  {
+    path: '/dialog/alert',
+    element: withSuspense(<AlertDialogPage />),
   },
   {
     path: '*',
-    element: <ErrorPage />,
+    element: withSuspense(<ErrorPage />),
   },
 ]
 

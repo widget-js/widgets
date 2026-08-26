@@ -19,5 +19,7 @@
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
-  "registries": {}
+  "registries": {
+    "@joyco": "https://registry.joyco.studio/r/{name}.json"
+  }
 }

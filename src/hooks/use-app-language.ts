@@ -8,26 +8,44 @@ export interface UseAppLanguageOption {
   onChange?: (code: string) => void
 }
 
+function detectInitialLanguage(): string {
+  try {
+    const navLang = navigator.language || 'zh'
+    return navLang.toLowerCase().startsWith('zh') ? 'zh' : 'en'
+  }
+  catch {
+    return 'zh'
+  }
+}
+
 export function useAppLanguage(options?: UseAppLanguageOption) {
-  const [languageCode, setLanguageCode] = useState<string>(navigator.language)
+  const [languageCode, setLanguageCode] = useState<string>(detectInitialLanguage)
   const loadedRef = useRef(false)
+  const optionsRef = useRef(options)
 
   useEffect(() => {
+    optionsRef.current = options
+  }, [options])
+
+  useEffect(() => {
+    let cancelled = false
     AppApi.getLanguageCode().then((result) => {
+      if (cancelled) { return }
       setLanguageCode(result)
       loadedRef.current = true
-      options?.onLoad?.(result)
+      optionsRef.current?.onLoad?.(result)
     })
-  }, []) // Empty dependency array means this runs once on mount
+    return () => { cancelled = true }
+  }, [])
 
   const handleBroadcast = useCallback((event: BroadcastEvent) => {
     if (event.event === AppApi.EVENT_LANGUAGE_CHANGED) {
       if (languageCode !== event.payload && typeof event.payload === 'string') {
         setLanguageCode(event.payload)
-        options?.onChange?.(event.payload)
+        optionsRef.current?.onChange?.(event.payload)
       }
     }
-  }, [languageCode, options])
+  }, [languageCode])
 
   useAppBroadcast([AppApi.EVENT_LANGUAGE_CHANGED], handleBroadcast)
 

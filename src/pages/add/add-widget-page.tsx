@@ -39,15 +39,32 @@ export default function AddWidgetPage() {
       }
     })
   }
+
+  const filterLocalWidgets = (localWidgets: any[], category: string, keyword: string): WebWidget[] => {
+    let result = localWidgets.filter(it => !it.disabled)
+    if (category) {
+      result = result.filter(it => it.categories && it.categories.includes(category as any))
+    }
+    if (keyword) {
+      result = result.filter((it) => {
+        const title = JSON.stringify(it.title)
+        const description = JSON.stringify(it.description)
+        return title.includes(keyword) || description.includes(keyword)
+      })
+    }
+    return result.map(it => WebWidget.fromObject(it))
+  }
+
   const search = useCallback(async () => {
     setLoading(true)
-    setWidgets([])
 
     try {
       if (selectedCategory === 'installed') {
-        const widgetPackages = await WidgetPackageApi.getPackages()
+        const [widgetPackages, localWidgets] = await Promise.all([
+          WidgetPackageApi.getPackages(),
+          WidgetApi.getWidgets(),
+        ])
         const installedPackages = widgetPackages.filter(it => !it.url.startsWith('http') || it.development)
-        const localWidgets = await WidgetApi.getWidgets()
         const newWidgets: WebWidget[] = []
 
         for (const widgetPackage of installedPackages) {
@@ -62,27 +79,23 @@ export default function AddWidgetPage() {
         return
       }
 
-      const version = await AppApi.getVersion()
+      const keyword = debouncedKeyword
+      const category = selectedCategory
+
+      const localWidgetsPromise = WidgetApi.getWidgets().then(raw => filterLocalWidgets(raw, category, keyword))
+      const versionPromise = AppApi.getVersion()
+
+      const [localWidgets, version] = await Promise.all([localWidgetsPromise, versionPromise])
+
+      setWidgets(localWidgets)
+      setLoading(false)
+
       const options: WidgetSearchOptions = {
         page: 1,
         pageSize: 50,
-        category: selectedCategory,
-        keyword: debouncedKeyword,
+        category,
+        keyword,
         appVersion: version,
-      }
-
-      let localWidgets = (await WidgetApi.getWidgets()).filter(it => !it.disabled)
-
-      if (selectedCategory) {
-        localWidgets = localWidgets.filter(it => it.categories && it.categories.includes(selectedCategory as any))
-      }
-
-      if (debouncedKeyword) {
-        localWidgets = localWidgets.filter((it) => {
-          const title = JSON.stringify(it.title)
-          const description = JSON.stringify(it.description)
-          return title.includes(debouncedKeyword) || description.includes(debouncedKeyword)
-        })
       }
 
       try {
@@ -91,24 +104,24 @@ export default function AddWidgetPage() {
           .map((it: any) => WebWidget.fromObject(it))
           .filter((it: any) => it.name !== 'cn.widgetjs.widgets.dynamic_island')
 
-        const mergedWidgets = [...remoteWidgets]
-
-        for (const localWidget of localWidgets) {
-          if (mergedWidgets.some(it => it.name === localWidget.name)) {
+        const localNames = new Set(localWidgets.map(it => it.name))
+        const merged = [...remoteWidgets]
+        for (const lw of localWidgets) {
+          if (!localNames.has(lw.name)) {
             continue
           }
-          mergedWidgets.push(WebWidget.fromObject(localWidget))
+          if (!merged.some(it => it.name === lw.name)) {
+            merged.push(lw)
+          }
         }
-        setWidgets(mergedWidgets)
+        setWidgets(merged)
       }
       catch (e) {
-        setWidgets(localWidgets.map(it => WebWidget.fromObject(it)))
+        consola.warn('remote search failed, keep local', e)
       }
     }
     catch (e) {
       consola.error(e)
-    }
-    finally {
       setLoading(false)
     }
   }, [selectedCategory, debouncedKeyword])

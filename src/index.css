@@ -148,3 +148,12 @@
 [data-rmiz-modal-overlay="visible"] {
   background-color: rgba(0, 0, 0, 0.7) !important;
 }
+
+@keyframes widget-preview-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

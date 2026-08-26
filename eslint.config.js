@@ -28,6 +28,7 @@ export default antfu({
       varsIgnorePattern: '^_',
     }],
     'ts/explicit-function-return-type': 'off',
+    'regexp/no-unused-capturing-group': 'warn',
     'style/max-statements-per-line': ['error', {
       max: 2,
     }],

@@ -9,7 +9,7 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'zh',
-    debug: true,
+    debug: false,
     resources: {
       en: {
         translation: enTranslation,
@@ -19,7 +19,7 @@ i18n
       },
     },
     interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
+      escapeValue: false,
     },
   })
 
