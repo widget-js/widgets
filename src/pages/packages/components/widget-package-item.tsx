@@ -187,7 +187,7 @@ export function WidgetPackageItem({ widgetPackage, onUninstall }: WidgetPackageI
         <div className="mt-3 pt-3">
           <div className="group relative overflow-hidden rounded-md">
             {useMarquee
-              ? <Marquee speed={1} direction={1}>{previewNodes}</Marquee>
+              ? <Marquee speed={10} direction={1}>{previewNodes}</Marquee>
               : <div className="flex gap-3">{previewNodes}</div>}
 
             {useMarquee && (
