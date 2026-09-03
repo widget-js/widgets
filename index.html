@@ -5,8 +5,95 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Widget Hub</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; }
+    body {
+      background: #fff;
+    }
+    #root {
+      width: 100%;
+      height: 100%;
+    }
+    .root-loading {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      display: grid;
+      place-items: center;
+    }
+    .logo,
+    .logo-glow {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      display: block;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      transform: translateZ(0);
+    }
+    .logo-glow {
+      z-index: 0;
+      opacity: .58;
+      filter: blur(14px) saturate(1.65) contrast(1.08);
+      animation: glowBreath 2.25s ease-in-out infinite;
+      will-change: transform, opacity, filter;
+      pointer-events: none;
+    }
+    .logo-glow.outer {
+      opacity: .30;
+      filter: blur(26px) saturate(1.7) contrast(1.06);
+      animation-name: glowBreathOuter;
+    }
+    .logo {
+      z-index: 2;
+      animation: logoBreath 2.25s ease-in-out infinite;
+      will-change: transform;
+    }
+    @keyframes glowBreath {
+      0%, 100% {
+        transform: scale(.96);
+        opacity: .42;
+        filter: blur(12px) saturate(1.5) contrast(1.06);
+      }
+      50% {
+        transform: scale(1.18);
+        opacity: .82;
+        filter: blur(18px) saturate(1.8) contrast(1.1);
+      }
+    }
+    @keyframes glowBreathOuter {
+      0%, 100% {
+        transform: scale(1.02);
+        opacity: .20;
+        filter: blur(23px) saturate(1.5) contrast(1.04);
+      }
+      50% {
+        transform: scale(1.38);
+        opacity: .48;
+        filter: blur(31px) saturate(1.85) contrast(1.08);
+      }
+    }
+    @keyframes logoBreath {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.018); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .logo,
+      .logo-glow { animation: none; }
+    }
+  </style>
   </head>
   <body>
+    <div class="root-loading" role="status" aria-label="Loading">
+      <img class="logo-glow outer" src="/foreground_no_shadow.svg" alt="" aria-hidden="true" />
+      <img class="logo-glow" src="/foreground_no_shadow.svg" alt="" aria-hidden="true" />
+      <img class="logo" src="/foreground_no_shadow.svg" alt="" />
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

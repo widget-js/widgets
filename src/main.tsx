@@ -11,3 +11,14 @@ createRoot(document.getElementById('root')!).render(
     <Toaster />
   </StrictMode>,
 )
+
+const rootLoading = document.querySelector('.root-loading')
+if (rootLoading) {
+  rootLoading.addEventListener('transitionend', () => rootLoading.remove())
+  requestAnimationFrame(() => {
+    ;(rootLoading as HTMLElement).style.transition = 'opacity 0.25s ease-out'
+    ;(rootLoading as HTMLElement).style.opacity = '0'
+    ;(rootLoading as HTMLElement).style.pointerEvents = 'none'
+  })
+  setTimeout(() => rootLoading.remove(), 500)
+}

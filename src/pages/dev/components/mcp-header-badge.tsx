@@ -37,7 +37,7 @@ export function McpHeaderBadge({ mcpInfo, onCopyConfig }: McpHeaderBadgeProps) {
   }
 
   return (
-    <div className="absolute bottom-4 right-4 z-10">
+    <div className="fixed bottom-4 right-4 z-50">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <div className="flex items-center gap-2 rounded-lg border border-border/50 bg-background/80 backdrop-blur-sm px-3 py-1.5 shadow-sm cursor-pointer hover:bg-background transition-colors">
