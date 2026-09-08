@@ -15,6 +15,7 @@ import AddWidgetPage from '@/pages/add/add-widget-page'
 
 const AiPage = lazy(() => import('@/pages/ai/ai-page'))
 const AlertDialogPage = lazy(() => import('@/pages/dialog/alert-dialog-page'))
+const FilePermissionDialogPage = lazy(() => import('@/pages/dialog/file-permission-dialog-page'))
 const DevPage = lazy(() => import('@/pages/dev/dev-page'))
 const ErrorPage = lazy(() => import('@/pages/error-page'))
 const WidgetPackageManagerPage = lazy(() => import('@/pages/packages/widget-package-manager-page'))
@@ -148,6 +149,10 @@ export const routes: RouteObject[] = [
   {
     path: '/dialog/alert',
     element: withSuspense(<AlertDialogPage />),
+  },
+  {
+    path: '/dialog/file-permission',
+    element: withSuspense(<FilePermissionDialogPage />),
   },
   {
     path: '*',
