@@ -19,6 +19,12 @@
       "name": "Name:",
       "installPath": "Install Path:",
       "uninstall": "Uninstall",
+      "clearData": "Clear data",
+      "clearingData": "Clearing...",
+      "clearDataConfirm": "Clear widget package data?",
+      "clearDataDesc": "This will permanently clear local storage, sign-in data and cache for {{name}}. The package installation and desktop layout will be kept, and related windows will reload.",
+      "clearDataSuccess": "Widget package data cleared",
+      "clearDataFailed": "Failed to clear widget package data. Please try again.",
       "uninstallConfirm": "Are you sure you want to uninstall?",
       "uninstallDesc": "Uninstalling {{name}} cannot be undone.",
       "cancel": "Cancel",
@@ -41,6 +47,7 @@
   "dev": {
     "emptyTitle": "Develop Your Own Desktop Widget",
     "viewDocs": "View Documentation",
+    "publishWidget": "Publish Widget",
     "suggestions": [
       "/widget Generate a gold price widget to view international gold prices",
       "/widget Generate a stock watchlist widget to add stocks you follow",

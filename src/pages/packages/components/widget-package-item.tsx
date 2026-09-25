@@ -1,9 +1,9 @@
 import type { LanguageCode, Widget, WidgetPackage } from '@widget-js/core'
-import { WidgetApi } from '@widget-js/core'
-import { Image as ImageIcon, ImageOff } from 'lucide-react'
-import { useEffect, useMemo, useState } from 'react'
+import { WidgetPackageApi } from '@widget-js/core'
+import { ImageOff } from 'lucide-react'
+import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Marquee } from '@/components/marquee'
+import { toast } from 'sonner'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,118 +18,55 @@ import {
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { useAppLanguage } from '@/hooks/use-app-language'
-import WidgetUtil from '@/utils/widget-util'
+import { useWidgetPreviewImage } from '@/hooks/use-widget-preview-image'
+import './widget-package-item.css'
 
 interface WidgetPackageItemProps {
   widgetPackage: WidgetPackage
+  widgets: Widget[]
   onUninstall: (pkg: WidgetPackage) => void
 }
 
-interface PreviewItem {
-  widget: Widget
-  url: string | null
-  loading: boolean
-  error: boolean
-}
+function WidgetPreview({ widget, widgetPackage, title }: { widget: Widget, widgetPackage: WidgetPackage, title: string }) {
+  const previewInfo = useMemo(() => ({
+    previewImage: widget.previewImage,
+    packageName: widgetPackage.name,
+    package: widgetPackage,
+  }), [widget.previewImage, widgetPackage])
+  const { previewImage: src, error: failed, setError } = useWidgetPreviewImage(previewInfo)
 
-function usePreviewImages(widgetPackage: WidgetPackage) {
-  const [items, setItems] = useState<PreviewItem[]>(() =>
-    widgetPackage.widgets.map(widget => ({
-      widget,
-      url: null,
-      loading: true,
-      error: false,
-    })),
+  return (
+    <figure className="w-40 shrink-0 rounded-lg border bg-muted/30 p-2">
+      <div className="flex h-28 items-center justify-center">
+        {src && !failed
+          ? <img src={src} alt={title} loading="lazy" className="h-full w-full object-contain" onError={() => setError(true)} />
+          : <ImageOff className="h-8 w-8 text-muted-foreground" aria-hidden="true" />}
+      </div>
+      <figcaption className="mt-2 truncate text-center text-xs" title={title}>{title}</figcaption>
+    </figure>
   )
-
-  useEffect(() => {
-    const loadPreviews = async () => {
-      const localWidgets = await WidgetApi.getWidgets()
-      const widgets = localWidgets.filter(it => it.packageName === widgetPackage.name)
-
-      const previewItems = await Promise.all(
-        widgets.map(async (widget) => {
-          const item: PreviewItem = {
-            widget,
-            url: null,
-            loading: true,
-            error: false,
-          }
-
-          if (!widget.previewImage) {
-            item.loading = false
-            return item
-          }
-
-          try {
-            item.url = await WidgetUtil.resolvePreviewImageUrl(widget)
-          }
-          catch (e) {
-            console.error('Failed to load preview image', e)
-            item.error = true
-          }
-          finally {
-            item.loading = false
-          }
-
-          return item
-        }),
-      )
-
-      setItems(previewItems)
-    }
-    loadPreviews()
-  }, [widgetPackage])
-
-  return items
 }
 
-export function WidgetPackageItem({ widgetPackage, onUninstall }: WidgetPackageItemProps) {
+export function WidgetPackageItem({ widgetPackage, widgets, onUninstall }: WidgetPackageItemProps) {
   const { t } = useTranslation()
   const [languageCode] = useAppLanguage()
-  const previewItems = usePreviewImages(widgetPackage)
-
-  const validPreviews = useMemo(
-    () => previewItems.filter(p => p.url || p.loading),
-    [previewItems],
-  )
-
-  const useMarquee = validPreviews.length > 3
-
-  const previewNodes = useMemo(
-    () => validPreviews.map((item, idx) => (
-      <div
-        key={`${item.widget.name || idx}-${idx}`}
-        className="shrink-0 w-32 h-24 rounded-md overflow-hidden relative flex items-center justify-center"
-      >
-        {item.url
-          ? (
-              <img
-                src={item.url}
-                alt={item.widget.name}
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                  ;(e.currentTarget.parentElement as HTMLElement).dataset.error = 'true'
-                }}
-              />
-            )
-          : null}
-
-        {item.loading && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground animate-pulse">
-            <ImageIcon size="20" className="mb-1" />
-          </div>
-        )}
-
-        {!item.loading && (!item.url || item.error) && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground bg-muted/50">
-            <ImageOff size="20" className="mb-1" />
-          </div>
-        )}
-      </div>
-    )),
-    [validPreviews],
-  )
+  const [clearing, setClearing] = useState(false)
+  const handleClearData = async () => {
+    if (clearing) {
+      return
+    }
+    setClearing(true)
+    try {
+      await WidgetPackageApi.clearData(widgetPackage.name)
+      toast.success(t('settings.widgetPackage.clearDataSuccess'))
+    }
+    catch {
+      toast.error(t('settings.widgetPackage.clearDataFailed'))
+    }
+    finally {
+      setClearing(false)
+    }
+  }
 
   const getTitle = (): string => {
     if (typeof widgetPackage.getTitle === 'function') {
@@ -139,7 +76,7 @@ export function WidgetPackageItem({ widgetPackage, onUninstall }: WidgetPackageI
   }
 
   return (
-    <Card className="p-3 shadow-sm hover:shadow-md transition-shadow">
+    <Card className="min-w-0 p-3 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-center gap-4">
         <div className="flex flex-col gap-1 flex-1 min-w-0 text-left">
           <div className="flex items-center gap-2 text-sm">
@@ -158,10 +95,31 @@ export function WidgetPackageItem({ widgetPackage, onUninstall }: WidgetPackageI
           </div>
         </div>
 
-        <div className="ml-auto flex items-center">
+        <div className="ml-auto flex items-center gap-2">
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="destructive" size="sm">
+              <Button variant="outline" size="sm" disabled={clearing}>
+                {t(clearing ? 'settings.widgetPackage.clearingData' : 'settings.widgetPackage.clearData')}
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>{t('settings.widgetPackage.clearDataConfirm')}</AlertDialogTitle>
+                <AlertDialogDescription>
+                  {t('settings.widgetPackage.clearDataDesc', { name: getTitle() })}
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>{t('settings.widgetPackage.cancel')}</AlertDialogCancel>
+                <AlertDialogAction onClick={handleClearData} disabled={clearing}>
+                  {t('settings.widgetPackage.confirm')}
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="destructive" size="sm" disabled={clearing}>
                 {t('settings.widgetPackage.uninstall')}
               </Button>
             </AlertDialogTrigger>
@@ -182,20 +140,17 @@ export function WidgetPackageItem({ widgetPackage, onUninstall }: WidgetPackageI
           </AlertDialog>
         </div>
       </div>
-
-      {validPreviews.length > 0 && (
-        <div className="mt-3 pt-3">
-          <div className="group relative overflow-hidden rounded-md">
-            {useMarquee
-              ? <Marquee speed={10} direction={1}>{previewNodes}</Marquee>
-              : <div className="flex gap-3">{previewNodes}</div>}
-
-            {useMarquee && (
-              <>
-                <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-background to-transparent" />
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-background to-transparent" />
-              </>
-            )}
+      {widgets.length > 0 && (
+        <div className="widget-preview-marquee mt-3 min-w-0 overflow-hidden border-t pt-3" role="region" aria-label={getTitle()}>
+          <div className="widget-preview-track" style={{ animationDuration: `${Math.max(40, widgets.length * 8)}s` }}>
+            {[0, 1].map(copy => (
+              <div key={copy} className="widget-preview-group" aria-hidden={copy === 1 ? true : undefined}>
+                {widgets.map((widget) => {
+                  const title = widget.getTitle(languageCode as LanguageCode) || widget.name
+                  return <WidgetPreview key={`${widget.name}:${widget.previewImage ?? ''}`} widget={widget} widgetPackage={widgetPackage} title={title} />
+                })}
+              </div>
+            ))}
           </div>
         </div>
       )}

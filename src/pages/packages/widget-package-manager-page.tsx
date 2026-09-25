@@ -1,14 +1,19 @@
-import { WidgetPackage, WidgetPackageApi } from '@widget-js/core'
+import type { Widget } from '@widget-js/core'
+import { WidgetApi, WidgetPackage, WidgetPackageApi } from '@widget-js/core'
 import consola from 'consola'
 import { useEffect, useState } from 'react'
 import { WidgetPackageItem } from './components/widget-package-item'
 
 export default function WidgetPackageManagerPage() {
   const [packages, setPackages] = useState<WidgetPackage[]>([])
+  const [widgets, setWidgets] = useState<Widget[]>([])
 
   const loadPackages = async () => {
     try {
-      const list = await WidgetPackageApi.getPackages()
+      const [list, widgetList] = await Promise.all([
+        WidgetPackageApi.getPackages(),
+        WidgetApi.getWidgets(),
+      ])
       const parsedList = list.map((it) => {
         if (WidgetPackage.parseObject) {
           return WidgetPackage.parseObject(it)
@@ -16,6 +21,7 @@ export default function WidgetPackageManagerPage() {
         return it as unknown as WidgetPackage
       })
       setPackages(parsedList)
+      setWidgets(widgetList)
     }
     catch (e) {
       consola.error('Failed to load packages', e)
@@ -45,6 +51,7 @@ export default function WidgetPackageManagerPage() {
             <WidgetPackageItem
               key={item.name}
               widgetPackage={item}
+              widgets={widgets.filter(widget => widget.packageName === item.name)}
               onUninstall={handleUninstall}
             />
           ))}

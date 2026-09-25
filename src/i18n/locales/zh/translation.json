@@ -19,6 +19,12 @@
       "name": "名称：",
       "installPath": "安装路径：",
       "uninstall": "卸载",
+      "clearData": "清除数据",
+      "clearingData": "正在清除...",
+      "clearDataConfirm": "确定要清除组件包数据吗？",
+      "clearDataDesc": "将清除 {{name}} 的本地存储、登录状态和缓存，此操作无法恢复。组件包安装及桌面布局会保留，相关窗口将刷新。",
+      "clearDataSuccess": "组件包数据已清除",
+      "clearDataFailed": "清除组件包数据失败，请重试",
       "uninstallConfirm": "确定要卸载吗？",
       "uninstallDesc": "卸载 {{name}} 将无法恢复。",
       "cancel": "取消",
@@ -41,6 +47,7 @@
   "dev": {
     "emptyTitle": "开发属于自己的桌面组件",
     "viewDocs": "查看文档",
+    "publishWidget": "发布组件",
     "suggestions": [
       "/widget 生成一个黄金价格组件，可以查看国际金价",
       "/widget 生成一个股票自选列表，可以添加自己关注的股票",

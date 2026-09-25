@@ -2,11 +2,13 @@ import consola from 'consola'
 import { useTranslation } from 'react-i18next'
 import { RouterProvider } from 'react-router-dom'
 import { useAppLanguage } from './hooks/use-app-language'
+import { useSystemTheme } from './hooks/use-system-theme'
 import { router } from './router'
 import '@widget-js/react/style.css'
 import './app.css'
 
 function App() {
+  useSystemTheme()
   const { i18n } = useTranslation()
   useAppLanguage({
     onLoad: (lang) => {

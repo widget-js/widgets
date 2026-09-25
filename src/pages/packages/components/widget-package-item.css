@@ -1,0 +1,41 @@
+.widget-preview-track {
+  display: flex;
+  width: max-content;
+  min-width: 200%;
+  animation: widget-preview-marquee-right 40s linear infinite;
+}
+
+.widget-preview-group {
+  display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: space-around;
+  gap: 12px;
+  padding-right: 12px;
+}
+
+@keyframes widget-preview-marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .widget-preview-track {
+    animation: none;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .widget-preview-group {
+    flex-wrap: wrap;
+    flex-shrink: 1;
+  }
+
+  .widget-preview-group[aria-hidden="true"] {
+    display: none;
+  }
+}

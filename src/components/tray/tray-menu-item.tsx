@@ -12,7 +12,9 @@ function TrayMenuItem({ ref, className, icon: Icon, label, ...props }: TrayMenuI
     <div
       ref={ref}
       className={cn(
-        'flex flex-col items-center justify-center gap-2 px-1 py-4 rounded cursor-pointer transition-colors bg-[rgba(0,0,0,0.04)] hover:bg-[rgba(0,0,0,0.08)]',
+        'flex flex-col items-center justify-center gap-2 px-1 py-4 rounded-lg cursor-pointer transition-colors duration-150',
+        'bg-muted text-foreground inset-ring inset-ring-border hover:bg-border active:bg-border/80',
+        'dark:hover:bg-white/15 dark:hover:inset-ring-white/20 dark:active:bg-white/20',
         className,
       )}
       {...props}

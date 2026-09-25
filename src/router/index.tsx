@@ -119,7 +119,6 @@ export const routes: RouteObject[] = [
               title: 'sidebar.proxySettings',
               icon: Globe,
               group: 'settings',
-              sidebarMenu: true,
             },
           },
           {

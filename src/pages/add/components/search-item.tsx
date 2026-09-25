@@ -123,16 +123,16 @@ export function SearchItem({ widget }: SearchItemProps) {
   const description = getLocalizedText(widget.description)
 
   return (
-    <Card className="flex flex-col p-4 bg-white rounded-xl mb-5 items-center relative">
+    <Card className="flex flex-col p-4 rounded-xl mb-5 items-center relative shadow-sm">
       {adding && (
-        <div className="absolute inset-0 bg-background/50 flex items-center justify-center z-10 rounded-xl backdrop-blur-[1px]">
+        <div className="absolute inset-0 bg-card/50 flex items-center justify-center z-10 rounded-xl backdrop-blur-[1px]">
           <Loader2 className="animate-spin h-8 w-8 text-primary" />
         </div>
       )}
 
       <div className="flex w-full">
         <div className="flex flex-col items-start">
-          <span className="text-base font-bold text-primary mb-2">{title}</span>
+          <span className="text-base font-bold mb-2">{title}</span>
           <span className="text-muted-foreground text-sm">{description}</span>
         </div>
         {widget.socialLinks && (
@@ -174,7 +174,7 @@ export function SearchItem({ widget }: SearchItemProps) {
                         </Button>
                       )}
                   {isWidgetHosted && isDev && (
-                    <Button variant="outline" onClick={openDevTools} className="rounded-full border-yellow-500 text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50">
+                    <Button variant="outline" onClick={openDevTools} className="rounded-full border-yellow-500 text-yellow-500 hover:text-yellow-400 hover:bg-yellow-500/10">
                       DevTools
                     </Button>
                   )}

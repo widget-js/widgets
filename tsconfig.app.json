@@ -21,6 +21,7 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
+      "@widget-js/core": ["../@widget-js/core/dist/index.d.ts"],
       "@/*": ["./src/*"]
     }
   },

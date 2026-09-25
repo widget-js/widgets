@@ -8,7 +8,7 @@ import './i18n/config'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
-    <Toaster />
+    <Toaster theme="system" />
   </StrictMode>,
 )
 
