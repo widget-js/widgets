@@ -20,7 +20,7 @@
     "@supabase/supabase-js": "^2.84.0",
     "@tailwindcss/vite": "^4.2.0",
     "@uiw/react-color": "^2.9.5",
-    "@widget-js/core": "^26.8.20",
+    "@widget-js/core": "^26.9.25",
     "@widget-js/react": "^26.7.21",
     "@widget-js/web-api": "^24.1.1-beta.70",
     "axios": "^1.13.5",

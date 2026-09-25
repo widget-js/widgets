@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
     ],
     resolve: {
       alias: {
-        '@widget-js/core': path.resolve(__dirname, '../@widget-js/core/dist/index.js'),
+        // '@widget-js/core': path.resolve(__dirname, '../@widget-js/core/dist/index.js'),
         '@': path.resolve(__dirname, './src'),
       },
     },
