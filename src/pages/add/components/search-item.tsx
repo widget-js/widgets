@@ -1,9 +1,12 @@
+import type { WallpaperState } from '@widget-js/core'
 import type { WebWidget } from '@widget-js/web-api'
 import {
   AppApi,
   BrowserWindowApi,
   DeployedWidgetApi,
   DeployMode,
+  DesktopApi,
+  ElectronUtils,
   NotificationApi,
   WidgetApi,
   WidgetPackageUtils,
@@ -28,6 +31,35 @@ export function SearchItem({ widget }: SearchItemProps) {
   const [isDev] = useDebugConfig()
   const [isWidgetHosted, setIsWidgetHosted] = useState(false)
   const [adding, setAdding] = useState(false)
+  const [wallpaperState, setWallpaperState] = useState<WallpaperState>({ status: 'idle', recoveryAttempts: 0, revision: -1 })
+  const isWallpaper = widget.supportDeployMode === DeployMode.WALLPAPER
+  // WebWidget may inherit an older SDK implementation that only checks configPagePath.
+  const isConfigurable = !!(widget.configPage?.path || widget.configPagePath)
+  const wallpaperActive = wallpaperState.widgetName === widget.name
+    && ['loading', 'running', 'recovering'].includes(wallpaperState.status)
+
+  useEffect(() => {
+    if (!isWallpaper || !ElectronUtils.hasElectronApi()) { return }
+    let disposed = false
+    const update = (state: WallpaperState) => {
+      if (!disposed && state) { setWallpaperState(previous => state.revision >= previous.revision ? state : previous) }
+    }
+    const unsubscribe = DesktopApi.onStateChanged(update)
+    DesktopApi.getState().then(update).catch(console.error)
+    return () => {
+      disposed = true
+      unsubscribe()
+    }
+  }, [isWallpaper])
+
+  const closeWallpaper = async () => {
+    try {
+      const permission = await DesktopApi.requestPermission({ action: DesktopApi.PERMISSION_SET_WALLPAPER_WIDGET })
+      if (permission === DesktopApi.RESULT_DENY) { return }
+      await DesktopApi.close(widget.name)
+    }
+    catch (error) { NotificationApi.error(String(error)) }
+  }
 
   const updateWidgetAdd = useCallback(async () => {
     if (widget.isSupportBackground()) {
@@ -63,7 +95,10 @@ export function SearchItem({ widget }: SearchItemProps) {
   }
 
   const openDevTools = () => {
-    DeployedWidgetApi.openDevTools(widget.name)
+    if (isWallpaper) {
+      DesktopApi.openDevTools(widget.name).catch(error => NotificationApi.error(String(error)))
+    }
+    else { DeployedWidgetApi.openDevTools(widget.name) }
   }
 
   const addWidget = async (mode: DeployMode) => {
@@ -87,12 +122,21 @@ export function SearchItem({ widget }: SearchItemProps) {
           ? WidgetPackageUtils.getRemotePackageJsonUrl(widget.package?.remote)
           : undefined
 
+        if (mode === DeployMode.WALLPAPER) {
+          const permission = await DesktopApi.requestPermission({ action: DesktopApi.PERMISSION_SET_WALLPAPER_WIDGET })
+          if (permission === DesktopApi.RESULT_DENY) { return }
+          await DesktopApi.setWallpaperWidget({ widgetName: widget.name, packageJsonUrl: url })
+          return
+        }
         await DeployedWidgetApi.addWidget({
           widgetName: widget.name,
           deployMode: mode,
           packageJsonUrl: url,
         })
       }
+    }
+    catch (error) {
+      NotificationApi.error(String(error))
     }
     finally {
       setAdding(false)
@@ -154,54 +198,77 @@ export function SearchItem({ widget }: SearchItemProps) {
 
       <div className="flex gap-4 flex-wrap justify-center">
         <div className="flex gap-2 flex-wrap justify-center">
-          {widget.isSupportBackground()
+          {isWallpaper
             ? (
                 <>
-                  {widget.isConfigurable() && (
+                  {isConfigurable && (
                     <Button onClick={openBackgroundWidgetSettings} className="rounded-full">
                       {t('settings.title', 'Settings')}
                     </Button>
                   )}
-                  {!isWidgetHosted
-                    ? (
-                        <Button onClick={addBackgroundWidget} className="rounded-full">
-                          {t('search.enable', 'Enable')}
-                        </Button>
-                      )
-                    : (
-                        <Button variant="destructive" onClick={removeWidget} className="rounded-full">
-                          {t('search.disable', 'Disable')}
-                        </Button>
-                      )}
-                  {isWidgetHosted && isDev && (
+                  <Button
+                    variant={wallpaperActive ? 'destructive' : 'default'}
+                    disabled={adding || (wallpaperActive && wallpaperState.status !== 'running')}
+                    onClick={wallpaperActive ? closeWallpaper : () => addWidget(DeployMode.WALLPAPER)}
+                    className="rounded-full"
+                  >
+                    {wallpaperActive ? (wallpaperState.status === 'running' ? '关闭' : '加载中…') : '壁纸'}
+                  </Button>
+                  {wallpaperActive && (
                     <Button variant="outline" onClick={openDevTools} className="rounded-full border-yellow-500 text-yellow-500 hover:text-yellow-400 hover:bg-yellow-500/10">
                       DevTools
                     </Button>
                   )}
-                  <Button variant="outline" onClick={() => DeployedWidgetApi.createDesktopShortcut(widget.name)} className="rounded-full">
-                    {t('search.desktopShortcut', '桌面图标')}
-                  </Button>
                 </>
               )
-            : (
-                <>
-                  {widget.isSupportNormal() && (
-                    <Button onClick={onClickAddNormal} className="rounded-full">
-                      {t('search.desktop', 'Desktop')}
+            : widget.isSupportBackground()
+              ? (
+                  <>
+                    {isConfigurable && (
+                      <Button onClick={openBackgroundWidgetSettings} className="rounded-full">
+                        {t('settings.title', 'Settings')}
+                      </Button>
+                    )}
+                    {!isWidgetHosted
+                      ? (
+                          <Button onClick={addBackgroundWidget} className="rounded-full">
+                            {t('search.enable', 'Enable')}
+                          </Button>
+                        )
+                      : (
+                          <Button variant="destructive" onClick={removeWidget} className="rounded-full">
+                            {t('search.disable', 'Disable')}
+                          </Button>
+                        )}
+                    {isWidgetHosted && isDev && (
+                      <Button variant="outline" onClick={openDevTools} className="rounded-full border-yellow-500 text-yellow-500 hover:text-yellow-400 hover:bg-yellow-500/10">
+                        DevTools
+                      </Button>
+                    )}
+                    <Button variant="outline" onClick={() => DeployedWidgetApi.createDesktopShortcut(widget.name)} className="rounded-full">
+                      {t('search.desktopShortcut', '桌面图标')}
                     </Button>
-                  )}
-                  {widget.isSupportOverlap() && (
-                    <Button onClick={() => addWidget(DeployMode.OVERLAP)} className="rounded-full">
-                      {t('search.overlap', 'Overlap')}
-                    </Button>
-                  )}
-                  {widget.isSupportTray() && (
-                    <Button onClick={() => addWidget(DeployMode.TRAY)} className="rounded-full">
-                      {t('search.tray', 'Tray')}
-                    </Button>
-                  )}
-                </>
-              )}
+                  </>
+                )
+              : (
+                  <>
+                    {widget.isSupportNormal() && (
+                      <Button onClick={onClickAddNormal} className="rounded-full">
+                        {t('search.desktop', 'Desktop')}
+                      </Button>
+                    )}
+                    {widget.isSupportOverlap() && (
+                      <Button onClick={() => addWidget(DeployMode.OVERLAP)} className="rounded-full">
+                        {t('search.overlap', 'Overlap')}
+                      </Button>
+                    )}
+                    {widget.isSupportTray() && (
+                      <Button onClick={() => addWidget(DeployMode.TRAY)} className="rounded-full">
+                        {t('search.tray', 'Tray')}
+                      </Button>
+                    )}
+                  </>
+                )}
         </div>
 
         {upgradable && (

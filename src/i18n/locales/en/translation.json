@@ -4,6 +4,69 @@
     "offline": "Network offline"
   },
   "loading": "Loading...",
+  "desktopPermission": {
+    "wallpaperTitle": "Desktop wallpaper permission",
+    "widgetTitle": "Wallpaper widget permission",
+    "wallpaperMessage": "{{name}} wants to change your desktop wallpaper.",
+    "widgetMessage": "{{name}} wants to set, replace, or close your desktop wallpaper widget.",
+    "application": "This application",
+    "target": "Requested action",
+    "rememberHint": "Allow once applies to the next operation. Allow remembers this permission; you can revoke it in Permissions. Temporary pages keep permission only for this session.",
+    "invalidAction": "This permission request is invalid. Please deny it and try again.",
+    "deny": "Deny",
+    "allowOnce": "Allow once",
+    "allow": "Allow"
+  },
+  "permissions": {
+    "title": "Permissions",
+    "description": "Review and revoke file and desktop permissions granted to widgets and pages.",
+    "refresh": "Refresh",
+    "loading": "Loading permissions...",
+    "loadFailed": "Could not load permissions. Please refresh to try again.",
+    "searchPlaceholder": "Search by source, action, or path",
+    "filterType": "Filter permission type",
+    "allTypes": "All types",
+    "count": "Sources: {{sources}} · Permissions: {{count}}",
+    "temporarySource": "Temporary page",
+    "desktopTarget": "Current desktop",
+    "widgetTarget": "Desktop wallpaper widget",
+    "types": {
+      "file": "File access",
+      "desktop": "Desktop"
+    },
+    "actions": {
+      "readFile": "Read file",
+      "writeFile": "Write file",
+      "readDirectory": "Read folder",
+      "writeDirectory": "Write folder",
+      "setWallpaper": "Set desktop wallpaper",
+      "setWallpaperWidget": "Set or close wallpaper widget"
+    },
+    "lifetimes": {
+      "persistent": "Until revoked",
+      "session": "This session",
+      "once": "Next operation"
+    },
+    "lifetimeHints": {
+      "persistent": "Permission remains after restarting the application.",
+      "session": "Permission expires when this application session ends.",
+      "once": "Permission is consumed by the next matching operation."
+    },
+    "revoke": "Revoke",
+    "revokeLabel": "Revoke {{action}} for {{source}}",
+    "revokeTitle": "Revoke this permission?",
+    "revokeDescription": "This source will lose this permission and can request it again when needed.",
+    "cancel": "Cancel",
+    "confirmRevoke": "Revoke permission",
+    "revoking": "Revoking...",
+    "revoked": "Permission revoked",
+    "revokeFailed": "Could not revoke this permission. Please try again.",
+    "emptyTitle": "No permissions granted",
+    "emptyDescription": "Permissions you grant to widgets and pages will appear here.",
+    "noResultsTitle": "No matching permissions",
+    "noResultsDescription": "Try a different search or permission type.",
+    "clearFilters": "Clear filters"
+  },
   "manager": {
     "title": "Title",
     "name": "Name",
@@ -36,6 +99,7 @@
     "packageManagement": "Widget Package",
     "generalSettings": "General Settings",
     "globalTheme": "Global Theme",
+    "permissions": "Permissions",
     "proxySettings": "Proxy",
     "ai": "AI",
     "widgetManagement": "Widget Management",

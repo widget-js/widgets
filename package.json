@@ -58,7 +58,7 @@
     "@types/react-dom": "^19.2.3",
     "@types/semver": "^7.7.1",
     "@vitejs/plugin-react": "^5.1.1",
-    "@widget-js/vite-plugin-widget": "^24.1.1-beta.72",
+    "@widget-js/vite-plugin-widget": "^26.8.21",
     "eslint": "^10.0.2",
     "eslint-plugin-format": "^2.0.1",
     "eslint-plugin-react-hooks": "^7.0.1",

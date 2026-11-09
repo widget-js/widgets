@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
     ],
     resolve: {
       alias: {
-        // '@widget-js/core': path.resolve(__dirname, '../@widget-js/core/dist/index.js'),
+        '@widget-js/core': path.resolve(__dirname, '../@widget-js/core/dist/index.js'),
         '@': path.resolve(__dirname, './src'),
       },
     },
@@ -21,6 +21,8 @@ export default defineConfig(({ mode }) => {
       port: 8085,
     },
     optimizeDeps: {
+      // Watch the local core bundle directly so new API exports are not cached.
+      exclude: ['@widget-js/core'],
       include: [
         'react',
         'react-dom',
@@ -36,7 +38,7 @@ export default defineConfig(({ mode }) => {
         'framer-motion',
         'axios',
         'consola',
-        '@widget-js/core',
+        '@widget-js/core > localforage',
         '@widget-js/react',
         '@widget-js/web-api',
       ],

@@ -4,6 +4,69 @@
     "offline": "网络已断开"
   },
   "loading": "加载中...",
+  "desktopPermission": {
+    "wallpaperTitle": "申请桌面壁纸设置权限",
+    "widgetTitle": "申请壁纸组件设置权限",
+    "wallpaperMessage": "「{{name}}」请求更改您的桌面壁纸。",
+    "widgetMessage": "「{{name}}」请求设置、替换或关闭您的桌面壁纸组件。",
+    "application": "应用",
+    "target": "申请操作",
+    "rememberHint": "“允许一次”仅用于下一次操作。“同意”将记住授权，您可在“权限管理”中撤销；临时页面的授权仅在本次会话生效。",
+    "invalidAction": "此权限请求无效，请拒绝后重试。",
+    "deny": "拒绝",
+    "allowOnce": "允许一次",
+    "allow": "同意"
+  },
+  "permissions": {
+    "title": "权限管理",
+    "description": "查看和撤销已授予组件及页面的文件、桌面操作权限。",
+    "refresh": "刷新",
+    "loading": "正在加载授权...",
+    "loadFailed": "无法加载授权，请刷新重试。",
+    "searchPlaceholder": "搜索来源、操作或路径",
+    "filterType": "筛选权限类型",
+    "allTypes": "全部类型",
+    "count": "{{sources}} 个来源 · {{count}} 项授权",
+    "temporarySource": "临时页面",
+    "desktopTarget": "当前桌面",
+    "widgetTarget": "桌面壁纸组件",
+    "types": {
+      "file": "文件权限",
+      "desktop": "桌面权限"
+    },
+    "actions": {
+      "readFile": "读取文件",
+      "writeFile": "写入文件",
+      "readDirectory": "读取文件夹",
+      "writeDirectory": "写入文件夹",
+      "setWallpaper": "设置桌面壁纸",
+      "setWallpaperWidget": "设置或关闭壁纸组件"
+    },
+    "lifetimes": {
+      "persistent": "持续有效",
+      "session": "本次会话",
+      "once": "下一次操作"
+    },
+    "lifetimeHints": {
+      "persistent": "重启后仍然有效，直至撤销。",
+      "session": "应用结束本次会话后失效。",
+      "once": "下一次执行对应操作后失效。"
+    },
+    "revoke": "撤销",
+    "revokeLabel": "撤销{{source}}的{{action}}权限",
+    "revokeTitle": "撤销这项授权？",
+    "revokeDescription": "此来源将失去这项授权，需要时可重新申请。",
+    "cancel": "取消",
+    "confirmRevoke": "撤销授权",
+    "revoking": "正在撤销...",
+    "revoked": "已撤销授权",
+    "revokeFailed": "无法撤销此授权，请重试。",
+    "emptyTitle": "暂无已授予的权限",
+    "emptyDescription": "您授予组件及页面的权限将显示在这里。",
+    "noResultsTitle": "没有匹配的授权",
+    "noResultsDescription": "试试其他搜索词或权限类型。",
+    "clearFilters": "清除筛选"
+  },
   "manager": {
     "title": "标题",
     "name": "名称",
@@ -36,6 +99,7 @@
     "packageManagement": "组件包管理",
     "generalSettings": "常用设置",
     "globalTheme": "全局主题",
+    "permissions": "权限管理",
     "proxySettings": "代理设置",
     "ai": "AI",
     "widgetManagement": "组件管理",

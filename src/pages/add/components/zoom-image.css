@@ -1,0 +1,21 @@
+/* ControlledZoom portals its modal dialog to body and uses the browser's top layer. */
+.widget-preview-dialog[open] {
+  z-index: 1000;
+  isolation: isolate;
+  -webkit-app-region: no-drag;
+}
+
+.widget-preview-dialog [data-rmiz-modal-overlay] {
+  z-index: 0;
+}
+
+.widget-preview-dialog [data-rmiz-modal-content],
+.widget-preview-dialog [data-rmiz-modal-img] {
+  z-index: 1;
+}
+
+.widget-preview-dialog [data-rmiz-btn-unzoom] {
+  top: 80px;
+  right: 40px;
+  z-index: 2;
+}

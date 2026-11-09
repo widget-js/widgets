@@ -7,6 +7,7 @@ import {
   Palette,
   Plus,
   Settings,
+  ShieldCheck,
 } from 'lucide-react'
 import { lazy, Suspense } from 'react'
 import { createHashRouter, Navigate } from 'react-router-dom'
@@ -16,6 +17,7 @@ import AddWidgetPage from '@/pages/add/add-widget-page'
 const AiPage = lazy(() => import('@/pages/ai/ai-page'))
 const AlertDialogPage = lazy(() => import('@/pages/dialog/alert-dialog-page'))
 const FilePermissionDialogPage = lazy(() => import('@/pages/dialog/file-permission-dialog-page'))
+const DesktopPermissionDialogPage = lazy(() => import('@/pages/dialog/desktop-permission-dialog-page'))
 const DevPage = lazy(() => import('@/pages/dev/dev-page'))
 const ErrorPage = lazy(() => import('@/pages/error-page'))
 const WidgetPackageManagerPage = lazy(() => import('@/pages/packages/widget-package-manager-page'))
@@ -23,6 +25,7 @@ const AppInfoPage = lazy(() => import('@/pages/settings/app-info-page'))
 const GeneralPage = lazy(() => import('@/pages/settings/general-page'))
 const ProxyPage = lazy(() => import('@/pages/settings/proxy-page'))
 const ThemePage = lazy(() => import('@/pages/settings/theme-page'))
+const PermissionsPage = lazy(() => import('@/pages/settings/permissions-page'))
 const SizePage = lazy(() => import('@/pages/size/size-page'))
 const TrayPage = lazy(() => import('@/pages/tray/tray-page'))
 const ProfilePage = lazy(() => import('@/pages/user/profile-page'))
@@ -104,6 +107,15 @@ export const routes: RouteObject[] = [
             },
           },
           {
+            path: 'permissions',
+            element: withSuspense(<PermissionsPage />),
+            handle: {
+              title: 'sidebar.permissions',
+              icon: ShieldCheck,
+              sidebarMenu: true,
+            },
+          },
+          {
             path: 'ai',
             element: withSuspense(<AiPage />),
             handle: {
@@ -152,6 +164,10 @@ export const routes: RouteObject[] = [
   {
     path: '/dialog/file-permission',
     element: withSuspense(<FilePermissionDialogPage />),
+  },
+  {
+    path: '/dialog/desktop-permission',
+    element: withSuspense(<DesktopPermissionDialogPage />),
   },
   {
     path: '*',
