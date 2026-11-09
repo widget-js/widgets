@@ -1,10 +1,13 @@
+import { existsSync } from 'node:fs'
 import path from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ command, mode }) => {
   const isProd = mode === 'production'
+  const localCorePath = path.resolve(__dirname, '../@widget-js/core/dist/index.js')
+  const useLocalCore = command === 'serve' && existsSync(localCorePath)
   return {
     base: './',
     plugins: [
@@ -13,7 +16,7 @@ export default defineConfig(({ mode }) => {
     ],
     resolve: {
       alias: {
-        '@widget-js/core': path.resolve(__dirname, '../@widget-js/core/dist/index.js'),
+        ...(useLocalCore ? { '@widget-js/core': localCorePath } : {}),
         '@': path.resolve(__dirname, './src'),
       },
     },
@@ -21,8 +24,8 @@ export default defineConfig(({ mode }) => {
       port: 8085,
     },
     optimizeDeps: {
-      // Watch the local core bundle directly so new API exports are not cached.
-      exclude: ['@widget-js/core'],
+      // Watch the local core bundle directly during development.
+      exclude: useLocalCore ? ['@widget-js/core'] : [],
       include: [
         'react',
         'react-dom',
@@ -38,7 +41,7 @@ export default defineConfig(({ mode }) => {
         'framer-motion',
         'axios',
         'consola',
-        '@widget-js/core > localforage',
+        useLocalCore ? '@widget-js/core > localforage' : '@widget-js/core',
         '@widget-js/react',
         '@widget-js/web-api',
       ],
