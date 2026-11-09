@@ -1,4 +1,4 @@
-import type { WallpaperState } from '@widget-js/core'
+import type { WallpaperState, Widget } from '@widget-js/core'
 import type { WebWidget } from '@widget-js/web-api'
 import {
   AppApi,
@@ -23,7 +23,8 @@ import WidgetUtil from '@/utils/widget-util'
 import WidgetContainer from './widget-container'
 
 interface SearchItemProps {
-  widget: WebWidget
+  // The web API's older core types do not include the optional configPage field.
+  widget: WebWidget & Pick<Widget, 'configPage'>
 }
 
 export function SearchItem({ widget }: SearchItemProps) {
